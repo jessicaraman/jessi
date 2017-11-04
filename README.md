@@ -1,1 +1,4 @@
-## Digicar Project
+digicar
+===========
+
+Spring MVC + Hibernate + Maven
