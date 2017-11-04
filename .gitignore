@@ -1,0 +1,23 @@
+# Les ligne commençant par '#' sont des commentaires.
+
+# Ignorer tous les fichiers class
+*.class
+# Ignorer les objets et les archives
+*.[oa]
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
