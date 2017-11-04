@@ -6,9 +6,13 @@ Spring MVC + Hibernate + Maven
 Technologies
 ===========
 MVC 3.x.x
+
 JDK 1.8
+
 wamp server for mySQL IHM
+
 or mysql 
+
 To set BD locally
 ===========
 use "hibnatedb" file in sql directory
@@ -20,7 +24,7 @@ Clone the repository:
 git clone http://fw-i2-digicar:8086/alpha.barry/digicar.git
 
 
-To run the application locally:
+To run the application locally
 ===========
 
 From the command line with Maven:
