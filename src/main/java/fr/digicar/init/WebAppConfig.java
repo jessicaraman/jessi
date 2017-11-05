@@ -1,4 +1,4 @@
-package com.sprhib.init;
+package fr.digicar.init;
 
 import java.util.Properties;
 
@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @Configuration
-@ComponentScan("com.sprhib")
+@ComponentScan("fr.digicar")
 @EnableWebMvc
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")

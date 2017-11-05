@@ -1,13 +1,12 @@
-package com.sprhib.dao;
+package fr.digicar.dao;
 
 import java.util.List;
 
+import fr.digicar.model.Team;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.sprhib.model.Team;
 
 @Repository
 public class TeamDAOImpl implements TeamDAO {

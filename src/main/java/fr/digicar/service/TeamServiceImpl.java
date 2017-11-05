@@ -1,13 +1,13 @@
-package com.sprhib.service;
+package fr.digicar.service;
 
 import java.util.List;
 
+import fr.digicar.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sprhib.dao.TeamDAO;
-import com.sprhib.model.Team;
+import fr.digicar.dao.TeamDAO;
 
 @Service
 @Transactional

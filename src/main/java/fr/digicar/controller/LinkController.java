@@ -1,7 +1,7 @@
-package com.sprhib.controller;
+package fr.digicar.controller;
 
-import com.sprhib.model.Team;
-import com.sprhib.service.TeamService;
+import fr.digicar.model.Team;
+import fr.digicar.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

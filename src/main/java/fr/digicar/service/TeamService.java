@@ -1,10 +1,10 @@
-package com.sprhib.dao;
+package fr.digicar.service;
 
 import java.util.List;
 
-import com.sprhib.model.Team;
+import fr.digicar.model.Team;
 
-public interface TeamDAO {
+public interface TeamService {
 	
 	public void addTeam(Team team);
 	public void updateTeam(Team team);

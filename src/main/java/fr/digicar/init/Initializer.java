@@ -1,4 +1,4 @@
-package com.sprhib.init;
+package fr.digicar.init;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
