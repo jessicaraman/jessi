@@ -80,6 +80,12 @@
             <version>1.2</version>
         </dependency>
 
+        <!-- H2 -->
+        <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>1.4.192</version>
+        </dependency>
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
