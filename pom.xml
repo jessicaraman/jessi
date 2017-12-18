@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.digicar</groupId>
-    <artifactId>spring</artifactId>
+    <artifactId>digicar</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
@@ -79,13 +79,19 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <scope>runtime</scope>
+            <version>1.1.1</version>
+        </dependency>
         <!--&lt;!&ndash; H2 &ndash;&gt;-->
         <!--<dependency>-->
         <!--<groupId>com.h2database</groupId>-->
         <!--<artifactId>h2</artifactId>-->
         <!--<version>1.4.190</version>-->
         <!--</dependency>-->
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>

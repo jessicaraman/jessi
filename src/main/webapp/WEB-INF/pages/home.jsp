@@ -1,45 +1,94 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Accueil</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Digicar</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
+    <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark indigo">
+    <a class="navbar-brand" href="#">Digicar</a>
+    <button class="navbar-toggler" type="button"
+            data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
 
-<h1>Liste des utilisateurs</h1>
+        </ul>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        </form>
+    </div>
+</nav>
+<!--/.Navbar-->
 
-<table border="1px" cellpadding="0" cellspacing="0" >
-    <thead>
-    <tr>
-        <th width="15%">Nom</th>
-        <th width="10%">actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="user" items="${users}">
-        <tr>
-            <td>${user.name}</td>
-            <td>
-                <a href="${pageContext.request.contextPath}/user/edit/${user.id}.html">Modifier</a><br/>
-                <a href="${pageContext.request.contextPath}/user/delete/${user.id}.html">Supprimer</a><br/>
-            </td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-6 p-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Maintain vehicle referential</h4>
+                    <p class="card-text">Alpha Barry &amp; Thierno Diallo</p>
+                    <a href="#" class="btn btn-primary">ACCESS</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 p-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Maintain parking spot referential</h4>
+                    <p class="card-text">Christophe Gougam &amp; Djouher Kahel</p>
+                    <a href="#" class="btn btn-primary">ACCESS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 p-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Maintain pricing referential</h4>
+                    <p class="card-text">Jessica Ramanantsoa &amp; Philippine Venries</p>
+                    <a href="#" class="btn btn-primary">ACCESS</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 p-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Manage user profile</h4>
+                    <p class="card-text">Evan Suau</p>
+                    <a href="#" class="btn btn-primary">ACCESS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-
-<p>
-${message}<br/>
-<a href="${pageContext.request.contextPath}/user/add.html">Nouvel utilisateur</a><br/>
-</p>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/mdb.min.js" />"></script>
 </body>
 </html>
