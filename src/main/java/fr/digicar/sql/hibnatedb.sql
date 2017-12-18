@@ -56,3 +56,42 @@ ALTER TABLE `users`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+--
+-- Structure de la table `parkingSpot`
+--
+
+CREATE TABLE `parkingSpot` (
+  `id` int(6) NOT NULL,
+  `nbSpot` varchar(40) NOT NULL,
+  `nbParking` int(5) NOT NULL,
+  `status` VARCHAR(40) NOT NULL,
+  `location` VARCHAR(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `parkingSpot`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `parkingSpot`
+--
+ALTER TABLE `parkingSpot`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
