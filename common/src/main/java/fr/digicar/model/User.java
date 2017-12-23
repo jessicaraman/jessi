@@ -1,34 +1,79 @@
 package fr.digicar.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
+    /** The identifier of the user. */
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Integer id;
 
-    private String name;
+    /** The user gender. */
+    @Column(name = "gender")
+    private String gender;
 
-    public Integer getId() {
-        return id;
-    }
+    /** The user first name. */
+    @Column(name = "first_name")
+    private String firstName;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    /** The user last name. */
+    @Column(name = "last_name")
+    private String lastName;
 
-    public String getName() {
-        return name;
-    }
+    /** The user last name */
+    @Column(name = "email")
+    private String email;
 
-    public void setName(String name) {
-        this.name = name;
+    /** The user password. */
+    @Column(name = "password")
+    private String password;
+
+    /** The user password confirmation. Only used for password confirmation on password change. */
+    private String passwordConfirm;
+
+    /** The user main address line. */
+    @Column(name = "address_line_1")
+    private String addressLine1;
+
+    /** The user complementary address line. */
+    @Column(name = "address_line_2")
+    private String addressLine2;
+
+    /** The user zip code. */
+    @Column(name = "zip_code")
+    private String zipCode;
+
+    /** The user city. */
+    @Column(name = "city")
+    private String city;
+
+    /** The user phone number. */
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    /** The user birth date. */
+    @Column(name = "birthdate")
+    private Date birthdate;
+
+    public User(String gender, String firstName, String lastName, String email, String password, String addressLine1, Date birthdate) {
+        this.gender = gender;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.addressLine1 = addressLine1;
+        this.birthdate = birthdate;
     }
-    
 }
