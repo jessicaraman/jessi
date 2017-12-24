@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Slf4j
 @Controller
 public class UserController {
@@ -48,20 +52,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration/confirm", method = RequestMethod.POST)
-    public ModelAndView confirmUserRegistration(@ModelAttribute User user) {
+    public ModelAndView confirmUserRegistration(@ModelAttribute User user) throws ParseException {
         log.debug("UserController#confirmUserRegistration");
         log.debug("user : " + user);
         user.setEmail(this.user.getEmail());
         user.setPassword(this.user.getPassword());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        user.setBirthdate(format.parse(user.getBirthdateString()));
         userService.createUser(user);
         return new ModelAndView("registration-confirm");
-    }
-
-    private boolean isValidEmailAddress(String email) {
-        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-        java.util.regex.Matcher m = p.matcher(email);
-        return m.matches();
     }
 
 }

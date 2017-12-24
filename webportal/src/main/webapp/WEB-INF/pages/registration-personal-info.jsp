@@ -87,13 +87,12 @@
         <div class="row mt-1">
             <div class="col-4">
                 <div class="md-form">
-                    <%--<form:input type="text" onfocus="(this.type='date')" id="birthdate" cssClass="form-control validate"--%>
-                                <%--path="birthdate" required="required"/>--%>
-                    <%--<form:label for="birthdate" path="birthdate">--%>
-                        <%--Date de naissance--%>
-                        <%--<span class="text-danger">*</span>--%>
-                    <%--</form:label>--%>
-                    <!-- TODO find a solution to set birth date. -->
+                    <form:input type="text" onfocus="(this.type='date')" id="birthdate" cssClass="form-control validate"
+                                path="birthdateString" required="required"/>
+                    <form:label for="birthdate" path="birthdateString">
+                        Date de naissance
+                        <span class="text-danger">*</span>
+                    </form:label>
                 </div>
             </div>
             <div class="col-8">
