@@ -10,15 +10,15 @@ import java.util.Date;
 @Entity
 @Table(name = "users")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     /** The identifier of the user. */
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private Integer id;
+    private int id;
 
     /** The user gender. */
     @Column(name = "gender")
@@ -67,13 +67,4 @@ public class User {
     @Column(name = "birthdate")
     private Date birthdate;
 
-    public User(String gender, String firstName, String lastName, String email, String password, String addressLine1, Date birthdate) {
-        this.gender = gender;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.addressLine1 = addressLine1;
-        this.birthdate = birthdate;
-    }
 }

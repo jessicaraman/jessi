@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Create account</title>
+    <title>S'enregistrer - CarSharingClub</title>
     <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark indigo">
-    <a class="navbar-brand" href="#">Digicar</a>
+    <a class="navbar-brand" href="<c:url value="/"/>">CarSharingClub</a>
     <button class="navbar-toggler" type="button"
             data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
@@ -22,7 +22,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Accueil</a>
+                <a class="nav-link" href="<c:url value="/"/>">Accueil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Fonctionnalités</a>
@@ -41,29 +41,32 @@
 
 <div class="container">
     <%--@elvariable id="user" type="fr.digicar.model.User"--%>
-    <form:form method="POST" modelAttribute="user" class="m-5"
-               action="${pageContext.request.contextPath}/user/new/info">
+    <form:form method="POST" modelAttribute="user" cssClass="m-5"
+               action="${pageContext.request.contextPath}/registration/confirm">
         <div class="row">
-            <a class="btn btn-sm btn-default col disabled">Identifiants</a>
+            <a class="btn btn-sm btn-default col disabled" href="<c:url value="/registration"/>">Identifiants</a>
             <hr class="col-2"/>
             <a class="btn btn-sm btn-default col disabled">Informations personnelles</a>
             <hr class="col-2"/>
             <a class="btn btn-sm btn-blue-grey col disabled">Activation</a>
         </div>
-        <div class="row">
+        <div class="row mt-4">
             <h1>Informations personnelles</h1>
         </div>
         <div class="row mt-2">
             <div class="col-2 pt-3">
-                <form:select class="custom-select w-100" path="gender">
-                    <form:option value="" disabled="true" selected="true">Civilité</form:option>
-                    <form:option value="Mme">Mme</form:option>
-                    <form:option value="M.">M.</form:option>
-                </form:select>
+                <div class="form-group w-100">
+                    <form:select cssClass="form-control w-100 validate" path="gender" required="required">
+                        <form:option value="" disabled="true" selected="true">Civilité</form:option>
+                        <form:option value="Mme">Mme</form:option>
+                        <form:option value="M.">M.</form:option>
+                    </form:select>
+                </div>
             </div>
             <div class="col-5">
                 <div class="md-form">
-                    <form:input type="text" id="firstname" class="form-control" path="firstName"/>
+                    <form:input type="text" id="firstname" cssClass="form-control validate" path="firstName"
+                                required="required"/>
                     <form:label for="firstname" path="">
                         Prénom
                         <span class="text-danger">*</span>
@@ -72,7 +75,8 @@
             </div>
             <div class="col-5">
                 <div class="md-form">
-                    <form:input type="text" id="lastname" class="form-control" path="lastName"/>
+                    <form:input type="text" id="lastname" cssClass="form-control validate" path="lastName"
+                                required="required"/>
                     <form:label for="lastname" path="lastName">
                         Nom
                         <span class="text-danger">*</span>
@@ -81,9 +85,33 @@
             </div>
         </div>
         <div class="row mt-1">
+            <div class="col-4">
+                <div class="md-form">
+                    <%--<form:input type="text" onfocus="(this.type='date')" id="birthdate" cssClass="form-control validate"--%>
+                                <%--path="birthdate" required="required"/>--%>
+                    <%--<form:label for="birthdate" path="birthdate">--%>
+                        <%--Date de naissance--%>
+                        <%--<span class="text-danger">*</span>--%>
+                    <%--</form:label>--%>
+                    <!-- TODO find a solution to set birth date. -->
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="md-form">
+                    <form:input type="text" id="phone" cssClass="form-control validate" path="phoneNumber"
+                                required="required"/>
+                    <form:label for="phone" path="phoneNumber">
+                        Numéro de téléphone
+                        <span class="text-danger">*</span>
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
             <div class="col-12">
                 <div class="md-form">
-                    <form:input type="text" id="addressline1" class="form-control" path="addressLine1"/>
+                    <form:input type="text" id="addressline1" cssClass="form-control" path="addressLine1"
+                                required="required"/>
                     <form:label for="addressline1" path="addressLine1">
                         Adresse
                         <span class="text-danger">*</span>
@@ -94,7 +122,7 @@
         <div class="row mt-1">
             <div class="col-12">
                 <div class="md-form">
-                    <form:input type="text" id="addressline2" class="form-control" path="addressLine2"/>
+                    <form:input type="text" id="addressline2" cssClass="form-control" path="addressLine2"/>
                     <form:label for="addressline2"
                                 path="addressLine2">Complément d'adresse (immeuble, étage, etc.)</form:label>
                 </div>
@@ -103,7 +131,7 @@
         <div class="row mt-1">
             <div class="col-4">
                 <div class="md-form">
-                    <form:input type="text" id="zipcode" class="form-control" path="zipCode"/>
+                    <form:input type="text" id="zipcode" cssClass="form-control" path="zipCode" required="required"/>
                     <form:label for="zipcode" path="zipCode">
                         Code postal
                         <span class="text-danger">*</span>
@@ -112,7 +140,7 @@
             </div>
             <div class="col-8">
                 <div class="md-form">
-                    <form:input type="text" id="city" class="form-control" path="city"/>
+                    <form:input type="text" id="city" cssClass="form-control" path="city" required="required"/>
                     <form:label for="city" path="city">
                         Ville
                         <span class="text-danger">*</span>
@@ -122,7 +150,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-6">
-                <a type="button" class="btn btn-light-blue" href="${pageContext.request.contextPath}/user/new">
+                <a type="button" class="btn btn-light-blue" href="<c:url value="/registration"/>">
                     <i class="fa fa-angle-left"></i>
                     Retour &nbsp;
                 </a>

@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
         userToUpdate.setGender(user.getGender());
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
-        // TODO complete update user method.
+        // TODO complete update user.
         getCurrentSession().update(userToUpdate);
     }
 
@@ -37,10 +37,6 @@ public class UserDAOImpl implements UserDAO {
         User user = getUser(id);
         if (user != null)
             getCurrentSession().delete(user);
-    }
-
-    public void flushUsers() {
-        getCurrentSession().createSQLQuery("TRUNCATE TABLE users").executeUpdate();
     }
 
 }

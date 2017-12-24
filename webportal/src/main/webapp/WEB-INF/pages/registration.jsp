@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Create account</title>
+    <title>S'enregistrer - CarSharingClub</title>
     <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
@@ -13,7 +13,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark indigo">
-    <a class="navbar-brand" href="#">Digicar</a>
+    <a class="navbar-brand" href="<c:url value="/"/>">CarSharingClub</a>
     <button class="navbar-toggler" type="button"
             data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Accueil</a>
+                <a class="nav-link" href="<c:url value="/"/>">Accueil</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Fonctionnalités</a>
@@ -31,7 +31,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Tarifs</a>
             </li>
-
         </ul>
         <form class="form-inline">
             <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" aria-label="Search">
@@ -42,7 +41,8 @@
 
 <div class="container">
     <%--@elvariable id="user" type="fr.digicar.model.User"--%>
-    <form:form method="POST" modelAttribute="user" action="${pageContext.request.contextPath}/user/new">
+    <form:form method="POST" modelAttribute="user" cssClass="m-5"
+               action="${pageContext.request.contextPath}/registration">
         <div class="row">
             <a class="btn btn-sm btn-default col">Identifiants</a>
             <hr class="col-2"/>
@@ -62,8 +62,9 @@
             <div class="col-12">
                 <div class="md-form">
                     <i class="fa fa-envelope prefix text-info"></i>
-                    <form:input type="email" id="email" class="form-control" path="email"/>
-                    <form:label for="email" path="email">
+                    <form:input type="email" id="email" cssClass="form-control validate" path="email"
+                                required="required"/>
+                    <form:label for="email" data-error="Email invalide" path="email">
                         Email
                         <span class="text-danger">*</span>
                     </form:label>
@@ -74,8 +75,9 @@
             <div class="col-12">
                 <div class="md-form">
                     <i class="fa fa-lock prefix text-info"></i>
-                    <form:input type="password" id="password" class="form-control" path="password"/>
-                    <form:label for="password" path="password">
+                    <form:input type="password" id="password" cssClass="form-control validate" path="password"
+                                minlength="6" required="required"/>
+                    <form:label for="password" data-error="Un mot de passde de plus de 6 caractères est requis" path="password">
                         Mot de passe
                         <span class="text-danger">*</span>
                     </form:label>
@@ -86,8 +88,9 @@
             <div class="col-12">
                 <div class="md-form">
                     <i class="prefix"></i>
-                    <form:input type="password" id="password" class="form-control" path="passwordConfirm"/>
-                    <form:label for="password" path="passwordConfirm">
+                    <form:input type="password" id="password" cssClass="form-control validate" path="passwordConfirm"
+                                minlegth="6" required="required"/>
+                    <form:label for="password" data-error="Un mot de passde de plus de 6 caractères est requis" path="passwordConfirm">
                         Mot de passe (confirmation)
                         <span class="text-danger">*</span>
                     </form:label>
