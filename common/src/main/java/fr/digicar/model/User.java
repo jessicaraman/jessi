@@ -1,22 +1,18 @@
 package fr.digicar.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@Data
 @Entity
 @Table(name = "users")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
 
     /** The identifier of the user. */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
@@ -41,6 +37,7 @@ public class User {
     private String password;
 
     /** The user password confirmation. Only used for password confirmation on password change. */
+    @Transient
     private String passwordConfirm;
 
     /** The user main address line. */

@@ -17,6 +17,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    private User user;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registerUser() {
         log.debug("UserController#registerUser");
@@ -37,10 +39,8 @@ public class UserController {
             modelAndView.addObject("message", "Les mots de passe renseignés doivent être identiques.");
             user.setPassword(null);
             user.setPasswordConfirm(null);
-        } else if (!isValidEmailAddress(user.getEmail())) {
-            modelAndView = new ModelAndView("registration");
-            modelAndView.addObject("message", "L'adresse email renseignée est incorrecte.");
         } else {
+            this.user = user;
             modelAndView = new ModelAndView("registration-personal-info");
         }
         modelAndView.addObject("user", user);
@@ -51,6 +51,8 @@ public class UserController {
     public ModelAndView confirmUserRegistration(@ModelAttribute User user) {
         log.debug("UserController#confirmUserRegistration");
         log.debug("user : " + user);
+        user.setEmail(this.user.getEmail());
+        user.setPassword(this.user.getPassword());
         userService.createUser(user);
         return new ModelAndView("registration-confirm");
     }
