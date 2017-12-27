@@ -16,24 +16,23 @@ public class UserDAOImpl implements UserDAO {
         return sessionFactory.getCurrentSession();
     }
 
-    @Override
     public void addUser(User user) {
         getCurrentSession().save(user);
     }
 
-    @Override
     public void updateUser(User user) {
         User userToUpdate = getUser(user.getId());
-        userToUpdate.setName(user.getName());
+        userToUpdate.setGender(user.getGender());
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
+        // TODO complete update user.
         getCurrentSession().update(userToUpdate);
     }
 
-    @Override
     public User getUser(int id) {
         return (User) getCurrentSession().get(User.class, id);
     }
 
-    @Override
     public void deleteUser(int id) {
         User user = getUser(id);
         if (user != null)
