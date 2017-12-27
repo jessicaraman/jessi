@@ -53,6 +53,7 @@
         <div class="row mt-4">
             <h1>Créer votre compte</h1>
         </div>
+        <%--@elvariable id="message" type="java.lang.String"--%>
         <c:if test="${not empty message}">
             <div class="row">
                 <div class="alert alert-danger w-100">${message}</div>
