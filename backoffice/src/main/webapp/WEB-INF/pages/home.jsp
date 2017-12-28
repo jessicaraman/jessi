@@ -1,14 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<?xml version="1.0" encoding="UTF-8" ?>
-
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Digicar</title>
+    <title>CarSharingClub - BackOffice</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
@@ -16,7 +13,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark indigo">
-    <a class="navbar-brand" href="#">Digicar Inside</a>
+    <a class="navbar-brand" href="#">CSC Inside</a>
     <button class="navbar-toggler" type="button"
             data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
@@ -59,7 +56,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Maintain parking spot referential</h4>
                     <p class="card-text">Christophe Gougam &amp; Djouher Kahel</p>
-                    <a href="#" class="btn btn-primary">ACCESS</a>
+                    <a href="<c:url value="/parking/add"/>" class="btn btn-primary">ACCESS</a>
                 </div>
             </div>
         </div>

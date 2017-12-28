@@ -30,8 +30,7 @@ public class ParkingSpotDAOImpl implements ParkingSpotDAO {
     }
 
     public ParkingSpot getParkingSpot(int id) {
-        ParkingSpot parkingSpot = (ParkingSpot) getCurrentSession().get(ParkingSpot.class, id);
-        return parkingSpot;
+        return (ParkingSpot) getCurrentSession().get(ParkingSpot.class, id);
     }
 
     public void deleteParkingSpot(int id) {
@@ -43,7 +42,7 @@ public class ParkingSpotDAOImpl implements ParkingSpotDAO {
 
     @SuppressWarnings("unchecked")
     public List<ParkingSpot> getParkingSpots() {
-        return getCurrentSession().createQuery("from ParkingSpot").list();
+        return getCurrentSession().createQuery("FROM ParkingSpot").list();
     }
 
 }

@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ParkingSpotDAO {
 
-    public void addParkingSpot(ParkingSpot parkingSpot);
-    public void updateParkingSpot(ParkingSpot parkingSpot);
-    public ParkingSpot getParkingSpot(int id);
-    public void deleteParkingSpot(int id);
-    public List<ParkingSpot> getParkingSpots();
+    void addParkingSpot(ParkingSpot parkingSpot);
+    void updateParkingSpot(ParkingSpot parkingSpot);
+    ParkingSpot getParkingSpot(int id);
+    void deleteParkingSpot(int id);
+    List<ParkingSpot> getParkingSpots();
 
 }

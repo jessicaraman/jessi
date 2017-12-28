@@ -22,7 +22,7 @@ public class ParkingSpotController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addParkingSpotPage() {
-        ModelAndView modelAndView = new ModelAndView("add-parkingSpot-form");
+        ModelAndView modelAndView = new ModelAndView("add-parking-spot-form");
         modelAndView.addObject("parkingSpot", new ParkingSpot());
         return modelAndView;
     }
@@ -33,7 +33,7 @@ public class ParkingSpotController {
         ModelAndView modelAndView = new ModelAndView("home");
         parkingSpotService.addParkingSpot(parkingSpot);
 
-        String message = parkingSpot.getNbSpot() + " a ete ajoute(e).";
+        String message = parkingSpot.getNbSpot() + " ont été ajoutées.";
         List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpots();
         modelAndView.addObject("parkingSpot", parkingSpots);
         modelAndView.addObject("message", message);
@@ -43,7 +43,7 @@ public class ParkingSpotController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editParkingSpotPage(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("edit-parkingSpot-form");
+        ModelAndView modelAndView = new ModelAndView("edit-parking-spot-form");
         ParkingSpot parkingSpot = parkingSpotService.getParkingSpot(id);
         modelAndView.addObject("parkingSpot", parkingSpot);
         return modelAndView;
