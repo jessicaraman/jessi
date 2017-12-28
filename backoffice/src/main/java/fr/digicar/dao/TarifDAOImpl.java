@@ -21,7 +21,6 @@ public class TarifDAOImpl implements TarifDAO {
     public void addTarif(Tarif tarif) {
         getCurrentSession().save(tarif);
     }
-
     public void updateTarif(Tarif tarif) {
         Tarif tarifToUpdate = getTarif(tarif.getId());
         //tarifToUpdate.setName(tarif.getName()); à redéfinir

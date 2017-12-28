@@ -2,7 +2,6 @@ package fr.digicar.service;
 
 import fr.digicar.dao.TarifDAO;
 import fr.digicar.model.Tarif;
-import fr.digicar.model.Tarif;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
