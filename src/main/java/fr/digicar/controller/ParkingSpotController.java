@@ -41,7 +41,7 @@ public class ParkingSpotController {
     }
 
 
-
+/*
     @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
     public ModelAndView editParkingSpotPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("edit-parkingSpot-form");
@@ -74,6 +74,6 @@ public class ParkingSpotController {
         modelAndView.addObject("parkingSpot", parkingSpots);
         modelAndView.addObject("message", message);
         return modelAndView;
-    }
+    }*/
 
 }
