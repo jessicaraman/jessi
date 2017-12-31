@@ -11,17 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TarifController {
 
     private TarifService tarifService;
-
+    private Tarif t;
 
     @RequestMapping(value = "/pricing", method = RequestMethod.GET)
     public ModelAndView addPricingPage() {
@@ -29,19 +26,36 @@ public class TarifController {
         modelAndView.addObject("tarif", new Tarif());
         return modelAndView;
     }
-  /*  @RequestMapping(value = "/pricing/addPricing", method = RequestMethod.POST)
-    public String addPricing(@ModelAttribute("tarif")Tarif tarif, ModelMap model) {
-        model.addAttribute("name", tarif.getLibelle());
-        model.addAttribute("age", tarif.getPrix_heure());
-        model.addAttribute("id", tarif.getPrix_km());
-        return "result";
-    }*/
-  @RequestMapping(value = "/pricing/addPricing", method = RequestMethod.GET)
+
+
+
+    //For add and update person both
+    /*@RequestMapping(value= "/person/add", method = RequestMethod.POST)
+    public String addPerson(@ModelAttribute("person") Person p){
+
+        if(p.getId() == 0){
+            //new person, add it
+            this.personService.addPerson(p);
+        }else{
+            //existing person, call update
+            this.personService.updatePerson(p);
+        }
+
+        return "redirect:/persons";
+
+    }
+   @RequestMapping(value = "/pricing/addPricing", method = RequestMethod.POST)
+    public String addPricing(@RequestParam("libelle") String libelle,@RequestParam("prix_heure") String prix_heure,
+                             @RequestParam("prix_km") String prix_km,@RequestParam("frais_mensuels") String fraismensuels) {
+   t.setPrix_km(prix_km);
+        return "home";
+    }
+  /*@RequestMapping(value = "/pricing/addPricing", method = RequestMethod.GET)
       public void addingPricing(@ModelAttribute("tarif") Tarif tarif) {
           ModelAndView modelAndView = new ModelAndView("home");
           tarifService.addTarif(tarif);
 
       }
-
+*/
 
 }

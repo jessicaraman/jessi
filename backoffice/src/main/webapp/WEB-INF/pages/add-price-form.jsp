@@ -47,55 +47,80 @@
 </nav>
 <!--/.Navbar-->
 
-<br>
-<br>
-<br>
- <div class="container">
-     <form:form method="GET" action="/pricing/addPricing" modelAttribute="tarif">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Ajouter un tarif
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter un tarif</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <form:form method="GET" action="/pricing/addPricing" modelAttribute="tarif">
 
 
-     <div class="md-form">
-        <i class="fa fa-user prefix grey-text"></i>
-        <form:input type="text" path="libelle"  class="form-control"/>
-        <form:label>Your name</form:label>
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="text" path="libelle"  class="form-control" required="required"/>
+                            <form:label path="libelle">Libellé</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <form:input type="text" path="prix_heure" class="form-control"/>
+                            <form:label  data-error="Montant invalide" path="prix_heure">Prix par heure</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <form:input type="text" path="prix_km" class="form-control"/>
+                            <form:label  data-error="Montant invalide" path="prix_heure" >Prix par km</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <form:input type="text" path="frais_mensuels" class="form-control"/>
+                            <form:label data-error="Montant invalide" path="frais_mensuels" >Frais mensuels</form:label>
+                        </div>
+
+                        <p style="color:rgb(117, 117, 117);">Catégories disponibles :</p>
+                        <%--    <div class="btn-group mr-4" data-toggle="buttons">
+
+                                <label class="btn btn-primary active">
+                                    <input type="checkbox" checked autocomplete="off"> Checkbox 1 (pre-checked)
+                                </label>
+
+                                <label class="btn btn-primary">
+                                    <input type="checkbox" autocomplete="off"> Checkbox 2
+                                </label>
+
+                                <label class="btn btn-primary">
+                                    <input type="checkbox" autocomplete="off"> Checkbox 3
+                                </label>
+
+                            </div> --%>
+                        <br>
+                       <%-- <div class="text-center">
+                            <button type="submit" value="Submit" class="btn btn-unique">Ajouter tarif <i class="fa fa-plus-square-o  ml-1"></i></button>
+                        </div>--%>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter tarif</button></form:form>
+            </div>
+        </div>
     </div>
-
-    <div class="md-form">
-        <i class="fa fa-envelope prefix grey-text"></i>
-        <form:input type="text" path="prix_heure" class="form-control"/>
-        <form:label>Your email</form:label>
-    </div>
-
-    <div class="md-form">
-        <i class="fa fa-tag prefix grey-text"></i>
-        <form:input type="text" path="prix_km" class="form-control"/>
-        <form:label >Subject</form:label>
-    </div>
-
-         <p style="color:rgb(117, 117, 117);">Vehicule categories :</p>
-     <%--    <div class="btn-group mr-4" data-toggle="buttons">
-
-             <label class="btn btn-primary active">
-                 <input type="checkbox" checked autocomplete="off"> Checkbox 1 (pre-checked)
-             </label>
-
-             <label class="btn btn-primary">
-                 <input type="checkbox" autocomplete="off"> Checkbox 2
-             </label>
-
-             <label class="btn btn-primary">
-                 <input type="checkbox" autocomplete="off"> Checkbox 3
-             </label>
-
-         </div> --%>
-<br>
-    <div class="text-center">
-        <button type="submit" value="Submit" class="btn btn-unique">Add pricing <i class="fa fa-plus-square-o  ml-1"></i></button>
-
-    </div>
-
-     </form:form>
 </div>
+
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>

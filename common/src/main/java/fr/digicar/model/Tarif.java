@@ -16,6 +16,7 @@ public class Tarif {
     private String libelle;
     private float prix_heure;
     private float prix_km;
+    private int frais_mensuels;
 public Integer getId(){return this.id;};
 
     public void setId(Integer id) {
@@ -38,5 +39,12 @@ public Integer getId(){return this.id;};
 
     public void setPrix_km(float prix_km) {
         this.prix_km = prix_km;
+    }
+
+    public void setFrais_mensuels(int frais_mensuels) {
+        this.frais_mensuels = frais_mensuels;
+    }
+    public int getFrais_mensuels(){
+        return this.frais_mensuels;
     }
 }
