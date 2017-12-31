@@ -19,43 +19,22 @@ public class TarifController {
 
     private TarifService tarifService;
     private Tarif t;
-
+//redirecting to list of pricing
     @RequestMapping(value = "/pricing", method = RequestMethod.GET)
     public ModelAndView addPricingPage() {
         ModelAndView modelAndView = new ModelAndView("add-price-form");
         modelAndView.addObject("tarif", new Tarif());
+        /*List listOfPricings = tarifService.getTarifs();
+        modelAndView.addObject("listOfPricings", listOfPricings);*/
         return modelAndView;
     }
+    //pour l'ajout
 
-
-
-    //For add and update person both
-    /*@RequestMapping(value= "/person/add", method = RequestMethod.POST)
-    public String addPerson(@ModelAttribute("person") Person p){
-
-        if(p.getId() == 0){
-            //new person, add it
-            this.personService.addPerson(p);
-        }else{
-            //existing person, call update
-            this.personService.updatePerson(p);
-        }
-
-        return "redirect:/persons";
-
-    }
-   @RequestMapping(value = "/pricing/addPricing", method = RequestMethod.POST)
-    public String addPricing(@RequestParam("libelle") String libelle,@RequestParam("prix_heure") String prix_heure,
-                             @RequestParam("prix_km") String prix_km,@RequestParam("frais_mensuels") String fraismensuels) {
-   t.setPrix_km(prix_km);
-        return "home";
-    }
-  /*@RequestMapping(value = "/pricing/addPricing", method = RequestMethod.GET)
+  @RequestMapping(value = "/pricing/addPricing", method = RequestMethod.GET)
       public void addingPricing(@ModelAttribute("tarif") Tarif tarif) {
           ModelAndView modelAndView = new ModelAndView("home");
           tarifService.addTarif(tarif);
-
       }
-*/
+
 
 }

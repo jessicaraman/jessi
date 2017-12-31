@@ -45,7 +45,7 @@ public class TarifDAOImpl implements TarifDAO {
 
     @SuppressWarnings("unchecked")
     public List<Tarif> getTarifs() {
-        return getCurrentSession().createQuery("from tarifs").list();
+        return getCurrentSession().createQuery("from Tarif").list();
     }
 
 }

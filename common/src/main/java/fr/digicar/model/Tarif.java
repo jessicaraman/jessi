@@ -13,11 +13,19 @@ public class Tarif {
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name="libelle")
     private String libelle;
+
+    @Column(name="prix_heure")
     private float prix_heure;
+
+    @Column(name="prix_km")
     private float prix_km;
+
+    @Column(name="frais_mensuels")
     private int frais_mensuels;
-public Integer getId(){return this.id;};
+/*public Integer getId(){return this.id;};
 
     public void setId(Integer id) {
         this.id = id;
@@ -46,5 +54,5 @@ public Integer getId(){return this.id;};
     }
     public int getFrais_mensuels(){
         return this.frais_mensuels;
-    }
+    }*/
 }

@@ -34,6 +34,7 @@ CREATE TABLE tarifs (
   libelle    VARCHAR(123),
   prix_km    FLOAT,
   prix_heure FLOAT
+  frais_mensuels INT(231)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

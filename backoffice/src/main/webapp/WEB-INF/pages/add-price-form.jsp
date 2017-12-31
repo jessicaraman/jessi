@@ -111,7 +111,6 @@
                         </div>--%>
 
 
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -120,6 +119,31 @@
         </div>
     </div>
 </div>
+
+
+<%--<h3>Liste des tarifs</h3>
+<c:if test="${!empty listOfPricings}">
+    <table class="table table-hover">
+        <tr>
+            <th width="80">Id</th>
+            <th width="120">Libelle</th>
+            <th width="120">Prix par heure</th>
+            <th width="60">Prix par km</th>
+            <th width="60">Frais mensuels</th>
+        </tr>
+        <c:forEach items="${listOfPricings}" var="tarif">
+            <tr>
+                <td>${tarif.id}</td>
+                <td>${tarif.libelle}</td>
+                <td>${country.prix_heure}</td>
+                <td>${country.prix_km}</td>
+                <td>${country.frais_mensuels}</td>
+                <td><a href="<c:url value='/updateTarif/${country.id}' />" >Modifier</a></td>
+                <td><a href="<c:url value='/deleteTarif/${country.id}' />" >Supprimer</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if> --%>
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
