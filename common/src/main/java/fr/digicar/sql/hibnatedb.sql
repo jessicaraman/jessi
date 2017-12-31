@@ -23,6 +23,7 @@ CREATE TABLE parking_spots (
   nb_spot    VARCHAR(40)  NOT NULL,
   nb_parking INT(5)       NOT NULL,
   status     VARCHAR(40)  NOT NULL,
+  electricPlug BOOLEAN NOT NULL,
   location   VARCHAR(100) NOT NULL
 )
   ENGINE = InnoDB

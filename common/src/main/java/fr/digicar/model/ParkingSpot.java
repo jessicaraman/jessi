@@ -23,6 +23,9 @@ public class ParkingSpot {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "electricPlug")
+    private boolean plug;
+
     @Column(name = "location")
     private String location;
 

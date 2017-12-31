@@ -41,7 +41,85 @@
 <!--/.Navbar-->
 
 <div class="container">
-    <code>Add parking spot.</code>
+    <%--@elvariable id="parking" type="fr.digicar.model.ParkingSpot"--%>
+    <form:form method="POST" modelAttribute="parking" cssClass="m-5"
+               action="${pageContext.request.contextPath}/add-parking-spot-form">
+        <div class="row">
+            <a class="btn btn-sm btn-default col">Identifiants</a>
+            <hr class="col-2"/>
+            <a class="btn btn-sm btn-blue-grey col">Informations personnelles</a>
+            <hr class="col-2"/>
+            <a class="btn btn-sm btn-blue-grey col">Activation</a>
+        </div>
+        <div class="row mt-4">
+            <h1>Créer une place de parking</h1>
+        </div>
+        <%--@elvariable id="message" type="java.lang.String"--%>
+        <c:if test="${not empty message}">
+            <div class="row">
+                <div class="alert alert-danger w-100">${message}</div>
+            </div>
+        </c:if>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="md-form">
+                    <i class="fa fa-envelope prefix text-info"></i>
+                    <form:input type="text" id="nbSpot" cssClass="form-control validate" path="nbSpot"
+                                required="required"/>
+                    <form:label for="nbSpot" data-error="Numéro de place déjà attribué" path="nbSpot">
+                        Numéro de Place
+                        <span class="text-danger">*</span>
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12">
+                <div class="md-form">
+                    <i class="fa fa-lock prefix text-info"></i>
+                    <form:input type="text" id="nbParking" cssClass="form-control validate" path="nbParking"
+                                 required="required"/>
+                    <form:label for="nbParking" data-error="Ce parking n'existe pas" path="nbParking">
+                        Numéro de Parking
+                        <span class="text-danger">*</span>
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12">
+                <div class="md-form">
+                    <i class="prefix"></i>
+                    <form:input type="checkbox" id="electricPlug" cssClass="form-control validate" path="electricPlug"
+                                required="required"/>
+                    <form:label for="electricPlug"  path="electricPlug">
+                        Prise pour voiture électrique
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12">
+                <div class="md-form">
+                    <i class="fa fa-lock prefix text-info"></i>
+                    <form:input type="text" id="location" cssClass="form-control validate" path="location"
+                                required="required"/>
+                    <form:label for="location" data-error="Renseignez la ville ou se situe le parking" path="location">
+                        Ville
+                        <span class="text-danger">*</span>
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col text-right">
+                <button type="submit" class="btn btn-primary">
+                    Suivant &nbsp;
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
+        </div>
+    </form:form>
 </div>
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
