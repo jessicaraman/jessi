@@ -1,5 +1,5 @@
 package fr.digicar.backoffice.service;
-
+import fr.digicar.model.*;
 import fr.digicar.dao.TarifDAO;
 import fr.digicar.model.Tarif;
 import org.springframework.beans.factory.annotation.Autowired;

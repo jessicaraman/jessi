@@ -22,13 +22,18 @@ public class TarifDAOImpl implements TarifDAO {
         getCurrentSession().save(tarif);
     }
     public void updateTarif(Tarif tarif) {
-        Tarif tarifToUpdate = getTarif(tarif.getId());
-        //tarifToUpdate.setName(tarif.getName()); à redéfinir
-        getCurrentSession().update(tarifToUpdate);
+        Session session = this.sessionFactory.getCurrentSession();
+        session.update(tarif);
 
     }
 
     public Tarif getTarif(int id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Tarif t = (Tarif) session.load(Tarif.class, new Integer(id));
+        return t;
+    }
+
+    public Tarif getTarifby(int id) {
         return (Tarif) getCurrentSession().get(Tarif.class, id);
     }
 
@@ -40,7 +45,7 @@ public class TarifDAOImpl implements TarifDAO {
 
     @SuppressWarnings("unchecked")
     public List<Tarif> getTarifs() {
-        return getCurrentSession().createQuery("from Tarif").list();
+        return getCurrentSession().createQuery("from tarifs").list();
     }
 
 }

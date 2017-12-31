@@ -10,17 +10,33 @@ import javax.persistence.*;
 public class Tarif {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "libelle")
     private String libelle;
-
-    @Column(name = "prix_heure")
     private float prix_heure;
-
-    @Column(name = "prix_km")
     private float prix_km;
+public Integer getId(){return this.id;};
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getLibelle(){return this.libelle;}
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public float getPrix_heure(){return this.prix_heure;}
+
+    public void setPrix_heure(float prix_heure) {
+        this.prix_heure = prix_heure;
+    }
+
+    public float getPrix_km(){return this.prix_km;}
+
+    public void setPrix_km(float prix_km) {
+        this.prix_km = prix_km;
+    }
 }
