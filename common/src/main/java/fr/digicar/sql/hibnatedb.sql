@@ -27,3 +27,18 @@ CREATE TABLE parking_spots (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+CREATE TABLE car
+(
+  id                          INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  registration_number         VARCHAR(40)  NOT NULL,
+  mark                        VARCHAR(40)  NOT NULL,
+  transmission                VARCHAR(40)  NOT NULL,
+  name_model                  VARCHAR(40)  NOT NULL,
+  nb_places                   NUMBER        NOT NULL,
+  nb_doors                    VARCHAR(40)  NOT NULL,
+  category                    VARCHAR(40)  NOT NULL,
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
