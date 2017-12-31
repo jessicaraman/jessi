@@ -31,10 +31,10 @@ public class CarController {
     public ModelAndView addingCar(@ModelAttribute Car car) {
 
         ModelAndView modelAndView = new ModelAndView("home");
-        CarService.addCar(car);
+        carService.addCar(car);
 
         String message = car.getNbSpot() + " ont été ajoutées.";
-        List<Car> cars = carService.getAll();
+        List<Car> cars = carService.getAllCar();
         modelAndView.addObject("car", cars);
         modelAndView.addObject("message", message);
         return modelAndView;

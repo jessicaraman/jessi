@@ -38,4 +38,4 @@ public class Car {
 
     @Column(name = "category")
     private String category;
-
+}

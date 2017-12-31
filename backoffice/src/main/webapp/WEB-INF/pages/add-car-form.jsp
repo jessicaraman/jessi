@@ -61,85 +61,57 @@
         <%--</fieldset>--%>
     <%--</form>--%>
 
-    <%--@elvariable id="car" type="fr.digicar.model.ParkingSpot"--%>
-    <form:form method="POST" modelAttribute="car" cssClass="m-5"
-               action="${pageContext.request.contextPath}/add-car-form">
-        <div class="row">
-            <a class="btn btn-sm btn-default col">Identifiants</a>
-            <hr class="col-2"/>
-            <a class="btn btn-sm btn-blue-grey col">Informations personnelles</a>
-            <hr class="col-2"/>
-            <a class="btn btn-sm btn-blue-grey col">Activation</a>
-        </div>
-        <div class="row mt-4">
-            <h1>Créer un véhicule</h1>
-        </div>
-        <%--@elvariable id="message" type="java.lang.String"--%>
-        <c:if test="${not empty message}">
-            <div class="row">
-                <div class="alert alert-danger w-100">${message}</div>
-            </div>
-        </c:if>
-        <div class="row mt-2">
-            <div class="col-12">
-                <div class="md-form">
-                    <i class="fa fa-envelope prefix text-info"></i>
-                    <form:input type="text" id="registrationNumber" cssClass="form-control validate" path="registrationNumber"
-                                required="required"/>
-                    <form:label for="registrationNumber" data-error="Numéro d'immatriculation déjà attribué" path="registrationNumber">
-                        Immatriculation
-                        <span class="text-danger">*</span>
-                    </form:label>
-                </div>
+    <form class="form-horizontal" action="/add">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="regristration_number">Registration number:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="regristration_number" placeholder="Enter registration number">
             </div>
         </div>
-        <div class="row mt-1">
-            <div class="col-12">
-                <div class="md-form">
-                    <i class="fa fa-lock prefix text-info"></i>
-                    <form:input type="text" id="mark" cssClass="form-control validate" path="mark"
-                                required="required"/>
-                    <form:label for="mark" data-error="le champs n'est pas correct" path="mark">
-                        Mark
-                        <span class="text-danger">*</span>
-                    </form:label>
-                </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="mark">Mark:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="mark" placeholder="Enter mark">
             </div>
         </div>
-        <div class="row mt-1">
-            <div class="col-12">
-                <div class="md-form">
-                    <i class="prefix"></i>
-                    <form:input type="text" id="electricPlug" cssClass="form-control validate" path="electricPlug"
-                                required="required"/>
-                    <form:label for="electricPlug"  path="electricPlug">
-                        Prise pour voiture électrique
-                    </form:label>
-                </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="model_name">Model name:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="model_name" placeholder="Enter Model name">
             </div>
         </div>
-        <div class="row mt-1">
-            <div class="col-12">
-                <div class="md-form">
-                    <i class="fa fa-lock prefix text-info"></i>
-                    <form:input type="text" id="location" cssClass="form-control validate" path="location"
-                                required="required"/>
-                    <form:label for="location" data-error="Renseignez la ville ou se situe le parking" path="location">
-                        Ville
-                        <span class="text-danger">*</span>
-                    </form:label>
-                </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="transmission">Transmission type:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="transmission" placeholder="Enter transmission type">
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col text-right">
-                <button type="submit" class="btn btn-primary">
-                    Suivant &nbsp;
-                    <i class="fa fa-angle-right"></i>
-                </button>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="nb_places">Number of places:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nb_places" placeholder="Enter number of places">
             </div>
         </div>
-    </form:form>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="nb_doors">Number of doors:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nb_doors" placeholder="Enter number of doors">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="category">Category:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="category" placeholder="Enter category">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Add car</button>
+            </div>
+        </div>
+    </form>
+
 </div>
 
 

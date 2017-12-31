@@ -36,9 +36,9 @@ CREATE TABLE car
   mark                        VARCHAR(40)  NOT NULL,
   transmission                VARCHAR(40)  NOT NULL,
   name_model                  VARCHAR(40)  NOT NULL,
-  nb_places                   NUMBER        NOT NULL,
-  nb_doors                    VARCHAR(40)  NOT NULL,
-  category                    VARCHAR(40)  NOT NULL,
+  nb_places                   INT(2)        NOT NULL,
+  nb_doors                    INT(2)  NOT NULL,
+  category                    VARCHAR(40)  NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
