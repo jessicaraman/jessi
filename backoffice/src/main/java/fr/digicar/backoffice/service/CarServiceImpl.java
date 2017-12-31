@@ -23,10 +23,10 @@ public class CarServiceImpl implements CarService {
     public void addCar(Car car) { CarDAO.addCar(car);
     }
 
-    @Override
-    public void updateCar(Car car) {
-        carDAO.updateCar(car);
-    }
+//    @Override
+//    public void updateCar(Car car) {
+//        carDAO.updateCar(car);
+//    }
 
     @Override
     public Car getCar(String registration_number) {
@@ -38,9 +38,9 @@ public class CarServiceImpl implements CarService {
         CarDAO.deleteCar(registration_number);
     }
 
-    @Override
-    public List<Car> getAllCar() {
-        return carDAO.getCar();
-    }
+//    @Override
+//    public List<Car> getAllCar() {
+//        return carDAO.getCar();
+//    }
 
 }

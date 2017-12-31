@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface CarService {
     void addCar(Car car);
-    void updateCar(Car car);
+//    void updateCar(Car car);
     Car getCar(String registration_number);
     void deleteCar(String registration_number);
-    List<Car> getAllCar();
+//    List<Car> getAllCar();
 }

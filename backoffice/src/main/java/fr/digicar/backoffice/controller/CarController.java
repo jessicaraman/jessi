@@ -20,7 +20,7 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView addCarPage() {
         ModelAndView modelAndView = new ModelAndView("add-car-form");
         modelAndView.addObject("car", new Car());
@@ -33,9 +33,9 @@ public class CarController {
         ModelAndView modelAndView = new ModelAndView("home");
         carService.addCar(car);
 
-        String message = car.getNbSpot() + " ont été ajoutées.";
-        List<Car> cars = carService.getAllCar();
-        modelAndView.addObject("car", cars);
+        String message = " ont été ajoutées.";
+//        List<Car> cars = carService.getAllCar();
+//        modelAndView.addObject("car", cars);
         modelAndView.addObject("message", message);
         return modelAndView;
     }
