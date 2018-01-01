@@ -17,30 +17,30 @@ import java.util.List;
 public class CarServiceImpl implements CarService {
 
     @Autowired
-    private CarDAO CarDAO;
+    private CarDAO carDAO;
 
     @Override
-    public void addCar(Car car) { CarDAO.addCar(car);
+    public void addCar(Car car) { carDAO.addCar(car);
     }
 
-//    @Override
-//    public void updateCar(Car car) {
-//        carDAO.updateCar(car);
-//    }
+    @Override
+    public void updateCar(Car car) {
+        carDAO.updateCar(car);
+    }
 
     @Override
     public Car getCar(String registration_number) {
-        return CarDAO.getCar(registration_number);
+        return carDAO.getCar(registration_number);
     }
 
     @Override
     public void deleteCar(String registration_number) {
-        CarDAO.deleteCar(registration_number);
+        carDAO.deleteCar(registration_number);
     }
 
-//    @Override
-//    public List<Car> getAllCar() {
-//        return carDAO.getCar();
-//    }
+    @Override
+    public List<Car> getCars() {
+        return carDAO.getCars();
+    }
 
 }
