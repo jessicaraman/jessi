@@ -38,4 +38,23 @@ public class Car {
 
     @Column(name = "category")
     private String category;
+
+    /* for location: in parking or storage */
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "kilometer")
+    private Integer kilometer;
+
+    @Column(name = "release_date")
+    private String release_date;
+
+    @Column(name = "comfort")
+    private Integer comfort;
+
+    @Column(name = "fuel_type")
+    private Integer fuel_type;
+
+
+
 }

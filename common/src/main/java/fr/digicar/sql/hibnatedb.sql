@@ -38,7 +38,12 @@ CREATE TABLE car
   name_model                  VARCHAR(40)  NOT NULL,
   nb_places                   INT(2)        NOT NULL,
   nb_doors                    INT(2)  NOT NULL,
-  category                    VARCHAR(10)  NOT NULL
+  category                    VARCHAR(10)  NOT NULL,
+  state                       INT(2)  NOT NULL,
+  comfort                     INT(2)  NOT NULL,
+  kilometer                   INT(6)  NOT NULL,
+  release_date                date  NOT NULL,
+  fuel_type                   VARCHAR(10)  NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
