@@ -39,10 +39,11 @@
     </div>
 </nav>
 <!--/.Navbar-->
-
-<div class="container">
-    <code>Add car </code>
-    <%--<form action="/action_page.php">--%>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Ajouter un véhicule
+</button>
+<%--<div class="container">--%>
+    <%--<form method = "POST" action="/car/add">--%>
         <%--<fieldset>--%>
             <%--<legend>car information:</legend>--%>
             <%--Registration number:<br>--%>
@@ -61,58 +62,109 @@
         <%--</fieldset>--%>
     <%--</form>--%>
 
-    <form class="form-horizontal" action="/add">
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="regristration_number">Registration number:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="regristration_number" placeholder="Enter registration number">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="mark">Mark:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="mark" placeholder="Enter mark">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="model_name">Model name:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="model_name" placeholder="Enter Model name">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="transmission">Transmission type:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="transmission" placeholder="Enter transmission type">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="nb_places">Number of places:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="nb_places" placeholder="Enter number of places">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="nb_doors">Number of doors:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="nb_doors" placeholder="Enter number of doors">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="category">Category:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="category" placeholder="Enter category">
+
+
+    <%--<form class="form-horizontal" action="/add">--%>
+        <%--<div class="form-group">--%>
+            <%--<label class="control-label col-sm-2" for="regristration_number">Registration number:</label>--%>
+            <%--<div class="col-sm-10">--%>
+                <%--<input type="text" class="form-control" id="regristration_number" placeholder="Enter registration number">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="form-group">--%>
+            <%--<label class="control-label col-sm-2" for="mark">Mark:</label>--%>
+            <%--<div class="col-sm-10">--%>
+                <%--<input type="text" class="form-control" id="mark" placeholder="Enter mark">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="form-group">--%>
+            <%--<label class="control-label col-sm-2" for="model_name">Model name:</label>--%>
+            <%--<div class="col-sm-10">--%>
+                <%--<input type="text" class="form-control" id="model_name" placeholder="Enter Model name">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="form-group">--%>
+            <%--<label class="control-label col-sm-2" for="transmission">Transmission type:</label>--%>
+            <%--<div class="col-sm-10">--%>
+                <%--<input type="text" class="form-control" id="transmission" placeholder="Enter transmission type">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="form-group">--%>
+            <%--<label class="control-label col-sm-2" for="nb_places">Number of places:</label>--%>
+            <%--<div class="col-sm-10">--%>
+                <%--<input type="text" class="form-control" id="nb_places" placeholder="Enter number of places">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="form-group">--%>
+            <%--<label class="control-label col-sm-2" for="nb_doors">Number of doors:</label>--%>
+            <%--<div class="col-sm-10">--%>
+                <%--<input type="text" class="form-control" id="nb_doors" placeholder="Enter number of doors">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="form-group">--%>
+            <%--<label class="control-label col-sm-2" for="category">Category:</label>--%>
+            <%--<div class="col-sm-10">--%>
+                <%--<input type="text" class="form-control" id="category" placeholder="Enter category">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+
+        <%--<div class="form-group">--%>
+            <%--<div class="col-sm-offset-2 col-sm-10">--%>
+                <%--<button type="submit" class="btn btn-default">Add car</button>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</form>--%>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ajouter un véhicule</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form:form method="POST" action="/car/add" modelAttribute="vehicule">
+
+
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="text" path="registration_number"  class="form-control" required="required"/>
+                            <form:label path="registration_number">Immatriculation</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <form:input type="text" path="mark" class="form-control"/>
+                            <form:label  data-error="Marque invalide" path="mark">Marque</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <form:input type="text" path="model_name" class="form-control"/>
+                            <form:label  data-error="modèle invalide" path="model_name" >Nom du modèle</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <form:input type="text" path="transmission" class="form-control"/>
+                            <form:label data-error="champs invalide" path="transmission" >Type de transmission</form:label>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Ajouter un véhicule</button></form:form>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Add car</button>
-            </div>
-        </div>
-    </form>
 
-</div>
 
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>

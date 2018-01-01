@@ -43,8 +43,8 @@ public class Car {
     @Column(name = "state")
     private String state;
 
-    @Column(name = "kilometer")
-    private Integer kilometer;
+    @Column(name = "kilometers")
+    private Integer kilometers;
 
     @Column(name = "release_date")
     private String release_date;
