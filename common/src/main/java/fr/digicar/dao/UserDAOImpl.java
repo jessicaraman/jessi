@@ -1,10 +1,13 @@
 package fr.digicar.dao;
 
 import fr.digicar.model.User;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -37,6 +40,21 @@ public class UserDAOImpl implements UserDAO {
         User user = getUser(id);
         if (user != null)
             getCurrentSession().delete(user);
+    }
+
+    public boolean checkEmailExistence(String email) {
+        Query query = getCurrentSession().createQuery("from User where email = :email");
+        query.setString("email", email);
+        List<User> result = (List<User>) query.list();
+        return !(result.size() > 0);
+    }
+
+    public boolean checkUserCredentials(User user) {
+        String email = user.getEmail();
+        String password = user.getPassword();
+        User user1 = (User) getCurrentSession().get(User.class, email);
+        User user2 = (User) getCurrentSession().get(User.class, password);
+        return user1 != null && user1 == user2;
     }
 
 }

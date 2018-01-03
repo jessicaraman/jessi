@@ -12,4 +12,8 @@ public interface UserService {
 
     void deleteUser(int id);
 
+    boolean checkEmailExistence(String email);
+
+    boolean checkUserCredentials(User user);
+
 }

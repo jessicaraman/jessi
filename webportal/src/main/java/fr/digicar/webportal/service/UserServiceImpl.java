@@ -33,4 +33,14 @@ public class UserServiceImpl implements UserService {
         userDAO.deleteUser(id);
     }
 
+    @Override
+    public boolean checkEmailExistence(String email) {
+        return userDAO.checkEmailExistence(email);
+    }
+
+    @Override
+    public boolean checkUserCredentials(User user) {
+        return userDAO.checkUserCredentials(user);
+    }
+
 }

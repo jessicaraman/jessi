@@ -23,7 +23,7 @@ public class RegistrationController {
 
     private User user;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView registerUser() {
         log.debug("UserController#registerUser");
         ModelAndView modelAndView = new ModelAndView("registration");
@@ -31,14 +31,19 @@ public class RegistrationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public ModelAndView registerUserPersonalInfo(@ModelAttribute User user) {
         log.debug("UserController#registerUserPerosnalInfo");
         log.debug("user.email : " + user.getEmail());
         log.debug("user.password : " + user.getPassword());
         log.debug("user.passwordConfirm : " + user.getPasswordConfirm());
         ModelAndView modelAndView;
-        if (!user.getPassword().equals(user.getPasswordConfirm())) {
+        if (!userService.checkEmailExistence(user.getEmail())) {
+            modelAndView = new ModelAndView("registration");
+            modelAndView.addObject("message", "Cette adresse email est déjà enregistrée.");
+            user.setPassword(null);
+            user.setPasswordConfirm(null);
+        } else if (!user.getPassword().equals(user.getPasswordConfirm())) {
             modelAndView = new ModelAndView("registration");
             modelAndView.addObject("message", "Les mots de passe renseignés doivent être identiques.");
             user.setPassword(null);
