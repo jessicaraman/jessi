@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public abstract class ParkingSpotDAOImpl implements ParkingSpotDAO {
+public class ParkingSpotDAOImpl implements ParkingSpotDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -23,9 +23,9 @@ public abstract class ParkingSpotDAOImpl implements ParkingSpotDAO {
     }
 
     public void updateParkingSpot(ParkingSpot parkingSpot) {
-        ParkingSpot parkinSpotToUpdate = getParkingSpot(parkingSpot.getId());
-        parkinSpotToUpdate.setNbSpot(parkingSpot.getNbSpot());
-        getCurrentSession().update(parkinSpotToUpdate);
+        ParkingSpot parkingSpotUpdate = getParkingSpot(parkingSpot.getId());
+        parkingSpotUpdate.setNbSpot(parkingSpot.getNbSpot());
+        getCurrentSession().update(parkingSpotUpdate);
 
     }
 
