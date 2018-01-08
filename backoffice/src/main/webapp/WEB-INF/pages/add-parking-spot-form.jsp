@@ -40,19 +40,14 @@
 </nav>
 <!--/.Navbar-->
 
+
 <div class="container">
     <%--@elvariable id="parking" type="fr.digicar.model.ParkingSpot"--%>
     <form:form method="POST" modelAttribute="parking" cssClass="m-5"
-               action="${pageContext.request.contextPath}/add-parking-spot-form">
-        <div class="row">
-            <a class="btn btn-sm btn-default col">Identifiants</a>
-            <hr class="col-2"/>
-            <a class="btn btn-sm btn-blue-grey col">Informations personnelles</a>
-            <hr class="col-2"/>
-            <a class="btn btn-sm btn-blue-grey col">Activation</a>
-        </div>
+               action="/parking/add">
+
         <div class="row mt-4">
-            <h1>Créer une place de parking</h1>
+            <h1>Ajouter une place de parking</h1>
         </div>
         <%--@elvariable id="message" type="java.lang.String"--%>
         <c:if test="${not empty message}">
@@ -78,7 +73,7 @@
                 <div class="md-form">
                     <i class="fa fa-lock prefix text-info"></i>
                     <form:input type="text" id="nbParking" cssClass="form-control validate" path="nbParking"
-                                 required="required"/>
+                                required="required"/>
                     <form:label for="nbParking" data-error="Ce parking n'existe pas" path="nbParking">
                         Numéro de Parking
                         <span class="text-danger">*</span>
@@ -92,7 +87,7 @@
                     <i class="prefix"></i>
                     <form:input type="checkbox" id="electricPlug" cssClass="form-control validate" path="electricPlug"
                                 required="required"/>
-                    <form:label for="electricPlug"  path="electricPlug">
+                    <form:label for="electricPlug" path="electricPlug">
                         Prise pour voiture électrique
                     </form:label>
                 </div>

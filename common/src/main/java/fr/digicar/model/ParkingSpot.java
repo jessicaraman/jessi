@@ -29,7 +29,4 @@ public class ParkingSpot {
     @Column(name = "location")
     private String location;
 
-    public String getNbSpot() {
-        return nbSpot;
-    }
 }
