@@ -46,7 +46,7 @@
     </div>
 </nav>
 <!--/.Navbar-->
-
+<div class="container">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i
         class="fa fa-plus mr-1"></i>
     Ajouter un tarif
@@ -148,22 +148,27 @@
             <th width="120">Prix par heure</th>
             <th width="60">Prix par km</th>
             <th width="60">Frais mensuels</th>
+            <th width="100">Catégories</th>
+            <th width="100">Actions</th>
+            <th width="100"></th>
         </tr>
-        <c:forEach items="${listOfPricings.rows}" var="tarif">
+        <c:forEach items="${listOfPricings}" var="tarif">
             <tr>
                 <td>${tarif.id}</td>
                 <td>${tarif.libelle}</td>
-                <td>${country.prix_heure}</td>
-                <td>${country.prix_km}</td>
-                <td>${country.frais_mensuels}</td>
-                <td><a href="<c:url value='/updateTarif/${country.id}' />">Modifier</a></td>
-                <td><a href="<c:url value='/deleteTarif/${country.id}' />">Supprimer</a></td>
+                <td>${tarif.prix_heure}</td>
+                <td>${tarif.prix_km}</td>
+                <td>${tarif.frais_mensuels}</td>
+                <td></td>
+                <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value='' />" >Modifier</a></button></td>
+                <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value='' />" >Supprimer</a></button></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
 
 <br>
+</div>-
 <%--
 <h3 style="margin-left: 6px;">Liste des tarifs</h3>
 

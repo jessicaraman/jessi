@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class TarifController {
 
@@ -20,8 +22,8 @@ public class TarifController {
     public ModelAndView addPricingPage() {
         ModelAndView modelAndView = new ModelAndView("add-price-form");
         modelAndView.addObject("tarif", new Tarif());
-        // List listOfPricings = tarifService.getTarifs();
-        // modelAndView.addObject("listOfPricings", listOfPricings);
+        List listOfPricings = tarifService.getTarifs();
+        modelAndView.addObject("listOfPricings", listOfPricings);
         return modelAndView;
     }
     //pour l'ajout
@@ -29,6 +31,9 @@ public class TarifController {
     @RequestMapping(value = "/pricing/addPricing", method = RequestMethod.POST)
     public ModelAndView addingPricing(@ModelAttribute Tarif tarif) {
         tarifService.addTarif(tarif);
-        return new ModelAndView("add-price-form");
+        ModelAndView modelAndView = new ModelAndView("add-price-form");
+        List listOfPricings = tarifService.getTarifs();
+        modelAndView.addObject("listOfPricings", listOfPricings);
+        return modelAndView;
     }
 }
