@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class TarifDAOImpl implements TarifDAO {
 
@@ -19,12 +20,12 @@ public class TarifDAOImpl implements TarifDAO {
     }
 
     public void addTarif(Tarif tarif) {
-        getCurrentSession().save(tarif);
-    }
-    public void updateTarif(Tarif tarif) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(tarif);
+        sessionFactory.getCurrentSession().save(tarif);
 
+    }
+
+    public void updateTarif(Tarif tarif) {
+        sessionFactory.getCurrentSession().update(tarif);
     }
 
     public Tarif getTarif(int id) {
@@ -45,7 +46,7 @@ public class TarifDAOImpl implements TarifDAO {
 
     @SuppressWarnings("unchecked")
     public List<Tarif> getTarifs() {
-        return getCurrentSession().createQuery("from Tarif").list();
+        return getCurrentSession().createQuery("FROM Tarif").list();
     }
 
 }

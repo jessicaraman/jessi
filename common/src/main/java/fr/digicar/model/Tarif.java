@@ -11,7 +11,7 @@ public class Tarif {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name="libelle")
@@ -25,34 +25,45 @@ public class Tarif {
 
     @Column(name="frais_mensuels")
     private int frais_mensuels;
-/*public Integer getId(){return this.id;};
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setFrais_mensuels(int frais_mensuels) {
+        this.frais_mensuels = frais_mensuels;
     }
-
-    public String getLibelle(){return this.libelle;}
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    public float getPrix_heure(){return this.prix_heure;}
-
-    public void setPrix_heure(float prix_heure) {
-        this.prix_heure = prix_heure;
-    }
-
-    public float getPrix_km(){return this.prix_km;}
 
     public void setPrix_km(float prix_km) {
         this.prix_km = prix_km;
     }
 
-    public void setFrais_mensuels(int frais_mensuels) {
-        this.frais_mensuels = frais_mensuels;
+    public void setPrix_heure(float prix_heure) {
+        this.prix_heure = prix_heure;
     }
-    public int getFrais_mensuels(){
-        return this.frais_mensuels;
-    }*/
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public float getPrix_km() {
+        return prix_km;
+    }
+
+    public float getPrix_heure() {
+        return prix_heure;
+    }
+
+    public int getFrais_mensuels() {
+        return frais_mensuels;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
