@@ -21,7 +21,7 @@ public class RegistrationController {
     @Autowired
     UserService userService;
 
-    private User user;
+    User user;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView registerUser() {
@@ -38,14 +38,14 @@ public class RegistrationController {
         log.debug("user.password : " + user.getPassword());
         log.debug("user.passwordConfirm : " + user.getPasswordConfirm());
         ModelAndView modelAndView;
-        if (!userService.checkEmailExistence(user.getEmail())) {
-            modelAndView = new ModelAndView("registration");
-            modelAndView.addObject("message", "Cette adresse email est déjà enregistrée.");
-            user.setPassword(null);
-            user.setPasswordConfirm(null);
-        } else if (!user.getPassword().equals(user.getPasswordConfirm())) {
+        if (!user.getPassword().equals(user.getPasswordConfirm())) {
             modelAndView = new ModelAndView("registration");
             modelAndView.addObject("message", "Les mots de passe renseignés doivent être identiques.");
+            user.setPassword(null);
+            user.setPasswordConfirm(null);
+        } else if (!userService.checkEmailExistence(user.getEmail())) {
+            modelAndView = new ModelAndView("registration");
+            modelAndView.addObject("message", "Cette adresse email est déjà enregistrée.");
             user.setPassword(null);
             user.setPasswordConfirm(null);
         } else {
