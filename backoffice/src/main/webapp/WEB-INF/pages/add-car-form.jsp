@@ -116,53 +116,89 @@
     <%--</form>--%>
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ajouter un véhicule</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form:form method="POST" action="/car/add" modelAttribute="vehicule">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter un véhicule</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form:form method="POST" action="/car/add" modelAttribute="vehicule">
 
 
-                        <div class="md-form">
-                            <i class="fa fa-tag prefix grey-text"></i>
-                            <form:input type="text" path="registration_number"  class="form-control" required="required"/>
-                            <form:label path="registration_number">Immatriculation</form:label>
-                        </div>
-
-                        <div class="md-form">
-                            <i class="fa fa-eur prefix grey-text"></i>
-                            <form:input type="text" path="mark" class="form-control"/>
-                            <form:label  data-error="Marque invalide" path="mark">Marque</form:label>
-                        </div>
-
-                        <div class="md-form">
-                            <i class="fa fa-eur prefix grey-text"></i>
-                            <form:input type="text" path="model_name" class="form-control"/>
-                            <form:label  data-error="modèle invalide" path="model_name" >Nom du modèle</form:label>
-                        </div>
-
-                        <div class="md-form">
-                            <i class="fa fa-eur prefix grey-text"></i>
-                            <form:input type="text" path="transmission" class="form-control"/>
-                            <form:label data-error="champs invalide" path="transmission" >Type de transmission</form:label>
-                        </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary">Ajouter un véhicule</button></form:form>
-                    </div>
+                <div class="md-form">
+                    <form:input type="text" path="registration_number"  class="form-control" required="required"/>
+                    <form:label path="registration_number">Immatriculation</form:label>
                 </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="mark" class="form-control"/>
+                    <form:label  data-error="Marque invalide" path="mark">Marque</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="model_name" class="form-control"/>
+                    <form:label  data-error="modèle invalide" path="model_name" >Nom du modèle</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="transmission" class="form-control"/>
+                    <form:label data-error="champs invalide" path="transmission" >Type de transmission</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="nb_places" class="form-control"/>
+                    <form:label data-error="champs invalide" path="nb_places" >Nombre de places</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="nb_doors" class="form-control"/>
+                    <form:label data-error="champs invalide" path="nb_doors" >Nombre de portes</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="category" class="form-control"/>
+                    <form:label data-error="champs invalide" path="category" >Catégorie</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="state" class="form-control"/>
+                    <form:label data-error="champs invalide" path="state" >Emplacement</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="kilometers" class="form-control"/>
+                    <form:label data-error="champs invalide" path="kilometers" >Kilométrage</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="release_date" class="form-control"/>
+                    <form:label data-error="champs invalide" path="release_date" >Date de mise en circulation</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="comfort" class="form-control"/>
+                    <form:label data-error="champs invalide" path="comfort" >Confort</form:label>
+                </div>
+
+                <div class="md-form">
+                    <form:input type="text" path="fuel_type" class="form-control"/>
+                    <form:label data-error="champs invalide" path="fuel_type" >Type de carburant</form:label>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary">Ajouter un véhicule</button></form:form>
             </div>
         </div>
+    </div>
+</div>
 
 
 

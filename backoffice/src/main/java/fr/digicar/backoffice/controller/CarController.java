@@ -31,6 +31,7 @@ public class CarController {
     public ModelAndView addingCar(@ModelAttribute Car car) {
 
         ModelAndView modelAndView = new ModelAndView("home");
+        System.out.println("[DEBUG]"+car.getRegistration_number());
         carService.addCar(car);
 
         String message = "Le véhicule "+car.getRegistration_number() + " a été ajouté.";
