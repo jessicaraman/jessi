@@ -7,11 +7,13 @@ import fr.digicar.backoffice.service.CarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
+
 public class CarController {
 
     @Autowired
@@ -25,7 +27,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/car/add", method = RequestMethod.POST)
-    public ModelAndView addingCar(@ModelAttribute ("car") Car car) {
+    public ModelAndView addingCar(@ModelAttribute ("car") Car car, BindingResult result) {
         log.debug(car.getRegistration_number());
         carService.addCar(car);
 
