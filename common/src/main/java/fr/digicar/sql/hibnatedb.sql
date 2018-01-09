@@ -50,7 +50,7 @@ CREATE TABLE car
   nb_places           INT(2),
   nb_doors            INT(2),
   category            VARCHAR(10),
-  state               INT(2),
+  state               VARCHAR(10),
   comfort             INT(2),
   kilometers          INT(6),
   release_date        DATE,

@@ -4,13 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-/**
- * Created by barry on 31/12/2017.
- */
-
 @Data
 @Entity
-@Table(name = "car")
+@Table(name = "Car")
 public class Car {
 
     @Id
@@ -54,7 +50,5 @@ public class Car {
 
     @Column(name = "fuel_type")
     private Integer fuel_type;
-
-
 
 }
