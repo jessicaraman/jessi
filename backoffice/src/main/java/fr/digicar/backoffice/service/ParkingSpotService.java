@@ -7,9 +7,13 @@ import fr.digicar.model.ParkingSpot;
 public interface ParkingSpotService {
 
     void addParkingSpot(ParkingSpot parkingSpot);
+
     void updateParkingSpot(ParkingSpot parkingSpot);
+
     ParkingSpot getParkingSpot(int id);
+
     void deleteParkingSpot(int id);
+
     List<ParkingSpot> getParkingSpots();
 
 }

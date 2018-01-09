@@ -37,7 +37,6 @@ public class ParkingSpotServiceImpl implements ParkingSpotService {
         parkingSpotDAO.deleteParkingSpot(id);
     }
 
-
     @Override
     public List<ParkingSpot> getParkingSpots() {
         return parkingSpotDAO.getParkingSpots();

@@ -56,7 +56,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Maintain parking spot referential</h4>
                     <p class="card-text">Christophe Gougam &amp; Djouher Kahel</p>
-                    <a href="<c:url value="/WEB-INF/pages/add-parking-spot-form.jsp"/>" class="btn btn-primary">ACCESS</a>
+                    <a href="<c:url value="/parking/add"/>" class="btn btn-primary">ACCESS</a>
                 </div>
             </div>
         </div>
