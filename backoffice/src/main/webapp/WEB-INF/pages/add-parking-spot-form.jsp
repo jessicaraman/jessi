@@ -58,7 +58,7 @@
         <div class="row mt-2">
             <div class="col-12">
                 <div class="md-form">
-                    <i class="fa fa-envelope prefix text-info"></i>
+                    <i class="prefix"></i>
                     <form:input type="text" id="nbSpot" cssClass="form-control validate" path="nbSpot"
                                 required="required"/>
                     <form:label for="nbSpot" data-error="Numéro de place déjà attribué" path="nbSpot">
@@ -71,7 +71,7 @@
         <div class="row mt-1">
             <div class="col-12">
                 <div class="md-form">
-                    <i class="fa fa-lock prefix text-info"></i>
+                    <i class="prefix"></i>
                     <form:input type="text" id="nbParking" cssClass="form-control validate" path="nbParking"
                                 required="required"/>
                     <form:label for="nbParking" data-error="Ce parking n'existe pas" path="nbParking">
@@ -89,6 +89,7 @@
                                 required="required"/>
                     <form:label for="electricPlug" path="electricPlug">
                         Prise pour voiture électrique
+                        <span class="text-danger">*</span>
                     </form:label>
                 </div>
             </div>
@@ -96,7 +97,7 @@
         <div class="row mt-1">
             <div class="col-12">
                 <div class="md-form">
-                    <i class="fa fa-lock prefix text-info"></i>
+                    <i class="prefix"></i>
                     <form:input type="text" id="location" cssClass="form-control validate" path="location"
                                 required="required"/>
                     <form:label for="location" data-error="Renseignez la ville ou se situe le parking" path="location">
