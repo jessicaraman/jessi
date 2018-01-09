@@ -20,8 +20,8 @@ public class ParkingSpot {
     @Column(name = "nb_parking")
     private Integer nbParking;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "electric_plug")
+    private boolean plug;
 
     @Column(name = "location")
     private String location;

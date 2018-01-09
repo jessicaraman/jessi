@@ -18,12 +18,12 @@
   CHARSET = utf8;
 
 CREATE TABLE parking_spots (
-  id         INT(6) AUTO_INCREMENT
+  id            INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  nb_spot    VARCHAR(40)  NOT NULL,
-  nb_parking INT(5)       NOT NULL,
-  status     VARCHAR(40)  NOT NULL,
-  location   VARCHAR(100) NOT NULL
+  nb_spot       VARCHAR(40)  NOT NULL,
+  nb_parking    INT(5)       NOT NULL,
+  electric_plug BOOLEAN      NOT NULL,
+  location      VARCHAR(100) NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
