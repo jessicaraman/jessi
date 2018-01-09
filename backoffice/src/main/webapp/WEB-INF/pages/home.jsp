@@ -47,7 +47,8 @@
                 <div class="card-body">
                     <h4 class="card-title">Maintain vehicle referential</h4>
                     <p class="card-text">Alpha Barry &amp; Thierno Diallo</p>
-                    <a href="#" class="btn btn-primary">ACCESS</a>
+                    <a href="<c:url value="/car/add"/>" class="btn btn-primary">ACCESS</a>
+
                 </div>
             </div>
         </div>
