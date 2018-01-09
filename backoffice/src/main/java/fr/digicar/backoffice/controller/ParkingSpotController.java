@@ -22,7 +22,7 @@ public class ParkingSpotController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addParkingSpotPage() {
         ModelAndView modelAndView = new ModelAndView("add-parking-spot-form");
-        modelAndView.addObject("parkingSpot", new ParkingSpot());
+        modelAndView.addObject("parking", new ParkingSpot());
         return modelAndView;
     }
 
