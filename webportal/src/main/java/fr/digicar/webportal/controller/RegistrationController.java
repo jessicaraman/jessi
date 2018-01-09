@@ -15,14 +15,15 @@ import java.text.SimpleDateFormat;
 
 @Slf4j
 @Controller
-public class UserController {
+@RequestMapping("/registration")
+public class RegistrationController {
 
     @Autowired
     UserService userService;
 
-    private User user;
+    User user;
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView registerUser() {
         log.debug("UserController#registerUser");
         ModelAndView modelAndView = new ModelAndView("registration");
@@ -30,8 +31,8 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView registerUserPerosnalInfo(@ModelAttribute User user) {
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public ModelAndView registerUserPersonalInfo(@ModelAttribute User user) {
         log.debug("UserController#registerUserPerosnalInfo");
         log.debug("user.email : " + user.getEmail());
         log.debug("user.password : " + user.getPassword());
@@ -42,6 +43,11 @@ public class UserController {
             modelAndView.addObject("message", "Les mots de passe renseignés doivent être identiques.");
             user.setPassword(null);
             user.setPasswordConfirm(null);
+        } else if (!userService.checkEmailExistence(user.getEmail())) {
+            modelAndView = new ModelAndView("registration");
+            modelAndView.addObject("message", "Cette adresse email est déjà enregistrée.");
+            user.setPassword(null);
+            user.setPasswordConfirm(null);
         } else {
             this.user = user;
             modelAndView = new ModelAndView("registration-personal-info");
@@ -50,7 +56,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/registration/confirm", method = RequestMethod.POST)
+    @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public ModelAndView confirmUserRegistration(@ModelAttribute User user) throws ParseException {
         log.debug("UserController#confirmUserRegistration");
         log.debug("user : " + user);

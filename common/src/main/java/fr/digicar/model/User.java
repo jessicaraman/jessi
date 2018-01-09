@@ -64,7 +64,7 @@ public class User {
     @Column(name = "birthdate")
     private Date birthdate;
 
-    /**The user birth date in string format. Only used to get input from JSP form. */
+    /** The user birth date in string format. Only used to get input from JSP form. */
     @Transient
     private String birthdateString;
 
