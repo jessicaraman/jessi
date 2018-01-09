@@ -11,33 +11,33 @@
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark indigo">
-    <a class="navbar-brand" href="<c:url value="/"/>">CarSharingClub</a>
-    <button class="navbar-toggler" type="button"
-            data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/"/>">Accueil</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Fonctionnalités</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Tarifs</a>
-            </li>
-
-        </ul>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" aria-label="Search">
-        </form>
-    </div>
-</nav>
-<!--/.Navbar-->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark elegant-color-dark">
+        <div class="container">
+            <a class="navbar-brand" href="<c:url value="/"/>">CarSharingClub</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                </ul>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
 
 <div class="container">
     <%--@elvariable id="user" type="fr.digicar.model.User"--%>
