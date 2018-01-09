@@ -30,20 +30,20 @@ CREATE TABLE parking_spots (
 
 CREATE TABLE car
 (
-  id                          INT(6) AUTO_INCREMENT
+  id                  INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  registration_number         VARCHAR(40) ,
-  mark                        VARCHAR(40) ,
-  transmission                VARCHAR(40) ,
-  name_model                  VARCHAR(40) ,
-  nb_places                   INT(2)  ,
-  nb_doors                    INT(2)  ,
-  category                    VARCHAR(10) ,
-  state                       INT(2)  ,
-  comfort                     INT(2)  ,
-  kilometers                  INT(6) ,
-  release_date                date ,
-  fuel_type                   VARCHAR(10)
+  registration_number VARCHAR(40) NOT NULL,
+  mark                VARCHAR(40)NOT NULL,
+  transmission        VARCHAR(40)NOT NULL,
+  name_model          VARCHAR(40)NOT NULL,
+  nb_places           INT(2) NOT NULL,
+  nb_doors            INT(2) NOT NULL,
+  category            VARCHAR(10) NOT NULL,
+  state               VARCHAR(10) NOT NULL,
+  comfort             INT(2) NOT NULL,
+  kilometers          INT(6) NOT NULL,
+  release_date        DATE NOT NULL,
+  fuel_type           VARCHAR(10) NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
