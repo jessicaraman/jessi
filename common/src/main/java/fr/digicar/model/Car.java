@@ -3,15 +3,15 @@ package fr.digicar.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by barry on 31/12/2017.
  */
-
 @Data
 @Entity
-@Table(name = "Car")
-public class Car {
+@Table(name = "car")
+public class Car implements Serializable{
 
     @Id
     @GeneratedValue
@@ -54,9 +54,5 @@ public class Car {
 
     @Column(name = "fuel_type")
     private Integer fuel_type;
-
-
-
-
 
 }

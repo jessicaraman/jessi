@@ -27,14 +27,14 @@ public class CarController {
     }
 
     @RequestMapping(value = "/car/add", method = RequestMethod.POST)
-    public ModelAndView addingCar(@ModelAttribute ("car") Car car, BindingResult result) {
+    public ModelAndView addingCar(@ModelAttribute Car car, BindingResult result) {
         log.debug(car.getRegistration_number());
         carService.addCar(car);
 
         ModelAndView modelAndView = new ModelAndView("add-car-form");
-        String message = "Le véhicule " + car.getRegistration_number() + " a été ajouté.";
+        String message = "Le véhicule " + " a été ajouté.";
         List<Car> cars = carService.getCars();
-        modelAndView.addObject("car", cars);
+        modelAndView.addObject("cars", cars);
         modelAndView.addObject("message", message);
         return modelAndView;
     }
