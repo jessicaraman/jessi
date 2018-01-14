@@ -62,8 +62,8 @@
         <div class="row mt-2">
             <div class="col-2 pt-3">
                 <div class="form-group w-100">
-                    <form:select cssClass="form-control w-100 validate" path="gender" required="required">
-                        <form:option value="" disabled="true" selected="true">Civilité</form:option>
+                    <form:select cssClass="form-control rounded validate" path="gender" required="required">
+                        <form:option value="" disabled="true" selected="true">Civilité *</form:option>
                         <form:option value="Mme">Mme</form:option>
                         <form:option value="M.">M.</form:option>
                     </form:select>
