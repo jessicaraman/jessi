@@ -53,6 +53,12 @@
         <div class="row mt-4">
             <h1>Informations personnelles</h1>
         </div>
+        <%--@elvariable id="message" type="java.lang.String"--%>
+        <c:if test="${not empty message}">
+            <div class="row">
+                <div class="alert alert-danger w-100">${message}</div>
+            </div>
+        </c:if>
         <div class="row mt-2">
             <div class="col-2 pt-3">
                 <div class="form-group w-100">
