@@ -23,7 +23,7 @@ import java.util.Properties;
 @ComponentScan("fr.digicar")
 @EnableWebMvc
 @EnableTransactionManagement
-@PropertySource("classpath:application.properties")
+@PropertySource({"classpath:application.properties", "classpath:hibernate.properties"})
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 	
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
