@@ -47,3 +47,35 @@ CREATE TABLE car
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+
+CREATE TABLE car_type
+(
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  name                VARCHAR(20) NOT NULL
+)
+
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE fuel_type
+(
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  name                VARCHAR(20) NOT NULL
+)
+
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
+CREATE TABLE transmission_mode
+(
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  name                VARCHAR(20) NOT NULL
+)
+
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
