@@ -39,5 +39,23 @@ public class CarController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/car/{registrationId}", method = RequestMethod.GET)
+    public ModelAndView getCarByRegistration(@PathVariable  String registrationId) {
+        Car car = carService.getCar(registrationId);
+
+        ModelAndView modelAndView = new ModelAndView("carByRegistrationId");
+        modelAndView.addObject("car", car);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/car/all", method = RequestMethod.GET)
+    public ModelAndView getAllCars() {
+        List<Car> cars = carService.getCars();
+
+        ModelAndView modelAndView = new ModelAndView("allCars");
+        modelAndView.addObject("cars", cars);
+        return modelAndView;
+    }
+
+
 
 }
