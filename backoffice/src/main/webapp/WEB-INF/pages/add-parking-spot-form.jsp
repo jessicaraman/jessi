@@ -83,11 +83,11 @@
         <div class="row mt-1">
             <div class="col-12">
                 <div class="md-form">
-                    <form:checkbox cssClass="form-control custom-control-input" path="plug"/>
-                    <form:label cssClass="custom-control custom-checkbox" path="plug">
+                    <label class="custom-control custom-checkbox" path="plug">
+                        <input type="checkbox" class="custom-control-input" path="plug">
                         <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Prise pour voiture électrique</span>
-                    </form:label>
+                        <span class="custom-control-description">Prise pour voiture electrique</span>
+                    </label>
                 </div>
             </div>
         </div>
