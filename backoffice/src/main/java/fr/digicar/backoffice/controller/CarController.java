@@ -19,9 +19,9 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView addPage() {
-        ModelAndView modelAndView = new ModelAndView("home-car-referential");
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
         modelAndView.addObject("car", new Car());
         List<Car> cars = carService.getCars();
         modelAndView.addObject("cars", cars);
@@ -32,7 +32,7 @@ public class CarController {
     public ModelAndView addingCar(@ModelAttribute("car") Car car, BindingResult result) {
         carService.addCar(car);
 
-        ModelAndView modelAndView = new ModelAndView("home-car-referential");
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
         Car addedCar = car;
         List<Car> cars = carService.getCars();
         modelAndView.addObject("addedCar", addedCar);
