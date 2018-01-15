@@ -22,21 +22,21 @@
 <!-- Modal -->
 
 <%--@elvariable id="car" type="fr.digicar.model.Car"--%>
-<form:form method="POST" action="${pageContext.request.contextPath}/car/add" modelAttribute="car">
+<form:form method="POST" action="${pageContext.request.contextPath}/${request.getParameter("registration_number").html}" modelAttribute="car">
     <div class="modal-body">
         <div class="col-md-3 mt-3">
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="registration_number" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
+                <form:input name="registration_number" path="registration_number" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
                 <form:label path="registration_number" data-error="Immatriculation invalide">Marque</form:label>
                 <span class="input-group-addon waves-effect grey lighten-3" id="basic-addon1">
-                    <a><i class="fa fa-search text-grey" aria-hidden="true"></i></a>
+                    <a href="${pageContext.request.contextPath}/${request.getParameter("registration_number")}.html"><i class="fa fa-search text-grey" aria-hidden="true"></i></a>
                 </span>
             </div>
         </div>
     </div>
 </form:form>
 
-<form:form method="POST" action="${pageContext.request.contextPath}/car/all" modelAttribute="car">
+<form:form method="POST" action="${pageContext.request.contextPath}/allcars" modelAttribute="car">
     <div class="row">
         <div class="col-md-3 mt-3">
             <div class="input-group md-form form-sm form-2 pl-0">
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 mt-3">
+        <div class="col-md-4 mt-3">
             <div class="input-group md-form form-sm form-2 pl-0">
                 <form:input path="name_model" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
                 <form:label path="name_model" data-error="modèle invalide">Modèle</form:label>
@@ -53,36 +53,49 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 mt-3">
+        <div class="col-md-4 mt-3">
             <div class="input-group md-form form-sm form-2 pl-0">
                 <form:input path="kilometers" required="required" cssClass="form-control my-0 py-1 grey-border" type="number"/>
-                <form:label path="kilometers">Marque</form:label>
+                <form:label path="kilometers">Kilometrage</form:label>
             </div>
         </div>
 
-        <div class="col-md-3 mt-3">
+        <div class="col-md-4 mt-3">
             <div class="input-group md-form form-sm form-2 pl-0">
                 <form:input path="type" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
-                <form:label path="type" >Modèle</form:label>
+                <form:label path="type" >Type de véhicule</form:label>
+            </div>
+        </div>
+        <div class="col-md-4 mt-3">
+            <div class="input-group md-form form-sm form-2 pl-0">
+                <form:input path="transmission" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
+                <form:label path="transmission">Type de transmission</form:label>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-3 mt-3">
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="transmission" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
-                <form:label path="transmission">Marque</form:label>
+                <form:input path="fuel_type" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
+                <form:label path="fuel_type">Type de carburant</form:label>
             </div>
         </div>
 
         <div class="col-md-3 mt-3">
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="fuel_type" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
-                <form:label path="fuel_type">Modèle</form:label>
+                <form:input path="nb_doors" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
+                <form:label path="nb_doors">Nombre de portes</form:label>
+            </div>
+        </div>
+        <div class="col-md-3 mt-3">
+            <div class="input-group md-form form-sm form-2 pl-0">
+                <form:input path="nb_places" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
+                <form:label path="nb_places">Nombre de places</form:label>
             </div>
         </div>
     </div>
-    <div>
+
+    <div class="row">
         <span>...</span>
     </div>
     <div class="modal-footer">

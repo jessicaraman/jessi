@@ -13,33 +13,34 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
-
+@RequestMapping("/car")
 public class CarController {
 
     @Autowired
     private CarService carService;
 
-    @RequestMapping(value = "/car", method = RequestMethod.GET)
-    public ModelAndView addCarPage() {
-        ModelAndView modelAndView = new ModelAndView("add-car-form");
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public ModelAndView addPage() {
+        ModelAndView modelAndView = new ModelAndView("home-car-referential");
         modelAndView.addObject("car", new Car());
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/car/add", method = RequestMethod.POST)
-    public ModelAndView addingCar(@ModelAttribute Car car, BindingResult result) {
-        log.debug(car.getRegistration_number());
-        carService.addCar(car);
-
-        ModelAndView modelAndView = new ModelAndView("add-car-form");
-        String message = "Le véhicule " + " a été ajouté.";
         List<Car> cars = carService.getCars();
         modelAndView.addObject("cars", cars);
-        modelAndView.addObject("message", message);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/car/{registrationId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelAndView addingCar(@ModelAttribute("car") Car car, BindingResult result) {
+        carService.addCar(car);
+
+        ModelAndView modelAndView = new ModelAndView("home-car-referential");
+        Car addedCar = car;
+        List<Car> cars = carService.getCars();
+        modelAndView.addObject("addedCar", addedCar);
+        modelAndView.addObject("cars", cars);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/{registrationId}", method = RequestMethod.GET)
     public ModelAndView getCarByRegistration(@PathVariable  String registrationId) {
         Car car = carService.getCar(registrationId);
 
@@ -47,7 +48,7 @@ public class CarController {
         modelAndView.addObject("car", car);
         return modelAndView;
     }
-    @RequestMapping(value = "/car/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/allcars", method = RequestMethod.GET)
     public ModelAndView getAllCars() {
         List<Car> cars = carService.getCars();
 
