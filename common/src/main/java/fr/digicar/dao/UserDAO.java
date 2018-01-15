@@ -12,4 +12,8 @@ public interface UserDAO {
 
     void deleteUser(int id);
 
+    boolean checkEmailExistence(String email);
+
+    boolean checkUserCredentials(User user);
+
 }

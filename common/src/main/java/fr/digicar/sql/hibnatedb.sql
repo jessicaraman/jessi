@@ -27,3 +27,34 @@ CREATE TABLE parking_spots (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+CREATE TABLE tarifs (
+  id             INT(12) AUTO_INCREMENT
+    PRIMARY KEY,
+  libelle        VARCHAR(123),
+  prix_km        FLOAT,
+  prix_heure     FLOAT,
+  frais_mensuels INT(231)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE car
+(
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  registration_number VARCHAR(40),
+  mark                VARCHAR(40),
+  transmission        VARCHAR(40),
+  name_model          VARCHAR(40),
+  nb_places           INT(2),
+  nb_doors            INT(2),
+  category            VARCHAR(10),
+  state               VARCHAR(10),
+  comfort             INT(2),
+  kilometers          INT(6),
+  release_date        DATE,
+  fuel_type           VARCHAR(10)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;

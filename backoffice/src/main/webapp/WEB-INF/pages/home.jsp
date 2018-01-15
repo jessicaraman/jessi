@@ -29,7 +29,7 @@
                 <a class="nav-link" href="#">Features</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="<c:url value="/pricing"/>">Pricing</a>
             </li>
 
         </ul>
@@ -47,7 +47,8 @@
                 <div class="card-body">
                     <h4 class="card-title">Maintain vehicle referential</h4>
                     <p class="card-text">Alpha Barry &amp; Thierno Diallo</p>
-                    <a href="#" class="btn btn-primary">ACCESS</a>
+                    <a href="<c:url value="/car"/>" class="btn btn-primary">ACCESS</a>
+
                 </div>
             </div>
         </div>
@@ -67,7 +68,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Maintain pricing referential</h4>
                     <p class="card-text">Jessica Ramanantsoa &amp; Philippine Venries</p>
-                    <a href="#" class="btn btn-primary">ACCESS</a>
+                    <a href="<c:url value="/pricing"/>" class="btn btn-primary">ACCESS</a>
                 </div>
             </div>
         </div>
