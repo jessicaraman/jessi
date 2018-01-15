@@ -23,9 +23,9 @@ public class ParkingSpotDAOImpl implements ParkingSpotDAO {
     }
 
     public void updateParkingSpot(ParkingSpot parkingSpot) {
-        ParkingSpot parkinSpotToUpdate = getParkingSpot(parkingSpot.getId());
-        parkinSpotToUpdate.setNbSpot(parkingSpot.getNbSpot());
-        getCurrentSession().update(parkinSpotToUpdate);
+        ParkingSpot parkingSpotUpdate = getParkingSpot(parkingSpot.getId());
+        parkingSpotUpdate.setNbSpot(parkingSpot.getNbSpot());
+        getCurrentSession().update(parkingSpotUpdate);
 
     }
 
@@ -38,7 +38,6 @@ public class ParkingSpotDAOImpl implements ParkingSpotDAO {
         if (parkingSpot != null)
             getCurrentSession().delete(parkingSpot);
     }
-
 
     @SuppressWarnings("unchecked")
     public List<ParkingSpot> getParkingSpots() {

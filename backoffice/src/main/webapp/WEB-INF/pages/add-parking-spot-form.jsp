@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -40,8 +41,77 @@
 </nav>
 <!--/.Navbar-->
 
+
 <div class="container">
-    <code>Add parking spot.</code>
+    <%--@elvariable id="parking" type="fr.digicar.model.ParkingSpot"--%>
+    <form:form method="POST" modelAttribute="parking" cssClass="m-5"
+               action="/parking/add">
+
+        <div class="row mt-4">
+            <h1>Ajouter une place de parking</h1>
+        </div>
+        <%--@elvariable id="message" type="java.lang.String"--%>
+        <c:if test="${not empty message}">
+            <div class="row">
+                <div class="alert alert-danger w-100">${message}</div>
+            </div>
+        </c:if>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="md-form">
+                    <form:input type="number" id="nbSpot" cssClass="form-control validate" path="nbSpot"
+                                required="required"/>
+                    <form:label for="nbSpot" data-error="Numéro de place déjà attribué" path="nbSpot">
+                        Numéro de Place
+                        <span class="text-danger">*</span>
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12">
+                <div class="md-form">
+                    <form:input type="number" id="nbParking" cssClass="form-control validate" path="nbParking"
+                                required="required"/>
+                    <form:label for="nbParking" data-error="Ce parking n'existe pas" path="nbParking">
+                        Numéro de Parking
+                        <span class="text-danger">*</span>
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12">
+                <div class="md-form">
+                    <form:checkbox cssClass="form-control custom-control-input" path="plug"/>
+                    <form:label cssClass="custom-control custom-checkbox" path="plug">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Prise pour voiture électrique</span>
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="md-form">
+                    <form:input type="text" id="location" cssClass="form-control validate" path="location"
+                                required="required"/>
+                    <form:label for="location" data-error="Renseignez la ville ou se situe le parking" path="location">
+                        Ville
+                        <span class="text-danger">*</span>
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col text-right">
+                <button type="submit" class="btn btn-primary">
+                    Suivant &nbsp;
+                    <i class="fa fa-angle-right"></i>
+                </button>
+            </div>
+        </div>
+    </form:form>
 </div>
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
