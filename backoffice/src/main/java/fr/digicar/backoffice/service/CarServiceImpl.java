@@ -20,7 +20,8 @@ public class CarServiceImpl implements CarService {
     private CarDAO carDAO;
 
     @Override
-    public void addCar(Car car) { carDAO.addCar(car);
+    public void addCar(Car car) {
+        carDAO.addCar(car);
     }
 
     @Override

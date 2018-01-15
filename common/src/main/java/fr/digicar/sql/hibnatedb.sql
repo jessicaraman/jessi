@@ -43,18 +43,50 @@ CREATE TABLE car
 (
   id                  INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  registration_number VARCHAR(40),
-  mark                VARCHAR(40),
-  transmission        VARCHAR(40),
-  name_model          VARCHAR(40),
-  nb_places           INT(2),
-  nb_doors            INT(2),
-  category            VARCHAR(10),
-  state               VARCHAR(10),
-  comfort             INT(2),
-  kilometers          INT(6),
-  release_date        DATE,
+  registration_number VARCHAR(40) ,
+  mark                VARCHAR(40) ,
+  transmission        VARCHAR(40) ,
+  name_model          VARCHAR(40) ,
+  nb_places           INT(2) ,
+  nb_doors            INT(2) ,
+  type                VARCHAR(10) ,
+  location            VARCHAR(10) ,
+  comfort             INT(2) ,
+  kilometers          INT(6) ,
+  release_date        DATE ,
   fuel_type           VARCHAR(10)
 )
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
+CREATE TABLE car_type
+(
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  name                VARCHAR(20) NOT NULL
+)
+
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE fuel_type
+(
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  name                VARCHAR(20) NOT NULL
+)
+
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
+CREATE TABLE transmission_mode
+(
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  name                VARCHAR(20) NOT NULL
+)
+
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

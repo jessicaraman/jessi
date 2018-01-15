@@ -3,7 +3,11 @@ package fr.digicar.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
+/*
+ * Created by barry on 31/12/2017.
+ */
 @Data
 @Entity
 @Table(name = "car")
@@ -32,12 +36,12 @@ public class Car {
     @Column(name = "nb_doors")
     private Integer nb_doors;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "type")
+    private String type;
 
     /* for location: in parking or storage */
-    @Column(name = "state")
-    private String state;
+    @Column(name = "location")
+    private String location;
 
     @Column(name = "kilometers")
     private Integer kilometers;
@@ -49,6 +53,6 @@ public class Car {
     private Integer comfort;
 
     @Column(name = "fuel_type")
-    private Integer fuel_type;
+    private String fuel_type;
 
 }
