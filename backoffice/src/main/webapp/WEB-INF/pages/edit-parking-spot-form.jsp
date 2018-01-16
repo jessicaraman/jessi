@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>CarSharingClub - BackOffice</title>
+    <title>CSC - BackOffice</title>
     <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
@@ -22,20 +22,28 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
+            <%--<li class="nav-item active">
+                <a class="nav-link" href="<c:url value="/car/"/>">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+            </li>--%>
 
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
+                    <a class="dropdown-item" href="<c:url value="/car/addCarPage"/>">Ajouter</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Maintain parking spot referential</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
+            </li>
         </ul>
-        <form class="form-inline">
+        <%--<form class="form-inline">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        </form>
+        </form>--%>
     </div>
 </nav>
 <!--/.Navbar-->

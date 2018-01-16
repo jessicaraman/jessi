@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>CarSharingClub - BackOffice</title>
+    <title>CSC - BackOffice</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
@@ -23,27 +23,35 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="">Liste véhicule</a>
+                    <a class="dropdown-item" href="<c:url value="/car/addCarPage"/>">Ajouter</a>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
             </li>
 
         </ul>
-        <form class="form-inline">
+        <%--<form class="form-inline">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        </form>
+        </form>--%>
     </div>
 </nav>
 
-<%@include file="add-car-form.jsp"%>
+<div>
 
-<h3>Liste des véhicules</h3>
+</div>
+<%@include file="carFilter.jsp"%>
 
+<h3 class="text-center">Liste des véhicules</h3>
+
+<div class="table">
 <c:if test="${!empty cars}">
     <table class="table table-hover">
         <tr>
@@ -80,7 +88,7 @@
         </c:forEach>
     </table>
 </c:if>
-
+</div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
