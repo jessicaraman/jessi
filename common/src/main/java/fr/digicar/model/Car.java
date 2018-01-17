@@ -31,7 +31,7 @@ public class Car {
 //    @JoinTable(name="transmission_mode",
 //              joinColumns = @JoinColumn(name="transmission_id"),
 //              inverseJoinColumns = @JoinColumn(name="id"))
-    private TransmissionMode transmission;
+    private Integer transmission;
 
     @Column(name = "nb_places")
     private Integer nb_places;
@@ -43,7 +43,7 @@ public class Car {
 //    @JoinTable(name="car_type",
 //            joinColumns = @JoinColumn(name="type_id"),
 //            inverseJoinColumns = @JoinColumn(name="id"))
-    private CarType type;
+    private Integer type;
 
     /* for location: in parking or storage */
     @Column(name = "location")
@@ -62,6 +62,6 @@ public class Car {
 //    @JoinTable(name="fuel_type",
 //            joinColumns = @JoinColumn(name="fuel_type_id"),
 //            inverseJoinColumns = @JoinColumn(name="id"))
-    private FuelType fuel_type;
+    private Integer fuel_type;
 
 }

@@ -54,11 +54,15 @@ public class CarController {
     public ModelAndView addingCar(@ModelAttribute("car") Car car, BindingResult result) {
         carService.addCar(car);
 
+
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
 
         Car addedCar = car;
 
         modelAndView.addObject("addedCar", addedCar);
+
+        modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
+        modelAndView.addObject("filters", new FilterOdt());
 
         return modelAndView;
     }
