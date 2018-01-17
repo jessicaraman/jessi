@@ -77,7 +77,7 @@
                     <form:option value="1">citadine</form:option>
                     <form:option value="2">berline</form:option>
                     <form:option value="3">...</form:option>
-                </form:select>
+            </form:select>
         </div>
     </div>
     <div class="row">

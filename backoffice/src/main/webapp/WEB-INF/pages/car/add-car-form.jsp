@@ -38,118 +38,124 @@
             </li>
 
         </ul>
-        <%--<form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        </form>--%>
     </div>
 </nav>
 
 <div>
 
 </div>
-<%--
-<!--/.Navbar-->
-<div class="row">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Ajouter un véhicule
-</button>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="" tabindex="" role="" aria-labelledby=""
-     aria-hidden="">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajouter un véhicule</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-     --%>
 <div class="container">
     <h5 class="modal-title text-center" id="exampleModalLabel">Ajouter un véhicule</h5>
 <%--@elvariable id="car" type="fr.digicar.model.Car"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/car/adding" modelAttribute="car">
-        <div class="modal-body">
-
-            <div class="md-form">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
                 <form:input type="text" path="registration_number" cssClass="form-control" required="required"/>
                 <form:label path="registration_number">Immatriculation</form:label>
+                </div>
             </div>
 
-            <div class="md-form">
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
                 <form:input type="text" path="mark" cssClass="form-control"/>
                 <form:label data-error="Marque invalide" path="mark">Marque</form:label>
-            </div>
-
-            <div class="md-form">
-                <form:input type="text" path="name_model" cssClass="form-control"/>
-                <form:label data-error="modèle invalide" path="name_model">Nom du modèle</form:label>
-            </div>
-
-            <div class="md-form">
-                <form:label path="transmission" >Transmission</form:label>
-                <form:select cssClass="form-control" path="transmission">
-                    <option value="" disabled="true" >Choisir un type</option>
-                    <c:forEach items="${listOfTransmissionMode}" var="transmissionMode" >
-                        <option value=${transmissionMode.id} >${transmissionMode.name}</option>
-                    </c:forEach>
-                </form:select>
-            </div>
-
-            <div class="md-form">
-                <form:input type="number" path="nb_places" cssClass="form-control"/>
-                <form:label data-error="champs invalide" path="nb_places">Nombre de places</form:label>
-            </div>
-
-            <div class="md-form">
-                <form:input type="number" path="nb_doors" cssClass="form-control"/>
-                <form:label data-error="champs invalide" path="nb_doors">Nombre de portes</form:label>
-            </div>
-
-            <div class="md-form">
-                <form:label path="type" >Type de véhicule</form:label>
-                <form:select cssClass="form-control" path="type">
-                    <option value="" disabled="true" >Choisir un type</option>
-                    <c:forEach items="${listOfCarType}" var="carType" >
-                        <option value=${carType.id} >${carType.name}</option>
-                    </c:forEach>
-                </form:select>
-            </div>
-
-            <div class="md-form">
-                <form:input type="text" path="location" cssClass="form-control"/>
-                <form:label data-error="champs invalide" path="location">Emplacement</form:label>
-            </div>
-
-            <div class="md-form">
-                <form:input type="number" path="kilometers" cssClass="form-control"/>
-                <form:label data-error="champs invalide" path="kilometers">Kilométrage</form:label>
-            </div>
-
-            <div class="md-form">
-                <form:input type="date" path="release_date" cssClass="form-control"/>
-                <form:label data-error="champs invalide"
-                            path="release_date">Date de mise en circulation</form:label>
-            </div>
-
-            <div class="md-form">
-                <form:input type="text" path="comfort" cssClass="form-control"/>
-                <form:label data-error="champs invalide" path="comfort">Confort</form:label>
-            </div>
-
-            <div class="md-form">
-                <form:label path="fuel_type" >Carburant</form:label>
-                <form:select cssClass="form-control" path="fuel_type">
-                    <option value="" disabled="true" >Choisir un type</option>
-                    <c:forEach items="${listOfFuelType}" var="fuelType" >
-                        <option value=${fuelType.id} >${fuelType.name}</option>
-                    </c:forEach>
-                </form:select>
+                </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <form:input type="text" path="name_model" cssClass="form-control"/>
+                    <form:label data-error="modèle invalide" path="name_model">Nom du modèle</form:label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <form:label path="transmission" >Transmission</form:label>
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="transmission">
+                        <form:option value="" disabled="true" selected="">Choisir un type</form:option>
+                        <c:forEach items="${listOfTransmissionMode}" var="transmissionMode" >
+                            <form:option value="${transmissionMode.id}" >${transmissionMode.name}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <form:input type="number" path="nb_places" cssClass="form-control"/>
+                    <form:label data-error="champs invalide" path="nb_places">Nombre de places</form:label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                <form:input type="number" path="nb_doors" cssClass="form-control"/>
+                <form:label data-error="champs invalide" path="nb_doors">Nombre de portes</form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                <form:label path="type" >Type de véhicule</form:label>
+                <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="type">
+                    <form:option value="" disabled="true" selected="">Choisir un type</form:option>
+                    <c:forEach items="${listOfCarType}" var="carType" >
+                        <form:option value="${carType.id}" >${carType.name}</form:option>
+                    </c:forEach>
+                </form:select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <form:input type="text" path="location" cssClass="form-control"/>
+                    <form:label data-error="champs invalide" path="location">Emplacement</form:label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                <form:input type="number" path="kilometers" cssClass="form-control"/>
+                <form:label data-error="champs invalide" path="kilometers">Kilométrage</form:label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <form:input type="date" path="release_date" cssClass="form-control"/>
+                    <form:label data-error="champs invalide"
+                                path="release_date">Date de mise en circulation</form:label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                <form:input type="text" path="comfort" cssClass="form-control"/>
+                <form:label data-error="champs invalide" path="comfort">Confort</form:label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <form:label path="fuel_type" >Carburant</form:label>
+                    <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="fuel_type">
+                        <form:option value="" disabled="true" selected="">Choisir un type</form:option>
+                        <c:forEach items="${listOfFuelType}" var="fuelType" >
+                            <form:option value="${fuelType.id}" >${fuelType.name}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </div>
+            </div>
+        </div>
+
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="">Annuler</button>
             <button type="submit" class="btn btn-primary">Ajouter un véhicule</button>
