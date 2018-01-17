@@ -37,7 +37,7 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
-                    <a class="dropdown-item" href="<c:url value="/car/addCarPage"/>">Ajouter</a>
+                    <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
                 </div>
             </li>
             <li class="nav-item">

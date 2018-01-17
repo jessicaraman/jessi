@@ -12,5 +12,5 @@ public interface CarService {
     void updateCar(Car car);
     Car getCar(String registration_number);
     void deleteCar(String registration_number);
-    List<Car> getCars();
+    List<Car> getAllCar();
 }

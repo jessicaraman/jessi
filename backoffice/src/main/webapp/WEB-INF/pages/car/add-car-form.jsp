@@ -71,76 +71,92 @@
 <div class="container">
     <h5 class="modal-title text-center" id="exampleModalLabel">Ajouter un véhicule</h5>
 <%--@elvariable id="car" type="fr.digicar.model.Car"--%>
-            <form:form method="POST" action="${pageContext.request.contextPath}/car/add" modelAttribute="car">
-                <div class="modal-body">
+    <form:form method="POST" action="${pageContext.request.contextPath}/car/adding" modelAttribute="car">
+        <div class="modal-body">
 
-                    <div class="md-form">
-                        <form:input type="text" path="registration_number" cssClass="form-control" required="required"/>
-                        <form:label path="registration_number">Immatriculation</form:label>
-                    </div>
+            <div class="md-form">
+                <form:input type="text" path="registration_number" cssClass="form-control" required="required"/>
+                <form:label path="registration_number">Immatriculation</form:label>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="text" path="mark" cssClass="form-control"/>
-                        <form:label data-error="Marque invalide" path="mark">Marque</form:label>
-                    </div>
+            <div class="md-form">
+                <form:input type="text" path="mark" cssClass="form-control"/>
+                <form:label data-error="Marque invalide" path="mark">Marque</form:label>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="text" path="name_model" cssClass="form-control"/>
-                        <form:label data-error="modèle invalide" path="name_model">Nom du modèle</form:label>
-                    </div>
+            <div class="md-form">
+                <form:input type="text" path="name_model" cssClass="form-control"/>
+                <form:label data-error="modèle invalide" path="name_model">Nom du modèle</form:label>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="text" path="transmission" cssClass="form-control"/>
-                        <form:label data-error="champs invalide" path="transmission">Type de transmission</form:label>
-                    </div>
+            <div class="md-form">
+                <form:label path="transmission" >Transmission</form:label>
+                <form:select cssClass="form-control" path="transmission">
+                    <option value="" disabled="true" >Choisir un type</option>
+                    <c:forEach items="${listOfTransmissionMode}" var="transmissionMode" >
+                        <option value=${transmissionMode.id} >${transmissionMode.name}</option>
+                    </c:forEach>
+                </form:select>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="number" path="nb_places" cssClass="form-control"/>
-                        <form:label data-error="champs invalide" path="nb_places">Nombre de places</form:label>
-                    </div>
+            <div class="md-form">
+                <form:input type="number" path="nb_places" cssClass="form-control"/>
+                <form:label data-error="champs invalide" path="nb_places">Nombre de places</form:label>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="number" path="nb_doors" cssClass="form-control"/>
-                        <form:label data-error="champs invalide" path="nb_doors">Nombre de portes</form:label>
-                    </div>
+            <div class="md-form">
+                <form:input type="number" path="nb_doors" cssClass="form-control"/>
+                <form:label data-error="champs invalide" path="nb_doors">Nombre de portes</form:label>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="text" path="type" cssClass="form-control"/>
-                        <form:label data-error="champs invalide" path="type">Type de véhicule</form:label>
-                    </div>
+            <div class="md-form">
+                <form:label path="type" >Type de véhicule</form:label>
+                <form:select cssClass="form-control" path="type">
+                    <option value="" disabled="true" >Choisir un type</option>
+                    <c:forEach items="${listOfCarType}" var="carType" >
+                        <option value=${carType.id} >${carType.name}</option>
+                    </c:forEach>
+                </form:select>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="text" path="location" cssClass="form-control"/>
-                        <form:label data-error="champs invalide" path="location">Emplacement</form:label>
-                    </div>
+            <div class="md-form">
+                <form:input type="text" path="location" cssClass="form-control"/>
+                <form:label data-error="champs invalide" path="location">Emplacement</form:label>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="number" path="kilometers" cssClass="form-control"/>
-                        <form:label data-error="champs invalide" path="kilometers">Kilométrage</form:label>
-                    </div>
+            <div class="md-form">
+                <form:input type="number" path="kilometers" cssClass="form-control"/>
+                <form:label data-error="champs invalide" path="kilometers">Kilométrage</form:label>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="text" path="release_date" cssClass="form-control"/>
-                        <form:label data-error="champs invalide"
-                                    path="release_date">Date de mise en circulation</form:label>
-                    </div>
+            <div class="md-form">
+                <form:input type="date" path="release_date" cssClass="form-control"/>
+                <form:label data-error="champs invalide"
+                            path="release_date">Date de mise en circulation</form:label>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="text" path="comfort" cssClass="form-control"/>
-                        <form:label data-error="champs invalide" path="comfort">Confort</form:label>
-                    </div>
+            <div class="md-form">
+                <form:input type="text" path="comfort" cssClass="form-control"/>
+                <form:label data-error="champs invalide" path="comfort">Confort</form:label>
+            </div>
 
-                    <div class="md-form">
-                        <form:input type="text" path="fuel_type" cssClass="form-control"/>
-                        <form:label data-error="champs invalide" path="fuel_type">Type de carburant</form:label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Ajouter un véhicule</button>
-                </div>
-            </form:form>
+            <div class="md-form">
+                <form:label path="fuel_type" >Carburant</form:label>
+                <form:select cssClass="form-control" path="fuel_type">
+                    <option value="" disabled="true" >Choisir un type</option>
+                    <c:forEach items="${listOfFuelType}" var="fuelType" >
+                        <option value=${fuelType.id} >${fuelType.name}</option>
+                    </c:forEach>
+                </form:select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="">Annuler</button>
+            <button type="submit" class="btn btn-primary">Ajouter un véhicule</button>
+        </div>
+    </form:form>
 </div>
+<%@include file="car-details.jsp"%>
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
@@ -149,4 +165,3 @@
 </body>
 </html>
 
-<%@include file="add-car-confirmation.jsp"%>

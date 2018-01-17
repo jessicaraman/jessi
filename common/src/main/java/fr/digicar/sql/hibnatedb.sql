@@ -39,32 +39,13 @@ CREATE TABLE tarifs (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE car
-(
-  id                  INT(6) AUTO_INCREMENT
-    PRIMARY KEY,
-  registration_number VARCHAR(40) ,
-  mark                VARCHAR(40) ,
-  transmission        VARCHAR(40) ,
-  name_model          VARCHAR(40) ,
-  nb_places           INT(2) ,
-  nb_doors            INT(2) ,
-  type                VARCHAR(10) ,
-  location            VARCHAR(10) ,
-  comfort             INT(2) ,
-  kilometers          INT(6) ,
-  release_date        DATE ,
-  fuel_type           VARCHAR(10)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
 
 
 CREATE TABLE car_type
 (
   id                  INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  name                VARCHAR(20) NOT NULL
+  name                VARCHAR(25) NOT NULL
 )
 
   ENGINE = InnoDB
@@ -80,7 +61,6 @@ CREATE TABLE fuel_type
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-
 CREATE TABLE transmission_mode
 (
   id                  INT(6) AUTO_INCREMENT
@@ -90,3 +70,46 @@ CREATE TABLE transmission_mode
 
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+CREATE TABLE car
+(
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  registration_number VARCHAR(40) ,
+  mark                VARCHAR(40) ,
+  transmission_id     INT(6) ,
+  name_model          VARCHAR(40) ,
+  nb_places           INT(2) ,
+  nb_doors            INT(2) ,
+  type_id             INT(6) ,
+  location            VARCHAR(10) ,
+  comfort             INT(2) ,
+  kilometers          INT(6) ,
+  release_date        DATE ,
+  fuel_type_id        INT(6),
+  FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id),
+  FOREIGN KEY (type_id) REFERENCES car_type (id),
+  FOREIGN KEY (fuel_type_id) REFERENCES transmission_mode (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+#----------------------------------------------------
+#                 populate data
+#----------------------------------------------------
+
+insert into car_type VALUES(DEFAULT,"Citadine");
+insert into car_type VALUES(DEFAULT,"Cross-over");
+insert into car_type VALUES(DEFAULT,"4X4");
+insert into car_type VALUES(DEFAULT,"Berline familiale");
+insert into car_type VALUES(DEFAULT,"Voiture de sport");
+insert into car_type VALUES(DEFAULT,"Voiture de collection ");
+
+insert into transmission_mode VALUES(DEFAULT,"manuelle");
+insert into transmission_mode VALUES(DEFAULT,"automatique");
+
+insert into fuel_type VALUES(DEFAULT,"essence");
+insert into fuel_type VALUES(DEFAULT,"diesel");
+insert into fuel_type VALUES(DEFAULT,"electrique");
+
+
+

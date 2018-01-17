@@ -27,8 +27,11 @@ public class Car {
     @Column(name = "name_model")
     private String name_model;
 
-    @Column(name = "transmission")
-    private String transmission;
+    @OneToOne(targetEntity = TransmissionMode.class)
+//    @JoinTable(name="transmission_mode",
+//              joinColumns = @JoinColumn(name="transmission_id"),
+//              inverseJoinColumns = @JoinColumn(name="id"))
+    private TransmissionMode transmission;
 
     @Column(name = "nb_places")
     private Integer nb_places;
@@ -36,8 +39,11 @@ public class Car {
     @Column(name = "nb_doors")
     private Integer nb_doors;
 
-    @Column(name = "type")
-    private String type;
+    @OneToOne(targetEntity = CarType.class)
+//    @JoinTable(name="car_type",
+//            joinColumns = @JoinColumn(name="type_id"),
+//            inverseJoinColumns = @JoinColumn(name="id"))
+    private CarType type;
 
     /* for location: in parking or storage */
     @Column(name = "location")
@@ -52,7 +58,10 @@ public class Car {
     @Column(name = "comfort")
     private Integer comfort;
 
-    @Column(name = "fuel_type")
-    private String fuel_type;
+    @OneToOne(targetEntity = FuelType.class)
+//    @JoinTable(name="fuel_type",
+//            joinColumns = @JoinColumn(name="fuel_type_id"),
+//            inverseJoinColumns = @JoinColumn(name="id"))
+    private FuelType fuel_type;
 
 }

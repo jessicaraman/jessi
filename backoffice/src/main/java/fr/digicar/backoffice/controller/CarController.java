@@ -1,7 +1,13 @@
 package fr.digicar.backoffice.controller;
 
 import fr.digicar.backoffice.service.CarService;
+import fr.digicar.backoffice.service.CarTypeService;
+import fr.digicar.backoffice.service.FuelTypeService;
+import fr.digicar.backoffice.service.TransmissionModeService;
 import fr.digicar.model.Car;
+import fr.digicar.model.CarType;
+import fr.digicar.model.FuelType;
+import fr.digicar.model.TransmissionMode;
 import fr.digicar.odt.FilterOdt;
 import fr.digicar.odt.FilterRegistrationIdOdt;
 import lombok.extern.slf4j.Slf4j;
@@ -24,36 +30,53 @@ public class CarController {
     @Autowired
     private CarService carService;
 
+    @Autowired
+    private CarTypeService carTypeService;
+
+    @Autowired
+    private TransmissionModeService transmissionModeService;
+
+    @Autowired
+    private FuelTypeService fuelTypeService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView addPage() {
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
         modelAndView.addObject("car", new Car());
-        List<Car> cars = carService.getCars();
+        List<Car> cars = carService.getAllCar();
         modelAndView.addObject("cars", cars);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/adding", method = RequestMethod.POST)
     public ModelAndView addingCar(@ModelAttribute("car") Car car, BindingResult result) {
         carService.addCar(car);
 
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+
         Car addedCar = car;
-        List<Car> cars = carService.getCars();
+
         modelAndView.addObject("addedCar", addedCar);
-        modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
-        modelAndView.addObject("filter", new FilterOdt());
-        modelAndView.addObject("cars", cars);
+
         return modelAndView;
     }
 
-    @RequestMapping(value = "/addCarPage", method = RequestMethod.GET)
-    public ModelAndView addingCar() {
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView addCar() {
 
         ModelAndView modelAndView = new ModelAndView("car/add-car-form");
+
+        List<CarType> listOfCarType = carTypeService.getAllCarType();
+        List<TransmissionMode> listOfTransmissionMode = transmissionModeService.getAllTransmissionMode();
+        List<FuelType> listOfFuelType = fuelTypeService.getAllFuelType();
+
         modelAndView.addObject("car", new Car());
+        modelAndView.addObject("listOfCarType", listOfCarType);
+        modelAndView.addObject("listOfTransmissionMode", listOfTransmissionMode);
+        modelAndView.addObject("listOfFuelType", listOfFuelType);
+
         return modelAndView;
     }
 
@@ -62,7 +85,7 @@ public class CarController {
         String registration = filterRegistrationIdOdt.getregistrationNumber();
         String message = "";
 
-        List<Car> cars = carService.getCars();
+        List<Car> cars = carService.getAllCar();
 
         Car car = new Car();
         Boolean check = false;
@@ -100,7 +123,7 @@ public class CarController {
     {
         String carBrand = filterOdt.getCarBrand();
         String modelName = filterOdt.getModelName();
-        List<Car> allCars = carService.getCars();
+        List<Car> allCars = carService.getAllCar();
         String message="";
 
         Car car;
