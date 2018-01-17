@@ -1,12 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>CarSharingClub - BackOffice</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
@@ -29,7 +30,7 @@
                 <a class="nav-link" href="#">Features</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/pricing"/>">Pricing</a>
+                <a class="nav-link" href="#">Pricing</a>
             </li>
 
         </ul>
@@ -41,38 +42,23 @@
 <!--/.Navbar-->
 
 <div class="container">
-    <div class="row mt-5">
-        <div class="col-6 p-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Maintain vehicle referential</h4>
-                    <p class="card-text">Alpha Barry &amp; Thierno Diallo</p>
-                    <a href="<c:url value="/car"/>" class="btn btn-primary">ACCESS</a>
+    <code>Search parking spot</code>
 
-                </div>
-            </div>
-        </div>
-        <div class="col-6 p-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Maintain parking spot referential</h4>
-                    <p class="card-text">Christophe Gougam &amp; Djouher Kahel</p>
-                    <a href="<c:url value="/parking"/>" class="btn btn-primary">ACCESS</a>
-                </div>
-            </div>
-        </div>
+    <form:form method="GET" methodParam="id" action="/parking/search/id">
+    <label for="btngrp-search2" class="wb-inv">Recherche</label>
+    <div class="input-group">
+        <input type="text" name="id" class="form-control" id="btngrp-search2"/>
     </div>
-    <div class="row">
-        <div class="col-6 p-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Maintain pricing referential</h4>
-                    <p class="card-text">Jessica Ramanantsoa &amp; Philippine Venries</p>
-                    <a href="<c:url value="/pricing"/>" class="btn btn-primary">ACCESS</a>
-                </div>
+        <div class="row mt-3">
+            <div class="col text-right">
+                <button type="submit" class="btn btn-primary">
+                    RECHERCHER &nbsp;
+                    <i class="fa fa-angle-right"></i>
+                </button>
             </div>
         </div>
-    </div>
+    </form:form>
+
 </div>
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>

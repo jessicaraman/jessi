@@ -5,6 +5,7 @@ import fr.digicar.model.ParkingSpot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,8 +21,23 @@ public class ParkingSpotController {
     private ParkingSpotService parkingSpotService;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView addParkingSpotPage() {
+    public ModelAndView addCreateParkingSpotPage() {
         ModelAndView modelAndView = new ModelAndView("add-parking-spot-form");
+        modelAndView.addObject("parking", new ParkingSpot());
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ModelAndView addSearchParkingSpotPage() {
+        ModelAndView modelAndView = new ModelAndView("search-parking-spot-form");
+        modelAndView.addObject("parking", new ParkingSpot());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ModelAndView AddMenuParkingSpotPage() {
+        ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
         modelAndView.addObject("parking", new ParkingSpot());
         return modelAndView;
     }
@@ -36,6 +52,15 @@ public class ParkingSpotController {
         List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpots();
         modelAndView.addObject("parkingSpot", parkingSpots);
         modelAndView.addObject("message", message);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/search/id", method = RequestMethod.GET)
+    public ModelAndView searchingParkingSpot(@PathVariable int id) {
+
+        ModelAndView modelAndView = new ModelAndView("search-parking-spot-form");
+        ParkingSpot parkingSpot = parkingSpotService.getParkingSpot(id);
+        modelAndView.addObject("parkingSpot", parkingSpot);
         return modelAndView;
     }
 

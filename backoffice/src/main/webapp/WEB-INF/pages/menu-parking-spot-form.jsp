@@ -29,7 +29,7 @@
                 <a class="nav-link" href="#">Features</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/pricing"/>">Pricing</a>
+                <a class="nav-link" href="#">Pricing</a>
             </li>
 
         </ul>
@@ -41,39 +41,36 @@
 <!--/.Navbar-->
 
 <div class="container">
+
+
+
     <div class="row mt-5">
         <div class="col-6 p-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Maintain vehicle referential</h4>
-                    <p class="card-text">Alpha Barry &amp; Thierno Diallo</p>
-                    <a href="<c:url value="/car"/>" class="btn btn-primary">ACCESS</a>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-6 p-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Maintain parking spot referential</h4>
+                    <h4 class="card-title">Add a parking spot to referential</h4>
                     <p class="card-text">Christophe Gougam &amp; Djouher Kahel</p>
-                    <a href="<c:url value="/parking"/>" class="btn btn-primary">ACCESS</a>
+                    <a href="<c:url value="/parking/add"/>" class="btn btn-primary">ACCESS</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+
+
         <div class="col-6 p-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Maintain pricing referential</h4>
-                    <p class="card-text">Jessica Ramanantsoa &amp; Philippine Venries</p>
-                    <a href="<c:url value="/pricing"/>" class="btn btn-primary">ACCESS</a>
+                    <h4 class="card-title">Search a parking spot on referential</h4>
+                    <p class="card-text">Christophe Gougam &amp; Djouher Kahel</p>
+                    <a href="<c:url value="/parking/search"/>" class="btn btn-primary">ACCESS</a>
                 </div>
             </div>
         </div>
-    </div>
+
+
 </div>
+
+
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>

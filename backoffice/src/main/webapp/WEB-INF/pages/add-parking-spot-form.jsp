@@ -86,7 +86,7 @@
                     <label class="custom-control custom-checkbox" path="plug">
                         <input type="checkbox" class="custom-control-input" path="plug">
                         <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Prise pour voiture electrique</span>
+                        <span class="custom-control-description">Prise pour voiture éléctrique</span>
                     </label>
                 </div>
             </div>
