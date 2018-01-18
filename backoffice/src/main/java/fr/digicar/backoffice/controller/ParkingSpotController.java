@@ -31,7 +31,7 @@ public class ParkingSpotController {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView addSearchParkingSpotPage() {
         ModelAndView modelAndView = new ModelAndView("search-parking-spot-form");
-        modelAndView.addObject("parking", new ParkingSpot());
+        modelAndView.addObject("searchparking", new ParkingSpot());
         return modelAndView;
     }
 
@@ -55,12 +55,22 @@ public class ParkingSpotController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/search/id", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
     public ModelAndView searchingParkingSpot(@PathVariable int id) {
 
         ModelAndView modelAndView = new ModelAndView("search-parking-spot-form");
-        ParkingSpot parkingSpot = parkingSpotService.getParkingSpot(id);
-        modelAndView.addObject("parkingSpot", parkingSpot);
+        ParkingSpot resultParkingSpot = parkingSpotService.getParkingSpot(id);
+        modelAndView.addObject("parkingSpot", resultParkingSpot);
+        return modelAndView;
+    }*/
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ModelAndView searchingParkingSpot(@ModelAttribute ParkingSpot parkingSpot) {
+
+        ModelAndView modelAndView = new ModelAndView("home");
+
+        ParkingSpot resultParkingSpot = parkingSpotService.getParkingSpot(parkingSpot.getId());
+        modelAndView.addObject("parkingSpot", resultParkingSpot);
         return modelAndView;
     }
 

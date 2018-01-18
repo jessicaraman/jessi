@@ -44,11 +44,71 @@
 <div class="container">
     <code>Search parking spot</code>
 
-    <form:form method="GET" methodParam="id" action="/parking/search/id">
-    <label for="btngrp-search2" class="wb-inv">Recherche</label>
-    <div class="input-group">
-        <input type="text" name="id" class="form-control" id="btngrp-search2"/>
-    </div>
+    <%--@elvariable id="searchparking" type="fr.digicar.model.ParkingSpot"--%>
+    <form:form method="POST" modelAttribute="searchparking" cssClass="m-5" action="/parking/search">
+
+
+
+
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="md-form">
+                    <form:input type="number" id="id" cssClass="form-control validate" path="id"
+                                required="required"/>
+                    <form:label for="id" path="id">
+                        Numéro de Place
+                        <span class="text-danger">*</span>
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="md-form">
+                    <form:input type="number" id="nbSpot" cssClass="form-control validate" path="nbSpot"
+                                />
+                    <form:label for="nbSpot" data-error="Numéro de place déjà attribué" path="nbSpot">
+                        Numéro de Place
+
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12">
+                <div class="md-form">
+                    <form:input type="number" id="nbParking" cssClass="form-control validate" path="nbParking"
+                                />
+                    <form:label for="nbParking" data-error="Ce parking n'existe pas" path="nbParking">
+                        Numéro de Parking
+
+                    </form:label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12">
+                <div class="md-form">
+                    <label class="custom-control custom-checkbox" path="plug">
+                        <input type="checkbox" class="custom-control-input" path="plug">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Prise pour voiture éléctrique</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="md-form">
+                    <form:input type="text" id="location" cssClass="form-control validate" path="location"
+                                />
+                    <form:label for="location" data-error="Renseignez la ville ou se situe le parking" path="location">
+                        Ville
+
+                    </form:label>
+                </div>
+            </div>
+        </div>
         <div class="row mt-3">
             <div class="col text-right">
                 <button type="submit" class="btn btn-primary">
