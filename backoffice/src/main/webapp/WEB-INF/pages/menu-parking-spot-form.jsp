@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,35 +41,109 @@
 <!--/.Navbar-->
 
 <div class="container">
+    <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#createModal">
+        <i class="fa fa-plus mr-1"></i>
+        Ajouter une place
+    </button>
 
+    <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#searchModal">
+        <i class="fa fa-plus mr-1"></i>
+        Rechercher une place de parking
+    </button>
 
+    <!-- Modal -->
+    <div class="modal fade mt-3" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:650px;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter une place</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <%--@elvariable id="parking" type="fr.digicar.model.ParkingSpot"--%>
+                    <form:form method="POST" modelAttribute="parking" cssClass="m-5"
+                               action="/parking/add">
 
-    <div class="row mt-5">
-        <div class="col-6 p-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Add a parking spot to referential</h4>
-                    <p class="card-text">Christophe Gougam &amp; Djouher Kahel</p>
-                    <a href="<c:url value="/parking/add"/>" class="btn btn-primary">ACCESS</a>
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="number" path="nbSpot" class="form-control" required="required"/>
+                            <form:label path="nbSpot">Numero de place</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="number" step="1" path="nbParking" class="form-control" required="required"/>
+                            <form:label path="nbParking">Numero de place</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <label class="custom-control custom-checkbox" path="plug">
+                                <input type="checkbox" step="1" class="custom-control-input" path="plug">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Prise pour voiture éléctrique</span>
+                            </label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <form:input type="text" step="1" path="location" class="form-control"
+                                        required="required"/>
+                            <form:label data-error="Ville invalide" path="location">Ville</form:label>
+                        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Ajouter tarif</button>
+                    </form:form>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 
 
-        <div class="col-6 p-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Search a parking spot on referential</h4>
-                    <p class="card-text">Christophe Gougam &amp; Djouher Kahel</p>
-                    <a href="<c:url value="/parking/search"/>" class="btn btn-primary">ACCESS</a>
-                </div>
-            </div>
-        </div>
+    <h3>Liste des tarifs</h3>
 
+    <c:if test="${!empty parkingSpot}">
+        <table class="table table-hover">
+            <tr>
+                <th width="80">Id</th>
+                <th width="120">Numero de place</th>
+                <th width="60">Numero de parking</th>
+                <th width="60">Prise electrique</th>
+                <th width="60">Ville</th>
+                <th width="100"></th>
+            </tr>
+            <c:forEach items="${parkingSpot}" var="place">
+                <c:if test="${!empty id} && ${place.id}==${id}">
+                    <c:set value="table-success" var="cssClass"></c:set>
+                </c:if>
+                <tr class="${cssClass}">
+                    <td>${place.id}</td>
+                    <td>${place.nbSpot}</td>
+                    <td>${place.nbParking}</td>
+                    <td>${place.plug}</td>
+                    <td>${place.location}</td>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value='' />">Modifier</a>
+                        </button>
+                    </td>
+                    <td>
+                        <button style="margin:0px" class="btn btn-danger"><a href="<c:url value='' />">Supprimer</a>
+                        </button>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:if>
+    <p>${id}</p>
+    <br>
 
 </div>
-
 
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>

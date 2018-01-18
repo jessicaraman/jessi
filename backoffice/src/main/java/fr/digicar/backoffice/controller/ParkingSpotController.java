@@ -39,15 +39,17 @@ public class ParkingSpotController {
     public ModelAndView AddMenuParkingSpotPage() {
         ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
         modelAndView.addObject("parking", new ParkingSpot());
+        List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpots();
+        modelAndView.addObject("parkingSpot", parkingSpots);
         return modelAndView;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addingParkingSpot(@ModelAttribute ParkingSpot parkingSpot) {
 
-        ModelAndView modelAndView = new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
+        modelAndView.addObject("parking", new ParkingSpot());
         parkingSpotService.addParkingSpot(parkingSpot);
-
         String message = parkingSpot.getNbSpot() + " ont été ajoutées.";
         List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpots();
         modelAndView.addObject("parkingSpot", parkingSpots);
