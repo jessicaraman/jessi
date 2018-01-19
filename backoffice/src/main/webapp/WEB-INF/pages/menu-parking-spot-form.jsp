@@ -51,7 +51,7 @@
         Rechercher une place de parking
     </button>
 
-    <!-- Modal -->
+    <!-- Modal AJOUTER-->
     <div class="modal fade mt-3" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -76,16 +76,13 @@
                         <div class="md-form">
                             <i class="fa fa-tag prefix grey-text"></i>
                             <form:input type="number" step="1" path="nbParking" class="form-control" required="required"/>
-                            <form:label path="nbParking">Numero de place</form:label>
+                            <form:label path="nbParking">Numero de parking</form:label>
                         </div>
 
                         <div class="md-form">
                             <i class="fa fa-eur prefix grey-text"></i>
-                            <label class="custom-control custom-checkbox" path="plug">
-                                <input type="checkbox" step="1" class="custom-control-input" path="plug">
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">Prise pour voiture éléctrique</span>
-                            </label>
+                            <form:checkbox step="1" class="custom-control custom-checkbox" path="plug"/>
+                            <form:label class="custom-control custom-checkbox" path="plug">Prise pour voiture éléctrique</form:label>
                         </div>
 
                         <div class="md-form">
@@ -96,12 +93,70 @@
                         </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Ajouter tarif</button>
-                    </form:form>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Ajouter place</button>
                 </div>
+                    </form:form>
+
             </div>
         </div>
     </div>
+    </div>
+
+
+    <!-- Modal SEARCH-->
+    <div class="modal fade mt-3" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:650px;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Ajouter une place</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <%--@elvariable id="parking" type="fr.digicar.model.ParkingSpot"--%>
+                    <form:form method="POST" modelAttribute="parking" cssClass="m-5"
+                               action="/parking/search">
+
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="number" path="id" class="form-control"/>
+                            <form:label path="id">IDENTIFIANT EN BASE de place</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="number" path="nbSpot" class="form-control"/>
+                            <form:label path="nbSpot">Numero de place</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="number" step="1" path="nbParking" class="form-control" />
+                            <form:label path="nbParking">Numero de parking</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <form:checkbox step="1" class="custom-control custom-checkbox" path="plug"/>
+                            <form:label class="custom-control custom-checkbox" path="plug">Prise pour voiture éléctrique</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-eur prefix grey-text"></i>
+                            <form:input type="text" step="1" path="location" class="form-control"/>
+                            <form:label data-error="Ville invalide" path="location">Ville</form:label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Rechercher place</button>
+                        </div>
+                    </form:form>
+
+                </div>
+            </div>
+        </div>
     </div>
 
 

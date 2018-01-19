@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -69,10 +70,12 @@ public class ParkingSpotController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ModelAndView searchingParkingSpot(@ModelAttribute ParkingSpot parkingSpot) {
 
-        ModelAndView modelAndView = new ModelAndView("home");
-
+        ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
+        modelAndView.addObject("parking", new ParkingSpot());
+        List<ParkingSpot> parkingSpots= new ArrayList<>();
         ParkingSpot resultParkingSpot = parkingSpotService.getParkingSpot(parkingSpot.getId());
-        modelAndView.addObject("parkingSpot", resultParkingSpot);
+        parkingSpots.add(resultParkingSpot);
+        modelAndView.addObject("parkingSpot", parkingSpots);
         return modelAndView;
     }
 
