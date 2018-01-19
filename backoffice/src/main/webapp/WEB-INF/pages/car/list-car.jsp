@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<div class="container">
 <h3 class="text-center">Liste des véhicules</h3>
 
 <div class="table">
@@ -40,10 +41,11 @@
                     <td>${car.release_date}</td>
                     <td>${car.comfort}</td>
                     <td>${car.fuel_type}</td>
-                    <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value='' />" >Modifier</a></button></td>
-                    <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value='' />" >Supprimer</a></button></td>
+                    <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value="car/updateCar/${car.registration_number}" />" >Modifier</a></button></td>
+                    <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value="car/deleteCar/${car.registration_number}" />" >Supprimer</a></button></td>
                 </tr>
             </c:forEach>
         </table>
     </c:if>
+</div>
 </div>

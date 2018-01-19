@@ -13,34 +13,44 @@
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark indigo">
-    <a class="navbar-brand" href="#">CSC Inside</a>
-    <button class="navbar-toggler" type="button"
-            data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="">Liste véhicule</a>
-                    <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
-            </li>
 
-        </ul>
+<%--@elvariable id="message" type="java.lang.String"--%>
+<c:if test="${not empty message}">
+    <div class="row">
+        <div class="alert alert-success w-100">${message}</div>
     </div>
-</nav>
-</nav>
+</c:if>
+
+
+    <div class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark indigo">
+            <a class="navbar-brand" href="#">CSC Inside</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="">Liste véhicule</a>
+                            <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
 
 <div>
 

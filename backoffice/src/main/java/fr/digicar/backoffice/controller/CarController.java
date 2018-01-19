@@ -17,8 +17,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/car")
 public class CarController {
+
+    //TODO Gestion exception
 
     @Autowired
     private CarService carService;
@@ -53,16 +57,60 @@ public class CarController {
     @RequestMapping(value = "/adding", method = RequestMethod.POST)
     public ModelAndView addingCar(@ModelAttribute("car") Car car, BindingResult result) {
         carService.addCar(car);
+        
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
 
+        /*Car addedCar = car;
+
+        modelAndView.addObject("addedCar", addedCar);*/
+
+        String message;
+
+        message = "Le véhicule"+car.getRegistration_number()+" a bien été ajouté";
+        modelAndView.addObject("message", message);
+        modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
+        modelAndView.addObject("filters", new FilterOdt());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/deleteCar/{registrationId}", method = RequestMethod.GET)
+    public ModelAndView deleteCar(@RequestParam String registrationId) {
+        carService.deleteCar(registrationId);
 
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
 
-        Car addedCar = car;
+        String message;
 
-        modelAndView.addObject("addedCar", addedCar);
-
+        message = "Le véhicule"+registrationId+" a bien été supprimé";
+        modelAndView.addObject("message", message);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
+
+        return modelAndView;
+    }
+    @RequestMapping(value = "/updateCar/{registration_number}", method = RequestMethod.GET)
+    public ModelAndView updateCar(@RequestParam String registration_number) {
+        List<Car> cars = carService.getAllCar();
+
+        Car car = new Car();
+        String registration;
+        for (int i=0; i<cars.size(); i++){
+            car = cars.get(i);
+            registration = car.getRegistration_number();
+            if(registration_number.equals(registration)){
+                break;
+            }
+        }
+        List<CarType> listOfCarType = carTypeService.getAllCarType();
+        List<TransmissionMode> listOfTransmissionMode = transmissionModeService.getAllTransmissionMode();
+        List<FuelType> listOfFuelType = fuelTypeService.getAllFuelType();
+
+        ModelAndView modelAndView = new ModelAndView("car/update-car");
+        modelAndView.addObject("car", car);
+        modelAndView.addObject("listOfCarType", listOfCarType);
+        modelAndView.addObject("listOfTransmissionMode", listOfTransmissionMode);
+        modelAndView.addObject("listOfFuelType", listOfFuelType);
 
         return modelAndView;
     }
@@ -87,13 +135,13 @@ public class CarController {
     @RequestMapping(value = "/registrationId", method = RequestMethod.POST)
     public ModelAndView getCarByRegistrationId(@ModelAttribute("filteregistration") final FilterRegistrationIdOdt filterRegistrationIdOdt) {
         String registration = filterRegistrationIdOdt.getregistrationNumber();
-        String message = "";
+        String message;
 
         List<Car> cars = carService.getAllCar();
 
         Car car = new Car();
         Boolean check = false;
-        String registrationId =null;
+        String registrationId;
         for (int i=0; i<cars.size(); i++){
             car = cars.get(i);
             registrationId = car.getRegistration_number();
@@ -128,7 +176,7 @@ public class CarController {
         String carBrand = filterOdt.getCarBrand();
         String modelName = filterOdt.getModelName();
         List<Car> allCars = carService.getAllCar();
-        String message="";
+        String message;
 
         Car car;
         List<Car> carsFind = new ArrayList<>();

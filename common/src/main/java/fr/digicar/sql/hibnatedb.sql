@@ -51,7 +51,7 @@ CREATE TABLE car_type
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE fuel_type
+CREATE TABLE fuelType
 (
   id                  INT(6) AUTO_INCREMENT
     PRIMARY KEY,
@@ -74,21 +74,21 @@ CREATE TABLE car
 (
   id                  INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  registration_number VARCHAR(40) ,
-  mark                VARCHAR(40) ,
-  transmission_id     INT(6) ,
-  name_model          VARCHAR(40) ,
-  nb_places           INT(2) ,
-  nb_doors            INT(2) ,
-  type_id             INT(6) ,
-  location            VARCHAR(10) ,
-  comfort             INT(2) ,
-  kilometers          INT(6) ,
-  release_date        DATE ,
+  registration_number VARCHAR(40),
+  mark                VARCHAR(40),
+  transmission_id     INT(6),
+  name_model          VARCHAR(40),
+  nb_places           VARCHAR(2),
+  nb_doors            VARCHAR(2),
+  type_id             INT(6),
+  location            VARCHAR(10),
+  comfort             INT(2),
+  kilometers          VARCHAR(2),
+  release_date        DATE,
   fuel_type_id        INT(6),
   FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id),
   FOREIGN KEY (type_id) REFERENCES car_type (id),
-  FOREIGN KEY (fuel_type_id) REFERENCES transmission_mode (id)
+  FOREIGN KEY (fuel_type_id) REFERENCES fuelType (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -107,9 +107,9 @@ insert into car_type VALUES(DEFAULT,"Voiture de collection ");
 insert into transmission_mode VALUES(DEFAULT,"manuelle");
 insert into transmission_mode VALUES(DEFAULT,"automatique");
 
-insert into fuel_type VALUES(DEFAULT,"essence");
-insert into fuel_type VALUES(DEFAULT,"diesel");
-insert into fuel_type VALUES(DEFAULT,"electrique");
+insert into fuelType VALUES(DEFAULT,"essence");
+insert into fuelType VALUES(DEFAULT,"diesel");
+insert into fuelType VALUES(DEFAULT,"electrique");
 
 
 

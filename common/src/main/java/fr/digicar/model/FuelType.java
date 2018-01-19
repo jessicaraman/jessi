@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Data
 @Entity
-@Table(name = "fuel_type")
+@Table(name = "fuelType")
 public class FuelType {
 
     @Id

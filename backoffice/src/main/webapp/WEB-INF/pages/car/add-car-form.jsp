@@ -13,36 +13,34 @@
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark indigo">
-    <a class="navbar-brand" href="#">CSC Inside</a>
-    <button class="navbar-toggler" type="button"
-            data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
-                    <a class="dropdown-item" href="">Ajouter</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
-            </li>
+<div class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark indigo">
+            <a class="navbar-brand" href="#">CSC Inside</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
+                            <a class="dropdown-item" href="">Ajouter</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
+                    </li>
 
-        </ul>
-    </div>
-</nav>
-
-<div>
-
+                </ul>
+            </div>
+        </nav>
 </div>
 
 <div class="container">
@@ -52,7 +50,8 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input type="text" path="registration_number" cssClass="form-control" required="required"/>
+                    <form:input title="AA-OO1-AA" maxlength="7" onKeypress="if((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if((event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
+                                cssStyle="text-transform:uppercase" name="registrationNumber" path="registration_number" minlength="" required="required" cssClass="form-control" type="text"/>
                 <form:label path="registration_number">Immatriculation</form:label>
                 </div>
             </div>
@@ -102,8 +101,8 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="input-group md-form form-sm form-2 pl-0">
                 <form:label path="type" >Type de véhicule</form:label>
+                <div class="input-group md-form form-sm form-2 pl-0">
                 <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="type">
                     <form:option value="" disabled="true" selected="">Choisir un type</form:option>
                     <c:forEach items="${listOfCarType}" var="carType" >
@@ -128,10 +127,9 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <form:label data-error="champs invalide" path="release_date">Date de mise en circulation</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:input type="date" path="release_date" cssClass="form-control"/>
-                    <form:label data-error="champs invalide"
-                                path="release_date">Date de mise en circulation</form:label>
                 </div>
             </div>
         </div>
@@ -144,8 +142,8 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <form:label path="fuel_type" >Carburant</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <form:label path="fuel_type" >Carburant</form:label>
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="fuel_type">
                         <form:option value="" disabled="true" selected="">Choisir un type</form:option>
                         <c:forEach items="${listOfFuelType}" var="fuelType" >
