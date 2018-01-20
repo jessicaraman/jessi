@@ -30,8 +30,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Transactional
-    public Car getCar(String registration_number) {
-        return carDAO.getCar(registration_number);
+    public Car getCar(int carId) {
+        return carDAO.getCar(carId);
     }
 
     @Transactional

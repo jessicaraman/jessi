@@ -28,8 +28,8 @@ public class CarDAOImpl implements CarDAO {
 
     }
 
-    public Car getCar(String registration_number) {
-        return (Car) getCurrentSession().load(Car.class, registration_number);
+    public Car getCar(int carId) {
+        return (Car) getCurrentSession().load(Car.class, carId);
     }
 
     public void deleteCar(int carId) {

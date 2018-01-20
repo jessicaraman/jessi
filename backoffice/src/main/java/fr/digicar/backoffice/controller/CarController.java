@@ -70,22 +70,37 @@ public class CarController {
 
     @RequestMapping(value = "/adding", method = RequestMethod.POST)
     public ModelAndView addingCar(@ModelAttribute("car") Car car, BindingResult result) {
-        carService.addCar(car);
-        
+        List<Car> cars = carService.getAllCar();
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+        String confirmationMessage = "";
+        String alertMessage = "";
 
-        /*Car addedCar = car;
+        Boolean checked = false;
+        String actual;
+        String expected = car.getRegistration_number();
+        for (int i=0; i<cars.size(); i++){
+            actual = cars.get(i).getRegistration_number();
+            if(actual.equals(expected)){
+                checked= true;
+                break;
+            }
+        }
+        if (checked){
 
-        modelAndView.addObject("addedCar", addedCar);*/
+            alertMessage = "Ce véhicule est connu dans le référentiel ! ";
+            modelAndView.addObject("alertMessage", alertMessage);
 
-        String confirmationmessage;
+        }
+        else{
+            carService.addCar(car);
+            confirmationMessage = "Le véhicule "+car.getRegistration_number()+" a bien été ajouté";
+            modelAndView.addObject("confirmationMessage", confirmationMessage);
 
-        confirmationmessage = "Le véhicule "+car.getRegistration_number()+" a bien été ajouté";
-        modelAndView.addObject("confirmationmessage", confirmationmessage);
+        }
+
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
 
-        List<Car> cars = carService.getAllCar();
         modelAndView.addObject("cars", cars);
 
         return modelAndView;
@@ -94,9 +109,7 @@ public class CarController {
     @RequestMapping(value = "/deleteCar/{registration_number}/{carId}", method = RequestMethod.GET)
     public ModelAndView deleteCar(@PathVariable int carId, @PathVariable String registration_number) {
         carService.deleteCar(carId);
-
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
-
         String message;
 
         message = "Le véhicule "+registration_number+" a bien été supprimé";
@@ -108,19 +121,10 @@ public class CarController {
 
         return modelAndView;
     }
-    @RequestMapping(value = "/updateCar/{registration_number}", method = RequestMethod.GET)
-    public ModelAndView getViewForUpdateCar(@PathVariable String registration_number) {
-        List<Car> cars = carService.getAllCar();
+    @RequestMapping(value = "/updateCar/{carId}", method = RequestMethod.GET)
+    public ModelAndView getViewForUpdateCar(@PathVariable int carId) {
+        Car car = carService.getCar(carId);
 
-        Car car = new Car();
-        String registration;
-        for (int i=0; i<cars.size(); i++){
-            car = cars.get(i);
-            registration = car.getRegistration_number();
-            if(registration_number.equals(registration)){
-                break;
-            }
-        }
         List<CarType> listOfCarType = carTypeService.getAllCarType();
         List<TransmissionMode> listOfTransmissionMode = transmissionModeService.getAllTransmissionMode();
         List<FuelType> listOfFuelType = fuelTypeService.getAllFuelType();
@@ -178,13 +182,10 @@ public class CarController {
             message = "Veuillez Renseigner un matricule correcte ou utiliser la recherche générale";
             modelAndView.addObject("message", message);
             return modelAndView;
-
         }
         else {
-
             List<Car> carFilter = new ArrayList<>();
             carFilter.add(car);
-
             modelAndView.addObject("cars", carFilter);
             return modelAndView;
         }
@@ -202,6 +203,7 @@ public class CarController {
         for (int i=0; i<allCars.size(); i++){
             car = allCars.get(i);
             if(carBrand.equals(car.getMark()) && modelName.equals(car.getName_model())){
+                //TODO Gérer les autres filtres renseignés
                 carsFind.add(car);
             }
         }

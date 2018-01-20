@@ -72,8 +72,7 @@ CREATE TABLE transmission_mode
   DEFAULT CHARSET = utf8;
 CREATE TABLE car
 (
-  id                  INT(6) AUTO_INCREMENT
-    PRIMARY KEY,
+  id                  INT(6) AUTO_INCREMENT,
   registration_number VARCHAR(40),
   mark                VARCHAR(40),
   transmission_id     INT(6),
@@ -86,16 +85,17 @@ CREATE TABLE car
   kilometers          VARCHAR(2),
   release_date        DATE,
   fuel_type_id        INT(6),
-
-  INDEX `fk_transmission_id` (`transmission_mode` ASC) ,
+  CONSTRAINT pk_car PRIMARY KEY (id, registration_number),
   CONSTRAINT `fk_transmission_id`  FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id)  ON DELETE NO ACTION ON UPDATE NO ACTION,
-  INDEX `fk_car_type` (`car_type` ASC) ,
   CONSTRAINT `fk_car_type`  FOREIGN KEY (type_id) REFERENCES car_type (id)  ON DELETE NO ACTION ON UPDATE NO ACTION,
-  INDEX `fk_fuel_type_id` (`fuelType` ASC) ,
   CONSTRAINT `fk_fuel_type_id`  FOREIGN KEY (fuel_type_id) REFERENCES fuelType (id)  ON DELETE NO ACTION ON UPDATE NO ACTION
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+
+
+CREATE INDEX `idx_car` ON `car` (`id`, `registration_number`);
 
 #----------------------------------------------------
 #                 populate data

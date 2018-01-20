@@ -8,7 +8,7 @@ public interface CarDAO {
 
     void addCar(Car car);
     void updateCar(Car car);
-    Car getCar(String registration_number);
+    Car getCar(int carId);
     void deleteCar(int carId);
     List<Car> getCars();
 
