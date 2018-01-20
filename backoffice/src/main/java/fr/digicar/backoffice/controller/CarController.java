@@ -14,10 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -44,13 +41,30 @@ public class CarController {
     private FuelTypeService fuelTypeService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView addPage() {
+    public ModelAndView getViewForListCar() {
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
         modelAndView.addObject("car", new Car());
         List<Car> cars = carService.getAllCar();
         modelAndView.addObject("cars", cars);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView getViewForaddCar() {
+
+        ModelAndView modelAndView = new ModelAndView("car/add-car-form");
+
+        List<CarType> listOfCarType = carTypeService.getAllCarType();
+        List<TransmissionMode> listOfTransmissionMode = transmissionModeService.getAllTransmissionMode();
+        List<FuelType> listOfFuelType = fuelTypeService.getAllFuelType();
+
+        modelAndView.addObject("car", new Car());
+        modelAndView.addObject("listOfCarType", listOfCarType);
+        modelAndView.addObject("listOfTransmissionMode", listOfTransmissionMode);
+        modelAndView.addObject("listOfFuelType", listOfFuelType);
+
         return modelAndView;
     }
 
@@ -64,25 +78,28 @@ public class CarController {
 
         modelAndView.addObject("addedCar", addedCar);*/
 
-        String message;
+        String confirmationmessage;
 
-        message = "Le véhicule"+car.getRegistration_number()+" a bien été ajouté";
-        modelAndView.addObject("message", message);
+        confirmationmessage = "Le véhicule"+car.getRegistration_number()+" a bien été ajouté";
+        modelAndView.addObject("confirmationmessage", confirmationmessage);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
+
+        List<Car> cars = carService.getAllCar();
+        modelAndView.addObject("cars", cars);
 
         return modelAndView;
     }
 
-    @RequestMapping(value = "/deleteCar/{registrationId}", method = RequestMethod.GET)
-    public ModelAndView deleteCar(@RequestParam String registrationId) {
-        carService.deleteCar(registrationId);
+    @RequestMapping(value = "/deleteCar/{registration_number}/{carId}", method = RequestMethod.GET)
+    public ModelAndView deleteCar(@PathVariable int carId, @PathVariable String registration_number) {
+        carService.deleteCar(carId);
 
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
 
         String message;
 
-        message = "Le véhicule"+registrationId+" a bien été supprimé";
+        message = "Le véhicule"+registration_number+" a bien été supprimé";
         modelAndView.addObject("message", message);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
@@ -90,7 +107,7 @@ public class CarController {
         return modelAndView;
     }
     @RequestMapping(value = "/updateCar/{registration_number}", method = RequestMethod.GET)
-    public ModelAndView updateCar(@RequestParam String registration_number) {
+    public ModelAndView getViewForUpdateCar(@PathVariable String registration_number) {
         List<Car> cars = carService.getAllCar();
 
         Car car = new Car();
@@ -115,19 +132,19 @@ public class CarController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView addCar() {
+    @RequestMapping(value = "/uptodate", method = RequestMethod.POST)
+    public ModelAndView updateCar(@ModelAttribute("car") Car car) {
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+        String confirmationmessage;
 
-        ModelAndView modelAndView = new ModelAndView("car/add-car-form");
+        carService.updateCar(car);
+        confirmationmessage = "Le véhicule"+car.getRegistration_number()+" a bien été mis à jour";
+        modelAndView.addObject("confirmationmessage", confirmationmessage);
+        modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
+        modelAndView.addObject("filters", new FilterOdt());
 
-        List<CarType> listOfCarType = carTypeService.getAllCarType();
-        List<TransmissionMode> listOfTransmissionMode = transmissionModeService.getAllTransmissionMode();
-        List<FuelType> listOfFuelType = fuelTypeService.getAllFuelType();
-
-        modelAndView.addObject("car", new Car());
-        modelAndView.addObject("listOfCarType", listOfCarType);
-        modelAndView.addObject("listOfTransmissionMode", listOfTransmissionMode);
-        modelAndView.addObject("listOfFuelType", listOfFuelType);
+        List<Car> cars = carService.getAllCar();
+        modelAndView.addObject("cars", cars);
 
         return modelAndView;
     }

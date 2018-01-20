@@ -12,34 +12,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service("countryService")
 @Transactional
 public class CarServiceImpl implements CarService {
 
     @Autowired
     private CarDAO carDAO;
 
-    @Override
+    @Transactional
     public void addCar(Car car) {
         carDAO.addCar(car);
     }
 
-    @Override
+    @Transactional
     public void updateCar(Car car) {
         carDAO.updateCar(car);
     }
 
-    @Override
+    @Transactional
     public Car getCar(String registration_number) {
         return carDAO.getCar(registration_number);
     }
 
-    @Override
-    public void deleteCar(String registration_number) {
-        carDAO.deleteCar(registration_number);
+    @Transactional
+    public void deleteCar(int carId) {
+        carDAO.deleteCar(carId);
     }
 
-    @Override
+    @Transactional
     public List<Car> getAllCar() {
         return carDAO.getCars();
     }

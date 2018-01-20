@@ -32,17 +32,17 @@
                     <td>${car.registration_number}</td>
                     <td>${car.mark}</td>
                     <td>${car.name_model}</td>
-                    <td>${car.transmission}</td>
+                    <td>${car.transmission.name}</td>
                     <td>${car.nb_places}</td>
                     <td>${car.nb_doors}</td>
-                    <td>${car.type}</td>
+                    <td>${car.type.name}</td>
                     <td>${car.location}</td>
                     <td>${car.kilometers}</td>
                     <td>${car.release_date}</td>
                     <td>${car.comfort}</td>
-                    <td>${car.fuel_type}</td>
-                    <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value="car/updateCar/${car.registration_number}" />" >Modifier</a></button></td>
-                    <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value="car/deleteCar/${car.registration_number}" />" >Supprimer</a></button></td>
+                    <td>${car.fuel_type.name}</td>
+                    <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value="updateCar/${car.registration_number}" />" >Modifier</a></button></td>
+                    <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value="deleteCar/${car.registration_number}/${car.id}" />" >Supprimer</a></button></td>
                 </tr>
             </c:forEach>
         </table>

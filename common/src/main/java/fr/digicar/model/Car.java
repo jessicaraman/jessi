@@ -28,10 +28,11 @@ public class Car {
     private String name_model;
 
     @OneToOne(targetEntity = TransmissionMode.class)
+    @JoinColumn(name="id")
 //    @JoinTable(name="transmission_mode",
 //              joinColumns = @JoinColumn(name="transmission_id"),
 //              inverseJoinColumns = @JoinColumn(name="id"))
-    private Integer transmission;
+    private TransmissionMode transmission;
 
     @Column(name = "nb_places")
     private Integer nb_places;
@@ -40,10 +41,11 @@ public class Car {
     private Integer nb_doors;
 
     @OneToOne(targetEntity = CarType.class)
+    @JoinColumn(name="id")
 //    @JoinTable(name="car_type",
 //            joinColumns = @JoinColumn(name="type_id"),
 //            inverseJoinColumns = @JoinColumn(name="id"))
-    private Integer type;
+    private CarType type;
 
     /* for location: in parking or storage */
     @Column(name = "location")
@@ -58,10 +60,11 @@ public class Car {
     @Column(name = "comfort")
     private Integer comfort;
 
-    @OneToOne(targetEntity = FuelType.class)
 //    @JoinTable(name="fuel_type",
 //            joinColumns = @JoinColumn(name="fuel_type_id"),
 //            inverseJoinColumns = @JoinColumn(name="id"))
-    private Integer fuel_type;
+    @OneToOne(targetEntity=FuelType.class) // le ManyToOne fait toujours reference à l'entité
+    @JoinColumn(name="id")
+    private FuelType fuel_type;
 
 }

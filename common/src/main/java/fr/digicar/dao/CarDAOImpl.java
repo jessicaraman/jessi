@@ -24,15 +24,16 @@ public class CarDAOImpl implements CarDAO {
 
     public void updateCar(Car car) {
 
+        getCurrentSession().update(car);
 
     }
 
     public Car getCar(String registration_number) {
-        return (Car) getCurrentSession().get(Car.class, registration_number);
+        return (Car) getCurrentSession().load(Car.class, registration_number);
     }
 
-    public void deleteCar(String registration_number) {
-        Car car = getCar(registration_number);
+    public void deleteCar(int carId) {
+        Car car = (Car) getCurrentSession().load(Car.class, carId);
         if (car != null)
             getCurrentSession().delete(car);
     }
