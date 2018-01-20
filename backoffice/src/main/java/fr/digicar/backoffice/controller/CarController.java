@@ -197,6 +197,12 @@ public class CarController {
     {
         String carBrand = filterOdt.getCarBrand();
         String modelName = filterOdt.getModelName();
+        String typeCar = filterOdt.getTypeCar();
+        int mileageMin = filterOdt.getMileageMin();
+        int mileageMax = filterOdt.getMileageMax();
+        String transmission = filterOdt.getTransmission();
+        String fuelType = filterOdt.getFuelType();
+
         List<Car> allCars = carService.getAllCar();
         String message;
 
@@ -205,8 +211,22 @@ public class CarController {
         for (int i=0; i<allCars.size(); i++){
             car = allCars.get(i);
             if(carBrand.equals(car.getMark()) && modelName.equals(car.getName_model())){
-                //TODO Gérer les autres filtres renseignés
-                carsFind.add(car);
+                if(!typeCar.isEmpty() && typeCar.equals(car.getFuel_type())) {
+                    if (mileageMin < car.getKilometers() && mileageMax > car.getKilometers()) {
+                        if (!transmission.isEmpty() && transmission.equals(car.getTransmission())){
+                            if (!fuelType.isEmpty() && fuelType.equals(car.getFuel_type()))
+                                carsFind.add(car);
+                            else
+                                carsFind.add(car);
+                        }
+                        else
+                            carsFind.add(car);
+                    }
+                    else
+                        carsFind.add(car);
+                }
+                else
+                    carsFind.add(car);
             }
         }
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");

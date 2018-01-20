@@ -54,7 +54,8 @@
                     <form:option value="1" >Cliot</form:option>
                     <form:option value="2" >Peugeot</form:option>
                     <form:option value="3" >Renault</form:option>
-                    <form:option value="4" >...</form:option>
+                    <form:option value="4" >Mazda</form:option>
+                    <form:option value="5" >Toyota</form:option>
                 </form:select>
             </div>
         </div>
@@ -67,7 +68,7 @@
                         <form:option value="1" >Cliot2</form:option>
                         <form:option value="2" >Peugeot 207</form:option>
                         <form:option value="3" >Mazda 3</form:option>
-                        <form:option value="4" >...</form:option>
+                        <form:option value="4" >Toyota Yaris</form:option>
                 </form:select>
             </div>
         </div>
@@ -128,22 +129,6 @@
 
     </div>
     <div class="row">
-        <div class="col-md-3">
-            <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input value="" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
-                            path="numberOfDoor" maxlength="1" cssClass="form-control my-0 py-1 grey-border" type="text"/>
-                <form:label path="numberOfDoor">Nombre de portes</form:label>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input value="" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
-                            path="numberOfSeats" maxlength="1" cssClass="form-control my-0 py-1 grey-border" type="text"/>
-                <form:label path="numberOfSeats">Nombre de places</form:label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <span>...</span>
     </div>
     <div class="modal-footer">
@@ -153,24 +138,6 @@
 
 </div>
 
-
-<script type="text/javascript">
-    // Material Select Initialization
-    $(document).ready(function() {
-        $('.mdb-select').material_select();
-    });
-    var mark = [
-        "MAZDA",
-        "TOYOTA",
-        "CLIOT",
-        "PEUGEOT",
-        "RENAULT"
-    ];
-
-    $('.mdb-autocomplete').mdb_autocomplete({
-        data: mark
-    });
-</script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
