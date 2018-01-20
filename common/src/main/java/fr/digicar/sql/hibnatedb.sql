@@ -85,10 +85,7 @@ CREATE TABLE car
   kilometers          VARCHAR(2),
   release_date        DATE,
   fuel_type_id        INT(6),
-  CONSTRAINT pk_car PRIMARY KEY (id, registration_number),
-  CONSTRAINT `fk_transmission_id`  FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id)  ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_car_type`  FOREIGN KEY (type_id) REFERENCES car_type (id)  ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_fuel_type_id`  FOREIGN KEY (fuel_type_id) REFERENCES fuelType (id)  ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT pk_car PRIMARY KEY (id, registration_number)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

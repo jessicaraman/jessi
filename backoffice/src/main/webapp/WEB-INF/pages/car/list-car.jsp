@@ -10,6 +10,9 @@
 <div class="container">
 <h3 class="text-center">Liste des véhicules</h3>
 
+
+
+
 <div class="table">
     <c:if test="${!empty cars}">
         <table class="table table-hover">
@@ -28,19 +31,35 @@
                 <th width="50">Type de carburant</th>
             </tr>
             <c:forEach items="${cars}" var="car">
+                <c:forEach items="${listOfTransmissionMode}" var="transmissiontype" >
+                    <c:if test="${transmissiontype.id eq car.transmission}">
+                        <c:set var="transmissionType" value="${transmissiontype.name}" scope="request" />
+                    </c:if>
+                </c:forEach>
+                <c:forEach items="${listOfCarType}" var="cartype" >
+                    <c:if test="${cartype.id eq car.type}">
+                        <c:set var="typeCar" value="${cartype.name}" scope="request" />
+                    </c:if>
+                </c:forEach>
+                <c:forEach items="${listOfFuelType}" var="fueltype" >
+                    <c:if test="${fueltype.id eq car.fuel_type}">
+                        <c:set var="fuelType" value="${fueltype.name}" scope="request" />
+                    </c:if>
+                </c:forEach>
+
                 <tr>
                     <td>${car.registration_number}</td>
                     <td>${car.mark}</td>
                     <td>${car.name_model}</td>
-                    <td>${car.transmission.name}</td>
+                    <td>${transmissionType}</td>
                     <td>${car.nb_places}</td>
                     <td>${car.nb_doors}</td>
-                    <td>${car.type.name}</td>
+                    <td>${typeCar}</td>
                     <td>${car.location}</td>
                     <td>${car.kilometers}</td>
                     <td>${car.release_date}</td>
                     <td>${car.comfort}</td>
-                    <td>${car.fuel_type.name}</td>
+                    <td>${fuelType}</td>
                     <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value="updateCar/${car.id}" />" >Modifier</a></button></td>
                     <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value="deleteCar/${car.registration_number}/${car.id}" />" >Supprimer</a></button></td>
                 </tr>

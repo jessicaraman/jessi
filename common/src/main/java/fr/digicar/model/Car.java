@@ -3,7 +3,6 @@ package fr.digicar.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /*
  * Created by barry on 31/12/2017.
@@ -14,8 +13,8 @@ import java.io.Serializable;
 public class Car {
 
     @Id
-    @GeneratedValue
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "registration_number")
@@ -27,12 +26,8 @@ public class Car {
     @Column(name = "name_model")
     private String name_model;
 
-    @OneToOne(targetEntity = TransmissionMode.class)
-    @JoinColumn(name="id")
-//    @JoinTable(name="transmission_mode",
-//              joinColumns = @JoinColumn(name="transmission_id"),
-//              inverseJoinColumns = @JoinColumn(name="id"))
-    private TransmissionMode transmission;
+    @Column(name="transmission_id")
+    private Integer transmission;
 
     @Column(name = "nb_places")
     private Integer nb_places;
@@ -40,12 +35,8 @@ public class Car {
     @Column(name = "nb_doors")
     private Integer nb_doors;
 
-    @OneToOne(targetEntity = CarType.class)
-    @JoinColumn(name="id")
-//    @JoinTable(name="car_type",
-//            joinColumns = @JoinColumn(name="type_id"),
-//            inverseJoinColumns = @JoinColumn(name="id"))
-    private CarType type;
+    @Column(name="type_id")
+    private Integer type;
 
     /* for location: in parking or storage */
     @Column(name = "location")
@@ -60,11 +51,110 @@ public class Car {
     @Column(name = "comfort")
     private Integer comfort;
 
-//    @JoinTable(name="fuel_type",
-//            joinColumns = @JoinColumn(name="fuel_type_id"),
-//            inverseJoinColumns = @JoinColumn(name="id"))
-    @OneToOne(targetEntity=FuelType.class) // le ManyToOne fait toujours reference à l'entité
-    @JoinColumn(name="id")
-    private FuelType fuel_type;
+    @Column(name="fuel_type_id")
+    private Integer fuel_type;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getRegistration_number() {
+        return registration_number;
+    }
+
+    public void setRegistration_number(String registration_number) {
+        this.registration_number = registration_number;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
+
+    public String getName_model() {
+        return name_model;
+    }
+
+    public void setName_model(String name_model) {
+        this.name_model = name_model;
+    }
+
+    public Integer getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(Integer transmission) {
+        this.transmission = transmission;
+    }
+
+    public Integer getNb_places() {
+        return nb_places;
+    }
+
+    public void setNb_places(Integer nb_places) {
+        this.nb_places = nb_places;
+    }
+
+    public Integer getNb_doors() {
+        return nb_doors;
+    }
+
+    public void setNb_doors(Integer nb_doors) {
+        this.nb_doors = nb_doors;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Integer getKilometers() {
+        return kilometers;
+    }
+
+    public void setKilometers(Integer kilometers) {
+        this.kilometers = kilometers;
+    }
+
+    public String getRelease_date() {
+        return release_date;
+    }
+
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
+    }
+
+    public Integer getComfort() {
+        return comfort;
+    }
+
+    public void setComfort(Integer comfort) {
+        this.comfort = comfort;
+    }
+
+    public Integer getFuel_type() {
+        return fuel_type;
+    }
+
+    public void setFuel_type(Integer fuel_type) {
+        this.fuel_type = fuel_type;
+    }
 }

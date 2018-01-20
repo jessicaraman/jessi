@@ -42,7 +42,13 @@ public class CarController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getViewForListCar() {
+
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
+
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
         modelAndView.addObject("car", new Car());
@@ -56,14 +62,10 @@ public class CarController {
 
         ModelAndView modelAndView = new ModelAndView("car/add-car-form");
 
-        List<CarType> listOfCarType = carTypeService.getAllCarType();
-        List<TransmissionMode> listOfTransmissionMode = transmissionModeService.getAllTransmissionMode();
-        List<FuelType> listOfFuelType = fuelTypeService.getAllFuelType();
-
         modelAndView.addObject("car", new Car());
-        modelAndView.addObject("listOfCarType", listOfCarType);
-        modelAndView.addObject("listOfTransmissionMode", listOfTransmissionMode);
-        modelAndView.addObject("listOfFuelType", listOfFuelType);
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
 
         return modelAndView;
     }
@@ -72,8 +74,8 @@ public class CarController {
     public ModelAndView addingCar(@ModelAttribute("car") Car car, BindingResult result) {
         List<Car> cars = carService.getAllCar();
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
-        String confirmationMessage = "";
-        String alertMessage = "";
+        String confirmationMessage;
+        String alertMessage;
 
         Boolean checked = false;
         String actual;
@@ -87,7 +89,7 @@ public class CarController {
         }
         if (checked){
 
-            alertMessage = "Ce véhicule est connu dans le référentiel ! ";
+            alertMessage = "Cette immatriculation est connue dans le référentiel ! ";
             modelAndView.addObject("alertMessage", alertMessage);
 
         }
@@ -100,8 +102,12 @@ public class CarController {
 
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
 
-        modelAndView.addObject("cars", cars);
+        List<Car> actualCar = carService.getAllCar();
+        modelAndView.addObject("cars", actualCar);
 
         return modelAndView;
     }
@@ -125,20 +131,16 @@ public class CarController {
     public ModelAndView getViewForUpdateCar(@PathVariable int carId) {
         Car car = carService.getCar(carId);
 
-        List<CarType> listOfCarType = carTypeService.getAllCarType();
-        List<TransmissionMode> listOfTransmissionMode = transmissionModeService.getAllTransmissionMode();
-        List<FuelType> listOfFuelType = fuelTypeService.getAllFuelType();
-
         ModelAndView modelAndView = new ModelAndView("car/update-car");
         modelAndView.addObject("car", car);
-        modelAndView.addObject("listOfCarType", listOfCarType);
-        modelAndView.addObject("listOfTransmissionMode", listOfTransmissionMode);
-        modelAndView.addObject("listOfFuelType", listOfFuelType);
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
 
         return modelAndView;
     }
 
-    @RequestMapping(value = "/uptodate", method = RequestMethod.POST)
+    @RequestMapping(value = "/updating", method = RequestMethod.POST)
     public ModelAndView updateCar(@ModelAttribute("car") Car car) {
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
         String confirmationmessage;
