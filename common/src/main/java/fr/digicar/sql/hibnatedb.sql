@@ -88,7 +88,7 @@ CREATE TABLE car
   fuel_type_id        INT(6),
   FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id),
   FOREIGN KEY (type_id) REFERENCES car_type (id),
-  FOREIGN KEY (fuel_type_id) REFERENCES transmission_mode (id)
+  FOREIGN KEY (fuel_type_id) REFERENCES fuel_type (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
