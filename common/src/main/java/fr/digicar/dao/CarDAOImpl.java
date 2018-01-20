@@ -29,7 +29,7 @@ public class CarDAOImpl implements CarDAO {
     }
 
     public Car getCar(int carId) {
-        return (Car) getCurrentSession().load(Car.class, carId);
+        return (Car) getCurrentSession().get(Car.class, carId);
     }
 
     public void deleteCar(int carId) {
