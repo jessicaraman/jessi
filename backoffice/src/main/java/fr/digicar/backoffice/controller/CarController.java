@@ -183,14 +183,16 @@ public class CarController {
         if (check==false){
             message = "Veuillez Renseigner un matricule correcte ou utiliser la recherche générale";
             modelAndView.addObject("message", message);
-            return modelAndView;
         }
         else {
             List<Car> carFilter = new ArrayList<>();
             carFilter.add(car);
             modelAndView.addObject("cars", carFilter);
-            return modelAndView;
         }
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        return modelAndView;
+
+
     }
     @RequestMapping(value = "/allcars", method = RequestMethod.POST)
     public ModelAndView getAllCars(@ModelAttribute("filters") final FilterOdt filterOdt)
