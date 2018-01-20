@@ -80,7 +80,7 @@ public class CarController {
 
         String confirmationmessage;
 
-        confirmationmessage = "Le véhicule"+car.getRegistration_number()+" a bien été ajouté";
+        confirmationmessage = "Le véhicule "+car.getRegistration_number()+" a bien été ajouté";
         modelAndView.addObject("confirmationmessage", confirmationmessage);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
@@ -99,10 +99,12 @@ public class CarController {
 
         String message;
 
-        message = "Le véhicule"+registration_number+" a bien été supprimé";
+        message = "Le véhicule "+registration_number+" a bien été supprimé";
         modelAndView.addObject("message", message);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
+        List<Car> cars = carService.getAllCar();
+        modelAndView.addObject("cars", cars);
 
         return modelAndView;
     }
@@ -138,7 +140,7 @@ public class CarController {
         String confirmationmessage;
 
         carService.updateCar(car);
-        confirmationmessage = "Le véhicule"+car.getRegistration_number()+" a bien été mis à jour";
+        confirmationmessage = "Le véhicule "+car.getRegistration_number()+" a bien été mis à jour";
         modelAndView.addObject("confirmationmessage", confirmationmessage);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
