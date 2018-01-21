@@ -1,12 +1,14 @@
 package fr.digicar.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 /*
  * Created by barry on 31/12/2017.
  */
+@ToString
+@EqualsAndHashCode
 @Data
 @Entity
 @Table(name = "car")
@@ -157,4 +159,5 @@ public class Car {
     public void setFuel_type(Integer fuel_type) {
         this.fuel_type = fuel_type;
     }
+
 }
