@@ -100,17 +100,19 @@
             </div>
         </div>
         <div class="row">
+
             <div class="col-md-4">
                 <form:label path="type" >Type de véhicule</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="type">
-                        <form:option value="" disabled="true" selected="">Choisir un type</form:option>
+                        <form:option value="" disabled="true" selected="true">Choisir un type</form:option>
                         <c:forEach items="${listOfCarType}" var="carType" >
                             <form:option value="${carType.id}" >${carType.name}</form:option>
                         </c:forEach>
                     </form:select>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:input maxlength="6" type="number" path="kilometers" cssClass="form-control"/>
@@ -127,11 +129,12 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <form:label data-error="champs invalide" path="comfort">Confort</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <form:input maxlength="1" type="number" path="comfort" cssClass="form-control"/>
-                    <form:label data-error="champs invalide" path="comfort">Confort</form:label>
+                    <form:input type="range"  min="1" max="5" path="comfort" Class="range-field"/>
                 </div>
             </div>
+
         </div>
 
         <div class="row">
@@ -148,9 +151,13 @@
             </div>
         </div>
 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="">Reinitialiser</button>
-            <button type="submit" class="btn btn-primary">Ajouter un véhicule</button>
+        <div class="row" style="border-top: 1px solid #e9ecef;">
+            <div class="col-md-4 text-right">
+                <button type="reset" class="btn btn-secondary" data-dismiss="">Reinitialiser</button>
+            </div>
+            <div class="col-md-4 text-left">
+                <button type="submit" class="btn btn-primary">Ajouter un véhicule</button>
+            </div>
         </div>
     </form:form>
 </div>
