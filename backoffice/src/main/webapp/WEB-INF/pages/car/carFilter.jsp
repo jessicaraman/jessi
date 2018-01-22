@@ -21,76 +21,108 @@
     </div>
 </c:if>
 
-<div class="container">
-    <%--@elvariable id="filteregistration" type="fr.digicar.odt.FilterRegistrationIdOdt</iframe>"--%>
+    <div class="container">
+        <div class="row"></div>
+<%--@elvariable id="filteregistration" type="fr.digicar.odt.FilterRegistrationIdOdt</iframe>"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/car/registrationId" modelAttribute="filteregistration">
         <div class="row">
                 <div class="col-md-3">
                     <div class="input-group md-form form-sm form-2 pl-0">
-                        <form:input name="registrationNumber" path="registrationNumber" minlength="" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
+                        <form:input title="AA-OO1-AA" maxlength="7" onKeypress="if((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if((event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
+                                    cssStyle="text-transform:uppercase" name="registrationNumber" path="registrationNumber" minlength="" required="required" cssClass="form-control validate my-0 py-1 grey-border" type="text"/>
                         <form:label path="registrationNumber" data-error="Immatriculation invalide">Immatriculation</form:label>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <input type="submit" class="btn btn-primary text-right">search</input>
+                    <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm my-0">Search</button>
                 </div>
         </div>
+
     </form:form>
+    </div>
+<div class="container">
+
 
 <%--@elvariable id="filters" type="fr.digicar.odt.FilterOdt"</iframe>"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/car/allcars" modelAttribute="filters">
     <div class="row">
         <div class="col-md-3">
+            <form:label for="form-autocomplete" cssClass="active" path="carBrand" data-error="marque invalide">Marque</form:label>
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="carBrand" id="form-autocomplete" required="required" cssClass="form-control my-0 py-1 grey-border mdb-autocomplete" type="search"/>
-                <form:label for="form-autocomplete" cssClass="active" path="carBrand" data-error="marque invalide">Marque</form:label>
+                <form:select cssClass="form-control validate rounded validate mdb-select  my-0 py-1 grey-border" path="carBrand">
+                    <form:option value="" disabled="true" selected="">Choisir une marque</form:option>
+                    <form:option value="1" >Cliot</form:option>
+                    <form:option value="2" >Peugeot</form:option>
+                    <form:option value="3" >Renault</form:option>
+                    <form:option value="4" >...</form:option>
+                </form:select>
             </div>
         </div>
 
         <div class="col-md-3">
+            <form:label path="modelName" >Modèle</form:label>
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="modelName" required="required" cssClass="form-control my-0 py-1 grey-border" type="text"/>
-                <form:label path="modelName" data-error="modèle invalide">Modèle</form:label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="mileageMin" cssClass="form-control my-0 py-1 grey-border" type="number"/>
-                <form:label path="mileageMin">Kilometrage Min</form:label>
-            </div>
-        </div>
-        <div>
-            <span>A</span>
-        </div>
-        <div class="col-md-3">
-            <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="mileageMax" cssClass="form-control my-0 py-1 grey-border" type="number"/>
-                <form:label path="mileageMax">Kilometrage Max</form:label>
+                <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="modelName">
+                    <form:option value="" disabled="true" selected="">Choisir un modèle</form:option>
+                        <form:option value="1" >Cliot2</form:option>
+                        <form:option value="2" >Peugeot 207</form:option>
+                        <form:option value="3" >Mazda 3</form:option>
+                        <form:option value="4" >...</form:option>
+                </form:select>
             </div>
         </div>
         <div class="col-md-3">
             <form:label path="typeCar" >Type de véhicule</form:label>
-            <form:select path="typeCar" cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border">
-                    <form:option value="" disabled="true" selected="true">Choose your option</form:option>
-                    <form:option value="1">citadine</form:option>
-                    <form:option value="2">berline</form:option>
-                    <form:option value="3">...</form:option>
-            </form:select>
+            <div class="input-group md-form form-sm form-2 pl-0">
+                <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="typeCar">
+                    <form:option value="" disabled="true" selected="">Choisir un type</form:option>
+                    <c:forEach items="${listOfCarType}" var="carType" >
+                        <form:option value="${carType.id}" >${carType.name}</form:option>
+                    </c:forEach>
+                </form:select>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-3">
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="transmission" cssClass="form-control my-0 py-1 grey-border" type="text"/>
-                <form:label path="transmission">Type de transmission</form:label>
+                <form:input value="" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
+                            maxlength="6" path="mileageMin" cssClass="form-control my-0 py-1 grey-border" type="text"/>
+                <form:label path="mileageMin">Kilometrage Min</form:label>
+            </div>
+        </div>
+
+        <span>A</span>
+
+        <div class="col-md-3">
+            <div class="input-group md-form form-sm form-2 pl-0">
+                <form:input value="" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
+                            maxlength="6" path="mileageMax" cssClass="form-control my-0 py-1 grey-border" type="text"/>
+                <form:label path="mileageMax">Kilometrage Max</form:label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <form:label path="transmission" >Transmission</form:label>
+            <div class="input-group md-form form-sm form-2 pl-0">
+                <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="transmission">
+                    <form:option value="" disabled="true" selected="">Choisir la transmission</form:option>
+                    <c:forEach items="${listOfTransmissionMode}" var="transmissionMode" >
+                        <form:option value="${transmissionMode.id}" >${transmissionMode.name}</form:option>
+                    </c:forEach>
+                </form:select>
             </div>
         </div>
         <div class="col-md-3">
+            <form:label path="fuelType" >Carburant</form:label>
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="fuelType" cssClass="form-control my-0 py-1 grey-border" type="text"/>
-                <form:label path="fuelType">Type de carburant</form:label>
+                <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="fuelType">
+                    <form:option value="" disabled="true" selected="">Choisir le carburant</form:option>
+                    <c:forEach items="${listOfFuelType}" var="fuelType" >
+                        <form:option value="${fuelType.id}" >${fuelType.name}</form:option>
+                    </c:forEach>
+                </form:select>
             </div>
         </div>
 
@@ -98,13 +130,15 @@
     <div class="row">
         <div class="col-md-3">
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="numberOfDoor" minlength="1" cssClass="form-control my-0 py-1 grey-border" type="number"/>
+                <form:input value="" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
+                            path="numberOfDoor" maxlength="1" cssClass="form-control my-0 py-1 grey-border" type="text"/>
                 <form:label path="numberOfDoor">Nombre de portes</form:label>
             </div>
         </div>
         <div class="col-md-3">
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input path="numberOfSeats" minlength="1" cssClass="form-control my-0 py-1 grey-border" type="number"/>
+                <form:input value="" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
+                            path="numberOfSeats" maxlength="1" cssClass="form-control my-0 py-1 grey-border" type="text"/>
                 <form:label path="numberOfSeats">Nombre de places</form:label>
             </div>
         </div>

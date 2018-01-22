@@ -13,35 +13,49 @@
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark indigo">
-    <a class="navbar-brand" href="#">CSC Inside</a>
-    <button class="navbar-toggler" type="button"
-            data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="">Liste véhicule</a>
-                    <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
-            </li>
+    <div class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark indigo">
+            <a class="navbar-brand" href="#">CSC Inside</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="">Liste véhicule</a>
+                            <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
+                    </li>
 
-        </ul>
+                </ul>
+            </div>
+        </nav>
     </div>
-</nav>
-</nav>
 
+
+    <%--@elvariable id="confirmationMessage" type="java.lang.String"--%>
+    <c:if test="${not empty confirmationMessage}">
+        <div class="row">
+            <div class="alert alert-success w-50">${confirmationMessage}</div>
+        </div>
+    </c:if>
+    <%--@elvariable id="alertMessage" type="java.lang.String"--%>
+    <c:if test="${not empty alertMessage}">
+        <div class="row">
+            <div class="alert alert-warning w-50">${alertMessage}</div>
+        </div>
+    </c:if>
 <div>
 
 </div>
@@ -49,44 +63,6 @@
 
 <%@include file="list-car.jsp"%>
 
-<div class="table">
-<c:if test="${!empty cars}">
-    <table class="table table-hover">
-        <tr>
-            <th width="80">Immatriculation</th>
-            <th width="120">Marque</th>
-            <th width="120">Nom du modèle</th>
-            <th width="60">Type de transmission</th>
-            <th width="60">Nombre de places</th>
-            <th width="100">Nombre de portes</th>
-            <th width="100">Type de véhicule</th>
-            <th width="100">Emplacement</th>
-            <th width="10">Kilométrage</th>
-            <th width="60">Date de mise en circulation</th>
-            <th width="10">Confort</th>
-            <th width="50">Type de carburant</th>
-        </tr>
-        <c:forEach items="${cars}" var="car">
-            <tr>
-                <td>${car.registration_number}</td>
-                <td>${car.mark}</td>
-                <td>${car.name_model}</td>
-                <td>${car.transmission}</td>
-                <td>${car.nb_places}</td>
-                <td>${car.nb_doors}</td>
-                <td>${car.type}</td>
-                <td>${car.location}</td>
-                <td>${car.kilometers}</td>
-                <td>${car.release_date}</td>
-                <td>${car.comfort}</td>
-                <td>${car.fuel_type}</td>
-                <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value='' />" >Modifier</a></button></td>
-                <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value='' />" >Supprimer</a></button></td>
-            </tr>
-        </c:forEach>
-    </table>
-</c:if>
-</div>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>

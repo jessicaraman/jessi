@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<div class="container">
 <h3 class="text-center">Liste des véhicules</h3>
 
 <div class="table">
@@ -20,7 +21,6 @@
                 <th width="60">Nombre de places</th>
                 <th width="100">Nombre de portes</th>
                 <th width="100">Type de véhicule</th>
-                <th width="100">Emplacement</th>
                 <th width="10">Kilométrage</th>
                 <th width="60">Date de mise en circulation</th>
                 <th width="10">Confort</th>
@@ -35,15 +35,15 @@
                     <td>${car.nb_places}</td>
                     <td>${car.nb_doors}</td>
                     <td>${car.type}</td>
-                    <td>${car.location}</td>
                     <td>${car.kilometers}</td>
                     <td>${car.release_date}</td>
                     <td>${car.comfort}</td>
                     <td>${car.fuel_type}</td>
-                    <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value='' />" >Modifier</a></button></td>
-                    <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value='' />" >Supprimer</a></button></td>
+                    <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value="updateCar/${car.id}" />" >Modifier</a></button></td>
+                    <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value="deleteCar/${car.registration_number}/${car.id}" />" >Supprimer</a></button></td>
                 </tr>
             </c:forEach>
         </table>
     </c:if>
+</div>
 </div>
