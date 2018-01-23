@@ -72,9 +72,9 @@ public class ParkingSpotController {
 
         ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
         modelAndView.addObject("parking", new ParkingSpot());
-        List<ParkingSpot> parkingSpots= new ArrayList<>();
-        ParkingSpot resultParkingSpot = parkingSpotService.getParkingSpot(parkingSpot.getId());
-        parkingSpots.add(resultParkingSpot);
+        List<ParkingSpot> parkingSpots= parkingSpotService.getParkingSpotByObj(parkingSpot);
+       // ParkingSpot resultParkingSpot = parkingSpotService.getParkingSpot(parkingSpot.getId());
+        //parkingSpots.add(resultParkingSpot);
         modelAndView.addObject("parkingSpot", parkingSpots);
         return modelAndView;
     }

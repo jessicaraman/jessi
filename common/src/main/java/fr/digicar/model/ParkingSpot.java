@@ -58,6 +58,8 @@ public class ParkingSpot {
         this.plug = plug;
     }
 
+
+
     public String getLocation() {
         return location;
     }

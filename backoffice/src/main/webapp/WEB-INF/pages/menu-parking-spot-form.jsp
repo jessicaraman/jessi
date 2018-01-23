@@ -68,25 +68,25 @@
                                action="/parking/add">
 
                         <div class="md-form">
-                            <i class="fa fa-tag prefix grey-text"></i>
+                            <i class="fa fa-car prefix grey-text"></i>
                             <form:input type="number" path="nbSpot" class="form-control" required="required"/>
                             <form:label path="nbSpot">Numero de place</form:label>
                         </div>
 
                         <div class="md-form">
-                            <i class="fa fa-tag prefix grey-text"></i>
+                            <i class="fa fa-sort-numeric-asc prefix grey-text"></i>
                             <form:input type="number" step="1" path="nbParking" class="form-control" required="required"/>
                             <form:label path="nbParking">Numero de parking</form:label>
                         </div>
 
                         <div class="md-form">
-                            <i class="fa fa-eur prefix grey-text"></i>
+                            <i class="fa fa-tag prefix grey-text"></i>
                             <form:checkbox step="1" class="custom-control custom-checkbox" path="plug"/>
                             <form:label class="custom-control custom-checkbox" path="plug">Prise pour voiture éléctrique</form:label>
                         </div>
 
                         <div class="md-form">
-                            <i class="fa fa-eur prefix grey-text"></i>
+                            <i class="fa fa-tag prefix grey-text"></i>
                             <form:input type="text" step="1" path="location" class="form-control"
                                         required="required"/>
                             <form:label data-error="Ville invalide" path="location">Ville</form:label>
@@ -109,7 +109,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width:650px;">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Ajouter une place</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">Recherchers une place</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -126,25 +126,19 @@
                         </div>
 
                         <div class="md-form">
-                            <i class="fa fa-tag prefix grey-text"></i>
+                            <i class="fa fa-car prefix grey-text"></i>
                             <form:input type="number" path="nbSpot" class="form-control"/>
                             <form:label path="nbSpot">Numero de place</form:label>
                         </div>
 
                         <div class="md-form">
-                            <i class="fa fa-tag prefix grey-text"></i>
+                            <i class="fa fa-sort-numeric-asc prefix grey-text"></i>
                             <form:input type="number" step="1" path="nbParking" class="form-control" />
                             <form:label path="nbParking">Numero de parking</form:label>
                         </div>
 
                         <div class="md-form">
-                            <i class="fa fa-eur prefix grey-text"></i>
-                            <form:checkbox step="1" class="custom-control custom-checkbox" path="plug"/>
-                            <form:label class="custom-control custom-checkbox" path="plug">Prise pour voiture éléctrique</form:label>
-                        </div>
-
-                        <div class="md-form">
-                            <i class="fa fa-eur prefix grey-text"></i>
+                            <i class="fa fa-tag prefix grey-text"></i>
                             <form:input type="text" step="1" path="location" class="form-control"/>
                             <form:label data-error="Ville invalide" path="location">Ville</form:label>
                         </div>
@@ -160,7 +154,7 @@
     </div>
 
 
-    <h3>Liste des tarifs</h3>
+    <h3>Liste des places</h3>
 
     <c:if test="${!empty parkingSpot}">
         <table class="table table-hover">
@@ -179,7 +173,7 @@
                 <tr class="${cssClass}">
                     <td>${place.id}</td>
                     <td>${place.nbSpot}</td>
-                    <td>${place.nbParking}</td>
+
                     <td>${place.plug}</td>
                     <td>${place.location}</td>
                     <td></td>
