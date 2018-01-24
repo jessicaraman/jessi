@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-//test
 @Service
 @Transactional
 public class TarifServiceImpl implements TarifService {
