@@ -80,40 +80,41 @@ public class ParkingSpotController {
     }
 
 
-/*
+
     @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editParkingSpotPage(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("edit-parking-spot-form");
+        ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
+        modelAndView.addObject("parking", new ParkingSpot());
         ParkingSpot parkingSpot = parkingSpotService.getParkingSpot(id);
-        modelAndView.addObject("parkingSpot", parkingSpot);
+        modelAndView.addObject("place", parkingSpot);
         return modelAndView;
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public ModelAndView edditingParkingSpot(@ModelAttribute ParkingSpot parkingSpot, @PathVariable Integer id) {
+    public ModelAndView edditingParkingSpot(@ModelAttribute ParkingSpot parkingSpot,@PathVariable Integer id) {
 
-        ModelAndView modelAndView = new ModelAndView("home");
-
+        ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
+        modelAndView.addObject("parking", new ParkingSpot());
         parkingSpotService.updateParkingSpot(parkingSpot);
 
         String message = parkingSpot.getNbSpot() + " a ete modifee.";
 
         List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpots();
-        modelAndView.addObject("parkingSpot", parkingSpot);
+       modelAndView.addObject("parkingSpot", parkingSpots);
         modelAndView.addObject("message", message);
         return modelAndView;
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteParkingSpot(@PathVariable Integer id) {
-        ModelAndView modelAndView = new ModelAndView("home");
+        ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
+        modelAndView.addObject("parking", new ParkingSpot());
         parkingSpotService.deleteParkingSpot(id);
         String message = "une place supprime.";
         List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpots();
         modelAndView.addObject("parkingSpot", parkingSpots);
         modelAndView.addObject("message", message);
         return modelAndView;
-    }*/
+    }
 
 }

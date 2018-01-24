@@ -178,21 +178,60 @@
                     <td>${place.location}</td>
                     <td></td>
                     <td>
-                        <button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value='' />">Modifier</a>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Modifier</a>
                         </button>
                     </td>
                     <td>
-                        <button style="margin:0px" class="btn btn-danger"><a href="<c:url value='' />">Supprimer</a>
+                        <form:form method="GET" modelAttribute="parking" action="parking/delete/${place.id}">
+                        <button style="margin:0px" type="submit" class="btn btn-danger">Supprimer
                         </button>
+                        </form:form>
                     </td>
+                    <!-- Modal MODIFIER-->
+                    <div class="modal fade mt-3" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="width:650px;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel3">Ajouter une place</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                        <%--@elvariable id="parking" type="fr.digicar.model.ParkingSpot"--%>
+                                    <form:form method="POST" modelAttribute="parking" action="parking/edit/${place.id}">
+
+                                        <div class="md-form">
+                                            <i class="fa fa-car prefix grey-text"></i>
+                                            <form:input type="number" path="nbSpot" class="form-control" required="required"/>
+                                            <form:label path="nbSpot">Numero de place</form:label>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Modifier place</button>
+                                        </div>
+                                    </form:form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </tr>
+
             </c:forEach>
         </table>
     </c:if>
-    <p>${id}</p>
+
     <br>
 
+
+
+
 </div>
+
 
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>

@@ -36,6 +36,7 @@ public class ParkingSpotDAOImpl implements ParkingSpotDAO {
 
     public List<ParkingSpot> getParkingSpotByObj(ParkingSpot p) {
 
+
         List<ParkingSpot> listPark=new ArrayList<ParkingSpot>();
 
         if (p.getId()!=null){
