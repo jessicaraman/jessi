@@ -43,6 +43,14 @@ public class UserDAOImpl implements UserDAO {
             getCurrentSession().delete(user);
     }
 
+    public List<User> searchUsers() {
+        try {
+            return getCurrentSession().createQuery("from User").list();
+        } catch (ClassCastException e) {
+            return new ArrayList<User>();
+        }
+    }
+
     public boolean checkEmailExistence(String email) {
         Query query = getCurrentSession().createQuery("from User where email = :email");
         query.setString("email", email);
