@@ -26,7 +26,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView registerUser() {
-        log.debug("UserController#registerUser");
+        log.debug("RegistrationController#registerUser");
 
         ModelAndView modelAndView = new ModelAndView("registration");
         modelAndView.addObject("user", new User());
@@ -35,7 +35,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ModelAndView registerUserPersonalInfo(@ModelAttribute User user) {
-        log.debug("UserController#registerUserPerosnalInfo");
+        log.debug("RegistrationController#registerUserPerosnalInfo");
         log.debug("user.email : " + user.getEmail());
         log.debug("user.password : " + user.getPassword());
         log.debug("user.passwordConfirm : " + user.getPasswordConfirm());
@@ -61,7 +61,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
     public ModelAndView confirmUserRegistration(@ModelAttribute User user) throws ParseException {
-        log.debug("UserController#confirmUserRegistration");
+        log.debug("RegistrationController#confirmUserRegistration");
         log.debug("user : " + user);
 
         user.setEmail(this.user.getEmail());
