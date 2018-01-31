@@ -2,6 +2,8 @@ package fr.digicar.dao;
 
 import fr.digicar.model.User;
 
+import java.util.List;
+
 public interface UserDAO {
 
     void addUser(User team);
@@ -11,6 +13,8 @@ public interface UserDAO {
     User getUser(int id);
 
     void deleteUser(int id);
+
+    List<User> searchUsers();
 
     boolean checkEmailExistence(String email);
 
