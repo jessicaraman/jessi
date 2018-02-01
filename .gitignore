@@ -14,9 +14,15 @@
 *.iml
 *.iws
 
+
+# Properties
+*.properties
+
+
 # Mac
 .DS_Store
 
 # Maven
 log/
 target/
+lib/

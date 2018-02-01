@@ -43,7 +43,6 @@ public class CarServiceImplTest {
         expectedCar.setComfort(5);
         expectedCar.setFuel_type(1);
         expectedCar.setKilometers(5);
-        expectedCar.setLocation("CRETEIL");
         expectedCar.setMark("MAZDA");
         expectedCar.setName_model("MAZDA3");
         expectedCar.setNb_doors(5);
@@ -51,6 +50,7 @@ public class CarServiceImplTest {
         expectedCar.setRegistration_number("IA123AA");
         expectedCar.setRelease_date("2018-01-22");
         expectedCar.setType(4);
+        expectedCar.setTransmission(1);
         when(carService.getCar(expectedCar.getId())).thenReturn(expectedCar);
 
 
