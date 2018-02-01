@@ -20,3 +20,6 @@
 # Maven
 log/
 target/
+
+# Properties file
+common/src/main/resources/application.properties
