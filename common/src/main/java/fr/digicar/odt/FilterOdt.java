@@ -11,8 +11,6 @@ public class FilterOdt implements Serializable{
     String typeCar;
     String transmission;
     String fuelType;
-    int numberOfDoor;
-    int numberOfSeats;
 
     public FilterOdt(){
 
@@ -72,22 +70,6 @@ public class FilterOdt implements Serializable{
 
     public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
-    }
-
-    public int getNumberOfDoor() {
-        return numberOfDoor;
-    }
-
-    public void setNumberOfDoor(int numberOfDoor) {
-        this.numberOfDoor = numberOfDoor;
-    }
-
-    public int getNumberOfSeats() {
-        return numberOfSeats;
-    }
-
-    public void setNumberOfSeats(int numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
     }
 
     //TODO

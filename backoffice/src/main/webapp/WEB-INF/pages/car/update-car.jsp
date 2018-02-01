@@ -46,7 +46,7 @@
 <div class="container">
     <h5 class="modal-title text-center" id="exampleModalLabel">Mettre à jour le véhicule</h5>
     <%--@elvariable id="car" type="fr.digicar.model.Car"--%>
-    <form:form method="POST" action="${pageContext.request.contextPath}/car/uptodate" modelAttribute="car">
+    <form:form method="POST" action="${pageContext.request.contextPath}/car/updating" modelAttribute="car">
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group md-form form-sm form-2 pl-0">
@@ -77,10 +77,10 @@
                 <form:label path="transmission" >Transmission</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="transmission">
-                        <form:option value="" disabled="true" selected="">Choisir un type</form:option>
+                        <form:option value="" disabled="true">Choisir un type</form:option>
                         <c:forEach items="${listOfTransmissionMode}" var="transmissionMode" >
-                            <c:if test="${not empty carType}">
-                                <form:option value="${transmissionMode.id}" selected="true">${true.name}</form:option>
+                            <c:if test="${not empty transmissionMode}">
+                                <form:option value="${transmissionMode.id}">${transmissionMode.name}</form:option>
                             </c:if>
                         </c:forEach>
                     </form:select>
@@ -92,10 +92,10 @@
                 <form:label path="type" >Type de véhicule</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="type">
-                        <form:option value="" disabled="true" selected="">Choisir un type</form:option>
+                        <form:option value="" disabled="true">Choisir un type</form:option>
                         <c:forEach items="${listOfCarType}" var="carType" >
                             <c:if test="${not empty carType}">
-                                <form:option value="${carType.id}" selected="true">${carType.name}</form:option>
+                                <form:option value="${carType.id}">${carType.name}</form:option>
                             </c:if>
                         </c:forEach>
                     </form:select>
@@ -105,12 +105,11 @@
                 <form:label path="fuel_type" >Carburant</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="fuel_type">
-                        <form:option value="" disabled="true" selected="">Choisir un type</form:option>
+                        <form:option value="" disabled="true">Choisir un type</form:option>
                         <c:forEach items="${listOfFuelType}" var="fuelType" >
                             <c:if test="${not empty fuelType}">
-                                <form:option value="${fuelType.id}" selected="true">${fuelType.name}</form:option>
+                                <form:option value="${fuelType.id}" >${fuelType.name}</form:option>
                             </c:if>
-                            <form:option value="${fuelType.id}" >${fuelType.name}</form:option>
                         </c:forEach>
                     </form:select>
                 </div>

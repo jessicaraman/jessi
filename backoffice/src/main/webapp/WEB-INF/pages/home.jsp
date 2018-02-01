@@ -30,11 +30,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <%--<li class="nav-item active">
-                        <a class="nav-link" href="<c:url value="/car/"/>">Maintain vehicle referential<span class="sr-only">(current)</span></a>
-                    </li>--%>
-
-                    <!-- Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
@@ -49,9 +44,6 @@
                         <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
                     </li>
                 </ul>
-                <%--<form class="form-inline">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                </form>--%>
             </div>
         </nav>
         <!--/.Navbar-->

@@ -1,21 +1,22 @@
 package fr.digicar.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /*
  * Created by barry on 31/12/2017.
  */
+@ToString
+@EqualsAndHashCode
 @Data
 @Entity
 @Table(name = "car")
 public class Car {
 
     @Id
-    @GeneratedValue
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "registration_number")
@@ -50,5 +51,4 @@ public class Car {
 
     @Column(name="fuel_type_id")
     private Integer fuel_type;
-
 }

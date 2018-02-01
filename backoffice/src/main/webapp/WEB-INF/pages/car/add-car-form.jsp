@@ -13,7 +13,7 @@
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
 </head>
 <body>
-<div class="header">
+    <div class="header">
         <nav class="navbar navbar-expand-lg navbar-dark indigo">
             <a class="navbar-brand" href="#">CSC Inside</a>
             <button class="navbar-toggler" type="button"
@@ -41,11 +41,11 @@
                 </ul>
             </div>
         </nav>
-</div>
+    </div>
 
 <div class="container">
     <h5 class="modal-title text-center" id="exampleModalLabel">Ajouter un véhicule</h5>
-<%--@elvariable id="car" type="fr.digicar.model.Car"--%>
+    <%--@elvariable id="car" type="fr.digicar.model.Car"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/car/adding" modelAttribute="car">
         <div class="row">
             <div class="col-md-4">
