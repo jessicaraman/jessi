@@ -1,4 +1,4 @@
-CREATE TABLE users
+﻿CREATE TABLE users
 (
   id             INT(6) AUTO_INCREMENT
     PRIMARY KEY,
@@ -72,7 +72,8 @@ CREATE TABLE transmission_mode
   DEFAULT CHARSET = utf8;
 CREATE TABLE car
 (
-  id                  INT(6) AUTO_INCREMENT,
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
   registration_number VARCHAR(40),
   mark                VARCHAR(40),
   transmission_id     INT(6),
@@ -84,33 +85,12 @@ CREATE TABLE car
   kilometers          INT(10),
   release_date        DATE,
   fuel_type_id        INT(6),
-
-  CONSTRAINT pk_car PRIMARY KEY (id, registration_number),
-  CONSTRAINT `fk_transmission_id`  FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id)  ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_car_type`  FOREIGN KEY (type_id) REFERENCES car_type (id)  ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_fuel_type_id`  FOREIGN KEY (fuel_type_id) REFERENCES fuelType (id)  ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id),
+  FOREIGN KEY (type_id) REFERENCES car_type (id),
+  FOREIGN KEY (fuel_type_id) REFERENCES fuelType (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
 
 
-CREATE INDEX `idx_car` ON `car` (`id`, `registration_number`);
-
-#----------------------------------------------------
-#                 populate data
-#----------------------------------------------------
-
-insert into car_type VALUES(DEFAULT,"Citadine");
-insert into car_type VALUES(DEFAULT,"Cross-over");
-insert into car_type VALUES(DEFAULT,"4X4");
-insert into car_type VALUES(DEFAULT,"Berline familiale");
-insert into car_type VALUES(DEFAULT,"Voiture de sport");
-insert into car_type VALUES(DEFAULT,"Voiture de collection ");
-
-insert into transmission_mode VALUES(DEFAULT,"manuelle");
-insert into transmission_mode VALUES(DEFAULT,"automatique");
-
-insert into fuelType VALUES(DEFAULT,"essence");
-insert into fuelType VALUES(DEFAULT,"diesel");
-insert into fuelType VALUES(DEFAULT,"electrique");

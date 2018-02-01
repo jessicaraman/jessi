@@ -12,40 +12,50 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>CarSharingClub - BackOffice</title>
+    <title>CSC - BackOffice</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark indigo">
-    <a class="navbar-brand" href="#">CSC Inside</a>
-    <button class="navbar-toggler" type="button"
-            data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
+<div class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark indigo">
+            <a class="navbar-brand" href="#">CSC Inside</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <%--<li class="nav-item active">
+                        <a class="nav-link" href="<c:url value="/car/"/>">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                    </li>--%>
 
-        </ul>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        </form>
-    </div>
-</nav>
-<!--/.Navbar-->
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
+                            <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Maintain pricing referential</a>
+                    </li>
+                </ul>
+                <%--<form class="form-inline">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                </form>--%>
+            </div>
+        </nav>
+        <!--/.Navbar-->
+</div>
 <div class="container">
     <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">
         <i class="fa fa-plus mr-1"></i>
