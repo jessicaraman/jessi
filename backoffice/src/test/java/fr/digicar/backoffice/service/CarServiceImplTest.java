@@ -43,7 +43,6 @@ public class CarServiceImplTest {
         expectedCar.setComfort(5);
         expectedCar.setFuel_type(1);
         expectedCar.setKilometers(5);
-        expectedCar.setLocation("CRETEIL");
         expectedCar.setMark("MAZDA");
         expectedCar.setName_model("MAZDA3");
         expectedCar.setNb_doors(5);
