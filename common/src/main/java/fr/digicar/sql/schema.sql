@@ -51,7 +51,7 @@ CREATE TABLE car_type
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE fuelType
+CREATE TABLE fuel_type
 (
   id                  INT(6) AUTO_INCREMENT
     PRIMARY KEY,
@@ -81,9 +81,8 @@ CREATE TABLE car
   nb_places           VARCHAR(2),
   nb_doors            VARCHAR(2),
   type_id             INT(6),
-  location            VARCHAR(10),
   comfort             INT(2),
-  kilometers          VARCHAR(2),
+  kilometers          INT(10),
   release_date        DATE,
   fuel_type_id        INT(6),
   FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id),

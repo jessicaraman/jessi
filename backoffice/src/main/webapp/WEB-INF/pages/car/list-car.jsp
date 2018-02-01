@@ -24,7 +24,6 @@
                 <th width="60">Nombre de places</th>
                 <th width="100">Nombre de portes</th>
                 <th width="100">Type de véhicule</th>
-                <th width="100">Emplacement</th>
                 <th width="10">Kilométrage</th>
                 <th width="60">Date de mise en circulation</th>
                 <th width="10">Confort</th>
@@ -55,7 +54,6 @@
                     <td>${car.nb_places}</td>
                     <td>${car.nb_doors}</td>
                     <td>${typeCar}</td>
-                    <td>${car.location}</td>
                     <td>${car.kilometers}</td>
                     <td>${car.release_date}</td>
                     <td>${car.comfort}</td>
