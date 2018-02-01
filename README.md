@@ -3,16 +3,20 @@ Digicar
 
 Spring MVC + Hibernate + Maven
 
-Technologies
+Dependencies
 ===========
-* MVC 3.x.x
-* JDK 1.8
-* WAMP Server for mySQL IHM
-* Or MySQL 
+
+## Java
+* Spring MVC 3.2.2
+* Hibernate 4.2.0
+
+## Front end
+* MDBootstrap 4.4.4
+* Font Awesome 4.7.0 
 
 To set BD locally
 ===========
-Use the `hibnatedb` file in `sql` directory
+Use the `hibnatedb.sql` file in the `common/src/main/java/fr/digicar/sql` directory
 
 To get the code
 ===========
@@ -29,13 +33,11 @@ From the command line with Maven:
 
 ```
 cd digicar
-mvn clean install -Dmaven.test.skip=true
+mvn clean install
 ```
 
-or
+Artifacts to deploy: 
+* `backoffice.war`
+* `webportal.war` 
 
-In your preferred IDE such as SpringSource Tool Suite (STS) or IntelliJ IDEA:
-
-Import digicar as a Maven Project
-Drag-n-drop the project onto the glassfich 5.0.
 Access the deployed web application at [http://localhost:8080/digicar/](http://localhost:8080/digicar/)
