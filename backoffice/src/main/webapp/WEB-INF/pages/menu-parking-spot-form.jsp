@@ -75,8 +75,8 @@
 
                         <div class="md-form">
                             <i class="fa fa-sort-numeric-asc prefix grey-text"></i>
-                            <form:input type="number" step="1" path="nbParking" class="form-control" required="required"/>
-                            <form:label path="nbParking">Numero de parking</form:label>
+                            <form:input type="text" step="1" path="nbParking" class="form-control" required="required"/>
+                            <form:label path="nbParking">Nom du parking</form:label>
                         </div>
 
                         <div class="md-form">
@@ -91,7 +91,37 @@
                                         required="required"/>
                             <form:label data-error="Ville invalide" path="location">Ville</form:label>
                         </div>
-                <div class="modal-footer">
+
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="text" step="1" path="longitude" class="form-control"
+                                        required="required"/>
+                            <form:label path="longitude">Coordonnées GPS-longitude</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="text" step="1" path="latitude" class="form-control"
+                                        required="required"/>
+                            <form:label path="latitude">Coordonnées GPS-latitude</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="text" step="1" path="longueur" class="form-control"
+                                required="required"/>
+                            <form:label path="longueur">Dimension Place-longueur</form:label>
+                        </div>
+
+                        <div class="md-form">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <form:input type="text" step="1" path="largeur" class="form-control"
+                                        required="required"/>
+                            <form:label path="largeur">Dimension Place-largeur</form:label>
+                        </div>
+
+
+                        <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Ajouter place</button>
                 </div>
@@ -109,7 +139,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width:650px;">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Recherchers une place</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">Rechercher une place</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -120,12 +150,6 @@
                                action="/parking/search">
 
                         <div class="md-form">
-                            <i class="fa fa-tag prefix grey-text"></i>
-                            <form:input type="number" path="id" class="form-control"/>
-                            <form:label path="id">IDENTIFIANT EN BASE de place</form:label>
-                        </div>
-
-                        <div class="md-form">
                             <i class="fa fa-car prefix grey-text"></i>
                             <form:input type="number" path="nbSpot" class="form-control"/>
                             <form:label path="nbSpot">Numero de place</form:label>
@@ -133,8 +157,8 @@
 
                         <div class="md-form">
                             <i class="fa fa-sort-numeric-asc prefix grey-text"></i>
-                            <form:input type="number" step="1" path="nbParking" class="form-control" />
-                            <form:label path="nbParking">Numero de parking</form:label>
+                            <form:input type="text" step="1" path="nbParking" class="form-control" />
+                            <form:label path="nbParking">Nom du parking</form:label>
                         </div>
 
                         <div class="md-form">
@@ -160,10 +184,14 @@
         <table class="table table-hover">
             <tr>
                 <th width="80">Id</th>
-                <th width="120">Numero de place</th>
-                <th width="60">Numero de parking</th>
+                <th width="120">Nom du parking</th>
+                <th width="30">Numero de place</th>
                 <th width="60">Prise electrique</th>
-                <th width="60">Ville</th>
+                <th width="100">Adresse</th>
+                <th width="30">Longitude</th>
+                <th width="30">Latitude</th>
+                <th width="30">Longueur</th>
+                <th width="30">Largeur</th>
                 <th width="100"></th>
             </tr>
             <c:forEach items="${parkingSpot}" var="place">
@@ -172,17 +200,21 @@
                 </c:if>
                 <tr class="${cssClass}">
                     <td>${place.id}</td>
+                    <td>${place.nbParking}</td>
                     <td>${place.nbSpot}</td>
-
                     <td>${place.plug}</td>
                     <td>${place.location}</td>
-                    <td></td>
+                    <td>${place.longitude}</td>
+                    <td>${place.latitude}</td>
+                    <td>${place.longueur}</td>
+                    <td>${place.largeur}</td>
+
                     <td>
                         <button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Modifier</a>
                         </button>
                     </td>
                     <td>
-                        <form:form method="GET" modelAttribute="parking" action="parking/delete/${place.id}">
+                        <form:form method="GET" modelAttribute="parking" action="/parking/delete/${place.id}">
                         <button style="margin:0px" type="submit" class="btn btn-danger">Supprimer
                         </button>
                         </form:form>
@@ -200,7 +232,7 @@
                                 </div>
                                 <div class="modal-body">
                                         <%--@elvariable id="parking" type="fr.digicar.model.ParkingSpot"--%>
-                                    <form:form method="POST" modelAttribute="parking" action="parking/edit/${place.id}">
+                                    <form:form method="POST" modelAttribute="parking" action="/parking/edit/${place.id}">
 
                                         <div class="md-form">
                                             <i class="fa fa-car prefix grey-text"></i>
