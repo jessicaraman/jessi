@@ -40,12 +40,11 @@ CREATE TABLE tarifs (
   DEFAULT CHARSET = utf8;
 
 
-
 CREATE TABLE car_type
 (
-  id                  INT(6) AUTO_INCREMENT
+  id   INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  name                VARCHAR(25) NOT NULL
+  name VARCHAR(25) NOT NULL
 )
 
   ENGINE = InnoDB
@@ -53,9 +52,9 @@ CREATE TABLE car_type
 
 CREATE TABLE fuel_type
 (
-  id                  INT(6) AUTO_INCREMENT
+  id   INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  name                VARCHAR(20) NOT NULL
+  name VARCHAR(20) NOT NULL
 )
 
   ENGINE = InnoDB
@@ -63,9 +62,9 @@ CREATE TABLE fuel_type
 
 CREATE TABLE transmission_mode
 (
-  id                  INT(6) AUTO_INCREMENT
+  id   INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  name                VARCHAR(20) NOT NULL
+  name VARCHAR(20) NOT NULL
 )
 
   ENGINE = InnoDB
@@ -87,10 +86,7 @@ CREATE TABLE car
   fuel_type_id        INT(6),
   FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id),
   FOREIGN KEY (type_id) REFERENCES car_type (id),
-  FOREIGN KEY (fuel_type_id) REFERENCES fuelType (id)
+  FOREIGN KEY (fuel_type_id) REFERENCES fuel_type (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
-
-
-

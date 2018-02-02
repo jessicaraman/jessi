@@ -1,58 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--<persistence-->
-        <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-        <!--version="2.1"-->
-        <!--xmlns="http://xmlns.jcp.org/xml/ns/persistence"-->
-        <!--xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">-->
-
-    <!--<persistence-unit name="DIGICAR" transaction-type="RESOURCE_LOCAL">-->
-		<!--<properties>-->
-            <!--&lt;!&ndash;jdbc:mysql://localhost:3306/DIGICAR?createDatabaseIfNotExist=true"&ndash;&gt;-->
-			<!--<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/DIGICAR" />-->
-            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"></property>-->
-            <!--<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />-->
-            <!--<property name="hibernate.connection.password" value="" />-->
-            <!--<property name="hibernate.connection.username" value="root" />-->
-            <!--<property name="hibernate.show_sql" value = "true" />-->
-
-            <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
-            <!--<property name="javax.persistence.schema-generation.drop-source" value="metadata"/>-->
-
-            <!--&lt;!&ndash;CHARGEMENT FICHES SQL&ndash;&gt;-->
-            <!--<property name="javax.persistence.schema-generation.create-source" value="script"/>-->
-            <!--<property name="javax.persistence.schema-generation.create-script-source" value="schema.sql"/>-->
-            <!--<property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>-->
-
-            <!--<property name="hibernate.default_schema" value="DIGICAR" />-->
-            <!--<property name="javax.persistence.sql-load-script-source" value="data.sql"/>-->
-
-        <!--</properties>-->
-    <!--</persistence-unit>-->
-
-<!--</persistence>-->
-
-
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd" >
 <hibernate-configuration>
-<session-factory>
-    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="connection.url">jdbc:mysql://localhost:3306/DIGICAR</property>
-    <property name="connection.username">root</property>
-    <property name="connection.password"></property>
-    <property name="connection.pool_size">10</property>
-    <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
-    <property name="hibernate.hbm2ddl.auto">create</property>
-    <property name="show_sql">true</property>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/digicar</property>
+        <property name="connection.username">dev</property>
+        <property name="connection.password">digicar</property>
+        <property name="connection.pool_size">10</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="show_sql">true</property>
 
-    <mapping class="fr.digicar.model.Car" />
-    <mapping class="fr.digicar.model.CarType" />
-    <mapping class="fr.digicar.model.FuelType" />
-    <mapping class="fr.digicar.model.ParkingSpot" />
-    <mapping class="fr.digicar.model.Tarif" />
-    <mapping class="fr.digicar.model.TransmissionMode" />
-    <mapping class="fr.digicar.model.User" />
-</session-factory>
+        <mapping class="fr.digicar.model.Car"/>
+        <mapping class="fr.digicar.model.CarType"/>
+        <mapping class="fr.digicar.model.FuelType"/>
+        <mapping class="fr.digicar.model.ParkingSpot"/>
+        <mapping class="fr.digicar.model.Tarif"/>
+        <mapping class="fr.digicar.model.TransmissionMode"/>
+        <mapping class="fr.digicar.model.User"/>
+    </session-factory>
 </hibernate-configuration>
