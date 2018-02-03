@@ -46,7 +46,7 @@ public class CarServiceImpl implements CarService {
 
     @Transactional
     public List<Car> getAllCar() {
-        return carDAO.getCars();
+        return carDAO.getAllCar();
     }
 
     @Transactional
