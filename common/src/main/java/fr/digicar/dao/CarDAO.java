@@ -10,6 +10,6 @@ public interface CarDAO {
     void updateCar(Car car);
     Car getCar(int carId);
     void deleteCar(int carId);
-    List<Car> getCars();
+    List<Car> getAllCar();
 
 }

@@ -1,20 +1,25 @@
 package fr.digicar.backoffice.service;
 
-
+import fr.digicar.backoffice.service.CarServiceImpl;
 import fr.digicar.dao.CarDAO;
-import fr.digicar.init.WebAppConfig;
 import fr.digicar.model.Car;
+import fr.digicar.init.WebAppConfig;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 
@@ -68,5 +73,28 @@ public class CarServiceImplTest {
         Assert.assertEquals(expectedCar.hashCode(), actualCar.hashCode());
         Assert.assertEquals(expectedCar.toString(), actualCar.toString());
 
+    }
+
+    @Test
+    public void listAllCarsShouldReturnAllCars(){
+        //
+        // GIVEN
+        //
+        List<Car> carList = new ArrayList<>();
+        carList.add(new Car(1, "BA-961-VC", "audi", "a1", 1, 2, 3, 1, 50100, "2009-02-25", 4, 2));
+        carList.add(new Car(2, "PN-341-KL", "audi", "a6", 2, 4, 5, 1, 40000, "20012-01-14", 5, 3));
+        carList.add(new Car(3, "BD-525-MI", "audi", "a8", 2, 4, 5, 1, 50100, "2009-02-25", 4, 2));
+
+        Mockito.when(carDAO.getAllCar()).thenReturn(carList);
+
+        //
+        // WHEN
+        //
+        List<Car> carListTest = carService.getAllCar();
+
+        //
+        // THEN
+        //
+        Assert.assertEquals(carList, carListTest);
     }
 }

@@ -40,7 +40,7 @@ public class CarDAOImpl implements CarDAO {
 
 
     @SuppressWarnings("unchecked")
-    public List<Car> getCars() {
+    public List<Car> getAllCar() {
         return getCurrentSession().createQuery("FROM Car").list();
     }
 
