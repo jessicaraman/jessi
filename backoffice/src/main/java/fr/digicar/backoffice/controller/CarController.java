@@ -1,9 +1,6 @@
 package fr.digicar.backoffice.controller;
 
-import fr.digicar.backoffice.service.CarService;
-import fr.digicar.backoffice.service.CarTypeService;
-import fr.digicar.backoffice.service.FuelTypeService;
-import fr.digicar.backoffice.service.TransmissionModeService;
+import fr.digicar.backoffice.service.*;
 import fr.digicar.model.Car;
 import fr.digicar.model.CarType;
 import fr.digicar.model.FuelType;
@@ -158,7 +155,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/registrationId", method = RequestMethod.POST)
-    public ModelAndView getCarByRegistrationId(@ModelAttribute("filteregistration") final FilterRegistrationIdOdt filterRegistrationIdOdt) {
+    public ModelAndView findCarByCriteriaNominalCase(@ModelAttribute("filteregistration") final FilterRegistrationIdOdt filterRegistrationIdOdt) {
         String registration = filterRegistrationIdOdt.getregistrationNumber();
         String message;
 
@@ -195,23 +192,28 @@ public class CarController {
 
     }
     @RequestMapping(value = "/allcars", method = RequestMethod.POST)
-    public ModelAndView getAllCars(@ModelAttribute("filters") final FilterOdt filterOdt)
+    public ModelAndView findCarByCriteria(@ModelAttribute("filters") final FilterOdt filterOdt)
     {
         String carBrand = filterOdt.getCarBrand();
         String modelName = filterOdt.getModelName();
         String typeCar = filterOdt.getTypeCar();
+
         int mileageMin = filterOdt.getMileageMin();
         int mileageMax = filterOdt.getMileageMax();
         String transmission = filterOdt.getTransmission();
         String fuelType = filterOdt.getFuelType();
 
-        List<Car> allCars = carService.getAllCar();
-        String message;
+        List<Car> allList = carService.getAllCar();
 
+        // TODO Rajouter le cas de kilometrageMin et kilometrageMax
+        List<Car> allCarList = carService.CarByCriteria(carBrand, modelName, typeCar, transmission, fuelType);
+        System.out.println(allCarList.toString());
+
+        String message;
         Car car;
         List<Car> carsFind = new ArrayList<>();
-        for (int i=0; i<allCars.size(); i++){
-            car = allCars.get(i);
+        for (int i=0; i<allList.size(); i++){
+            car = allList.get(i);
             if(carBrand.equals(car.getMark()) && modelName.equals(car.getName_model())){
                 if(!typeCar.isEmpty() && typeCar.equals(car.getFuel_type())) {
                     if (mileageMin < car.getKilometers() && mileageMax > car.getKilometers()) {

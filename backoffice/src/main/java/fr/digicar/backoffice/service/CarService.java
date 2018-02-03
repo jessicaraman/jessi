@@ -13,4 +13,5 @@ public interface CarService {
     Car getCar(int carId);
     void deleteCar(int carId);
     List<Car> getAllCar();
+    List<Car> CarByCriteria(String mark, String name_model, String type, String transmission, String fuel_type);
 }

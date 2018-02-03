@@ -44,4 +44,10 @@ public class CarServiceImpl implements CarService {
         return carDAO.getCars();
     }
 
+    @Transactional
+    public List<Car> CarByCriteria(String mark, String name_model, String type, String transmission, String fuel_type) {
+        return carDAO.CarByCriteria( mark, name_model, type, transmission, fuel_type);
+    }
+
+
 }

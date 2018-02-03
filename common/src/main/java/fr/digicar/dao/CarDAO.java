@@ -11,5 +11,6 @@ public interface CarDAO {
     Car getCar(int carId);
     void deleteCar(int carId);
     List<Car> getCars();
+    List<Car> CarByCriteria(String mark, String name_model, String type, String transmission, String fuel_type);
 
 }

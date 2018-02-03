@@ -14,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
 
@@ -34,7 +33,7 @@ public class CarServiceImplTest {
         MockitoAnnotations.initMocks(this);
     }
     @Test
-    public void getCarShiulReturnCarRegistred(){
+    public void itShoulDReturnCarRegistred(){
         //
         //GIVEN
         //
