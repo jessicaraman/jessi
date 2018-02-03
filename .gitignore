@@ -25,4 +25,10 @@
 # Maven
 log/
 target/
+<<<<<<< HEAD
 lib/
+=======
+
+# Properties file
+common/src/main/resources/application.properties
+>>>>>>> develop
