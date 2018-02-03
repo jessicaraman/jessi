@@ -28,13 +28,13 @@
         <div class="row">
                 <div class="col-md-3">
                     <div class="input-group md-form form-sm form-2 pl-0">
-                        <form:input title="AA-OO1-AA" maxlength="7" onKeypress="if((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if((event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
+                        <form:input title="AA-OO1-AA" maxlength="7" onKeypress="if( (event.keyCode != 45) && (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if( (event.which != 45) && (event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
                                     cssStyle="text-transform:uppercase" name="registrationNumber" path="registrationNumber" minlength="" required="required" cssClass="form-control validate my-0 py-1 grey-border" type="text"/>
                         <form:label path="registrationNumber" data-error="Immatriculation invalide">Immatriculation</form:label>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm my-0">Search</button>
+                    <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm my-0" title="rechercher"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
         </div>
 
@@ -49,26 +49,26 @@
         <div class="col-md-3">
             <form:label for="form-autocomplete" cssClass="active" path="carBrand" data-error="marque invalide">Marque</form:label>
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:select cssClass="form-control validate rounded validate mdb-select  my-0 py-1 grey-border" path="carBrand">
-                    <form:option value="" disabled="true" selected="">Choisir une marque</form:option>
-                    <form:option value="1" >Cliot</form:option>
-                    <form:option value="2" >Peugeot</form:option>
-                    <form:option value="3" >Renault</form:option>
-                    <form:option value="4" >Mazda</form:option>
-                    <form:option value="5" >Toyota</form:option>
+                <form:select required="required" cssClass="form-control validate rounded validate mdb-select  my-0 py-1 grey-border" path="carBrand">
+                    <form:option value="" disabled="true" selected="true">Choisir une marque</form:option>
+                    <form:option value="Cliot" >Cliot</form:option>
+                    <form:option value="Peugeot" >Peugeot</form:option>
+                    <form:option value="Renault" >Renault</form:option>
+                    <form:option value="MAZDA" >Mazda</form:option>
+                    <form:option value="Toyota" >Toyota</form:option>
                 </form:select>
             </div>
         </div>
 
         <div class="col-md-3">
-            <form:label path="modelName" >Modèle</form:label>
+            <form:label path="modelName" data-error="modèle invalide">Modèle</form:label>
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="modelName">
-                    <form:option value="" disabled="true" selected="">Choisir un modèle</form:option>
-                        <form:option value="1" >Cliot2</form:option>
-                        <form:option value="2" >Peugeot 207</form:option>
-                        <form:option value="3" >Mazda 3</form:option>
-                        <form:option value="4" >Toyota Yaris</form:option>
+                <form:select required="required" cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="modelName">
+                    <form:option value="" disabled="true" selected="true">Choisir un modèle</form:option>
+                        <form:option value="Cliot2" >Cliot2</form:option>
+                        <form:option value="Peugeot 207" >Peugeot 207</form:option>
+                        <form:option value="MAZDA3" >Mazda3</form:option>
+                        <form:option value="Toyota Yaris" >Toyota Yaris</form:option>
                 </form:select>
             </div>
         </div>
@@ -76,7 +76,7 @@
             <form:label path="typeCar" >Type de véhicule</form:label>
             <div class="input-group md-form form-sm form-2 pl-0">
                 <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="typeCar">
-                    <form:option value="" disabled="true" selected="">Choisir un type</form:option>
+                    <form:option value="" disabled="true" selected="true">Choisir un type</form:option>
                     <c:forEach items="${listOfCarType}" var="carType" >
                         <form:option value="${carType.id}" >${carType.name}</form:option>
                     </c:forEach>
@@ -87,7 +87,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input value="" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
+                <form:input min="1" max="900000" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
                             maxlength="6" path="mileageMin" cssClass="form-control my-0 py-1 grey-border" type="text"/>
                 <form:label path="mileageMin">Kilometrage Min</form:label>
             </div>
@@ -97,7 +97,7 @@
 
         <div class="col-md-3">
             <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input value="" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
+                <form:input min="1" max="900000" value="" onKeypress="if(event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;if(event.which < 48 || event.which > 57) return false;"
                             maxlength="6" path="mileageMax" cssClass="form-control my-0 py-1 grey-border" type="text"/>
                 <form:label path="mileageMax">Kilometrage Max</form:label>
             </div>
@@ -108,7 +108,7 @@
             <form:label path="transmission" >Transmission</form:label>
             <div class="input-group md-form form-sm form-2 pl-0">
                 <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="transmission">
-                    <form:option value="" disabled="true" selected="">Choisir la transmission</form:option>
+                    <form:option value="" disabled="true" selected="true">Choisir la transmission</form:option>
                     <c:forEach items="${listOfTransmissionMode}" var="transmissionMode" >
                         <form:option value="${transmissionMode.id}" >${transmissionMode.name}</form:option>
                     </c:forEach>
@@ -119,21 +119,22 @@
             <form:label path="fuelType" >Carburant</form:label>
             <div class="input-group md-form form-sm form-2 pl-0">
                 <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="fuelType">
-                    <form:option value="" disabled="true" selected="">Choisir le carburant</form:option>
+                    <form:option value="" disabled="true" selected="true">Choisir le carburant</form:option>
                     <c:forEach items="${listOfFuelType}" var="fuelType" >
                         <form:option value="${fuelType.id}" >${fuelType.name}</form:option>
                     </c:forEach>
                 </form:select>
             </div>
         </div>
+    </div>
+        <div class="row">
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary" title="Rechercher"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>
+        </div>
 
-    </div>
-    <div class="row">
-        <span>...</span>
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">rechercher</button>
-    </div>
+    <span class="modal-footer">
+    </span>
     </form:form>
 
 </div>

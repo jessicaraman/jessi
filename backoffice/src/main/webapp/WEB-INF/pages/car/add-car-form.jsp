@@ -87,14 +87,14 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <form:input maxlength="1" type="number" path="nb_places" cssClass="form-control"/>
+                    <form:input min="2" max="5" maxlength="1" type="number" path="nb_places" cssClass="form-control"/>
                     <form:label data-error="champs invalide" path="nb_places">Nombre de places</form:label>
                 </div>
             </div>
 
             <div class="col-md-4">
                 <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input maxlength="1" type="number" path="nb_doors" cssClass="form-control"/>
+                <form:input min="3" max="" maxlength="1" type="number" path="nb_doors" cssClass="form-control"/>
                 <form:label data-error="champs invalide" path="nb_doors">Nombre de portes</form:label>
                 </div>
             </div>
@@ -115,7 +115,7 @@
 
             <div class="col-md-4">
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <form:input maxlength="6" type="number" path="kilometers" cssClass="form-control"/>
+                    <form:input min="1" max="900000" maxlength="6" type="number" path="kilometers" cssClass="form-control"/>
                     <form:label data-error="champs invalide" path="kilometers">Kilométrage</form:label>
                 </div>
             </div>

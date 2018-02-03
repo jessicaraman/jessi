@@ -14,12 +14,18 @@
 *.iml
 *.iws
 
+
+# Properties
+*.properties
+
+
 # Mac
 .DS_Store
 
 # Maven
 log/
 target/
+lib/
 
 # Properties file
 common/src/main/resources/application.properties

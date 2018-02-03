@@ -7,10 +7,11 @@ import javax.persistence.*;
 /*
  * Created by barry on 31/12/2017.
  */
-@ToString
-@EqualsAndHashCode
+
+@AllArgsConstructor
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "car")
 public class Car {
 
@@ -51,4 +52,18 @@ public class Car {
 
     @Column(name="fuel_type_id")
     private Integer fuel_type;
+
+    public Car(int id, String registration_number, String mark, String name_model, int transmission, int nb_places, int nb_doors, int type, int kilometers, String release_date, int comfort, int fuel_type) {
+        this.registration_number = registration_number;
+        this.mark = mark;
+        this.name_model = name_model;
+        this.transmission = transmission;
+        this.nb_places = nb_places;
+        this.nb_doors = nb_doors;
+        this.type = type;
+        this.kilometers = kilometers;
+        this.release_date = release_date;
+        this.comfort = comfort;
+        this.fuel_type = fuel_type;
+    }
 }
