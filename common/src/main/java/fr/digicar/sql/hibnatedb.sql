@@ -1,4 +1,4 @@
-CREATE TABLE users
+﻿CREATE TABLE users
 (
   id             INT(6) AUTO_INCREMENT
     PRIMARY KEY,
@@ -17,15 +17,20 @@ CREATE TABLE users
   ENGINE = InnoDB
   CHARSET = utf8;
 
-CREATE TABLE parking_spots (
+CREATE TABLE parking_spots
+(
   id            INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  nb_spot       VARCHAR(40)  NOT NULL,
-  nb_parking    INT(5)       NOT NULL,
-  electric_plug BOOLEAN      NOT NULL,
-  location      VARCHAR(100) NOT NULL
+  nb_spot       INT          NOT NULL,
+  nb_parking    VARCHAR(40)  NOT NULL,
+  electric_plug TINYINT(1)   NOT NULL,
+  location      VARCHAR(100) NOT NULL,
+  longitude     INT          NULL,
+  latitude      INT          NULL,
+  longueur      INT(4)       NULL,
+  largeur       INT(4)       NULL
 )
-  ENGINE = InnoDB
+  ENGINE = InnoDB;
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE tarifs (
@@ -51,7 +56,7 @@ CREATE TABLE car_type
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE fuel_type
+CREATE TABLE fuelType
 (
   id                  INT(6) AUTO_INCREMENT
     PRIMARY KEY,
@@ -85,11 +90,11 @@ CREATE TABLE car
   release_date        DATE,
   fuel_type_id        INT(6),
 
-  CONSTRAINT pk_car PRIMARY KEY (id, registration_number),
-  CONSTRAINT `fk_transmission_id`  FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id)  ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT pk_car PRIMARY KEY (id, registration_number)
+ /* CONSTRAINT `fk_transmission_id`  FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id)  ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_car_type`  FOREIGN KEY (type_id) REFERENCES car_type (id)  ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_fuel_type_id`  FOREIGN KEY (fuel_type_id) REFERENCES fuelType (id)  ON DELETE NO ACTION ON UPDATE NO ACTION
-)
+*/)
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 

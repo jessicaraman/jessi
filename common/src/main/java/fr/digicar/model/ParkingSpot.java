@@ -1,11 +1,15 @@
 package fr.digicar.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "parking_spots")
 public class ParkingSpot {
 
@@ -37,6 +41,9 @@ public class ParkingSpot {
 
     @Column(name = "largeur")
     private Integer largeur;
+
+    public ParkingSpot(int id, int nbSpot, String nbParking, boolean plug, String location, int longitude, int latitude, int longueur, int largeur) {
+    }
 
     public Integer getLongueur() {
         return longueur;

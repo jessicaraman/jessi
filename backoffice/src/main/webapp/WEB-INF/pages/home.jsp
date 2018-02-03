@@ -39,7 +39,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
+                    <a class="nav-link" href="<c:url value="/parking/"/>">Maintain parking spot referential</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
