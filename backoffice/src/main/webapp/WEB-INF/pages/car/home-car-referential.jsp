@@ -47,13 +47,13 @@
     <%--@elvariable id="confirmationMessage" type="java.lang.String"--%>
     <c:if test="${not empty confirmationMessage}">
         <div class="row">
-            <div class="alert alert-success w-50">${confirmationMessage}</div>
+            <div class="alert alert-success w-100">${confirmationMessage}</div>
         </div>
     </c:if>
     <%--@elvariable id="alertMessage" type="java.lang.String"--%>
     <c:if test="${not empty alertMessage}">
         <div class="row">
-            <div class="alert alert-warning w-50">${alertMessage}</div>
+            <div class="alert alert-warning w-100">${alertMessage}</div>
         </div>
     </c:if>
 <div>

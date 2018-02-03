@@ -30,8 +30,13 @@ public class CarServiceImpl implements CarService {
     }
 
     @Transactional
-    public Car getCar(int carId) {
-        return carDAO.getCar(carId);
+    public Car getCarById(int carId) {
+        return carDAO.getCarById(carId);
+    }
+
+    @Transactional
+    public Car getCarByRegistration(String registration) {
+        return carDAO.getCarByRegistration(registration);
     }
 
     @Transactional
@@ -45,8 +50,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Transactional
-    public List<Car> CarByCriteria(String mark, String name_model, String type, String transmission, String fuel_type) {
-        return carDAO.CarByCriteria( mark, name_model, type, transmission, fuel_type);
+    public List<Car> CarByCriteria(String mark, String name_model, String type, String transmission, String fuel_type, String mileageMin, String mileageMax) {
+        return carDAO.CarByCriteria( mark, name_model, type, transmission, fuel_type, mileageMin, mileageMax);
     }
 
 

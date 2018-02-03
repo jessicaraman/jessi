@@ -126,7 +126,7 @@ public class CarController {
     }
     @RequestMapping(value = "/updateCar/{carId}", method = RequestMethod.GET)
     public ModelAndView getViewForUpdateCar(@PathVariable int carId) {
-        Car car = carService.getCar(carId);
+        Car car = carService.getCarById(carId);
 
         ModelAndView modelAndView = new ModelAndView("car/update-car");
         modelAndView.addObject("car", car);
@@ -140,13 +140,17 @@ public class CarController {
     @RequestMapping(value = "/updating", method = RequestMethod.POST)
     public ModelAndView updateCar(@ModelAttribute("car") Car car) {
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
-        String confirmationmessage;
+        String confirmationMessage;
 
         carService.updateCar(car);
-        confirmationmessage = "Le véhicule "+car.getRegistration_number()+" a bien été mis à jour";
-        modelAndView.addObject("confirmationmessage", confirmationmessage);
+        confirmationMessage = "Le véhicule "+car.getRegistration_number()+" a bien été mis à jour";
+        modelAndView.addObject("confirmationMessage", confirmationMessage);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
+
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
 
         List<Car> cars = carService.getAllCar();
         modelAndView.addObject("cars", cars);
@@ -159,36 +163,23 @@ public class CarController {
         String registration = filterRegistrationIdOdt.getregistrationNumber();
         String message;
 
-        List<Car> cars = carService.getAllCar();
-
-        Car car = new Car();
-        Boolean check = false;
-        String registrationId;
-        for (int i=0; i<cars.size(); i++){
-            car = cars.get(i);
-            registrationId = car.getRegistration_number();
-            if(registrationId.equals(registration)){
-                check= true;
-                break;
-            }
-        }
+        Car cardfiltered = carService.getCarByRegistration(registration);
 
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
         modelAndView.addObject("car", new Car());
         modelAndView.addObject("filters", new FilterOdt());
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
 
-        if (check==false){
+        if (null == cardfiltered){
             message = "Veuillez Renseigner un matricule correcte ou utiliser la recherche générale";
             modelAndView.addObject("message", message);
         }
         else {
             List<Car> carFilter = new ArrayList<>();
-            carFilter.add(car);
+            carFilter.add(cardfiltered);
             modelAndView.addObject("cars", carFilter);
         }
-        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
         return modelAndView;
-
 
     }
     @RequestMapping(value = "/allcars", method = RequestMethod.POST)
@@ -197,55 +188,34 @@ public class CarController {
         String carBrand = filterOdt.getCarBrand();
         String modelName = filterOdt.getModelName();
         String typeCar = filterOdt.getTypeCar();
-
-        int mileageMin = filterOdt.getMileageMin();
-        int mileageMax = filterOdt.getMileageMax();
         String transmission = filterOdt.getTransmission();
         String fuelType = filterOdt.getFuelType();
 
-        List<Car> allList = carService.getAllCar();
+        String mileageMin = filterOdt.getMileageMin();
+        String mileageMax = filterOdt.getMileageMax();
 
-        // TODO Rajouter le cas de kilometrageMin et kilometrageMax
-        List<Car> allCarList = carService.CarByCriteria(carBrand, modelName, typeCar, transmission, fuelType);
-        System.out.println(allCarList.toString());
+        List<Car> allCarList = carService.CarByCriteria(carBrand, modelName, typeCar, transmission, fuelType, mileageMin, mileageMax);
 
         String message;
-        Car car;
-        List<Car> carsFind = new ArrayList<>();
-        for (int i=0; i<allList.size(); i++){
-            car = allList.get(i);
-            if(carBrand.equals(car.getMark()) && modelName.equals(car.getName_model())){
-                if(!typeCar.isEmpty() && typeCar.equals(car.getFuel_type())) {
-                    if (mileageMin < car.getKilometers() && mileageMax > car.getKilometers()) {
-                        if (!transmission.isEmpty() && transmission.equals(car.getTransmission())){
-                            if (!fuelType.isEmpty() && fuelType.equals(car.getFuel_type()))
-                                carsFind.add(car);
-                            else
-                                carsFind.add(car);
-                        }
-                        else
-                            carsFind.add(car);
-                    }
-                    else
-                        carsFind.add(car);
-                }
-                else
-                    carsFind.add(car);
-            }
-        }
+        List<Car> cars = new ArrayList<>();
+
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
 
         modelAndView.addObject("car", new Car());
         modelAndView.addObject("filters", new FilterOdt());
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
 
-        if(carsFind.isEmpty()){
+        if(allCarList.isEmpty()){
             message = "Aucun véhicule trouvé pour cette rechercher";
             modelAndView.addObject("message", message);
-            modelAndView.addObject("cars", carsFind);
+            modelAndView.addObject("cars", cars);
         }
         else{
-            modelAndView.addObject("cars", carsFind);
+            modelAndView.addObject("cars", allCarList);
         }
 
         return modelAndView;

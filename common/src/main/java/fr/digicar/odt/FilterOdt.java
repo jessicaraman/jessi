@@ -6,8 +6,8 @@ import java.io.Serializable;
 public class FilterOdt implements Serializable{
     String carBrand;
     String modelName;
-    int mileageMin;
-    int mileageMax;
+    String mileageMin;
+    String mileageMax;
     String typeCar;
     String transmission;
     String fuelType;
@@ -32,19 +32,19 @@ public class FilterOdt implements Serializable{
         this.modelName = modelName;
     }
 
-    public int getMileageMin() {
+    public String getMileageMin() {
         return mileageMin;
     }
 
-    public void setMileageMin(int mileageMin) {
+    public void setMileageMin(String mileageMin) {
         this.mileageMin = mileageMin;
     }
 
-    public int getMileageMax() {
+    public String getMileageMax() {
         return mileageMax;
     }
 
-    public void setMileageMax(int mileageMax) {
+    public void setMileageMax(String mileageMax) {
         this.mileageMax = mileageMax;
     }
 
