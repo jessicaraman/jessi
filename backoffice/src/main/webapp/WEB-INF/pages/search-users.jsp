@@ -23,18 +23,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Véhicules</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
+                    <a class="dropdown-item" href="<c:url value="/car/"/>">Liste des véhicules</a>
                     <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
+                <a class="nav-link" href="<c:url value="/parking/add"/>">Places de parking</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
+                <a class="nav-link" href="<c:url value="/pricing"/>">Tarifs</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="<c:url value="/users"/>">Utilisateurs</a>
             </li>
         </ul>
     </div>
@@ -49,50 +51,22 @@
         <div class="row flex-nowrap">
             <div class="col-3 sidebar">
                 <div class="container">
-                    <h5 class="mb-4">
-                        <i class="fa fa-search text-muted"></i>
-                        &nbsp;
-                        Recherche
-                    </h5>
-                    <%--@elvariable id="searchCriteria" type="fr.digicar.backoffice.utils.SearchCriteria"--%>
+                    <h5 class="mb-4">Rechercher</h5>
+                    <%--@elvariable id="searchCriteria" type="fr.digicar.model.User"--%>
                     <form:form method="POST" modelAttribute="searchCriteria"
-                               action="${pageContext.request.contextPath}/users">
+                               action="${pageContext.request.contextPath}/registration">
                         <strong>Nom</strong>
                         <div class="md-form">
-                            <form:input class="form-control" placeholder="Ex: Jean Dupont" path="name"/>
+                            <input type="email" id="email" class="form-control validate" placeholder="Ex: Jean Dupont"/>
                         </div>
                         <strong>Localisation</strong>
                         <div class="form-group mt-2">
-                            <form:checkbox id="checkbox1" path="departments" value="75"/>
+                            <input type="checkbox" id="checkbox1" checked="checked"/>
                             <label for="checkbox1">Paris (75)</label><br/>
-                            <form:checkbox id="checkbox2" path="departments" value="92"/>
-                            <label for="checkbox2">Hauts-de-Seine (92)</label><br/>
-                            <form:checkbox id="checkbox3" path="departments" value="93"/>
-                            <label for="checkbox3">Seine-Saint-Denis (93)</label><br/>
-                            <form:checkbox id="checkbox4" path="departments" value="94"/>
-                            <label for="checkbox4">Val-de-Marne (94)</label><br/>
-                            <form:checkbox id="checkbox5" path="departments" value="95"/>
-                            <label for="checkbox5">Val-d'Oise (95)</label><br/>
-                            <form:checkbox id="checkbox6" path="departments" value="78"/>
-                            <label for="checkbox6">Yvelines (78)</label><br/>
-                            <form:checkbox id="checkbox7" path="departments" value="91"/>
-                            <label for="checkbox7">Essone (91)</label><br/>
-                            <form:checkbox id="checkbox8" path="departments" value="77"/>
-                            <label for="checkbox8">Seine-et-Marne (77)</label>
-                            <br/>
+                            <input type="checkbox" id="checkbox2" checked="checked"/>
+                            <label for="checkbox2">Val-de-Marne (94)</label>
                         </div>
-                        <strong>Statuts</strong>
-                        <div class="form-group mt-2">
-                            <form:checkbox id="active" path="statuses" value="ACTIVE"/>
-                            <label for="active">Actif</label><br />
-                            <form:checkbox id="inactive" path="statuses" value="INACTIVE"/>
-                            <label for="inactive">Inactif</label><br />
-                            <form:checkbox id="banned" path="statuses" value="BANNED"/>
-                            <label for="banned">Banni</label>
-                        </div>
-                        <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm">
-                            Rechercher
-                        </button>
+                        <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm">Search</button>
                     </form:form>
                 </div>
             </div>
@@ -139,7 +113,7 @@
                                     </c:choose>
                                     <br/>
                                     <small class="text-muted">
-                                            <%--@elvariable id="dateFormat" type="java.text.SimpleDateFormat"--%>
+                                        <%--@elvariable id="dateFormat" type="java.text.SimpleDateFormat"--%>
                                         Inscrit(e) le ${dateFormat.format(user.signUpDate)}
                                     </small>
                                 </td>
