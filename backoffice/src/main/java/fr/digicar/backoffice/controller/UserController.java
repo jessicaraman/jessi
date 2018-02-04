@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.SimpleDateFormat;
+
 @Slf4j
 @Controller
 @RequestMapping(value = "/users")
@@ -22,6 +24,7 @@ public class UserController {
 
         ModelAndView modelAndView = new ModelAndView("search-users");
         modelAndView.addObject("users", userService.searchUsers());
+        modelAndView.addObject("dateFormat", new SimpleDateFormat("dd/MM/yyyy"));
         return modelAndView;
     }
 

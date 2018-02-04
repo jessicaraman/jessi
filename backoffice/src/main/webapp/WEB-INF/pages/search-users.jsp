@@ -64,6 +64,7 @@
                             <input type="checkbox" id="checkbox2" checked="checked"/>
                             <label for="checkbox2">Val-de-Marne (94)</label>
                         </div>
+                        <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm">Search</button>
                     </form:form>
                 </div>
             </div>
@@ -88,7 +89,7 @@
                                     </c:choose>
                                 </td>
                                 <td class="align-middle">
-                                    <strong>${user.firstName} ${user.firstName}</strong>
+                                    <strong>${user.firstName} ${user.lastName}</strong>
                                     <br/>
                                     <small class="text-muted">${user.city} (${user.zipCode})</small>
                                 </td>
@@ -97,9 +98,22 @@
                                     <i class="fa fa-credit-card text-muted"></i> 0.00€ dépensé(s)
                                 </td>
                                 <td class="align-middle">
-                                    <i class="fa fa-circle text-success"></i> Actif
+                                    <c:choose>
+                                        <c:when test="${user.status == 'ACTIVE'}">
+                                            <i class="fa fa-circle text-success"></i> Actif
+                                        </c:when>
+                                        <c:when test="${user.status == 'BANNED'}">
+                                            <i class="fa fa-circle text-danger"></i> Banni
+                                        </c:when>
+                                        <c:otherwise>
+                                            <i class="fa fa-circle text-warning"></i> Inactif
+                                        </c:otherwise>
+                                    </c:choose>
                                     <br/>
-                                    <small class="text-muted">Inscrit(e) le 18/12/2017</small>
+                                    <small class="text-muted">
+                                        <%--@elvariable id="dateFormat" type="java.text.SimpleDateFormat"--%>
+                                        Inscrit(e) le ${dateFormat.format(user.signUpDate)}
+                                    </small>
                                 </td>
                                 <td class="align-middle text-center">
                                     <button class="btn btn-sm btn-primary">
@@ -121,5 +135,9 @@
     </div>
 </section>
 
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/mdb.min.js" />"></script>
 </body>
 </html>
