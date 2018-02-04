@@ -1,32 +1,22 @@
 package fr.digicar.backoffice.service;
 
-import fr.digicar.backoffice.service.CarServiceImpl;
 import fr.digicar.dao.CarDAO;
 import fr.digicar.model.Car;
-import fr.digicar.init.WebAppConfig;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = WebAppConfig.class)
-@WebAppConfiguration
-
 public class CarServiceImplTest {
+
     @Mock
     private CarDAO carDAO;
 
@@ -37,8 +27,9 @@ public class CarServiceImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
+
     @Test
-    public void itShoulDReturnCarRegistred(){
+    public void getCarShouldReturnCarRegistered() {
         //
         //GIVEN
         //

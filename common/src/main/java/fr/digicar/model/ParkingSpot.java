@@ -1,11 +1,15 @@
 package fr.digicar.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "parking_spots")
 public class ParkingSpot {
 
@@ -15,10 +19,10 @@ public class ParkingSpot {
     private Integer id;
 
     @Column(name = "nb_spot")
-    private String nbSpot;
+    private Integer nbSpot;
 
     @Column(name = "nb_parking")
-    private Integer nbParking;
+    private String nbParking;
 
     @Column(name = "electric_plug")
     private boolean plug;
@@ -26,4 +30,90 @@ public class ParkingSpot {
     @Column(name = "location")
     private String location;
 
+    @Column(name = "longitude")
+    private Integer longitude;
+
+    @Column(name = "latitude")
+    private Integer latitude;
+
+    @Column(name = "longueur")
+    private Integer longueur;
+
+    @Column(name = "largeur")
+    private Integer largeur;
+
+    public ParkingSpot(int id, int nbSpot, String nbParking, boolean plug, String location, int longitude, int latitude, int longueur, int largeur) {
+    }
+
+    public Integer getLongueur() {
+        return longueur;
+    }
+
+    public Integer getLargeur() {
+        return largeur;
+    }
+
+    public void setLargeur(Integer largeur) {
+        this.largeur = largeur;
+    }
+
+    public void setLongueur(Integer longueur) {
+        this.longueur = longueur;
+    }
+
+    public Integer getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Integer latitude) {
+        this.latitude = latitude;
+    }
+
+    public Integer getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Integer longitude) {
+        this.longitude = longitude;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getNbSpot() {
+        return nbSpot;
+    }
+
+    public void setNbSpot(Integer nbSpot) {
+        this.nbSpot = nbSpot;
+    }
+
+    public String getNbParking() {
+        return nbParking;
+    }
+
+    public void setNbParking(String nbParking) {
+        this.nbParking = nbParking;
+    }
+
+    public boolean isPlug() {
+        return plug;
+    }
+
+    public void setPlug(boolean plug) {
+        this.plug = plug;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }

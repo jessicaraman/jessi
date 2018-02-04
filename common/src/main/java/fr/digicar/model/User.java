@@ -1,6 +1,8 @@
 package fr.digicar.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +10,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     /** The identifier of the user. */
@@ -67,5 +71,14 @@ public class User {
     /** The user birth date in string format. Only used to get input from JSP form. */
     @Transient
     private String birthdateString;
+
+    /** The sign up date of the client. */
+    @Column(name = "signup_date")
+    private Date signUpDate;
+
+    /** The status of the client. */
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
 }

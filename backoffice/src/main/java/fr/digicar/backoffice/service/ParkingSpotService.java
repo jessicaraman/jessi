@@ -15,5 +15,6 @@ public interface ParkingSpotService {
     void deleteParkingSpot(int id);
 
     List<ParkingSpot> getParkingSpots();
+    List<ParkingSpot> getParkingSpotByObj(ParkingSpot p);
 
 }

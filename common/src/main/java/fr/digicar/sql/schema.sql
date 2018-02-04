@@ -11,19 +11,26 @@
   phone_number   VARCHAR(20)  NULL,
   address_line_1 VARCHAR(250) NOT NULL,
   address_line_2 VARCHAR(250) NULL,
-  zip_code       VARCHAR(10)  NULL,
-  city           VARCHAR(100) NULL
+  zip_code       VARCHAR(10)  NOT NULL,
+  city           VARCHAR(100) NOT NULL,
+  signup_date    DATE         NOT NULL,
+  status         VARCHAR(10)  NOT NULL
 )
   ENGINE = InnoDB
   CHARSET = utf8;
 
-CREATE TABLE parking_spots (
+CREATE TABLE parking_spots
+(
   id            INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  nb_spot       VARCHAR(40)  NOT NULL,
-  nb_parking    INT(5)       NOT NULL,
-  electric_plug BOOLEAN      NOT NULL,
-  location      VARCHAR(100) NOT NULL
+  nb_spot       INT          NOT NULL,
+  nb_parking    VARCHAR(40)  NOT NULL,
+  electric_plug TINYINT(1)   NOT NULL,
+  location      VARCHAR(100) NOT NULL,
+  longitude     INT          NULL,
+  latitude      INT          NULL,
+  longueur      INT(4)       NULL,
+  largeur       INT(4)       NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -40,12 +47,11 @@ CREATE TABLE tarifs (
   DEFAULT CHARSET = utf8;
 
 
-
 CREATE TABLE car_type
 (
-  id                  INT(6) AUTO_INCREMENT
+  id   INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  name                VARCHAR(25) NOT NULL
+  name VARCHAR(25) NOT NULL
 )
 
   ENGINE = InnoDB
@@ -53,9 +59,9 @@ CREATE TABLE car_type
 
 CREATE TABLE fuel_type
 (
-  id                  INT(6) AUTO_INCREMENT
+  id   INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  name                VARCHAR(20) NOT NULL
+  name VARCHAR(20) NOT NULL
 )
 
   ENGINE = InnoDB
@@ -63,9 +69,9 @@ CREATE TABLE fuel_type
 
 CREATE TABLE transmission_mode
 (
-  id                  INT(6) AUTO_INCREMENT
+  id   INT(6) AUTO_INCREMENT
     PRIMARY KEY,
-  name                VARCHAR(20) NOT NULL
+  name VARCHAR(20) NOT NULL
 )
 
   ENGINE = InnoDB
@@ -87,10 +93,7 @@ CREATE TABLE car
   fuel_type_id        INT(6),
   FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id),
   FOREIGN KEY (type_id) REFERENCES car_type (id),
-  FOREIGN KEY (fuel_type_id) REFERENCES fuelType (id)
+  FOREIGN KEY (fuel_type_id) REFERENCES fuel_type (id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
-
-
-
