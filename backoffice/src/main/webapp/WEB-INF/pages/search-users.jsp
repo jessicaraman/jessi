@@ -63,20 +63,32 @@
                         </div>
                         <strong>Localisation</strong>
                         <div class="form-group mt-2">
-                            <form:checkbox path="departments" value="75"/> Paris (75)<br/>
-                            <form:checkbox path="departments" value="92"/> Hauts-de-Seine (92)<br/>
-                            <form:checkbox path="departments" value="93"/> Seine-Saint-Denis (93)<br/>
-                            <form:checkbox path="departments" value="94"/> Val-de-Marne (94)<br/>
-                            <form:checkbox path="departments" value="95"/> Val-d'Oise (95)<br/>
-                            <form:checkbox path="departments" value="78"/> Yvelines (78)<br/>
-                            <form:checkbox path="departments" value="91"/> Essone (91)<br/>
-                            <form:checkbox path="departments" value="77"/> Seine-et-Marne (77)<br/>
+                            <form:checkbox id="checkbox1" path="departments" value="75"/>
+                            <label for="checkbox1">Paris (75)</label><br/>
+                            <form:checkbox id="checkbox2" path="departments" value="92"/>
+                            <label for="checkbox2">Hauts-de-Seine (92)</label><br/>
+                            <form:checkbox id="checkbox3" path="departments" value="93"/>
+                            <label for="checkbox3">Seine-Saint-Denis (93)</label><br/>
+                            <form:checkbox id="checkbox4" path="departments" value="94"/>
+                            <label for="checkbox4">Val-de-Marne (94)</label><br/>
+                            <form:checkbox id="checkbox5" path="departments" value="95"/>
+                            <label for="checkbox5">Val-d'Oise (95)</label><br/>
+                            <form:checkbox id="checkbox6" path="departments" value="78"/>
+                            <label for="checkbox6">Yvelines (78)</label><br/>
+                            <form:checkbox id="checkbox7" path="departments" value="91"/>
+                            <label for="checkbox7">Essone (91)</label><br/>
+                            <form:checkbox id="checkbox8" path="departments" value="77"/>
+                            <label for="checkbox8">Seine-et-Marne (77)</label>
+                            <br/>
                         </div>
                         <strong>Statuts</strong>
                         <div class="form-group mt-2">
-                            <form:checkbox path="statuses" value="ACTIVE"/> Actif<br />
-                            <form:checkbox path="statuses" value="INACTIVE"/> Inactif<br />
-                            <form:checkbox path="statuses" value="BANNED"/> Banni
+                            <form:checkbox id="active" path="statuses" value="ACTIVE"/>
+                            <label for="active">Actif</label><br />
+                            <form:checkbox id="inactive" path="statuses" value="INACTIVE"/>
+                            <label for="inactive">Inactif</label><br />
+                            <form:checkbox id="banned" path="statuses" value="BANNED"/>
+                            <label for="banned">Banni</label>
                         </div>
                         <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm">
                             Rechercher

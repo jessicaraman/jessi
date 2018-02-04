@@ -8,7 +8,7 @@ public class SearchCriteria {
 
     String name;
 
-    int[] departments;
+    String[] departments;
 
     UserStatus[] statuses;
 

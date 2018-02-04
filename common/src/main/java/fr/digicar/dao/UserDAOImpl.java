@@ -43,9 +43,17 @@ public class UserDAOImpl implements UserDAO {
             getCurrentSession().delete(user);
     }
 
-    public List<User> searchUsers() {
+    public List<User> getUsers() {
         try {
             return getCurrentSession().createQuery("from User").list();
+        } catch (ClassCastException e) {
+            return new ArrayList<User>();
+        }
+    }
+
+    public List<User> filterUsers(String searchQuery) {
+        try {
+            return getCurrentSession().createQuery(searchQuery).list();
         } catch (ClassCastException e) {
             return new ArrayList<User>();
         }

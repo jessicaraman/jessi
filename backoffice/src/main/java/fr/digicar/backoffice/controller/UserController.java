@@ -34,7 +34,7 @@ public class UserController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String filterUsers(@ModelAttribute SearchCriteria searchCriteria, ModelMap model) {
-        model.addAttribute("users", userService.searchUsers());
+        model.addAttribute("users", userService.searchUsers(searchCriteria));
         return "search-users";
     }
 
