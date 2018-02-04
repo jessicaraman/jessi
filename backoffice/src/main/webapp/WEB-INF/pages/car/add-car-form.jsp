@@ -25,17 +25,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Véhicules</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
                             <a class="dropdown-item" href="">Ajouter</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
+                        <a class="nav-link" href="<c:url value="/parking"/>">Places de parking</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
+                        <a class="nav-link" href="<c:url value="/pricing"/>">Tarifs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/users"/>">Utilisateurs</a>
                     </li>
 
                 </ul>
@@ -94,7 +97,7 @@
 
             <div class="col-md-4">
                 <div class="input-group md-form form-sm form-2 pl-0">
-                <form:input min="3" max="" maxlength="1" type="number" path="nb_doors" cssClass="form-control"/>
+                <form:input min="3" max="5" maxlength="1" type="number" path="nb_doors" cssClass="form-control"/>
                 <form:label data-error="champs invalide" path="nb_doors">Nombre de portes</form:label>
                 </div>
             </div>
@@ -115,7 +118,7 @@
 
             <div class="col-md-4">
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <form:input min="1" max="900000" maxlength="6" type="number" path="kilometers" cssClass="form-control"/>
+                    <form:input min="1" max="6" maxlength="6" type="number" path="kilometers" cssClass="form-control"/>
                     <form:label data-error="champs invalide" path="kilometers">Kilométrage</form:label>
                 </div>
             </div>

@@ -25,17 +25,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Véhicules</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="">Liste véhicule</a>
                             <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
+                        <a class="nav-link" href="<c:url value="/parking"/>">Places de parking</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
+                        <a class="nav-link" href="<c:url value="/pricing"/>">Tarifs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/users"/>">Utilisateurs</a>
                     </li>
 
                 </ul>
