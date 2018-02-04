@@ -49,22 +49,38 @@
         <div class="row flex-nowrap">
             <div class="col-3 sidebar">
                 <div class="container">
-                    <h5 class="mb-4">Rechercher</h5>
-                    <%--@elvariable id="searchCriteria" type="fr.digicar.model.User"--%>
+                    <h5 class="mb-4">
+                        <i class="fa fa-search text-muted"></i>
+                        &nbsp;
+                        Recherche
+                    </h5>
+                    <%--@elvariable id="searchCriteria" type="fr.digicar.backoffice.utils.SearchCriteria"--%>
                     <form:form method="POST" modelAttribute="searchCriteria"
-                               action="${pageContext.request.contextPath}/registration">
+                               action="${pageContext.request.contextPath}/users">
                         <strong>Nom</strong>
                         <div class="md-form">
-                            <input type="email" id="email" class="form-control validate" placeholder="Ex: Jean Dupont"/>
+                            <form:input class="form-control" placeholder="Ex: Jean Dupont" path="name"/>
                         </div>
                         <strong>Localisation</strong>
                         <div class="form-group mt-2">
-                            <input type="checkbox" id="checkbox1" checked="checked"/>
-                            <label for="checkbox1">Paris (75)</label><br/>
-                            <input type="checkbox" id="checkbox2" checked="checked"/>
-                            <label for="checkbox2">Val-de-Marne (94)</label>
+                            <form:checkbox path="departments" value="75"/> Paris (75)<br/>
+                            <form:checkbox path="departments" value="92"/> Hauts-de-Seine (92)<br/>
+                            <form:checkbox path="departments" value="93"/> Seine-Saint-Denis (93)<br/>
+                            <form:checkbox path="departments" value="94"/> Val-de-Marne (94)<br/>
+                            <form:checkbox path="departments" value="95"/> Val-d'Oise (95)<br/>
+                            <form:checkbox path="departments" value="78"/> Yvelines (78)<br/>
+                            <form:checkbox path="departments" value="91"/> Essone (91)<br/>
+                            <form:checkbox path="departments" value="77"/> Seine-et-Marne (77)<br/>
                         </div>
-                        <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm">Search</button>
+                        <strong>Statuts</strong>
+                        <div class="form-group mt-2">
+                            <form:checkbox path="statuses" value="ACTIVE"/> Actif<br />
+                            <form:checkbox path="statuses" value="INACTIVE"/> Inactif<br />
+                            <form:checkbox path="statuses" value="BANNED"/> Banni
+                        </div>
+                        <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm">
+                            Rechercher
+                        </button>
                     </form:form>
                 </div>
             </div>
@@ -111,7 +127,7 @@
                                     </c:choose>
                                     <br/>
                                     <small class="text-muted">
-                                        <%--@elvariable id="dateFormat" type="java.text.SimpleDateFormat"--%>
+                                            <%--@elvariable id="dateFormat" type="java.text.SimpleDateFormat"--%>
                                         Inscrit(e) le ${dateFormat.format(user.signUpDate)}
                                     </small>
                                 </td>
