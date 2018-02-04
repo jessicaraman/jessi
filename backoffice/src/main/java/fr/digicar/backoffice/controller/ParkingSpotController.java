@@ -72,15 +72,15 @@ public class ParkingSpotController {
 
         ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
         modelAndView.addObject("parking", new ParkingSpot());
-        List<ParkingSpot> parkingSpots= parkingSpotService.getParkingSpotByObj(parkingSpot);
-       // ParkingSpot resultParkingSpot = parkingSpotService.getParkingSpot(parkingSpot.getId());
+        List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpotByObj(parkingSpot);
+        // ParkingSpot resultParkingSpot = parkingSpotService.getParkingSpot(parkingSpot.getId());
         //parkingSpots.add(resultParkingSpot);
         modelAndView.addObject("parkingSpot", parkingSpots);
         return modelAndView;
     }
 
 
-    @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editParkingSpotPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
         modelAndView.addObject("parking", new ParkingSpot());
@@ -90,7 +90,7 @@ public class ParkingSpotController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public ModelAndView edditingParkingSpot(@ModelAttribute ParkingSpot parkingSpot,@PathVariable Integer id) {
+    public ModelAndView edditingParkingSpot(@ModelAttribute ParkingSpot parkingSpot, @PathVariable Integer id) {
 
         ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
         modelAndView.addObject("parking", new ParkingSpot());
@@ -99,7 +99,7 @@ public class ParkingSpotController {
         String message = parkingSpot.getNbSpot() + " a ete modifee.";
 
         List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpots();
-       modelAndView.addObject("parkingSpot", parkingSpots);
+        modelAndView.addObject("parkingSpot", parkingSpots);
         modelAndView.addObject("message", message);
         return modelAndView;
     }
