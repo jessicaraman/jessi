@@ -52,7 +52,14 @@ public class TarifDAOImpl implements TarifDAO {
 
     public List<Tarif> searchTarifs(String libelle,float prix_km_min, float prix_km_max,
                                     float prix_heure_min,float prix_heure_max,int frais_mensuels_min, int frais_mensuels_max) {
-        return getCurrentSession().createQuery("FROM Tarif where libelle='"+libelle+"'").list();
+        String sql ="FROM Tarif";
+        if(libelle!="none"){ sql=sql+" where libelle ='"+libelle+"'";}
+        else{
+            sql=sql+" where prix_km>="+prix_km_min+" AND prix_km" + "<="+prix_km_max+
+                    " and prix_heure>="+prix_heure_min+" and prix_heure<="+prix_heure_max+
+                    " and frais_mensuels>= "+frais_mensuels_min+" and frais_mensuels<="+frais_mensuels_max;}
+        System.out.println(sql);
+        return getCurrentSession().createQuery(sql).list();
     }
 
 
