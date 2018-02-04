@@ -23,7 +23,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> searchUsers(SearchCriteria searchCriteria) {
-        if (searchCriteria != null) {
+        if (searchCriteria != null
+                && ((searchCriteria.getName() != null && searchCriteria.getName().length() > 0)
+                || searchCriteria.getDepartments().length > 0
+                || searchCriteria.getStatuses().length > 0)) {
             return userDAO.filterUsers(generateSearchString(searchCriteria));
         }
         return searchUsers();
@@ -56,7 +59,7 @@ public class UserServiceImpl implements UserService {
         searchString += byNameString.length() > 0 ? byNameString : "";
         searchString += byNameString.length() > 0 && (byDepartmentsString.length() > 0 || byStatusesString.length() > 0) ? " and " : "";
         searchString += byDepartmentsString.length() > 0 ? byDepartmentsString.toString() : "";
-        searchString += byDepartmentsString.length() > 0 && byStatusesString.length() > 0 ?  " and " : "";
+        searchString += byDepartmentsString.length() > 0 && byStatusesString.length() > 0 ? " and " : "";
         searchString += byStatusesString.length() > 0 ? byStatusesString.toString() : "";
         return searchString;
     }
