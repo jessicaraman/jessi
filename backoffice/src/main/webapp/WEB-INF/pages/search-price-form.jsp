@@ -12,8 +12,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>CarSharingClub - BackOffice</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+    <title>CSC Inside</title>
+    <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
@@ -41,7 +41,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/parking"/>">Places de parking</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="<c:url value="/pricing"/>">Tarifs</a>
                 </li>
                 <li class="nav-item">
