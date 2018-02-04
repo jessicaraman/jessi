@@ -51,6 +51,7 @@
         <i class="fa fa-plus mr-1"></i>
         Ajouter un tarif
     </button>
+    <a href="<c:url value="/pricing/search"/>" class="btn btn-primary">Rechercher un tarif</a>
 
     <!-- Modal -->
     <div class="modal fade mt-3" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -93,7 +94,7 @@
                         <form:label data-error="Montant invalide" path="frais_mensuels">Frais mensuels</form:label>
                     </div>
 
-                    <p style="color:rgb(117, 117, 117);">Catégories disponibles :</p>
+                    <p style="color:rgb(117, 117, 117);">Catégories de véhicule :</p>
                     <div class="btn-group mr-4" data-toggle="buttons">
 
                         <label class="btn btn-default">

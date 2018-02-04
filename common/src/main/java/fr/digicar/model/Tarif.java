@@ -26,6 +26,8 @@ public class Tarif {
     @Column(name="frais_mensuels")
     private int frais_mensuels;
 
+    public void setId(Integer id) { this.id = id; }
+
     public void setFrais_mensuels(int frais_mensuels) {
         this.frais_mensuels = frais_mensuels;
     }
