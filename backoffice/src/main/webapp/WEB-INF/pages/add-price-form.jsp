@@ -36,18 +36,21 @@
 
                     <!-- Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Véhicules</a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
                             <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Maintain pricing referential</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/parking"/>">Places de parking</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/pricing"/>">Tarifs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/users"/>">Utilisateurs</a>
+                        </li>
                 </ul>
                 <%--<form class="form-inline">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">

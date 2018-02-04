@@ -14,6 +14,7 @@
 </head>
 <body>
 
+<br>
 <%--@elvariable id="message" type="java.lang.String"--%>
 <c:if test="${not empty message}">
     <div class="row">
@@ -28,7 +29,7 @@
         <div class="row">
                 <div class="col-md-3">
                     <div class="input-group md-form form-sm form-2 pl-0">
-                        <form:input title="AA-OO1-AA" maxlength="7" onKeypress="if( (event.keyCode != 45) && (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if( (event.which != 45) && (event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
+                        <form:input title="AA-OO1-AA" maxlength="9" onKeypress="if( (event.keyCode != 45) && (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if( (event.which != 45) && (event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
                                     cssStyle="text-transform:uppercase" name="registrationNumber" path="registrationNumber" minlength="" required="required" cssClass="form-control validate my-0 py-1 grey-border" type="text"/>
                         <form:label path="registrationNumber" data-error="Immatriculation invalide">Immatriculation</form:label>
                     </div>
@@ -51,11 +52,9 @@
             <div class="input-group md-form form-sm form-2 pl-0">
                 <form:select required="required" cssClass="form-control validate rounded validate mdb-select  my-0 py-1 grey-border" path="carBrand">
                     <form:option value="" disabled="true" selected="true">Choisir une marque</form:option>
-                    <form:option value="Cliot" >Cliot</form:option>
+                    <form:option value="Clio" >Cliot</form:option>
                     <form:option value="Peugeot" >Peugeot</form:option>
-                    <form:option value="Renault" >Renault</form:option>
                     <form:option value="MAZDA" >Mazda</form:option>
-                    <form:option value="Toyota" >Toyota</form:option>
                 </form:select>
             </div>
         </div>
@@ -65,10 +64,9 @@
             <div class="input-group md-form form-sm form-2 pl-0">
                 <form:select required="required" cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="modelName">
                     <form:option value="" disabled="true" selected="true">Choisir un modèle</form:option>
-                        <form:option value="Cliot2" >Cliot2</form:option>
-                        <form:option value="Peugeot 207" >Peugeot 207</form:option>
+                        <form:option value="Clio2" >Cliot2</form:option>
+                        <form:option value="Peugeot207" >Peugeot207</form:option>
                         <form:option value="MAZDA3" >Mazda3</form:option>
-                        <form:option value="Toyota Yaris" >Toyota Yaris</form:option>
                 </form:select>
             </div>
         </div>
@@ -93,7 +91,7 @@
             </div>
         </div>
 
-        <span>A</span>
+        <div class="col-md-1">à</div>
 
         <div class="col-md-3">
             <div class="input-group md-form form-sm form-2 pl-0">
