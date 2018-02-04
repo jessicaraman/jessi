@@ -11,8 +11,10 @@
   phone_number   VARCHAR(20)  NULL,
   address_line_1 VARCHAR(250) NOT NULL,
   address_line_2 VARCHAR(250) NULL,
-  zip_code       VARCHAR(10)  NULL,
-  city           VARCHAR(100) NULL
+  zip_code       VARCHAR(10)  NOT NULL,
+  city           VARCHAR(100) NOT NULL,
+  signup_date    DATE         NOT NULL,
+  status         VARCHAR(10)  NOT NULL
 )
   ENGINE = InnoDB
   CHARSET = utf8;
