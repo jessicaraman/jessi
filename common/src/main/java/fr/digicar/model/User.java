@@ -68,4 +68,13 @@ public class User {
     @Transient
     private String birthdateString;
 
+    /** The sign up date of the client. */
+    @Column(name = "signup_date")
+    private Date signUpDate;
+
+    /** The status of the client. */
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+
 }
