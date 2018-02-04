@@ -51,7 +51,10 @@
         <i class="fa fa-plus mr-1"></i>
         Ajouter un tarif
     </button>
-    <a href="<c:url value="/pricing/search"/>" class="btn btn-primary">Rechercher un tarif</a>
+    <a href="<c:url value="/pricing/search"/>"> <button type="button" class="btn btn-primary mt-2">
+    <i class="fa fa-search mr-1"></i>
+    Rechercher un tarif
+</button></a>
 
     <!-- Modal -->
     <div class="modal fade mt-3" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

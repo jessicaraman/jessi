@@ -51,9 +51,21 @@ public class TarifController {
 
 
     @RequestMapping(value = "/pricing/searchs", method = RequestMethod.POST)
-    public ModelAndView search(@RequestParam("libelle") String libelle) {
+    public ModelAndView search(@RequestParam("libelle") String libelle,@RequestParam("prix_km_min")String prix_km_min,
+                               @RequestParam("prix_km_max")String prix_km_max,@RequestParam("prix_heure_min")String prix_heure_min,
+                               @RequestParam("prix_heure_max")String prix_heure_max,@RequestParam("frais_mensuels_min")String frais_mensuels_min,
+                               @RequestParam("frais_mensuels_max")String frais_mensuels_max){
         ModelAndView modelAndView = new ModelAndView("search-price-form");
-        List<Tarif> foundPrices=tarifService.searchTarifs(libelle,1,2,3,4,5,6);
+        if(libelle.isEmpty()){libelle="none";}
+        if (prix_km_min.isEmpty()){prix_km_min="-1";}
+        if (prix_km_max.isEmpty()){prix_km_max="12345";}
+        if (prix_heure_min.isEmpty()){prix_heure_min="-1";}
+        if (prix_heure_max.isEmpty()){prix_heure_max="12345";}
+        if (frais_mensuels_min.isEmpty()){frais_mensuels_min="-1";}
+        if (frais_mensuels_max.isEmpty()){frais_mensuels_max="12345";}
+        List<Tarif> foundPrices=tarifService.searchTarifs(libelle, Float.parseFloat(prix_km_min), Float.parseFloat(prix_km_max),
+                Float.parseFloat(prix_heure_min),Float.parseFloat(prix_heure_max),Integer.parseInt(frais_mensuels_min),
+                Integer.parseInt(frais_mensuels_max));
         modelAndView.addObject("foundPrices", foundPrices);
         return modelAndView;
     }

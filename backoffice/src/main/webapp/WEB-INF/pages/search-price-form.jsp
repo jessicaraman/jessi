@@ -48,7 +48,10 @@
 </nav>
 <br>
 <div class="container">
-    <a href="<c:url value="/pricing"/>" class="btn btn-primary">Ajout/Liste des Tarifs</a>
+    <a href="<c:url value="/pricing"/>"> <button type="button" class="btn btn-primary mt-2">
+        <i class="fa fa-arrow-circle-left mr-1"></i>
+        Ajout/Liste des tarifs
+    </button></a><br><br>
     <form:form class="form-inline"  action="/pricing/searchs" method="POST">
 
         <div class="md-form form-group">
