@@ -1,9 +1,12 @@
 package fr.digicar.backoffice.controller;
 
-import java.util.List;
-
+import fr.digicar.backoffice.service.*;
 import fr.digicar.model.Car;
-import fr.digicar.backoffice.service.CarService;
+import fr.digicar.model.CarType;
+import fr.digicar.model.FuelType;
+import fr.digicar.model.TransmissionMode;
+import fr.digicar.odt.FilterOdt;
+import fr.digicar.odt.FilterRegistrationIdOdt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,34 +14,213 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequestMapping("/car")
 public class CarController {
 
+    //TODO Gestion exception
+
     @Autowired
     private CarService carService;
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public ModelAndView addPage() {
-        ModelAndView modelAndView = new ModelAndView("home-car-referential");
+    @Autowired
+    private CarTypeService carTypeService;
+
+    @Autowired
+    private TransmissionModeService transmissionModeService;
+
+    @Autowired
+    private FuelTypeService fuelTypeService;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView getViewForListCar() {
+
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
+
+        modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
+        modelAndView.addObject("filters", new FilterOdt());
         modelAndView.addObject("car", new Car());
-        List<Car> cars = carService.getCars();
+        List<Car> cars = carService.getAllCar();
         modelAndView.addObject("cars", cars);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView getViewForaddCar() {
+
+        ModelAndView modelAndView = new ModelAndView("car/add-car-form");
+
+        modelAndView.addObject("car", new Car());
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/adding", method = RequestMethod.POST)
     public ModelAndView addingCar(@ModelAttribute("car") Car car, BindingResult result) {
-        carService.addCar(car);
+        List<Car> cars = carService.getAllCar();
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+        String confirmationMessage;
+        String alertMessage;
 
-        ModelAndView modelAndView = new ModelAndView("home-car-referential");
-        Car addedCar = car;
-        List<Car> cars = carService.getCars();
-        modelAndView.addObject("addedCar", addedCar);
-        modelAndView.addObject("cars", cars);
+        Boolean checked = false;
+        String actual;
+        String expected = car.getRegistration_number();
+        for (int i=0; i<cars.size(); i++){
+            actual = cars.get(i).getRegistration_number();
+            if(actual.equals(expected)){
+                checked= true;
+                break;
+            }
+        }
+        if (checked){
+
+            alertMessage = "Cette immatriculation est connue dans le référentiel ! ";
+            modelAndView.addObject("alertMessage", alertMessage);
+
+        }
+        else{
+            carService.addCar(car);
+            confirmationMessage = "Le véhicule "+car.getRegistration_number()+" a bien été ajouté";
+            modelAndView.addObject("confirmationMessage", confirmationMessage);
+
+        }
+
+        modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
+        modelAndView.addObject("filters", new FilterOdt());
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
+
+        List<Car> actualCar = carService.getAllCar();
+        modelAndView.addObject("cars", actualCar);
+
         return modelAndView;
     }
+
+    @RequestMapping(value = "/deleteCar/{registration_number}/{carId}", method = RequestMethod.GET)
+    public ModelAndView deleteCar(@PathVariable int carId, @PathVariable String registration_number) {
+        carService.deleteCar(carId);
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+        String message;
+
+        message = "Le véhicule "+registration_number+" a bien été supprimé";
+        modelAndView.addObject("message", message);
+        modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
+        modelAndView.addObject("filters", new FilterOdt());
+        List<Car> cars = carService.getAllCar();
+        modelAndView.addObject("cars", cars);
+
+        return modelAndView;
+    }
+    @RequestMapping(value = "/updateCar/{carId}", method = RequestMethod.GET)
+    public ModelAndView getViewForUpdateCar(@PathVariable int carId) {
+        Car car = carService.getCarById(carId);
+
+        ModelAndView modelAndView = new ModelAndView("car/update-car");
+        modelAndView.addObject("car", car);
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/updating", method = RequestMethod.POST)
+    public ModelAndView updateCar(@ModelAttribute("car") Car car) {
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+        String confirmationMessage;
+
+        carService.updateCar(car);
+        confirmationMessage = "Le véhicule "+car.getRegistration_number()+" a bien été mis à jour";
+        modelAndView.addObject("confirmationMessage", confirmationMessage);
+        modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
+        modelAndView.addObject("filters", new FilterOdt());
+
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
+
+        List<Car> cars = carService.getAllCar();
+        modelAndView.addObject("cars", cars);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/registrationId", method = RequestMethod.POST)
+    public ModelAndView findCarByCriteriaNominalCase(@ModelAttribute("filteregistration") final FilterRegistrationIdOdt filterRegistrationIdOdt) {
+        String registration = filterRegistrationIdOdt.getregistrationNumber();
+        String message;
+
+        Car cardfiltered = carService.getCarByRegistration(registration);
+
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+        modelAndView.addObject("car", new Car());
+        modelAndView.addObject("filters", new FilterOdt());
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+
+        if (null == cardfiltered){
+            message = "Veuillez Renseigner un matricule correcte ou utiliser la recherche générale";
+            modelAndView.addObject("message", message);
+        }
+        else {
+            List<Car> carFilter = new ArrayList<>();
+            carFilter.add(cardfiltered);
+            modelAndView.addObject("cars", carFilter);
+        }
+        return modelAndView;
+
+    }
+    @RequestMapping(value = "/allcars", method = RequestMethod.POST)
+    public ModelAndView findCarByCriteria(@ModelAttribute("filters") final FilterOdt filterOdt)
+    {
+        String carBrand = filterOdt.getCarBrand();
+        String modelName = filterOdt.getModelName();
+        String typeCar = filterOdt.getTypeCar();
+        String transmission = filterOdt.getTransmission();
+        String fuelType = filterOdt.getFuelType();
+
+        String mileageMin = filterOdt.getMileageMin();
+        String mileageMax = filterOdt.getMileageMax();
+
+        List<Car> allCarList = carService.CarByCriteria(carBrand, modelName, typeCar, transmission, fuelType, mileageMin, mileageMax);
+
+        String message;
+        List<Car> cars = new ArrayList<>();
+
+        ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
+
+        modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
+        modelAndView.addObject("listOfTransmissionMode", transmissionModeService.getAllTransmissionMode());
+        modelAndView.addObject("listOfFuelType", fuelTypeService.getAllFuelType());
+
+        modelAndView.addObject("car", new Car());
+        modelAndView.addObject("filters", new FilterOdt());
+        modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
+
+        if(allCarList.isEmpty()){
+            message = "Aucun véhicule trouvé pour cette rechercher";
+            modelAndView.addObject("message", message);
+            modelAndView.addObject("cars", cars);
+        }
+        else{
+            modelAndView.addObject("cars", allCarList);
+        }
+
+        return modelAndView;
+    }
+
 
 
 }
