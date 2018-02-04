@@ -44,9 +44,16 @@ public class TarifDAOImpl implements TarifDAO {
             getCurrentSession().delete(tarif);
     }
 
+
     @SuppressWarnings("unchecked")
     public List<Tarif> getTarifs() {
         return getCurrentSession().createQuery("FROM Tarif").list();
     }
+
+    public List<Tarif> searchTarifs(String libelle,float prix_km_min, float prix_km_max,
+                                    float prix_heure_min,float prix_heure_max,int frais_mensuels_min, int frais_mensuels_max) {
+        return getCurrentSession().createQuery("FROM Tarif where libelle='"+libelle+"'").list();
+    }
+
 
 }
