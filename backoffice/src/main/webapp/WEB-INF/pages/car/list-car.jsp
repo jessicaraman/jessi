@@ -58,8 +58,8 @@
                     <td>${car.release_date}</td>
                     <td>${car.comfort}</td>
                     <td>${fuelType}</td>
-                    <td><button class="btn btn-warning" style="margin: 0px;"><a href="<c:url value="updateCar/${car.id}" />" >Modifier</a></button></td>
-                    <td><button style="margin:0px" class="btn btn-danger"><a href="<c:url value="deleteCar/${car.registration_number}/${car.id}" />" >Supprimer</a></button></td>
+                    <td><button class="btn btn-warning" style="margin: 0px;" title="Modifier"><a href="<c:url value="updateCar/${car.id}" />" ><i class="fa fa-pencil" aria-hidden="true"></i></a></button></td>
+                    <td><button style="margin:0px" class="btn btn-danger" title="Supprimer "><a href="<c:url value="deleteCar/${car.registration_number}/${car.id}" />" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></button></td>
                 </tr>
             </c:forEach>
         </table>

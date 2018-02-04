@@ -41,14 +41,14 @@ public class CarServiceImplTest {
         expectedCar.setRegistration_number("IA123AA");
         expectedCar.setRelease_date("2018-01-22");
         expectedCar.setType(4);
-        when(carService.getCar(expectedCar.getId())).thenReturn(expectedCar);
+        when(carService.getCarById(expectedCar.getId())).thenReturn(expectedCar);
 
         carDAO.addCar(expectedCar);
 
         //
         //WHEN
         //
-        Car actualCar = carService.getCar(1);
+        Car actualCar = carService.getCarById(1);
 
         //
         //THEN

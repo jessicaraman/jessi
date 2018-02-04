@@ -43,14 +43,28 @@
     </nav>
 </div>
 
+
+<%--@elvariable id="confirmationMessage" type="java.lang.String"--%>
+<c:if test="${not empty confirmationMessage}">
+    <div class="row">
+        <div class="alert alert-success w-100">${confirmationMessage}</div>
+    </div>
+</c:if>
+
 <div class="container">
     <h5 class="modal-title text-center" id="exampleModalLabel">Mettre à jour le véhicule</h5>
     <%--@elvariable id="car" type="fr.digicar.model.Car"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/car/updating" modelAttribute="car">
         <div class="row">
+            <div>
+            <form:input type="hidden" value="${car.id}" path="id"/>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-4">
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <form:input disabled="true" title="AA-OO1-AA" onKeypress="if((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if((event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
+                    <form:input title="AA-OO1-AA" onKeypress="if((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if((event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
                                 cssStyle="text-transform:uppercase"
                                 maxlength="7" type="text" path="registration_number" value="${car.registration_number}" cssClass="form-control" required="required"/>
                     <form:label path="registration_number">Immatriculation</form:label>
