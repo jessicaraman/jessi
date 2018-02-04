@@ -9,11 +9,9 @@ import javax.persistence.*;
  */
 @Data
 @Entity
-<<<<<<< Updated upstream
+
 @Table(name = "fuel_type")
-=======
-@Table(name = "fuelType")
->>>>>>> Stashed changes
+
 public class FuelType {
 
     @Id

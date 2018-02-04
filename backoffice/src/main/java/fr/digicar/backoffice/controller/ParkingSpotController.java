@@ -80,7 +80,6 @@ public class ParkingSpotController {
     }
 
 
-
     @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
     public ModelAndView editParkingSpotPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
