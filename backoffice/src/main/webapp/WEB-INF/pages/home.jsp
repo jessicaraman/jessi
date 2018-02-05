@@ -52,7 +52,47 @@
     </nav>
     <section class="view intro-1 hm-black-strong">
         <div class="full-bg-img flex-center">
-            <div class="container"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Véhicules</h3>
+                                <p class="card-text">Alpha &amp; Thierno</p>
+                                <a href="<c:url value="/car/"/>" class="btn btn-primary w-100">Ajouter</a>
+                                <a href="<c:url value="/car/add"/>" class="btn btn-primary w-100">Rechercher</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title">Parkings</h3>
+                                <p class="card-text mb-5">Christophe &amp; Djouher</p>
+                                <a href="<c:url value="/parking"/>" class="btn btn-primary w-100">Accéder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title">Tarifs</h3>
+                                <p class="card-text mb-5">Jessica &amp; Philippine</p>
+                                <a href="<c:url value="/pricing"/>" class="btn btn-primary w-100">Accéder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title">Utilisateurs</h3>
+                                <p class="card-text mb-5">Evan</p>
+                                <a href="<c:url value="/users"/>" class="btn btn-primary w-100">Accéder</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </header>
