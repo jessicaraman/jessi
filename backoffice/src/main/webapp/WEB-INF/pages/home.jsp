@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html>
+<html class="full-height">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>CSC Inside</title>
@@ -18,8 +18,8 @@
     </style>
 </head>
 
-<body class="intro-1">
-<div class="header">
+<body>
+<header>
     <nav class="navbar navbar-expand-lg navbar-dark indigo">
         <a class="navbar-brand" href="<c:url value="/"/>">CSC Inside</a>
         <button class="navbar-toggler" type="button"
@@ -31,7 +31,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Véhicules</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Véhicules</a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="<c:url value="/car/"/>">Liste des véhicules</a>
                         <a class="dropdown-item" href="<c:url value="/car/add"/>">Ajouter</a>
@@ -49,9 +50,12 @@
             </ul>
         </div>
     </nav>
-    <!--/.Navbar-->
-    
-</div>
+    <section class="view intro-1 hm-black-strong">
+        <div class="full-bg-img flex-center">
+            <div class="container"></div>
+        </div>
+    </section>
+</header>
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
