@@ -38,23 +38,27 @@ public class UserServiceImpl implements UserService {
         StringBuilder byDepartmentsString = new StringBuilder();
         StringBuilder byStatusesString = new StringBuilder();
         if (searchCriteria.getName() != null && searchCriteria.getName().length() > 0) {
-            byNameString = "firstName like \'%" + searchCriteria.getName() + "%\' or lastName like \'%" + searchCriteria.getName() + "%\'";
+            byNameString = "(firstName like \'%" + searchCriteria.getName() + "%\' or lastName like \'%" + searchCriteria.getName() + "%\')";
         }
         if (searchCriteria.getDepartments() != null && searchCriteria.getDepartments().length > 0) {
+            byDepartmentsString.append("(");
             int i = 0;
             do {
                 byDepartmentsString.append(i > 0 ? " or " : "");
                 byDepartmentsString.append("zipCode like \'").append(searchCriteria.getDepartments()[i]).append("%\'");
                 i++;
             } while (i < searchCriteria.getDepartments().length);
+            byDepartmentsString.append(")");
         }
         if (searchCriteria.getStatuses() != null && searchCriteria.getStatuses().length > 0) {
+            byStatusesString.append("(");
             int i = 0;
             do {
                 byStatusesString.append(i > 0 ? " or " : "");
                 byStatusesString.append("status = \'").append(searchCriteria.getStatuses()[i]).append("\'");
                 i++;
             } while (i < searchCriteria.getStatuses().length);
+            byStatusesString.append(")");
         }
         searchString += byNameString.length() > 0 ? byNameString : "";
         searchString += byNameString.length() > 0 && (byDepartmentsString.length() > 0 || byStatusesString.length() > 0) ? " and " : "";

@@ -28,13 +28,13 @@ public class UserServiceImplTest {
         SearchCriteria searchCriteria1 = new SearchCriteria();
         searchCriteria1.setName("Test");
         String expectedQueryString1 = "from User where " +
-                "firstName like '%Test%' or lastName like '%Test%'";
+                "(firstName like '%Test%' or lastName like '%Test%')";
 
         SearchCriteria searchCriteria2 = new SearchCriteria();
         searchCriteria2.setName("Test");
         searchCriteria2.setStatuses(new UserStatus[]{UserStatus.ACTIVE, UserStatus.BANNED});
         String expectedQueryString2 = expectedQueryString1 +
-                " and status = 'ACTIVE' or status = 'BANNED'";
+                " and (status = 'ACTIVE' or status = 'BANNED')";
 
         assertEquals(expectedQueryString1, new UserServiceImpl().generateSearchString(searchCriteria1));
         assertEquals(expectedQueryString2, new UserServiceImpl().generateSearchString(searchCriteria2));
