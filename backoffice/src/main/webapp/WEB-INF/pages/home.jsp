@@ -59,8 +59,8 @@
                             <div class="card-body">
                                 <h3 class="card-title">Véhicules</h3>
                                 <p class="card-text">Alpha &amp; Thierno</p>
-                                <a href="<c:url value="/car/"/>" class="btn btn-primary w-100">Ajouter</a>
-                                <a href="<c:url value="/car/add"/>" class="btn btn-primary w-100">Rechercher</a>
+                                <a href="<c:url value="/car/add"/>" class="btn btn-primary w-100">Ajouter</a>
+                                <a href="<c:url value="/car/"/>" class="btn btn-primary w-100">Rechercher</a>
                             </div>
                         </div>
                     </div>
