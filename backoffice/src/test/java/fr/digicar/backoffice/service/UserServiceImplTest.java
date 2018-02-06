@@ -16,9 +16,9 @@ public class UserServiceImplTest {
         searchCriteria.setStatuses(new UserStatus[]{UserStatus.ACTIVE, UserStatus.INACTIVE});
 
         String expectedQueryString = "from User where " +
-                "firstName like '%Test%' or lastName like '%Test%' " +
-                "and zipCode like '75%' or zipCode like '92%' or zipCode like '94%' " +
-                "and status = 'ACTIVE' or status = 'INACTIVE'";
+                "(firstName like '%Test%' or lastName like '%Test%') " +
+                "and (zipCode like '75%' or zipCode like '92%' or zipCode like '94%') " +
+                "and (status = 'ACTIVE' or status = 'INACTIVE')";
 
         assertEquals(expectedQueryString, new UserServiceImpl().generateSearchString(searchCriteria));
     }
