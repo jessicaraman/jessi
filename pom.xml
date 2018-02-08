@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.digicar</groupId>
@@ -11,6 +10,12 @@
         <module>backoffice</module>
         <module>common</module>
     </modules>
+
+    <scm>
+        <url>http://fw-i2-digicar:8086/alpha.barry/digicar</url>
+        <connection>scm:git:http://fw-i2-digicar:8086/alpha.barry/digicar.git</connection>
+        <tag>v1.0.0</tag>
+    </scm>
 
     <distributionManagement>
         <repository>
