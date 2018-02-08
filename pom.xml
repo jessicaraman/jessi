@@ -4,7 +4,7 @@
     <groupId>fr.digicar</groupId>
     <artifactId>digicar</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>webportal</module>
         <module>backoffice</module>
