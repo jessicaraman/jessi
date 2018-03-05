@@ -1,4 +1,143 @@
-﻿CREATE TABLE users
+﻿CREATE TABLE car
+(
+  id                  INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  registration_number VARCHAR(40) NULL,
+  mark                VARCHAR(40) NULL,
+  transmission_id     INT(6)      NULL,
+  name_model          VARCHAR(40) NULL,
+  nb_places           VARCHAR(2)  NULL,
+  nb_doors            VARCHAR(2)  NULL,
+  type_id             INT(6)      NULL,
+  comfort             INT(2)      NULL,
+  kilometers          INT(10)     NULL,
+  release_date        DATE        NULL,
+  fuel_type_id        INT(6)      NULL
+)
+  ENGINE = InnoDB
+  CHARSET = utf8;
+
+CREATE INDEX transmission_id
+  ON car (transmission_id);
+
+CREATE INDEX type_id
+  ON car (type_id);
+
+CREATE INDEX fuel_type_id
+  ON car (fuel_type_id);
+
+CREATE TABLE car_type
+(
+  id   INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  name VARCHAR(25) NOT NULL
+)
+  ENGINE = InnoDB
+  CHARSET = utf8;
+
+ALTER TABLE car
+  ADD CONSTRAINT car_ibfk_2
+FOREIGN KEY (type_id) REFERENCES car_type (id);
+
+CREATE TABLE fuel_type
+(
+  id   INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  name VARCHAR(20) NOT NULL
+)
+  ENGINE = InnoDB
+  CHARSET = utf8;
+
+ALTER TABLE car
+  ADD CONSTRAINT car_ibfk_3
+FOREIGN KEY (fuel_type_id) REFERENCES fuel_type (id);
+
+CREATE TABLE parking_spots
+(
+  id            INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  nb_spot       INT          NOT NULL,
+  nb_parking    VARCHAR(40)  NOT NULL,
+  electric_plug TINYINT(1)   NOT NULL,
+  location      VARCHAR(100) NOT NULL,
+  longitude     INT          NULL,
+  latitude      INT          NULL,
+  longueur      INT(4)       NULL,
+  largeur       INT(4)       NULL
+)
+  ENGINE = InnoDB
+  CHARSET = utf8;
+
+CREATE TABLE retard_calcule
+(
+  id_retard            INT AUTO_INCREMENT
+    PRIMARY KEY,
+  immatriculation      VARCHAR(40) NOT NULL,
+  mark                 VARCHAR(40) NULL,
+  model                VARCHAR(40) NULL,
+  heure_retour_prevu   DATETIME    NULL,
+  heure_retour_calcule DATETIME    NULL,
+  penality             DOUBLE      NULL,
+  first_name           VARCHAR(40) NULL,
+  last_name            VARCHAR(40) NULL,
+  phone_number         VARCHAR(15) NULL,
+  tag_appel            TINYINT(1)  NULL,
+  id_session           INT         NOT NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE session_en_cours
+(
+  id_session          INT AUTO_INCREMENT
+    PRIMARY KEY,
+  id_reservation      INT        NOT NULL,
+  id_car              INT        NOT NULL,
+  id_place_depart     INT        NULL,
+  id_place_arrivee    INT        NULL,
+  heure_depart_reel   DATETIME   NULL,
+  heure_arrivee_prevu DATETIME   NULL,
+  heure_arrivee_reel  DATETIME   NULL,
+  tarif               DOUBLE     NULL,
+  id_user             INT        NOT NULL,
+  tag                 TINYINT(1) NOT NULL,
+  penality            DOUBLE     NULL,
+  CONSTRAINT session_en_cours_car_id_fk
+  FOREIGN KEY (id_car) REFERENCES car (id)
+)
+  ENGINE = InnoDB;
+
+CREATE INDEX session_en_cours_car_id_fk
+  ON session_en_cours (id_car);
+
+CREATE INDEX session_en_cours_users_id_fk
+  ON session_en_cours (id_user);
+
+CREATE TABLE tarifs
+(
+  id             INT(12) AUTO_INCREMENT
+    PRIMARY KEY,
+  libelle        VARCHAR(123) NULL,
+  prix_km        FLOAT        NULL,
+  prix_heure     FLOAT        NULL,
+  frais_mensuels INT(231)     NULL
+)
+  ENGINE = InnoDB
+  CHARSET = utf8;
+
+CREATE TABLE transmission_mode
+(
+  id   INT(6) AUTO_INCREMENT
+    PRIMARY KEY,
+  name VARCHAR(20) NOT NULL
+)
+  ENGINE = InnoDB
+  CHARSET = utf8;
+
+ALTER TABLE car
+  ADD CONSTRAINT car_ibfk_1
+FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id);
+
+CREATE TABLE users
 (
   id             INT(6) AUTO_INCREMENT
     PRIMARY KEY,
@@ -19,82 +158,6 @@
   ENGINE = InnoDB
   CHARSET = utf8;
 
-CREATE TABLE parking_spots
-(
-  id            INT(6) AUTO_INCREMENT
-    PRIMARY KEY,
-  nb_spot       INT          NOT NULL,
-  nb_parking    VARCHAR(40)  NOT NULL,
-  electric_plug TINYINT(1)   NOT NULL,
-  location      VARCHAR(100) NOT NULL,
-  longitude     INT          NULL,
-  latitude      INT          NULL,
-  longueur      INT(4)       NULL,
-  largeur       INT(4)       NULL
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-CREATE TABLE tarifs (
-  id             INT(12) AUTO_INCREMENT
-    PRIMARY KEY,
-  libelle        VARCHAR(123),
-  prix_km        FLOAT,
-  prix_heure     FLOAT,
-  frais_mensuels INT(231)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-
-CREATE TABLE car_type
-(
-  id   INT(6) AUTO_INCREMENT
-    PRIMARY KEY,
-  name VARCHAR(25) NOT NULL
-)
-
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-CREATE TABLE fuel_type
-(
-  id   INT(6) AUTO_INCREMENT
-    PRIMARY KEY,
-  name VARCHAR(20) NOT NULL
-)
-
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-CREATE TABLE transmission_mode
-(
-  id   INT(6) AUTO_INCREMENT
-    PRIMARY KEY,
-  name VARCHAR(20) NOT NULL
-)
-
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
-
-CREATE TABLE car
-(
-  id                  INT(6) AUTO_INCREMENT
-    PRIMARY KEY,
-  registration_number VARCHAR(40),
-  mark                VARCHAR(40),
-  transmission_id     INT(6),
-  name_model          VARCHAR(40),
-  nb_places           VARCHAR(2),
-  nb_doors            VARCHAR(2),
-  type_id             INT(6),
-  comfort             INT(2),
-  kilometers          INT(10),
-  release_date        DATE,
-  fuel_type_id        INT(6),
-  FOREIGN KEY (transmission_id) REFERENCES transmission_mode (id),
-  FOREIGN KEY (type_id) REFERENCES car_type (id),
-  FOREIGN KEY (fuel_type_id) REFERENCES fuel_type (id)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+ALTER TABLE session_en_cours
+  ADD CONSTRAINT session_en_cours_users_id_fk
+FOREIGN KEY (id_user) REFERENCES users (id);
