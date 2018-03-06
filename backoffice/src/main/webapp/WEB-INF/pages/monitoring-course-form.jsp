@@ -46,7 +46,7 @@
         <a class="nav-link" href="<c:url value="/modifurgent/"/>">Actualiser</a>
     </li>
 
-    <h3>Liste des places</h3>
+    <h3>Liste des sessions en retard</h3>
 
     <c:if test="${!empty retardCalcule}">
         <table class="table table-hover">
