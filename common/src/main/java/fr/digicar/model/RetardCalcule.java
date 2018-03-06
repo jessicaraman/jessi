@@ -1,27 +1,63 @@
 package fr.digicar.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@AllArgsConstructor
+@Data
+@Entity
+@NoArgsConstructor
+@Table(name = "retard_calcule")
 public class RetardCalcule {
 
-  private long idRetard;
+  @Id
+  @GeneratedValue
+  @Column(name = "id_retard")
+  private int id;
+
+  @Column(name = "immatriculation")
   private String immatriculation;
+
+  @Column(name = "mark")
   private String mark;
+
+  @Column(name = "model")
   private String model;
-  private java.sql.Timestamp heureRetourPrevu;
-  private java.sql.Timestamp heureRetourCalcule;
+
+  @Column(name = "heure_retour_prevu")
+  private Date heureRetourPrevu;
+
+  @Column(name = "heure_retour_calcule")
+  private Date heureRetourCalcule;
+
+  @Column(name = "penality")
   private double penality;
+
+  @Column(name = "first_name")
   private String firstName;
+
+  @Column(name = "last_name")
   private String lastName;
+
+  @Column(name = "phone_number")
   private String phoneNumber;
-  private long tagAppel;
 
+  @Column(name = "tag_appel")
+  private boolean tagAppel;
 
-  public long getIdRetard() {
-    return idRetard;
+  @Column(name = "id_session")
+  private int idSession;
+
+  public int getId() {
+    return id;
   }
 
-  public void setIdRetard(long idRetard) {
-    this.idRetard = idRetard;
+  public void setId(int idRetard) {
+    this.id = idRetard;
   }
 
 
@@ -52,20 +88,20 @@ public class RetardCalcule {
   }
 
 
-  public java.sql.Timestamp getHeureRetourPrevu() {
+  public Date getHeureRetourPrevu() {
     return heureRetourPrevu;
   }
 
-  public void setHeureRetourPrevu(java.sql.Timestamp heureRetourPrevu) {
+  public void setHeureRetourPrevu(Date heureRetourPrevu) {
     this.heureRetourPrevu = heureRetourPrevu;
   }
 
 
-  public java.sql.Timestamp getHeureRetourCalcule() {
+  public Date getHeureRetourCalcule() {
     return heureRetourCalcule;
   }
 
-  public void setHeureRetourCalcule(java.sql.Timestamp heureRetourCalcule) {
+  public void setHeureRetourCalcule(Date heureRetourCalcule) {
     this.heureRetourCalcule = heureRetourCalcule;
   }
 
@@ -106,12 +142,19 @@ public class RetardCalcule {
   }
 
 
-  public long getTagAppel() {
+  public boolean getTagAppel() {
     return tagAppel;
   }
 
-  public void setTagAppel(long tagAppel) {
+  public void setTagAppel(boolean tagAppel) {
     this.tagAppel = tagAppel;
   }
 
+  public int isIdSession() {
+    return idSession;
+  }
+
+  public void setIdSession(int idSession) {
+    this.idSession = idSession;
+  }
 }

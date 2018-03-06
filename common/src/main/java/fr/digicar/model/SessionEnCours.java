@@ -18,6 +18,7 @@ public class SessionEnCours {
   @Column(name = "id_session")
   private long idSession;
 
+
   @Column(name = "id_reservation")
   private long idReservation;
 
@@ -44,6 +45,12 @@ public class SessionEnCours {
 
   @Column(name = "id_user")
   private long idUser;
+
+  @Column(name = "tag")
+  private boolean tag;
+
+  @Column(name = "penality")
+  private double penality;
 
   public long getIdSession() {
     return idSession;
@@ -134,4 +141,19 @@ public class SessionEnCours {
     this.idUser = idUser;
   }
 
+  public boolean isTag() {
+    return tag;
+  }
+
+  public void setTag(boolean tag) {
+    this.tag = tag;
+  }
+
+  public double getPenality() {
+    return penality;
+  }
+
+  public void setPenality(double penality) {
+    this.penality = penality;
+  }
 }

@@ -44,6 +44,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/modifurgent/"/>">Course Monitoring</a>
+                </li>
             </ul>
         </div>
     </nav>
