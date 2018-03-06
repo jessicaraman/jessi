@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>CSC - BackOffice</title>
+    <title>CSC Inside</title>
     <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
     <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
@@ -15,7 +15,7 @@
 <body>
 <div class="header">
     <nav class="navbar navbar-expand-lg navbar-dark indigo">
-        <a class="navbar-brand" href="#">CSC Inside</a>
+        <a class="navbar-brand" href="<c:url value="/"/>">CSC Inside</a>
         <button class="navbar-toggler" type="button"
                 data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
@@ -24,18 +24,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maintain vehicle referential<span class="sr-only">(current)</span></a>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Véhicules</a>
                     <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
                         <a class="dropdown-item" href="">Ajouter</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/parking/add"/>">Maintain parking spot referential</a>
+                    <a class="nav-link" href="<c:url value="/parking"/>">Places de parking</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/pricing"/>">Maintain pricing referential</a>
+                    <a class="nav-link" href="<c:url value="/pricing"/>">Tarifs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/users"/>">Utilisateurs</a>
                 </li>
 
             </ul>

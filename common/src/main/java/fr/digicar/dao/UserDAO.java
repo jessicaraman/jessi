@@ -14,7 +14,9 @@ public interface UserDAO {
 
     void deleteUser(int id);
 
-    List<User> searchUsers();
+    List<User> getUsers();
+
+    List<User> filterUsers(String searchString);
 
     boolean checkEmailExistence(String email);
 

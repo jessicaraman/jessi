@@ -76,6 +76,7 @@ CREATE TABLE transmission_mode
 
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
 CREATE TABLE car
 (
   id                  INT(6) AUTO_INCREMENT

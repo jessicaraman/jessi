@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 @Service
 @Transactional
 public class TarifServiceImpl implements TarifService {
@@ -37,6 +36,12 @@ public class TarifServiceImpl implements TarifService {
     @Override
     public List<Tarif> getTarifs() {
         return tarifDAO.getTarifs();
+    }
+
+    @Override
+    public List<Tarif> searchTarifs(String libelle,float prix_km_min, float prix_km_max,float prix_heure_min,
+                                    float prix_heure_max,int frais_mensuels_min, int frais_mensuels_max) {
+        return tarifDAO.searchTarifs(libelle,prix_km_min,prix_km_max,prix_heure_min,prix_heure_max,frais_mensuels_min,frais_mensuels_max);
     }
 
 }

@@ -1,16 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: barry
-  Date: 15/01/2018
-  Time: 19:20
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <div class="container">
 <h3 class="text-center">Liste des véhicules</h3>
-
-
 
 
 <div class="table">
