@@ -104,8 +104,9 @@
             <div class="col-8">
                 <div class="md-form">
                     <form:input type="text" id="phone" cssClass="form-control validate" path="phoneNumber"
-                                required="required"/>
-                    <form:label for="phone" path="phoneNumber">
+                                pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" required="required"
+                                onkeyup="this.value=this.value.replace(/\b(\d{2})(\d{2})\b/g, '$1 $2')"/>
+                    <form:label for="phone" path="phoneNumber" data-error="Numéro invalide">
                         Numéro de téléphone
                         <span class="text-danger">*</span>
                     </form:label>
@@ -115,7 +116,7 @@
         <div class="row mt-1">
             <div class="col-12">
                 <div class="md-form">
-                    <form:input type="text" id="addressline1" cssClass="form-control" path="addressLine1"
+                    <form:input type="text" id="addressline1" cssClass="form-control validate" path="addressLine1"
                                 required="required"/>
                     <form:label for="addressline1" path="addressLine1">
                         Adresse
@@ -128,16 +129,18 @@
             <div class="col-12">
                 <div class="md-form">
                     <form:input type="text" id="addressline2" cssClass="form-control" path="addressLine2"/>
-                    <form:label for="addressline2"
-                                path="addressLine2">Complément d'adresse (immeuble, étage, etc.)</form:label>
+                    <form:label for="addressline2" path="addressLine2">
+                        Complément d'adresse (immeuble, étage, etc.)
+                    </form:label>
                 </div>
             </div>
         </div>
         <div class="row mt-1">
             <div class="col-4">
                 <div class="md-form">
-                    <form:input type="text" id="zipcode" cssClass="form-control" path="zipCode" required="required"/>
-                    <form:label for="zipcode" path="zipCode">
+                    <form:input type="text" id="zipcode" cssClass="form-control validate" path="zipCode" maxlength="5"
+                                pattern="[0-9]{5}" required="required"/>
+                    <form:label for="zipcode" path="zipCode" data-error="Code postal invalide">
                         Code postal
                         <span class="text-danger">*</span>
                     </form:label>

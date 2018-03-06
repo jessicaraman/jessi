@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -42,10 +43,23 @@ public class UserDAOImpl implements UserDAO {
             getCurrentSession().delete(user);
     }
 
+    public List<User> searchUsers() {
+        try {
+            return getCurrentSession().createQuery("from User").list();
+        } catch (ClassCastException e) {
+            return new ArrayList<User>();
+        }
+    }
+
     public boolean checkEmailExistence(String email) {
         Query query = getCurrentSession().createQuery("from User where email = :email");
         query.setString("email", email);
-        List<User> result = (List<User>) query.list();
+        List<User> result;
+        try {
+            result = (List<User>) query.list();
+        } catch (ClassCastException e) {
+            result = new ArrayList<User>();
+        }
         return !(result.size() > 0);
     }
 

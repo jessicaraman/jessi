@@ -1,18 +1,17 @@
-
 #----------------------------------------------------
-#                 populate data
+#                 POPULATE DATA
 #----------------------------------------------------
 
-insert into digicar.car_type VALUES(DEFAULT,"Citadine");
-insert into digicar.car_type VALUES(DEFAULT,"Cross-over");
-insert into digicar.car_type VALUES(DEFAULT,"4X4");
-insert into digicar.car_type VALUES(DEFAULT,"Berline familiale");
-insert into digicar.car_type VALUES(DEFAULT,"Voiture de sport");
-insert into digicar.car_type VALUES(DEFAULT,"Voiture de collection ");
+INSERT INTO digicar.car_type VALUES (DEFAULT, 'Citadine');
+INSERT INTO digicar.car_type VALUES (DEFAULT, 'Cross-over');
+INSERT INTO digicar.car_type VALUES (DEFAULT, '4X4');
+INSERT INTO digicar.car_type VALUES (DEFAULT, 'Berline familiale');
+INSERT INTO digicar.car_type VALUES (DEFAULT, 'Voiture de sport');
+INSERT INTO digicar.car_type VALUES (DEFAULT, 'Voiture de collection ');
 
-insert into digicar.transmission_mode VALUES(DEFAULT,"manuelle");
-insert into digicar.transmission_mode VALUES(DEFAULT,"automatique");
+INSERT INTO digicar.transmission_mode VALUES (DEFAULT, 'manuelle');
+INSERT INTO digicar.transmission_mode VALUES (DEFAULT, 'automatique');
 
-insert into digicar.fuelType VALUES(DEFAULT,"essence");
-insert into digicar.fuelType VALUES(DEFAULT,"diesel");
-insert into digicar.fuelType VALUES(DEFAULT,"electrique");
+INSERT INTO digicar.fuel_type VALUES (DEFAULT, 'essence');
+INSERT INTO digicar.fuel_type VALUES (DEFAULT, 'diesel');
+INSERT INTO digicar.fuel_type VALUES (DEFAULT, 'electrique');

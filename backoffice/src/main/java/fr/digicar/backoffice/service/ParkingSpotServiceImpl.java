@@ -42,4 +42,9 @@ public class ParkingSpotServiceImpl implements ParkingSpotService {
         return parkingSpotDAO.getParkingSpots();
     }
 
+    @Override
+    public List<ParkingSpot> getParkingSpotByObj(ParkingSpot p) {
+        return parkingSpotDAO.getParkingSpotByObj(p);
+    }
+
 }
