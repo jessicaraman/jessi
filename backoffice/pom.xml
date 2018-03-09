@@ -26,13 +26,13 @@
             <artifactId>hibernate-validator</artifactId>
             <version>4.1.0.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.maps/google-maps-services -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>4.1.0.Final</version>
+            <groupId>com.google.maps</groupId>
+            <artifactId>google-maps-services</artifactId>
+            <version>0.2.6</version>
         </dependency>
     </dependencies>
-
     <build>
         <finalName>backoffice</finalName>
         <plugins>
@@ -46,5 +46,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

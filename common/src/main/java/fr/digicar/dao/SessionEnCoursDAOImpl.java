@@ -1,61 +1,57 @@
 package fr.digicar.dao;
 
-import fr.digicar.model.ParkingSpot;
-import org.hibernate.Query;
+import fr.digicar.model.SessionEnCours;
+import fr.digicar.model.SessionEnCours;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.maps.*;
-import com.google.maps.model.GeocodingResult;
-
 
 
 @Repository
-public class ParkingSpotDAOImpl implements ParkingSpotDAO {
+public class SessionEnCoursDAOImpl implements SessionEnCoursDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
-
 
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
 
-    public void addParkingSpot(ParkingSpot parkingSpot) {
-        getCurrentSession().save(parkingSpot);
+    public void addSessionEnCours(SessionEnCours sessionEnCours) {
+        getCurrentSession().save(sessionEnCours);
     }
 
-    public void updateParkingSpot(ParkingSpot parkingSpot) {
-        ParkingSpot parkingSpotUpdate = getParkingSpot(parkingSpot.getId());
-        parkingSpotUpdate.setNbSpot(parkingSpot.getNbSpot());
-        getCurrentSession().update(parkingSpotUpdate);
+   
+
+    public void updateSessionEnCours(SessionEnCours sessionEnCours) {
+        SessionEnCours sessionEnCoursUpdate = getSessionEnCours(sessionEnCours.getIdSession());
+        sessionEnCoursUpdate.setPenality(sessionEnCours.getPenality());
+        getCurrentSession().update(sessionEnCoursUpdate);
 
     }
 
-    public ParkingSpot getParkingSpot(int id) {
-        return (ParkingSpot) getCurrentSession().get(ParkingSpot.class, id);
+    public SessionEnCours getSessionEnCours(int id) {
+        return (SessionEnCours) getCurrentSession().get(SessionEnCours.class, id);
     }
 
-    public List<ParkingSpot> getParkingSpotByObj(ParkingSpot p) {
+    public List<SessionEnCours> getSessionEnCoursByObj(SessionEnCours p) {
 
 
-        List<ParkingSpot> listPark=new ArrayList<ParkingSpot>();
-        System.out.println(p.getNbSpot()+" place "+p.getLocation()+" VILLE  "+p.getNbParking()+" parking");
+        List<SessionEnCours> listRetard=new ArrayList<SessionEnCours>();
+        /*System.out.println(p.getNbSpot()+" place "+p.getLocation()+" VILLE  "+p.getNbParking()+" parking");
         System.out.println((p.getNbSpot()!=null) +"/"+ !p.getNbParking().equals("")+"/"+!p.getLocation().equals(""));
-        /*if (p.getNbSpot()!=null&&!p.getNbParking().equals("")&&!p.getLocation().equals("")){
-            Query query=getCurrentSession().createQuery("FROM ParkingSpot WHERE nbSpot=:nbspot AND nbParking=:nbpark AND location=:locat");
-            query.setParameter("nbspot",p.getNbSpot());
-            query.setParameter("nbpark",p.getNbParking());
-            query.setParameter("locat",p.getLocation());
-            listPark.addAll(query.list());
-            System.out.println(listPark.size()+" TAILLE ");
 
-                }*/
+
 
         if (p.getNbSpot()!=null){
             if(!p.getNbParking().equals("")){
@@ -106,7 +102,7 @@ public class ParkingSpotDAOImpl implements ParkingSpotDAO {
                 }
             }
 
-        }
+        }*/
         /*if (p.getId()!=null){
             listPark.add((ParkingSpot) getCurrentSession().get(ParkingSpot.class, p.getId()));
         }
@@ -134,19 +130,22 @@ public class ParkingSpotDAOImpl implements ParkingSpotDAO {
             }
         }
         listPark=listParkcopy;*/
-        return listPark;
+        return listRetard;
     }
 
-    public void deleteParkingSpot(int id) {
-        ParkingSpot parkingSpot = getParkingSpot(id);
-        if (parkingSpot != null)
-            getCurrentSession().delete(parkingSpot);
+    public void deleteSessionEnCours(int id) {
+        SessionEnCours sessionEnCours = getSessionEnCours(id);
+        if (sessionEnCours != null)
+            getCurrentSession().delete(sessionEnCours);
     }
 
     @SuppressWarnings("unchecked")
 
-    public List<ParkingSpot> getParkingSpots() {
-        return getCurrentSession().createQuery("FROM ParkingSpot").list();
+    public List<SessionEnCours> getSessionsEnCours() {
+        return getCurrentSession().createQuery("FROM SessionEnCours").list();
     }
+
+
+
 
 }

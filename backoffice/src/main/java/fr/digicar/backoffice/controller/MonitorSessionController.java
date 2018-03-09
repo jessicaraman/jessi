@@ -4,6 +4,7 @@ import fr.digicar.backoffice.service.RetardCalculeService;
 
 
 import fr.digicar.model.RetardCalcule;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -27,10 +29,11 @@ public class MonitorSessionController {
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelAndView AddMonitorCoursePage() {
+    public ModelAndView AddMonitorCoursePage() throws IOException, JSONException {
         ModelAndView modelAndView = new ModelAndView("monitoring-course-form");
         modelAndView.addObject("ligneRetard", new RetardCalcule());
-        List<RetardCalcule> retardscalcule = retardCalculeService.getRetardsCalcule();
+        retardCalculeService.addRetardCalculeAutomatically();
+        List<RetardCalcule> retardscalcule = retardCalculeService.getRetardsCalcule();//ajouter condition de sup
         modelAndView.addObject("retardCalcule", retardscalcule);
         return modelAndView;
     }
