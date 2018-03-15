@@ -1,11 +1,26 @@
 package fr.digicar.dao;
 
 import fr.digicar.model.SessionEnCours;
+<<<<<<< HEAD
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+=======
+import fr.digicar.model.SessionEnCours;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.io.IOException;
+>>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +43,11 @@ public class SessionEnCoursDAOImpl implements SessionEnCoursDAO {
 
     public void updateSessionEnCours(SessionEnCours sessionEnCours) {
         SessionEnCours sessionEnCoursUpdate = getSessionEnCours(sessionEnCours.getIdSession());
+<<<<<<< HEAD
         sessionEnCoursUpdate.setTag(sessionEnCours.isTag());
+=======
+        sessionEnCoursUpdate.setPenality(sessionEnCours.getPenality());
+>>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
         getCurrentSession().update(sessionEnCoursUpdate);
 
     }
@@ -135,10 +154,14 @@ public class SessionEnCoursDAOImpl implements SessionEnCoursDAO {
     @SuppressWarnings("unchecked")
 
     public List<SessionEnCours> getSessionsEnCours() {
+<<<<<<< HEAD
 
         List<SessionEnCours> L=getCurrentSession().createQuery("FROM SessionEnCours").list();
 
         return L;
+=======
+        return getCurrentSession().createQuery("FROM SessionEnCours").list();
+>>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
     }
 
 

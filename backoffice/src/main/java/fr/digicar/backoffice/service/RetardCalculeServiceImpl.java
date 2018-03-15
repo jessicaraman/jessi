@@ -2,6 +2,7 @@ package fr.digicar.backoffice.service;
 
 import fr.digicar.dao.RetardCalculeDAO;
 import fr.digicar.model.RetardCalcule;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,11 @@ public class RetardCalculeServiceImpl implements RetardCalculeService {
     }
 
     @Override
+<<<<<<< HEAD
     public void addRetardCalculeAutomatically() throws IOException {retardCalculeDAO.addRetardCalculeAutomatically();}
+=======
+    public void addRetardCalculeAutomatically() throws IOException, JSONException{retardCalculeDAO.addRetardCalculeAutomatically();}
+>>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
 
     @Override
     public void updateRetardCalcule(RetardCalcule retardCalcule) {

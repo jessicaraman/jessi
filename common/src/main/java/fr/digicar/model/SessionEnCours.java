@@ -53,10 +53,17 @@ public class SessionEnCours {
   private float penality;
 
   @Column(name = "latitude_current")
+<<<<<<< HEAD
   private float latitudeCurrent;
 
   @Column(name = "longitude_current")
   private float longitudeCurrent;
+=======
+  private int latitudeCurrent;
+
+  @Column(name = "longitude_current")
+  private int longitudeCurrent;
+>>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
 
   public int getIdSession() {
     return idSession;
@@ -163,6 +170,7 @@ public class SessionEnCours {
     this.penality = penality;
   }
 
+<<<<<<< HEAD
   public float getLatitudeCurrent() {
     return latitudeCurrent;
   }
@@ -176,6 +184,21 @@ public class SessionEnCours {
   }
 
   public void setLongitudeCurrent(float longitudeCurrent) {
+=======
+  public int getLatitudeCurrent() {
+    return latitudeCurrent;
+  }
+
+  public void setLatitudeCurrent(int latitudeCurrent) {
+    this.latitudeCurrent = latitudeCurrent;
+  }
+
+  public int getLongitudeCurrent() {
+    return longitudeCurrent;
+  }
+
+  public void setLongitudeCurrent(int longitudeCurrent) {
+>>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
     this.longitudeCurrent = longitudeCurrent;
   }
 }

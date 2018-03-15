@@ -1,6 +1,7 @@
 package fr.digicar.backoffice.service;
 
 import fr.digicar.model.RetardCalcule;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 public interface RetardCalculeService {
 
     void addRetardCalcule(RetardCalcule retardCalcule);
+    void addRetardCalculeAutomatically() throws IOException, JSONException;
 
     void addRetardCalculeAutomatically() throws IOException;
 

@@ -7,14 +7,20 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import java.util.ArrayList;
 import java.util.List;
+import com.google.maps.*;
+import com.google.maps.model.GeocodingResult;
+
+
 
 @Repository
 public class ParkingSpotDAOImpl implements ParkingSpotDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
+
 
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();

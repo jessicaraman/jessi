@@ -5,7 +5,11 @@ import fr.digicar.backoffice.service.RetardCalculeService;
 
 import fr.digicar.backoffice.service.SessionEnCoursService;
 import fr.digicar.model.RetardCalcule;
+<<<<<<< HEAD
 import fr.digicar.model.SessionEnCours;
+=======
+import org.json.JSONException;
+>>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
 import java.util.List;
 
 
@@ -36,6 +43,7 @@ public class MonitorSessionController {
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
+<<<<<<< HEAD
     public ModelAndView AddMonitorCoursePage() throws IOException {
         ModelAndView modelAndView = new ModelAndView("monitoring-course-form");
         modelAndView.addObject("ligneRetard", new RetardCalcule());
@@ -61,6 +69,14 @@ public class MonitorSessionController {
         modelAndView.addObject("retardCalcule", retardcalculesNonAppeler);
         modelAndView.addObject("retardCalculeAppeler", retardcalculesAppeler);
         modelAndView.addObject("retardCalculeNonEnRetard", retardcalculesNonEnRetard);
+=======
+    public ModelAndView AddMonitorCoursePage() throws IOException, JSONException {
+        ModelAndView modelAndView = new ModelAndView("monitoring-course-form");
+        modelAndView.addObject("ligneRetard", new RetardCalcule());
+        retardCalculeService.addRetardCalculeAutomatically();
+        List<RetardCalcule> retardscalcule = retardCalculeService.getRetardsCalcule();//ajouter condition de sup
+        modelAndView.addObject("retardCalcule", retardscalcule);
+>>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
         return modelAndView;
     }
 
