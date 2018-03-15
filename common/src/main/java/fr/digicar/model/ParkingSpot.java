@@ -31,10 +31,10 @@ public class ParkingSpot {
     private String location;
 
     @Column(name = "longitude")
-    private Integer longitude;
+    private float longitude;
 
     @Column(name = "latitude")
-    private Integer latitude;
+    private float latitude;
 
     @Column(name = "longueur")
     private Integer longueur;
@@ -61,19 +61,19 @@ public class ParkingSpot {
         this.longueur = longueur;
     }
 
-    public Integer getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Integer latitude) {
+    public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
 
-    public Integer getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Integer longitude) {
+    public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
 

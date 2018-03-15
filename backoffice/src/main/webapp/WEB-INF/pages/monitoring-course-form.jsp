@@ -69,6 +69,7 @@
                 <c:if test="${!empty id} && ${place.id}==${id}">
                     <c:set value="table-success" var="cssClass"></c:set>
                 </c:if>
+
                 <tr class="${cssClass}">
                     <td>${place.id}</td>
                     <td>${place.immatriculation}</td>
@@ -83,7 +84,7 @@
                     <td>${place.tagAppel}</td>
                     <td>${place.idSession}</td>
                     <td>
-                        <form:form method="GET" modelAttribute="ligneRetard" action="/modifurgent/${place.id}">
+                        <form:form method="GET" modelAttribute="ligneRetard" action="/modifurgent/cloturer/${place.id}">
                         <button style="margin:0px" type="submit" class="btn btn-danger">Cloturer
                         </button>
                         </form:form>
@@ -97,7 +98,104 @@
     </c:if>
 
     <br>
+    <h3>Liste des sessions en retard déjà appelées</h3>
 
+    <c:if test="${!empty retardCalculeAppeler}">
+        <table class="table table-hover">
+            <tr>
+                <th width="80">Id du retard</th>
+                <th width="120">Immatriculation</th>
+                <th width="30">Marque</th>
+                <th width="60">Modèle</th>
+                <th width="100">Heure prévue du retour</th>
+                <th width="30">Heure calculée du retour</th>
+                <th width="30">Penalité</th>
+                <th width="30">Nom</th>
+                <th width="30">Prénom</th>
+                <th width="30">Téléphone</th>
+                <th width="10">Tag</th>
+                <th width="30">Id de la session</th>
+
+            </tr>
+            <c:forEach items="${retardCalculeAppeler}" var="place">
+                <c:if test="${!empty id} && ${place.id}==${id}">
+                    <c:set value="table-success" var="cssClass"></c:set>
+                </c:if>
+
+                <tr class="${cssClass}">
+                    <td>${place.id}</td>
+                    <td>${place.immatriculation}</td>
+                    <td>${place.mark}</td>
+                    <td>${place.model}</td>
+                    <td>${place.heureRetourPrevu}</td>
+                    <td>${place.heureRetourCalcule}</td>
+                    <td>${place.penality}</td>
+                    <td>${place.firstName}</td>
+                    <td>${place.lastName}</td>
+                    <td>${place.phoneNumber}</td>
+                    <td>${place.tagAppel}</td>
+                    <td>${place.idSession}</td>
+                    <td>
+                        <form:form method="GET" modelAttribute="ligneRetard" action="/modifurgent/reouvrir/${place.id}">
+                            <button style="margin:0px" type="submit" class="btn btn-danger">Relancer
+                            </button>
+                        </form:form>
+                    </td>
+
+
+                </tr>
+
+            </c:forEach>
+        </table>
+    </c:if>
+
+    <br>
+
+    <h3>Liste des sessions en cours Non en retard</h3>
+
+    <c:if test="${!empty retardCalculeNonEnRetard}">
+        <table class="table table-hover">
+            <tr>
+                <th width="80">Id du retard</th>
+                <th width="120">Immatriculation</th>
+                <th width="30">Marque</th>
+                <th width="60">Modèle</th>
+                <th width="100">Heure prévue du retour</th>
+                <th width="30">Heure calculée du retour</th>
+                <th width="30">Penalité</th>
+                <th width="30">Nom</th>
+                <th width="30">Prénom</th>
+                <th width="30">Téléphone</th>
+                <th width="10">Tag</th>
+                <th width="30">Id de la session</th>
+
+            </tr>
+            <c:forEach items="${retardCalculeNonEnRetard}" var="place">
+                <c:if test="${!empty id} && ${place.id}==${id}">
+                    <c:set value="table-success" var="cssClass"></c:set>
+                </c:if>
+
+                <tr class="${cssClass}">
+                    <td>${place.id}</td>
+                    <td>${place.immatriculation}</td>
+                    <td>${place.mark}</td>
+                    <td>${place.model}</td>
+                    <td>${place.heureRetourPrevu}</td>
+                    <td>${place.heureRetourCalcule}</td>
+                    <td>${place.penality}</td>
+                    <td>${place.firstName}</td>
+                    <td>${place.lastName}</td>
+                    <td>${place.phoneNumber}</td>
+                    <td>${place.tagAppel}</td>
+                    <td>${place.idSession}</td>
+
+                </tr>
+
+            </c:forEach>
+        </table>
+    </c:if>
+
+    <br>
 
 
 

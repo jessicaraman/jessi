@@ -2,11 +2,14 @@ package fr.digicar.backoffice.service;
 
 import fr.digicar.model.RetardCalcule;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface RetardCalculeService {
 
     void addRetardCalcule(RetardCalcule retardCalcule);
+
+    void addRetardCalculeAutomatically() throws IOException;
 
     void updateRetardCalcule(RetardCalcule retardCalcule);
 
@@ -17,4 +20,5 @@ public interface RetardCalculeService {
     List<RetardCalcule> getRetardsCalcule();
     List<RetardCalcule> getRetardCalculeByObj(RetardCalcule p);
 
+    void deleteAllRetardsCalcule();
 }

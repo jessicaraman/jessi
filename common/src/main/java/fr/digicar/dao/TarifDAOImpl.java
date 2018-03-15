@@ -50,6 +50,13 @@ public class TarifDAOImpl implements TarifDAO {
         return getCurrentSession().createQuery("FROM Tarif").list();
     }
 
+
+    public List<Tarif> getTarifsByLibelle(String libelle){
+        String sql ="FROM Tarif";
+        if(libelle!="none"){ sql=sql+" where libelle ='"+libelle+"'";}
+        return getCurrentSession().createQuery(sql).list();
+    }
+
     public List<Tarif> searchTarifs(String libelle,float prix_km_min, float prix_km_max,
                                     float prix_heure_min,float prix_heure_max,int frais_mensuels_min, int frais_mensuels_max) {
         String sql ="FROM Tarif";

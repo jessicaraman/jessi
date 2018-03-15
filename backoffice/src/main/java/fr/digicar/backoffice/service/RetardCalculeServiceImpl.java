@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -20,6 +21,8 @@ public class RetardCalculeServiceImpl implements RetardCalculeService {
         retardCalculeDAO.addRetardCalcule(retardCalcule);
     }
 
+    @Override
+    public void addRetardCalculeAutomatically() throws IOException {retardCalculeDAO.addRetardCalculeAutomatically();}
 
     @Override
     public void updateRetardCalcule(RetardCalcule retardCalcule) {
@@ -44,6 +47,11 @@ public class RetardCalculeServiceImpl implements RetardCalculeService {
     @Override
     public List<RetardCalcule> getRetardCalculeByObj(RetardCalcule p) {
         return retardCalculeDAO.getRetardCalculeByObj(p);
+    }
+
+    @Override
+    public void deleteAllRetardsCalcule() {
+        retardCalculeDAO.deleteAllRetardsCalcule();
     }
 
 }

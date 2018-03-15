@@ -16,20 +16,20 @@ public class SessionEnCours {
   @Id
   @GeneratedValue
   @Column(name = "id_session")
-  private long idSession;
+  private int idSession;
 
 
   @Column(name = "id_reservation")
-  private long idReservation;
+  private int idReservation;
 
   @Column(name = "id_car")
-  private long idCar;
+  private int idCar;
 
   @Column(name = "id_place_depart")
-  private long idPlaceDepart;
+  private int idPlaceDepart;
 
   @Column(name = "id_place_arrivee")
-  private long idPlaceArrivee;
+  private int idPlaceArrivee;
 
   @Column(name = "heure_depart_reel")
   private java.sql.Timestamp heureDepartReel;
@@ -44,55 +44,61 @@ public class SessionEnCours {
   private double tarif;
 
   @Column(name = "id_user")
-  private long idUser;
+  private int idUser;
 
   @Column(name = "tag")
   private boolean tag;
 
   @Column(name = "penality")
-  private double penality;
+  private float penality;
 
-  public long getIdSession() {
+  @Column(name = "latitude_current")
+  private float latitudeCurrent;
+
+  @Column(name = "longitude_current")
+  private float longitudeCurrent;
+
+  public int getIdSession() {
     return idSession;
   }
 
-  public void setIdSession(long idSession) {
+  public void setIdSession(int idSession) {
     this.idSession = idSession;
   }
 
 
-  public long getIdReservation() {
+  public int getIdReservation() {
     return idReservation;
   }
 
-  public void setIdReservation(long idReservation) {
+  public void setIdReservation(int idReservation) {
     this.idReservation = idReservation;
   }
 
 
-  public long getIdCar() {
+  public int getIdCar() {
     return idCar;
   }
 
-  public void setIdCar(long idCar) {
+  public void setIdCar(int idCar) {
     this.idCar = idCar;
   }
 
 
-  public long getIdPlaceDepart() {
+  public int getIdPlaceDepart() {
     return idPlaceDepart;
   }
 
-  public void setIdPlaceDepart(long idPlaceDepart) {
+  public void setIdPlaceDepart(int idPlaceDepart) {
     this.idPlaceDepart = idPlaceDepart;
   }
 
 
-  public long getIdPlaceArrivee() {
+  public int getIdPlaceArrivee() {
     return idPlaceArrivee;
   }
 
-  public void setIdPlaceArrivee(long idPlaceArrivee) {
+  public void setIdPlaceArrivee(int idPlaceArrivee) {
     this.idPlaceArrivee = idPlaceArrivee;
   }
 
@@ -133,11 +139,11 @@ public class SessionEnCours {
   }
 
 
-  public long getIdUser() {
+  public int getIdUser() {
     return idUser;
   }
 
-  public void setIdUser(long idUser) {
+  public void setIdUser(int idUser) {
     this.idUser = idUser;
   }
 
@@ -149,11 +155,28 @@ public class SessionEnCours {
     this.tag = tag;
   }
 
-  public double getPenality() {
+  public float getPenality() {
     return penality;
   }
 
-  public void setPenality(double penality) {
+  public void setPenality(float penality) {
     this.penality = penality;
   }
+
+  public float getLatitudeCurrent() {
+    return latitudeCurrent;
+  }
+
+  public void setLatitudeCurrent(float latitudeCurrent) {
+    this.latitudeCurrent = latitudeCurrent;
+  }
+
+  public float getLongitudeCurrent() {
+    return longitudeCurrent;
+  }
+
+  public void setLongitudeCurrent(float longitudeCurrent) {
+    this.longitudeCurrent = longitudeCurrent;
+  }
 }
+

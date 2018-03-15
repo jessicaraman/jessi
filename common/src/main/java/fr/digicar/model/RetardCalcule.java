@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Time;
 
 @AllArgsConstructor
 @Data
@@ -29,13 +29,13 @@ public class RetardCalcule {
   private String model;
 
   @Column(name = "heure_retour_prevu")
-  private Date heureRetourPrevu;
+  private Time heureRetourPrevu;
 
   @Column(name = "heure_retour_calcule")
-  private Date heureRetourCalcule;
+  private Time heureRetourCalcule;
 
   @Column(name = "penality")
-  private double penality;
+  private float penality;
 
   @Column(name = "first_name")
   private String firstName;
@@ -88,29 +88,29 @@ public class RetardCalcule {
   }
 
 
-  public Date getHeureRetourPrevu() {
+  public Time getHeureRetourPrevu() {
     return heureRetourPrevu;
   }
 
-  public void setHeureRetourPrevu(Date heureRetourPrevu) {
+  public void setHeureRetourPrevu(Time heureRetourPrevu) {
     this.heureRetourPrevu = heureRetourPrevu;
   }
 
 
-  public Date getHeureRetourCalcule() {
+  public Time getHeureRetourCalcule() {
     return heureRetourCalcule;
   }
 
-  public void setHeureRetourCalcule(Date heureRetourCalcule) {
+  public void setHeureRetourCalcule(Time heureRetourCalcule) {
     this.heureRetourCalcule = heureRetourCalcule;
   }
 
 
-  public double getPenality() {
+  public float getPenality() {
     return penality;
   }
 
-  public void setPenality(double penality) {
+  public void setPenality(float penality) {
     this.penality = penality;
   }
 
