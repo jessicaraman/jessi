@@ -10,8 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.google.maps.*;
-import com.google.maps.model.GeocodingResult;
 
 
 

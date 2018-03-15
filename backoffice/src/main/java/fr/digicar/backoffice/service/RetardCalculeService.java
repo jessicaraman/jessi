@@ -11,7 +11,7 @@ public interface RetardCalculeService {
     void addRetardCalcule(RetardCalcule retardCalcule);
     void addRetardCalculeAutomatically() throws IOException, JSONException;
 
-    void addRetardCalculeAutomatically() throws IOException;
+
 
     void updateRetardCalcule(RetardCalcule retardCalcule);
 

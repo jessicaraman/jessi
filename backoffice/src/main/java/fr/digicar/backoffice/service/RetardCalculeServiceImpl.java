@@ -23,11 +23,8 @@ public class RetardCalculeServiceImpl implements RetardCalculeService {
     }
 
     @Override
-<<<<<<< HEAD
-    public void addRetardCalculeAutomatically() throws IOException {retardCalculeDAO.addRetardCalculeAutomatically();}
-=======
     public void addRetardCalculeAutomatically() throws IOException, JSONException{retardCalculeDAO.addRetardCalculeAutomatically();}
->>>>>>> da59a1f040c909ddc8f69e3ab2aa07b992041463
+
 
     @Override
     public void updateRetardCalcule(RetardCalcule retardCalcule) {
