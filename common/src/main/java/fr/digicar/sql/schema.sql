@@ -175,4 +175,18 @@ create table occupation (
 );
 ALTER TABLE occupation MODIFY id INT(6) AUTO_INCREMENT PRIMARY KEY;
 
+-- table availability
+create table availability (
+	id INT(6),
+	date date,
+	id_occupation INT(6),
+	start_time Time,
+  end_time	Time,
+  status INT(1),
+
+  PRIMARY KEY (id),
+    FOREIGN KEY (id_occupation) REFERENCES occupation(id)
+);
+ALTER TABLE availability MODIFY id INT(6) AUTO_INCREMENT;
+
 
