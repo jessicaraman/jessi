@@ -30,7 +30,7 @@ public class AvailabilityDAOImpl implements AvailabilityDAO {
     }
 
     public List<Availability> getAllAvailability() {
-        return getCurrentSession().createQuery("FROM availability").list();
+        return getCurrentSession().createQuery("FROM availability where status = 1").list();
     }
 
 
@@ -59,7 +59,7 @@ public class AvailabilityDAOImpl implements AvailabilityDAO {
             querypParam += " and start_time <= '"+start_time.toString()+"'";
         }
         if (null != end_time){
-            querypParam += " and end_time = '"+end_time.toString()+"'";
+            querypParam += " and end_time >= '"+end_time.toString()+"'";
         }
         return query;
     }
