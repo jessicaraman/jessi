@@ -161,3 +161,18 @@ CREATE TABLE users
 ALTER TABLE session_en_cours
   ADD CONSTRAINT session_en_cours_users_id_fk
 FOREIGN KEY (id_user) REFERENCES users (id);
+
+
+
+-- table occupation
+create table occupation (
+	car_id INT(6),
+	parking_spots_id INT(6),
+	id INT(6),
+	PRIMARY KEY (id),
+    FOREIGN KEY (car_id) REFERENCES car(id),
+    FOREIGN KEY (parking_spots_id) REFERENCES parking_spots(id)
+);
+ALTER TABLE occupation MODIFY id INT(6) AUTO_INCREMENT PRIMARY KEY;
+
+
