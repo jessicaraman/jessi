@@ -1,5 +1,6 @@
 package fr.digicar.backoffice.service;
 
+import fr.digicar.backoffice.utils.DelayDistribution;
 import fr.digicar.dao.DelayDAO;
 import fr.digicar.model.Delay;
 import lombok.extern.slf4j.Slf4j;
@@ -19,35 +20,47 @@ public class DelayServiceImpl implements DelayService {
     private DelayDAO delayDAO;
 
     @Override
-    public int[] getDelayDistribution() {
+    public DelayDistribution getDelayDistribution() {
         int[] distribution = new int[4];
         int[] values = getDelayValues(delayDAO.findAll());
+        int firstQuartile = getQuartile(values, 25);
+        int secondQuartile = getQuartile(values, 50);
+        int thirdQuartile = getQuartile(values, 75);
         for (int i = 0; i < 4; i++) {
             int count = 0;
             for (int value : values) {
                 switch (i) {
                     case 0:
-                        if (value >= values[0] && value < getQuartile(values, 25)) count++;
+                        if (value >= values[0] && value < firstQuartile) count++;
                         break;
                     case 1:
-                        if (value >= getQuartile(values, 25) && value < getQuartile(values, 50)) count++;
+                        if (value >= firstQuartile && value < secondQuartile) count++;
                         break;
                     case 2:
-                        if (value >= getQuartile(values, 50) && value < getQuartile(values, 75)) count++;
+                        if (value >= secondQuartile && value < thirdQuartile) count++;
                         break;
                     case 3:
-                        if (value >= getQuartile(values, 75) && value <= values[values.length-1]) count++;
+                        if (value >= thirdQuartile && value <= values[values.length - 1]) count++;
                         break;
                 }
             }
             distribution[i] = count;
         }
-        return distribution;
+        return new DelayDistribution(distribution, getQuartileLabels(new int[]{values[0], firstQuartile, secondQuartile, thirdQuartile, values[values.length - 1]}));
     }
 
     @Override
     public int getDelayNumber() {
         return delayDAO.count();
+    }
+
+    private String[] getQuartileLabels(int[] quartiles) {
+        String[] labels = new String[4];
+        labels[0] = String.valueOf(quartiles[0]) + "-" + String.valueOf(quartiles[1]);
+        labels[1] = String.valueOf(quartiles[1] + 1) + "-" + String.valueOf(quartiles[2]);
+        labels[2] = String.valueOf(quartiles[2] + 1) + "-" + String.valueOf(quartiles[3]);
+        labels[3] = String.valueOf(quartiles[3] + 1) + "-" + String.valueOf(quartiles[4]);
+        return labels;
     }
 
     private int getQuartile(int[] values, int lowerPercent) {

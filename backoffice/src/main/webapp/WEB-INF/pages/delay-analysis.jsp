@@ -77,11 +77,22 @@
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["Q1", "Q2", "Q3", "Q4"],
+            <%--@elvariable id="delayDistributionLabels" type="java.util.List"--%>
+            labels: [
+                '${delayDistributionLabels[0]}',
+                '${delayDistributionLabels[1]}',
+                '${delayDistributionLabels[2]}',
+                '${delayDistributionLabels[3]}'
+            ],
             datasets: [{
                 label: 'Répartition des retards',
                 <%--@elvariable id="delayDistribution" type="java.util.List"--%>
-                data: [${delayDistribution[0]}, ${delayDistribution[1]}, ${delayDistribution[2]}, ${delayDistribution[3]}],
+                data: [
+                    ${delayDistribution[0]},
+                    ${delayDistribution[1]},
+                    ${delayDistribution[2]},
+                    ${delayDistribution[3]}
+                ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
