@@ -18,6 +18,7 @@ public class DelayController {
     public ModelAndView showDelayNumber() {
         ModelAndView modelAndView = new ModelAndView("delay-analysis");
         modelAndView.addObject("delayNumber", delayService.getDelayNumber());
+        modelAndView.addObject("delayDistribution", delayService.getDelayDistribution());
         return modelAndView;
     }
 

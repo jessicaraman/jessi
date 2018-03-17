@@ -8,4 +8,6 @@ public interface DelayDAO {
 
     List<Delay> findAll();
 
+    int count();
+
 }
