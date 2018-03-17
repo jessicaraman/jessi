@@ -70,4 +70,16 @@ public class DelayServiceImplTest {
         assertArrayEquals(new int[]{2, 3, 6, 7}, (int[]) method.invoke(delayService, delays));
     }
 
+    @Test
+    public void getQuartileReturnCorrectNumber() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Method method = DelayServiceImpl.class.getDeclaredMethod("getQuartile", int[].class, int.class);
+        method.setAccessible(true);
+
+        int[] delayValues = new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+        assertEquals(3, (int) method.invoke(delayService, delayValues, 25));
+        assertEquals(6, (int) method.invoke(delayService, delayValues, 50));
+        assertEquals(8, (int) method.invoke(delayService, delayValues, 75));
+    }
+
 }
