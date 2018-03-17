@@ -51,19 +51,16 @@ public class DelayServiceImpl implements DelayService {
     }
 
     private int getQuartile(int[] values, int lowerPercent) {
-        int[] v = new int[values.length];
-        Arrays.sort(v);
-        int n = Math.round(v.length * lowerPercent / 100);
-        return v[n];
+        int n = Math.round(values.length * lowerPercent / 100);
+        return values[n];
     }
 
     private int[] getDelayValues(List<Delay> delays) {
         int[] values = new int[delays.size()];
-        int i = 0;
-        for (Delay delay : delays) {
-            values[i] = delay.getDuration();
-            i++;
+        for (int i = 0; i < values.length; i++) {
+            values[i] = delays.get(i).getDuration();
         }
+        Arrays.sort(values);
         return values;
     }
 
