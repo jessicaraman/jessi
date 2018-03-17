@@ -1,6 +1,7 @@
 package fr.digicar.backoffice.controller;
 
 import fr.digicar.backoffice.service.DelayService;
+import fr.digicar.backoffice.utils.DelayDistribution;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -36,15 +37,15 @@ public class DelayControllerTest {
     @Test
     public void delayDahboardIsOk() throws Exception {
         when(delayService.getDelayNumber()).thenReturn(1000);
-        when(delayService.getDelayDistribution()).thenReturn(new int[]{1, 2, 3, 4});
+        when(delayService.getDelayDistribution()).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
 
         mockMvc.perform(get("/delays"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("delay-analysis"))
                 .andExpect(forwardedUrl("/WEB-INF/pages/delay-analysis.jsp"))
                 .andExpect(model().attribute("delayNumber", 1000))
-                .andExpect(model().attribute("delayDistribution", new int[]{1, 2, 3, 4}))
-            ;
+                .andExpect(model().attribute("delayDistribution", new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))
+                .andExpect(model().attribute("delayDistributionLabels", new String[]{"1-3", "4-6", "7-8", "9-10"}));;
     }
 
 }

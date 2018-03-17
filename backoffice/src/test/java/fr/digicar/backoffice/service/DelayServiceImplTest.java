@@ -36,21 +36,21 @@ public class DelayServiceImplTest {
     @Test
     public void getDelayDistributionReturnCoherentResult() {
         List<Delay> delays = new ArrayList<>();
-        delays.add(new Delay(1, (int)(Math.random()*100), new Date()));
-        delays.add(new Delay(2, (int)(Math.random()*100), new Date()));
-        delays.add(new Delay(3, (int)(Math.random()*100), new Date()));
-        delays.add(new Delay(4, (int)(Math.random()*100), new Date()));
-        delays.add(new Delay(5, (int)(Math.random()*100), new Date()));
-        delays.add(new Delay(6, (int)(Math.random()*100), new Date()));
-        delays.add(new Delay(7, (int)(Math.random()*100), new Date()));
-        delays.add(new Delay(8, (int)(Math.random()*100), new Date()));
-        delays.add(new Delay(9, (int)(Math.random()*100), new Date()));
-        delays.add(new Delay(10, (int)(Math.random()*100), new Date()));
+        delays.add(new Delay(1, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(2, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(3, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(4, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(5, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(6, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(7, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(8, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(9, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(10, (int) (Math.random() * 100), new Date()));
 
         when(delayDAO.findAll()).thenReturn(delays);
 
         int total = 0;
-        for (int delayNumber : delayService.getDelayDistribution()) {
+        for (int delayNumber : delayService.getDelayDistribution().getValues()) {
             total += delayNumber;
         }
         assertEquals(10, total);
@@ -75,7 +75,7 @@ public class DelayServiceImplTest {
         Method method = DelayServiceImpl.class.getDeclaredMethod("getQuartile", int[].class, int.class);
         method.setAccessible(true);
 
-        int[] delayValues = new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        int[] delayValues = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
         assertEquals(3, (int) method.invoke(delayService, delayValues, 25));
         assertEquals(6, (int) method.invoke(delayService, delayValues, 50));
