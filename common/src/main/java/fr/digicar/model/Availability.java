@@ -36,7 +36,7 @@ public class Availability {
     @Column(name="end_time")
     private LocalTime end_time;
 
-    /* To know if this gap if is not used */
+    /* To know if this gap is not used */
     @Column(name = "status")
     private Boolean status;
 
