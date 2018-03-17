@@ -4,7 +4,7 @@ package fr.digicar.odt;
 import java.io.Serializable;
 
 public class FilterReservationOdt implements Serializable{
-    String date;
+    String wishedDate;
     String start_time;
     String end_time;
     String postal_code;
@@ -13,8 +13,8 @@ public class FilterReservationOdt implements Serializable{
 
     }
 
-    public String getDate() {
-        return date;
+    public String getWishedDate() {
+        return wishedDate;
     }
 
     public String getStart_time() {
@@ -29,8 +29,8 @@ public class FilterReservationOdt implements Serializable{
         return postal_code;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setWishedDate(String date) {
+        this.wishedDate = wishedDate;
     }
 
     public void setStart_time(String start_time) {
