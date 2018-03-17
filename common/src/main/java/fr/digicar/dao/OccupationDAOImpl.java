@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public class OccupationDAOImpl implements OccupationDAO {
@@ -25,6 +27,9 @@ public class OccupationDAOImpl implements OccupationDAO {
         return (Occupation) getCurrentSession().get(Occupation.class, id_occupation);
     }
 
+    public List<Occupation> getAllOccupations() {
+        return getCurrentSession().createQuery("FROM occupation").list();
+    }
 
   /*  private String buildFindByCriteriaQuery(String mark, String name_model, String type, String transmission, String fuel_type, String mileageMin, String mileageMax){
         String query = new String("FROM Car WHERE");
