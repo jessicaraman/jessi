@@ -170,3 +170,12 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `end_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 )
+
+CREATE TABLE IF NOT EXISTS `invoice` (
+  `id_invoice` int(123) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `id_user` int(123) NOT NULL,
+  `amount` double NOT NULL,
+  `url` varchar(200) NOT NULL,
+  PRIMARY KEY (`id_invoice`)
+)

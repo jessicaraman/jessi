@@ -11,7 +11,7 @@ public interface SubscriptionDAO {
     void addSubscription(Subscription sub);
     void updateSubscription(Subscription subscription);
     Subscription getSubscription(int SubscriptionId);
-    List<Subscription> getSubscriptionByUserID(Integer id_user);
+    List<Subscription> getSubscriptionByUserID();
     void deleteSubscription(int SubscriptionId);
     List<Subscription> getSubscriptions();
     List<Subscription> SubscriptionsByDate(Date d);

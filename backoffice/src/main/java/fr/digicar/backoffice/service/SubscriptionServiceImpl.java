@@ -1,11 +1,13 @@
 package fr.digicar.backoffice.service;
 
 import fr.digicar.dao.SubscriptionDAO;
+import fr.digicar.model.Invoice;
 import fr.digicar.model.Subscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,8 +33,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public List<Subscription> getSubscriptionByUserID(Integer id_user) {
-        return subscriptionDAO.getSubscriptionByUserID(id_user);
+    public List<Subscription> getSubscriptionByUserID() {
+        return subscriptionDAO.getSubscriptionByUserID();
     }
 
     @Override
@@ -40,4 +42,6 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 
     }
+
+
 }

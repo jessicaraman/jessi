@@ -16,5 +16,6 @@
         <mapping class="fr.digicar.model.TransmissionMode"/>
         <mapping class="fr.digicar.model.User"/>
         <mapping class="fr.digicar.model.Subscription"/>
+        <mapping class="fr.digicar.model.Invoice"/>
     </session-factory>
 </hibernate-configuration>

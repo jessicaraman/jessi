@@ -6,30 +6,31 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "subscription")
 public class Subscription {
     @Id
-    @Column(name = "id")
+    @Column(name = "id_subcription")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
+    Integer id_subscription;
 
     @Column(name = "id_user")
     Integer id_user;
 
-    @Column(name = "id_pricing")
+    @Column(name = "id_tarif")
     Integer id_pricing;
 
     @Column(name = "start_date")
     Date start_date;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date",nullable=true)
     Date end_date;
 
     public Integer getId() {
-        return id;
+        return id_subscription;
     }
 
     public Date getEnd_date() {
@@ -53,7 +54,7 @@ public class Subscription {
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_subscription = id;
     }
 
     public void setId_pricing(Integer id_pricing) {

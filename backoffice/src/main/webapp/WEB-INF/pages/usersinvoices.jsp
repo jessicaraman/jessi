@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: Jessica Ramanantsoa
   Date: 16/03/2018
@@ -28,7 +29,13 @@
 
 <div class="container">
     <br>
-    <h4><img id="img_change" src="<c:url value="/resources/img/car.png" />"> Factures du 15 mars 2016 <img src="<c:url value="/resources/img/bike.png" />"></h4>
+    <h4><img id="img_change" src="<c:url value="/resources/img/car.png" />"> Factures du <%!
+        public String formatDate(Date d){
+        SimpleDateFormat formater = new SimpleDateFormat("dd MMMMM yyyy");
+        return formater.format(d);}
+    %>
+        <%= formatDate(new Date()) %>
+        <img src="<c:url value="/resources/img/bike.png" />"></h4>
     <a href="#"><h5><img src="<c:url value="/resources/img/chevron.png"/> ">Autre date</h5></a>
     <input type="text" class="form-control form-control-lg" id="myInput" onkeyup="myFunction()" placeholder="Rechercher par nom de famille ...">
 
@@ -44,43 +51,31 @@
             <th style="width:8%;">Facture</th>
         </tr>
 
-        <tr>
-            <td> <img src="gold.png"> </td>
-            <td>Alfreds Futterkiste</td>
-            <td>Germany</td>
-            <td>Economique (depuis le 24 janvier 2012)</td>
-            <td><a href="https://mail.google.com/mail/?view=cm&fs=1&to=user@domain.com&su=Votre%20Facture%20Digicar" target="blank_">user@domain.com</A></td>
-            <td>0645123698</td>
-            <td><a target="blank_" href="test.pdf"><img class="img_change" src="pdf.png"></a></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>Berglunds snabbkop</td>
-            <td>Sweden</td>
-            <td>Economique (depuis le 24 janvier 2012)</td>
-            <td>user@email.com</td>
-            <td>0645123698</td>
-            <td><img class="img_change" src="pdf.png"></td>
-        </tr>
-        <tr>
-            <td><img src="gold.png"></td>
-            <td>Island Trading</td>
-            <td>UK</td>
-            <td>Economique (depuis le 24 janvier 2012)</td>
-            <td>user@email.com</td>
-            <td>0645123698</td>
+        <c:forEach items="${users}" var="user">
+        <c:forEach items="${subscriptions}" var="sub">
+        <c:forEach items="${tarifs}" var="tarif">
+        <c:forEach items="${invoices}" var="inv">
+            <c:if test="${user.id==sub.id_user}">
+            <c:if test="${tarif.id==sub.id_user}">
+            <c:if test="${inv.id==sub.id_user}">
 
-            <td><img class="img_change" src="pdf.png"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>Koniglich Essen</td>
-            <td>Germany</td>
-            <td>Economique (depuis le 24 janvier 2012)</td>
-            <td>user@email.com</td>
-            <td>0645123698</td>
-            <td><img class="img_change" src="pdf.png"></td>
-        </tr>
+                    <tr>
+                        <td> <img src="<c:url value="/resources/img/gold.png" />"> </td>
+                        <td>${user.lastName}</td>
+                        <td>${user.firstName}</td>
+                        <td>${tarif.libelle}</td>
+                        <td>${user.email}</td>
+                        <td>${user.phoneNumber}</td>
+                        <td><a target="blank_" href="<c:url value="${inv.url}" />"><img class="img_change" src="<c:url value="/resources/img/pdf.png" />"></a></td>
+                    </tr>
+            </c:if>
+            </c:if>
+            </c:if>
+
+            </c:forEach>
+            </c:forEach>
+            </c:forEach>
+            </c:forEach>
     </table>
 </div>
 </body>

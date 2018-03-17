@@ -42,9 +42,10 @@ public class SubscriptionDAOImpl implements  SubscriptionDAO {
         return t;
     }
 
-    public List<Subscription> getSubscriptionByUserID(Integer id_user) {
-        String sql ="FROM Tarif";
-
+    //Récupère les utilisateurs à facturer le jour
+    public List<Subscription> getSubscriptionByUserID() {
+        int day=new Date().getDate();
+        String sql ="FROM Subscription where end_date is null and start_date like '%"+day+"' group by id_user";
         System.out.println(sql);
         return getCurrentSession().createQuery(sql).list();
     }
