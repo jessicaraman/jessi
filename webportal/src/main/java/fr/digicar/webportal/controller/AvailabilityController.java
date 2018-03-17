@@ -2,6 +2,7 @@ package fr.digicar.webportal.controller;
 
 import fr.digicar.model.Car;
 import fr.digicar.model.ParkingSpot;
+import fr.digicar.odt.FilterReservationOdt;
 import fr.digicar.webportal.service.ParkingSpotService;
 import fr.digicar.webportal.service.ParkingSpotServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,7 @@ public class AvailabilityController {
             modelAndView = new ModelAndView("carReservation-form");
             listOfParkingSpot = parkingSpotService.getParkingSpots();
             modelAndView.addObject("listOfTown", listOfParkingSpot);
+            modelAndView.addObject("filters", new FilterReservationOdt());
         }catch (Exception e){
             log.error("Localize message: "+e.getLocalizedMessage());
             log.error("Simple Message: "+e.getMessage());
