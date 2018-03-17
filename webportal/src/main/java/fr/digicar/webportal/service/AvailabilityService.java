@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 public interface AvailabilityService {
 
-    Availability getAvailabilityById(int id_availability);
+    public Availability getAvailabilityById(int id_availability);
     List<Availability> getAllAvailability();
     List<Availability> availabilityByCreteria(String date, LocalTime start_time, LocalTime end_time);
 

@@ -14,7 +14,7 @@ public class OccupationServiceImpl implements OccupationService{
     private OccupationDAO occupationDAO;
 
     @Override
-    Occupation getOccupationtyById(int id_occupation){
+    public Occupation getOccupationById(int id_occupation){
 
         return occupationDAO.getOccupationById(id_occupation);
     }

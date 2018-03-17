@@ -17,17 +17,17 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     private AvailabilityDAO availabilityDAO;
 
     @Override
-    Availability getAvailabilityById(int id_availability){
+    public Availability getAvailabilityById(int id_availability){
         return availabilityDAO.getAvailabilityById(id_availability);
     }
 
     @Override
-    List<Availability> getAllAvailability(){
+    public List<Availability> getAllAvailability(){
         return availabilityDAO.getAllAvailability();
     }
 
     @Override
-    List<Availability> availabilityByCreteria(String date, LocalTime start_time, LocalTime end_time){
+    public List<Availability> availabilityByCreteria(String date, LocalTime start_time, LocalTime end_time){
         return availabilityDAO.availabilityByCriteria(date, start_time, end_time);
     }
 }
