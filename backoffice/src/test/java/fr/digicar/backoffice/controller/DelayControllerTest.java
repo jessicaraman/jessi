@@ -34,13 +34,17 @@ public class DelayControllerTest {
     }
 
     @Test
-    public void showDelayNumber() throws Exception {
+    public void delayDahboardIsOk() throws Exception {
         when(delayService.getDelayNumber()).thenReturn(1000);
+        when(delayService.getDelayDistribution()).thenReturn(new int[]{1, 2, 3, 4});
 
         mockMvc.perform(get("/delays"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("delay-analysis"))
                 .andExpect(forwardedUrl("/WEB-INF/pages/delay-analysis.jsp"))
-                .andExpect(model().attribute("delayNumber", 1000));
+                .andExpect(model().attribute("delayNumber", 1000))
+                .andExpect(model().attribute("delayDistribution", new int[]{1, 2, 3, 4}))
+            ;
     }
+
 }
