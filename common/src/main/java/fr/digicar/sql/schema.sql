@@ -161,3 +161,21 @@ CREATE TABLE users
 ALTER TABLE session_en_cours
   ADD CONSTRAINT session_en_cours_users_id_fk
 FOREIGN KEY (id_user) REFERENCES users (id);
+
+CREATE TABLE IF NOT EXISTS `subscription` (
+  `id` int(123) NOT NULL AUTO_INCREMENT,
+  `id_user` int(123) NOT NULL,
+  `id_pricing` int(123) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+
+CREATE TABLE IF NOT EXISTS `invoice` (
+  `id_invoice` int(123) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `id_user` int(123) NOT NULL,
+  `amount` double NOT NULL,
+  `url` varchar(200) NOT NULL,
+  PRIMARY KEY (`id_invoice`)
+)
