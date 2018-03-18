@@ -91,7 +91,7 @@ public class DelayServiceImplTest {
         method.setAccessible(true);
 
         int[] quartiles = new int[]{1, 3, 6, 8, 10};
-        String[] expected = new String[]{"1-3", "4-6", "7-8", "9-10"};
+        String[] expected = new String[]{"1-3 min.", "4-6 min.", "7-8 min.", "9-10 min."};
 
         assertArrayEquals(expected, (String[]) method.invoke(delayService, (Object) quartiles));
     }
