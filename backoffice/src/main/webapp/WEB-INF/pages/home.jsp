@@ -50,6 +50,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/modifurgent/"/>">Course Monitoring</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/invoices"/>">Factures</a>
+                </li>
             </ul>
         </div>
     </nav>

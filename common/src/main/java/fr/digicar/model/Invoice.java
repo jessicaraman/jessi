@@ -19,6 +19,13 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
+    public Invoice(Integer id_user, Date date, double amount, String url) {
+        this.id_user = id_user;
+        this.date = date;
+        this.amount = amount;
+        this.url = url;
+    }
+
     @Column(name = "id_user")
     Integer id_user;
 

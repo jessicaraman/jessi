@@ -76,7 +76,72 @@ public class User {
     @Column(name = "signup_date")
     private Date signUpDate;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public String getBirthdateString() {
+        return birthdateString;
+    }
+
+    public Date getSignUpDate() {
+        return signUpDate;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
     /** The status of the client. */
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private UserStatus status;

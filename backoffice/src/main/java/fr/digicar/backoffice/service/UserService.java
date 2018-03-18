@@ -10,5 +10,6 @@ public interface UserService {
     List<User> searchUsers();
 
     List<User> searchUsers(SearchCriteria searchCriteria);
+    User getUser(int id);
 
 }

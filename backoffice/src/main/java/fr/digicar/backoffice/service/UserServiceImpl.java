@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService {
         return searchUsers();
     }
 
+    @Override
+    public User getUser(int id) {
+        return userDAO.getUser(id);
+    }
+
     String generateSearchString(SearchCriteria searchCriteria) {
         String searchString = "from User where ";
         String byNameString = "";

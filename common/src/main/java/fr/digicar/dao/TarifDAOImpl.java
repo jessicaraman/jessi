@@ -29,9 +29,7 @@ public class TarifDAOImpl implements TarifDAO {
     }
 
     public Tarif getTarif(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Tarif t = (Tarif) session.load(Tarif.class, new Integer(id));
-        return t;
+        return (Tarif) getCurrentSession().get(Tarif.class, id);
     }
 
     public Tarif getTarifby(int id) {
