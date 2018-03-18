@@ -2,7 +2,10 @@ package fr.digicar.dao;
 
 import fr.digicar.model.Car;
 import fr.digicar.model.Session;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -29,16 +32,21 @@ public class SessionDAOImpl implements SessionDAO {
         c.setTime(d);
         c.add(Calendar.MONTH, -1);
         Date minus1= c.getTime();
-        String sqlizedstart = convertToDatetime(minus1);
-        String sqlizedend=convertToDatetime(d);
+        String sqlizedstart = convertToDatetim(minus1);
+        String sqlizedend=convertToDatetim(d);
         String sql ="FROM Session where id_user="+userID+" and departure_date between '"+sqlizedstart+"' and '"+sqlizedend+"'";
         System.out.print(sql);
         return getCurrentSession().createQuery(sql).list();
     }
 
     public Car getSessionCar(int sessionId) {
-        String sql="From Car c, Session s where c.id=s.id_car and s.id="+sessionId;
-        return (Car) getCurrentSession().createQuery(sql).list().get(0);
+        Session s=this.getSession(sessionId);
+        Criteria cr = getCurrentSession().createCriteria(Car.class);
+
+        Criterion id = Restrictions.gt("id", s.getId_car());
+        cr.add( id );
+
+       return (Car) cr.list().get(0);
     }
 
     private static java.sql.Date convertUtilToSql(java.util.Date uDate) {

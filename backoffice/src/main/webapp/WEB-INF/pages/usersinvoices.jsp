@@ -37,6 +37,14 @@
         <%= formatDate(new Date()) %>
         <img src="<c:url value="/resources/img/bike.png" />"></h4>
     <a href="#"><h5><img src="<c:url value="/resources/img/chevron.png"/> ">Autre date</h5></a>
+
+        <c:choose>
+            <c:when test="${empty invoices}">
+                <p style="text-align:center;"> Factures non générées  <a href="<c:url value="/algo" />"><button class="btn btn-sm btn-primary">
+                    Générer
+                </button></a></p>
+            </c:when>
+            <c:otherwise>
     <input type="text" class="form-control form-control-lg" id="myInput" onkeyup="myFunction()" placeholder="Rechercher par nom de famille ...">
 
     <table id="myTable" class="table">
@@ -50,33 +58,33 @@
             <th style="width:21%;"><img class="img_change" src="<c:url value="/resources/img/mobile-phone.png" />"></th>
             <th style="width:8%;">Facture</th>
         </tr>
+                <c:forEach items="${users}" var="user">
+                    <c:forEach items="${subscriptions}" var="sub">
+                        <c:forEach items="${tarifs}" var="tarif">
+                            <c:forEach items="${invoices}" var="inv">
+                                <c:if test="${user.id==sub.id_user}">
+                                    <c:if test="${sub.id_pricing==tarif.id}">
+                                        <c:if test="${sub.id_user==inv.id_user}">
+                                            <tr>
+                                                <td> <img src="<c:url value="/resources/img/gold.png" />"> </td>
+                                                <td>${user.lastName}</td>
+                                                <td>${user.firstName}</td>
+                                                <td>${tarif.libelle}</td>
+                                                <td>${user.email}</td>
+                                                <td>${user.phoneNumber}
+                                                <td><a target="_blank" href="file:///${desktop}${inv.url}"><img src="<c:url value="/resources/img/pdf.png" />" ></a></td>
+                                            </tr>
 
-        <c:forEach items="${users}" var="user">
-            <c:forEach items="${subscriptions}" var="sub">
-                <c:forEach items="${tarifs}" var="tarif">
-                    <c:forEach items="${invoices}" var="inv">
-                        <c:if test="${user.id==sub.id_user}">
-                            <c:if test="${sub.id_pricing==tarif.id}">
-                                <c:if test="${sub.id_user==inv.id_user}">
-
-
-                                    <tr>
-                                        <td> <img src="<c:url value="/resources/img/gold.png" />"> </td>
-                                        <td>${user.lastName}</td>
-                                        <td>${user.firstName}</td>
-                                        <td>${tarif.libelle}</td>
-                                        <td>${user.email}</td>
-                                        <td>${user.phoneNumber}
-                                        <td><a href="<c:url value="file:///C\${inv.url}" />" download><img class="img_change" src="<c:url value="/resources/img/pdf.png" />"></a></td>
-                                    </tr>
+                                        </c:if>
+                                    </c:if>
                                 </c:if>
-                            </c:if>
-                        </c:if>
+                            </c:forEach>
+                        </c:forEach>
                     </c:forEach>
                 </c:forEach>
-            </c:forEach>
-        </c:forEach>
     </table>
+            </c:otherwise>
+        </c:choose>
 </div>
 </body>
 </html>

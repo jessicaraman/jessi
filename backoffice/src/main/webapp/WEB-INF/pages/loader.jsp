@@ -3,7 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>CSC Inside</title>
+        <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css" />" rel="stylesheet"/>
+        <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
+        <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
+        <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
     <style>
         /* Center the loader */
         #loader {
@@ -63,9 +68,10 @@
 <div id="loader"></div>
 
 <div style="display:none;" id="myDiv" class="animate-bottom">
-    <h2>DIGICAR</h2>
-    <p>Factures générées</p>
-    <a href="<c:url value="/algo" />">Voir</a>
+    <img src="<c:url value="/resources/img/check.png" />" >
+    <h3>Factures générées</h3>
+    <h4>Vérifier sur votre bureau</h4>
+    <a href="<c:url value="/invoices" />"><h4>Retour</h4></a>
 </div>
 
 <script>

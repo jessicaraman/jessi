@@ -3,6 +3,7 @@ package fr.digicar.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -17,10 +18,10 @@ public Session(){}
 
 
     @Column(name = "departure_date")
-    String departure_date;
+    Timestamp departure_date;
 
     @Column(name = "arrival_date")
-    String arrival_date;
+    Timestamp arrival_date;
 
     @Column(name = "id_car")
     Integer id_car;
@@ -41,11 +42,11 @@ public Session(){}
         return id;
     }
 
-    public String getDeparture_date() {
+    public Date getDeparture_date() {
         return departure_date;
     }
 
-    public String getArrival_date() {
+    public Date getArrival_date() {
         return arrival_date;
     }
 
@@ -61,10 +62,10 @@ public Session(){}
         return id_delay;
     }
 
-    public Session(String departure_date, String arrival_date, Integer id_car, Integer id_user, Integer id_delay) {
+    public Session(Date departure_date, Date arrival_date, Integer id_car, Integer id_user, Integer id_delay) {
 
-        this.departure_date = departure_date;
-        this.arrival_date = arrival_date;
+        this.departure_date = (Timestamp) departure_date;
+        this.arrival_date = (Timestamp) arrival_date;
         this.id_car = id_car;
         this.id_user = id_user;
         this.id_delay = id_delay;

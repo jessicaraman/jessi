@@ -66,4 +66,12 @@ public class Car {
         this.comfort = comfort;
         this.fuel_type = fuel_type;
     }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public String getName_model() {
+        return name_model;
+    }
 }
