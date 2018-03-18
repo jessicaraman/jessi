@@ -26,31 +26,34 @@ public class DelayServiceImplTest {
     @InjectMocks
     private DelayServiceImpl delayService;
 
+    private Date dateStart = new Date(1514764800000L);
+    private Date dateEnd = new Date(1546300799000L);
+
     @Test
     public void getDelayNumberReturnsCorrectValue() {
-        when(delayDAO.count()).thenReturn(1000);
+        when(delayDAO.countByDate(dateStart, dateEnd)).thenReturn(1000);
 
-        assertEquals(1000, delayService.getDelayNumber());
+        assertEquals(1000, delayService.getDelayNumber(dateStart, dateEnd));
     }
 
     @Test
     public void getDelayDistributionReturnCoherentResult() {
         List<Delay> delays = new ArrayList<>();
-        delays.add(new Delay(1, (int) (Math.random() * 100), new Date()));
-        delays.add(new Delay(2, (int) (Math.random() * 100), new Date()));
-        delays.add(new Delay(3, (int) (Math.random() * 100), new Date()));
-        delays.add(new Delay(4, (int) (Math.random() * 100), new Date()));
-        delays.add(new Delay(5, (int) (Math.random() * 100), new Date()));
-        delays.add(new Delay(6, (int) (Math.random() * 100), new Date()));
-        delays.add(new Delay(7, (int) (Math.random() * 100), new Date()));
-        delays.add(new Delay(8, (int) (Math.random() * 100), new Date()));
-        delays.add(new Delay(9, (int) (Math.random() * 100), new Date()));
-        delays.add(new Delay(10, (int) (Math.random() * 100), new Date()));
+        delays.add(new Delay(1, (int) (Math.random() * 100), new Date(1514764800000L)));
+        delays.add(new Delay(2, (int) (Math.random() * 100), new Date(1517443200000L)));
+        delays.add(new Delay(3, (int) (Math.random() * 100), new Date(1519862400000L)));
+        delays.add(new Delay(4, (int) (Math.random() * 100), new Date(1522540800000L)));
+        delays.add(new Delay(5, (int) (Math.random() * 100), new Date(1525132800000L)));
+        delays.add(new Delay(6, (int) (Math.random() * 100), new Date(1527811200000L)));
+        delays.add(new Delay(7, (int) (Math.random() * 100), new Date(1530403200000L)));
+        delays.add(new Delay(8, (int) (Math.random() * 100), new Date(1533081600000L)));
+        delays.add(new Delay(9, (int) (Math.random() * 100), new Date(1535760000000L)));
+        delays.add(new Delay(10, (int) (Math.random() * 100), new Date(1538352000000L)));
 
-        when(delayDAO.findAll()).thenReturn(delays);
+        when(delayDAO.filterByDate(dateStart, dateEnd)).thenReturn(delays);
 
         int total = 0;
-        for (int delayNumber : delayService.getDelayDistribution().getValues()) {
+        for (int delayNumber : delayService.getDelayDistribution(dateStart, dateEnd).getValues()) {
             total += delayNumber;
         }
         assertEquals(10, total);
