@@ -135,7 +135,7 @@ public class RetardCalculeDAOImpl implements RetardCalculeDAO {
             retardCalcule.setTagAppel(s.isTag());
             int differenceHeur=(((Time) l.get(1)).getHours()-s.getHeureArriveePrevu().getHours())*60;
             int differenceMin=(((Time) l.get(1)).getMinutes()-s.getHeureArriveePrevu().getMinutes());
-            retardCalcule.setPenality(differenceHeur+differenceMin);
+            retardCalcule.setPenality((differenceHeur+differenceMin)*(tarif.getPrix_heure()/60));
             getCurrentSession().save(retardCalcule);
 
         }
