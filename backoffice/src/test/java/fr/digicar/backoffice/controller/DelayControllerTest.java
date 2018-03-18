@@ -1,6 +1,7 @@
 package fr.digicar.backoffice.controller;
 
 import fr.digicar.backoffice.service.DelayService;
+import fr.digicar.backoffice.utils.DelayDistribution;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -10,6 +11,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Date;
+import java.util.TimeZone;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -24,6 +32,9 @@ public class DelayControllerTest {
 
     private MockMvc mockMvc;
 
+    private Date dateStart = new Date(1514764800000L);
+    private Date dateEnd = new Date(1546300799000L);
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -34,13 +45,35 @@ public class DelayControllerTest {
     }
 
     @Test
-    public void showDelayNumber() throws Exception {
-        when(delayService.getDelayNumber()).thenReturn(1000);
+    public void delayDashboardIsOk() throws Exception {
+        when(delayService.getDelayNumber(any(Date.class), any(Date.class))).thenReturn(1000);
+        when(delayService.getDelayDistribution(any(Date.class), any(Date.class))).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
 
         mockMvc.perform(get("/delays"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("delay-analysis"))
                 .andExpect(forwardedUrl("/WEB-INF/pages/delay-analysis.jsp"))
-                .andExpect(model().attribute("delayNumber", 1000));
+                .andExpect(model().attribute("delayNumber", 1000))
+                .andExpect(model().attribute("delayDistribution", new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))
+                .andExpect(model().attribute("delayDistributionLabels", new String[]{"1-3", "4-6", "7-8", "9-10"}));
     }
+
+    @Test
+    public void getPreviousYearDateReturnLastYearsDate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = DelayController.class.getDeclaredMethod("getPreviousYearDate", Date.class);
+        method.setAccessible(true);
+
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        assertEquals(new Date(1483228800000L), method.invoke(delayController, dateStart));
+    }
+
+    @Test
+    public void getResultDateStringReturnsCorrectString() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = DelayController.class.getDeclaredMethod("getResultDateString", Date.class, Date.class);
+        method.setAccessible(true);
+
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        assertEquals("Janvier 2018 - Décembre 2018", method.invoke(delayController, dateStart, dateEnd));
+    }
+
 }

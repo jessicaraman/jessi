@@ -98,6 +98,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mt-5">
+                    <div class="col-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title">Analyse des retards</h3>
+                                <p class="card-text mb-5">Evan & Philippine</p>
+                                <a href="<c:url value="/delays"/>" class="btn btn-primary w-100">Accéder</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

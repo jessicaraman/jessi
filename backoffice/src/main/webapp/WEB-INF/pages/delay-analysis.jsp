@@ -58,10 +58,14 @@
                     <%--@elvariable id="delayNumber" type="int"--%>
                     <h4 class="card-title"><strong>${delayNumber}</strong></h4>
                     <h5>RETARDS ENREGISTRÉS</h5>
-                    <p class="card-text">Février - Mars 2018</p>
+                    <%--@elvariable id="resultDate" type="String"--%>
+                    <p class="card-text">${resultDate}</p>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row mt-5">
+        <canvas id="quartiles" class="col" style="max-width: 600px; margin: auto;"></canvas>
     </div>
 </section>
 
@@ -69,5 +73,52 @@
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/mdb.min.js" />"></script>
+<script type="text/javascript">
+    var ctx = document.getElementById("quartiles").getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            <%--@elvariable id="delayDistributionLabels" type="java.util.List"--%>
+            labels: [
+                '${delayDistributionLabels[0]}',
+                '${delayDistributionLabels[1]}',
+                '${delayDistributionLabels[2]}',
+                '${delayDistributionLabels[3]}'
+            ],
+            datasets: [{
+                label: 'Répartition des retards',
+                <%--@elvariable id="delayDistribution" type="java.util.List"--%>
+                data: [
+                    ${delayDistribution[0]},
+                    ${delayDistribution[1]},
+                    ${delayDistribution[2]},
+                    ${delayDistribution[3]}
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 </body>
 </html>
