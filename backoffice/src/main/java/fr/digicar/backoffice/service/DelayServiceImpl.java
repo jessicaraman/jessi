@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,9 +21,8 @@ public class DelayServiceImpl implements DelayService {
     private DelayDAO delayDAO;
 
     @Override
-    public DelayDistribution getDelayDistribution() {
-        Date today = new Date();
-        int[] values = getDelayValues(delayDAO.filterByDate(getPreviousYearDate(today), today));
+    public DelayDistribution getDelayDistribution(Date dateStart, Date dateEnd) {
+        int[] values = getDelayValues(delayDAO.filterByDate(dateStart, dateEnd));
 
         int[] distribution = new int[4];
 
@@ -56,9 +54,9 @@ public class DelayServiceImpl implements DelayService {
     }
 
     @Override
-    public int getDelayNumber() {
+    public int getDelayNumber(Date dateStart, Date dateEnd) {
         Date today = new Date();
-        return delayDAO.countByDate(getPreviousYearDate(today), today);
+        return delayDAO.countByDate(dateStart, dateEnd);
     }
 
     private String[] getQuartileLabels(int[] quartiles) {
@@ -82,13 +80,6 @@ public class DelayServiceImpl implements DelayService {
         }
         Arrays.sort(values);
         return values;
-    }
-
-    private Date getPreviousYearDate(Date date) {
-        Calendar previousYearDate = Calendar.getInstance();
-        previousYearDate.setTime(date);
-        previousYearDate.add(Calendar.YEAR, -1);
-        return previousYearDate.getTime();
     }
 
 }

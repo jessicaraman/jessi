@@ -58,7 +58,8 @@
                     <%--@elvariable id="delayNumber" type="int"--%>
                     <h4 class="card-title"><strong>${delayNumber}</strong></h4>
                     <h5>RETARDS ENREGISTRÉS</h5>
-                    <p class="card-text">Février - Mars 2018</p>
+                    <%--@elvariable id="resultDate" type="String"--%>
+                    <p class="card-text">${resultDate}</p>
                 </div>
             </div>
         </div>
