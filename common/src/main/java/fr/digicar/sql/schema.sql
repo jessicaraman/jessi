@@ -162,31 +162,40 @@ ALTER TABLE session_en_cours
   ADD CONSTRAINT session_en_cours_users_id_fk
 FOREIGN KEY (id_user) REFERENCES users (id);
 
-
-
 -- table occupation
-create table occupation (
-	car_id INT(6),
-	parking_spots_id INT(6),
-	id INT(6),
-	PRIMARY KEY (id),
-    FOREIGN KEY (car_id) REFERENCES car(id),
-    FOREIGN KEY (parking_spots_id) REFERENCES parking_spots(id)
+CREATE TABLE occupation (
+  car_id           INT(6),
+  parking_spots_id INT(6),
+  id               INT(6),
+  PRIMARY KEY (id),
+  FOREIGN KEY (car_id) REFERENCES car (id),
+  FOREIGN KEY (parking_spots_id) REFERENCES parking_spots (id)
 );
-ALTER TABLE occupation MODIFY id INT(6) AUTO_INCREMENT PRIMARY KEY;
+ALTER TABLE occupation
+  MODIFY id INT(6) AUTO_INCREMENT PRIMARY KEY;
 
 -- table availability
-create table availability (
-	id INT(6),
-	date date,
-	id_occupation INT(6),
-	start_time Time,
-  end_time	Time,
-  status INT(1),
+CREATE TABLE availability (
+  id            INT(6),
+  date          DATE,
+  id_occupation INT(6),
+  start_time    TIME,
+  end_time      TIME,
+  status        INT(1),
 
   PRIMARY KEY (id),
-    FOREIGN KEY (id_occupation) REFERENCES occupation(id)
+  FOREIGN KEY (id_occupation) REFERENCES occupation (id)
 );
-ALTER TABLE availability MODIFY id INT(6) AUTO_INCREMENT;
+ALTER TABLE availability
+  MODIFY id INT(6) AUTO_INCREMENT;
+
+CREATE TABLE history_delays
+(
+  delay_id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  duration         INT  NOT NULL,
+  session_end_date DATE NOT NULL
+)
+  ENGINE = InnoDB;
 
 
