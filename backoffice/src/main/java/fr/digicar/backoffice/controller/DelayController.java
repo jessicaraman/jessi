@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/delays")
@@ -39,7 +40,7 @@ public class DelayController {
     }
 
     private String getResultDateString(Date dateStart, Date dateEnd) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMMM yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMMM yyyy", Locale.FRENCH);
         String dateStartString = dateFormat.format(dateStart);
         String dateEndString = dateFormat.format(dateEnd);
         return dateStartString.substring(0, 1).toUpperCase()

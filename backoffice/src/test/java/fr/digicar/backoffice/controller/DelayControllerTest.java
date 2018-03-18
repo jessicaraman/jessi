@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -45,8 +46,8 @@ public class DelayControllerTest {
 
     @Test
     public void delayDashboardIsOk() throws Exception {
-        when(delayService.getDelayNumber(dateStart, dateEnd)).thenReturn(1000);
-        when(delayService.getDelayDistribution(dateStart, dateEnd)).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
+        when(delayService.getDelayNumber(any(Date.class), any(Date.class))).thenReturn(1000);
+        when(delayService.getDelayDistribution(any(Date.class), any(Date.class))).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
 
         mockMvc.perform(get("/delays"))
                 .andExpect(status().isOk())
