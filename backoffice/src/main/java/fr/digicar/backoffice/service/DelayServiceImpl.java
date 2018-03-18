@@ -61,10 +61,10 @@ public class DelayServiceImpl implements DelayService {
 
     private String[] getQuartileLabels(int[] quartiles) {
         String[] labels = new String[4];
-        labels[0] = String.valueOf(quartiles[0]) + "-" + String.valueOf(quartiles[1]);
-        labels[1] = String.valueOf(quartiles[1] + 1) + "-" + String.valueOf(quartiles[2]);
-        labels[2] = String.valueOf(quartiles[2] + 1) + "-" + String.valueOf(quartiles[3]);
-        labels[3] = String.valueOf(quartiles[3] + 1) + "-" + String.valueOf(quartiles[4]);
+        labels[0] = String.valueOf(quartiles[0]) + "-" + String.valueOf(quartiles[1]) + " min.";
+        labels[1] = String.valueOf(quartiles[1] + 1) + "-" + String.valueOf(quartiles[2]) + " min.";
+        labels[2] = String.valueOf(quartiles[2] + 1) + "-" + String.valueOf(quartiles[3]) + " min.";
+        labels[3] = String.valueOf(quartiles[3] + 1) + "-" + String.valueOf(quartiles[4]) + " min.";
         return labels;
     }
 
