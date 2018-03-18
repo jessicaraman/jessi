@@ -58,6 +58,15 @@ public class DelayControllerTest {
     }
 
     @Test
+    public void getPreviousYearDateReturnLastYearsDate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = DelayController.class.getDeclaredMethod("getPreviousYearDate", Date.class);
+        method.setAccessible(true);
+
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        assertEquals(new Date(1483228800000L), method.invoke(delayController, dateStart));
+    }
+
+    @Test
     public void getResultDateStringReturnsCorrectString() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = DelayController.class.getDeclaredMethod("getResultDateString", Date.class, Date.class);
         method.setAccessible(true);
