@@ -108,7 +108,7 @@
     </div>
 </c:if>
 
-<%@include file="/WEB-INF/pages/list-car.jsp"%>
+<%@include file="/WEB-INF/pages/list-car-available.jsp"%>
 --%>
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>

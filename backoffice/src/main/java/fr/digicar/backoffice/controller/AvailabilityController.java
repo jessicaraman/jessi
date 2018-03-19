@@ -1,10 +1,8 @@
-package fr.digicar.webportal.controller;
+package fr.digicar.backoffice.controller;
 
-import fr.digicar.model.Car;
 import fr.digicar.model.ParkingSpot;
 import fr.digicar.odt.FilterReservationOdt;
-import fr.digicar.webportal.service.ParkingSpotService;
-import fr.digicar.webportal.service.ParkingSpotServiceImpl;
+import fr.digicar.backoffice.service.ParkingSpotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

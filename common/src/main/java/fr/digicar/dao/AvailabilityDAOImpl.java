@@ -1,15 +1,11 @@
 package fr.digicar.dao;
 
 import fr.digicar.model.Availability;
-import fr.digicar.model.Car;
 import org.hibernate.JDBCException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import sun.security.x509.AVA;
-
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +26,11 @@ public class AvailabilityDAOImpl implements AvailabilityDAO {
     }
 
     public List<Availability> getAllAvailability() {
-        return getCurrentSession().createQuery("FROM availability where status = 1").list();
+        return getCurrentSession().createQuery("FROM availability WHERE status = 1").list();
     }
 
 
-    public List<Availability> availabilityByCriteria(String date, LocalTime start_time, LocalTime end_time){
+    public List<Availability> availabilityByCriteria(String date, String start_time, String end_time){
 
         String findByCriteriaQueryString = buildFindByCriteriaQuery(date, start_time, end_time);
 
@@ -49,10 +45,10 @@ public class AvailabilityDAOImpl implements AvailabilityDAO {
         return resultList;
     }
 
-    private String buildFindByCriteriaQuery(String date, LocalTime start_time, LocalTime end_time){
-        String query = new String("FROM availability WHERE");
+    private String buildFindByCriteriaQuery(String date, String start_time, String end_time){
+        String query = new String("FROM availability WHERE status = 1");
         String querypParam = "";
-        if (null != date && !date.isEmpty()){
+        if (null != date ){
             querypParam += " date = '"+date+"'";
         }
         if (null != start_time){

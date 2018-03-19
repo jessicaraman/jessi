@@ -1,4 +1,4 @@
-package fr.digicar.webportal.service;
+package fr.digicar.backoffice.service;
 
 import fr.digicar.dao.AvailabilityDAO;
 import fr.digicar.model.Availability;
@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalTime;
 import java.util.List;
 
-@Service("availabilityService")
+@Service
 @Transactional
 public class AvailabilityServiceImpl implements AvailabilityService {
 
@@ -27,7 +26,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     }
 
     @Override
-    public List<Availability> availabilityByCreteria(String date, LocalTime start_time, LocalTime end_time){
+    public List<Availability> availabilityByCreteria(String date, String start_time, String end_time){
         return availabilityDAO.availabilityByCriteria(date, start_time, end_time);
     }
 }

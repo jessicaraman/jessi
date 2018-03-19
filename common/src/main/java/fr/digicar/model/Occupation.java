@@ -3,7 +3,6 @@ package fr.digicar.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.lang.String;
 
 /*
  * Created by barry on 31/12/2017.
@@ -30,6 +29,30 @@ public class Occupation {
 
     public Occupation(int id, int car_id, int parking_spots_id) {
         this.car_id = car_id;
+        this.parking_spots_id = parking_spots_id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getCar_id() {
+        return car_id;
+    }
+
+    public void setCar_id(Integer car_id) {
+        this.car_id = car_id;
+    }
+
+    public Integer getParking_spots_id() {
+        return parking_spots_id;
+    }
+
+    public void setParking_spots_id(Integer parking_spots_id) {
         this.parking_spots_id = parking_spots_id;
     }
 }

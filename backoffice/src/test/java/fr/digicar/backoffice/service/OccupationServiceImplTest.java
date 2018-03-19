@@ -1,8 +1,8 @@
-package fr.digicar.webportal.controller;
+package fr.digicar.backoffice.service;
 
 import fr.digicar.dao.OccupationDAO;
 import fr.digicar.model.Occupation;
-import fr.digicar.webportal.service.OccupationServiceImpl;
+import fr.digicar.backoffice.service.OccupationServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

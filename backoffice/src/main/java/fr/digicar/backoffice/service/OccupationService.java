@@ -1,4 +1,4 @@
-package fr.digicar.webportal.service;
+package fr.digicar.backoffice.service;
 
 import fr.digicar.model.Occupation;
 

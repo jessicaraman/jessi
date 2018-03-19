@@ -1,4 +1,4 @@
-package fr.digicar.webportal.service;
+package fr.digicar.backoffice.service;
 
 import fr.digicar.dao.OccupationDAO;
 import fr.digicar.model.Occupation;
@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service("occupationService")
+@Service
 @Transactional
 public class OccupationServiceImpl implements OccupationService{
 
