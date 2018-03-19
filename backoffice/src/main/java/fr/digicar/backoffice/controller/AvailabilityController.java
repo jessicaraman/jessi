@@ -85,11 +85,9 @@ public class AvailabilityController {
             message = "Aucun véhicule disponible pour cette date";
             modelAndView.addObject("message", message);
             modelAndView.addObject("cars", listOfAvailableCar);
-            System.out.println("list véhicule dispo: "+ listOfAvailableCar);
         }
         else{
             modelAndView.addObject("cars", listOfAvailableCar);
-            System.out.println("bla bla : list véhicule dispo: "+ listOfAvailableCar);
         }
 
 
