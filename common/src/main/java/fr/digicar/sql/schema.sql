@@ -200,7 +200,7 @@ CREATE TABLE availability (
   end_time      TIME,
   status        INT(1),
 
-  PRIMARY KEY (id),
+  PRIMARY KEY (id, id_occupation, date, start_time, end_time),
   FOREIGN KEY (id_occupation) REFERENCES occupation (id)
 );
 ALTER TABLE availability

@@ -26,7 +26,7 @@ public class AvailabilityDAOImpl implements AvailabilityDAO {
     }
 
     public List<Availability> getAllAvailability() {
-        return getCurrentSession().createQuery("FROM availability WHERE status = 1").list();
+        return getCurrentSession().createQuery("FROM Availability where status = true").list();
     }
 
 
@@ -46,17 +46,19 @@ public class AvailabilityDAOImpl implements AvailabilityDAO {
     }
 
     private String buildFindByCriteriaQuery(String date, String start_time, String end_time){
-        String query = new String("FROM availability WHERE status = 1");
+        String query = new String("FROM Availability where status = true");
         String querypParam = "";
         if (null != date ){
-            querypParam += " date = '"+date+"'";
+            querypParam += " and date = '"+date+"'";
         }
         if (null != start_time){
-            querypParam += " and start_time <= '"+start_time.toString()+"'";
+            querypParam += " and start_time <= '"+start_time+"'";
         }
         if (null != end_time){
-            querypParam += " and end_time >= '"+end_time.toString()+"'";
+            querypParam += " and end_time >= '"+end_time+"'";
         }
+
+        query += querypParam;
         return query;
     }
 /*

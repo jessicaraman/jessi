@@ -108,6 +108,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title">Réservation de véhicule</h3>
+                                <p class="card-text mb-5">Alpha & Christophe</p>
+                                <a href="<c:url value="/reservation/home"/>" class="btn btn-primary w-100">réserver</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
