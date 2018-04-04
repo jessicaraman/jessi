@@ -1,4 +1,4 @@
-package fr.digicar.backoffice.service;
+package fr.digicar.backoffice.emergency_modification.service;
 
 import fr.digicar.dao.SessionEnCoursDAO;
 import fr.digicar.model.SessionEnCours;
