@@ -12,8 +12,8 @@
     </modules>
 
     <scm>
-        <url>http://192.168.3.2:8081/alpha.barry/digicar</url>
-        <connection>scm:git:http://192.168.3.2:8081/alpha.barry/digicar.git</connection>
+        <url>http://192.168.3.2/alpha.barry/digicar</url>
+        <connection>scm:git:http://192.168.3.2/alpha.barry/digicar.git</connection>
         <tag>v1.0.0</tag>
     </scm>
 
