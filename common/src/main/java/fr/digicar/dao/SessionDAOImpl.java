@@ -3,15 +3,20 @@ package fr.digicar.dao;
 import fr.digicar.model.Car;
 import fr.digicar.model.Session;
 import org.hibernate.Criteria;
+import org.hibernate.JDBCException;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Repository
 public class SessionDAOImpl implements SessionDAO {
@@ -37,6 +42,49 @@ public class SessionDAOImpl implements SessionDAO {
         String sql ="FROM Session where id_user="+userID+" and departure_date between '"+sqlizedstart+"' and '"+sqlizedend+"'";
         System.out.print(sql);
         return getCurrentSession().createQuery(sql).list();
+    }
+    public List<Session> getImpactedSessions(String registration, Long arrival_time) {
+
+
+        List<Session> resultList = new ArrayList<Session>();
+        String sql ="FROM Session where car_registration_id="+registration;
+
+        List<Session> sessionfiltered = new ArrayList<Session>();
+
+        try{
+            resultList = getCurrentSession().createQuery(sql).list();
+
+            Long departureTime;
+            for (int i=0; i<resultList.size(); i++){
+                departureTime = resultList.get(i).getDeparture_date().getTime();
+
+                if (arrival_time >= departureTime) {
+
+                    sessionfiltered.add(resultList.get(i));
+                }
+
+            }
+        }
+        catch(Exception e) {
+            //Error during hibernate query
+        }
+
+        return resultList;
+    }
+
+    public List<Session> getAllSessions() {
+
+        List<Session> resultList = new ArrayList<Session>();
+        String sql ="FROM Session";
+
+        try{
+            resultList = getCurrentSession().createQuery(sql).list();
+        }
+        catch(Exception e) {
+            //Error during hibernate query
+        }
+
+        return resultList;
     }
 
     public Car getSessionCar(int sessionId) {

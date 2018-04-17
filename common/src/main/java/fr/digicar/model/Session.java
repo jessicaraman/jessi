@@ -16,6 +16,8 @@ public Session(){}
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name = "car_registration_id")
+    String car_registration_id;
 
     @Column(name = "departure_date")
     Timestamp departure_date;
@@ -34,6 +36,13 @@ public Session(){}
     @Column(name = "kms")
     Integer kms;
 
+    public String getCar_registration_id() {
+        return car_registration_id;
+    }
+
+    public void setCar_registration_id(String car_registration_id) {
+        this.car_registration_id = car_registration_id;
+    }
     public Integer getKms() {
         return kms;
     }
