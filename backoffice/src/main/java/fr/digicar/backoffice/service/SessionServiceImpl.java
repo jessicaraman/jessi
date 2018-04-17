@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class SessionServiceImpl implements SessionService {
 
     @Autowired
     private SessionDAO sessionDAO;
+    @Override
+    public List<Session> getImpactedSessions(String registration, Long arrival_time){return sessionDAO.getImpactedSessions(registration, arrival_time);}
+    @Override
+    public List<Session> getAllSessions(){return sessionDAO.getAllSessions();}
     @Override
     public Session getSession(int id) {
         return sessionDAO.getSession(id);
