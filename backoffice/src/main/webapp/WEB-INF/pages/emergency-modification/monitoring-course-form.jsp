@@ -22,14 +22,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modification de session</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="<c:url value="/modifurgent/impactedSession"/>">sessions impactées</a>
+                    <a class="dropdown-item"/>Liste retards</a>
+                </div>
             </li>
 
         </ul>
@@ -89,10 +87,8 @@
                         </button>
                         </form:form>
                     </td>
-
-
+                    <td><button class="btn btn-warning" style="margin: 0px;" title="Voir conflits"><a href="<c:url value="/modifurgent/impactedSession/${place.immatriculation}" />" ><i class="fa fa-eye" aria-hidden="true"></i></a></button></td>
                 </tr>
-
             </c:forEach>
         </table>
     </c:if>
@@ -141,6 +137,7 @@
                             </button>
                         </form:form>
                     </td>
+                    <td><button class="btn btn-warning" style="margin: 0px;" title="Voir conflits"><a href="<c:url value="/modifurgent/impactedSession/${place.immatriculation}" />" ><i class="fa fa-eye" aria-hidden="true"></i></a></button></td>
 
 
                 </tr>
