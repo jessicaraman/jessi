@@ -24,6 +24,36 @@ public class SessionDAOImpl implements SessionDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+    public void removeSessionById(int id){
+
+        try
+        {
+            Session session = getSession(id);
+            getCurrentSession().delete(session);
+
+        }
+        catch(Exception e){
+            //Error during hibernate query
+        }
+
+
+    }
+
+    public void updateSessionById(int sessionId, int carId){
+
+            try
+            {
+                Session session = getSession(sessionId);
+                //session.setCar_registration_id("");
+                //session.setId_car();
+                getCurrentSession().update(session);
+
+            }
+            catch(Exception e){
+                //Error during hibernate query
+            }
+    }
+
     private org.hibernate.Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }

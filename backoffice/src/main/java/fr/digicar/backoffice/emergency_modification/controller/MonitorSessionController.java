@@ -3,9 +3,12 @@ package fr.digicar.backoffice.emergency_modification.controller;
 import fr.digicar.backoffice.emergency_modification.service.RetardCalculeService;
 import fr.digicar.backoffice.emergency_modification.service.SessionEnCoursService;
 import fr.digicar.backoffice.service.SessionService;
+import fr.digicar.model.Car;
 import fr.digicar.model.RetardCalcule;
 import fr.digicar.model.Session;
 import fr.digicar.model.SessionEnCours;
+import fr.digicar.odt.ChosenvehicleOdt;
+import fr.digicar.odt.CommercialGestureOdt;
 import fr.digicar.odt.FilterRegistrationIdOdt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,12 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -113,6 +112,54 @@ public class MonitorSessionController {
 
         return findSession(filterRegistrationIdOdt);
     }
+
+    @RequestMapping(value = "/edditingImpactedSession/{sessionId}", method = RequestMethod.GET)
+    public ModelAndView getViewForEdditingImpactedSession(@PathVariable int sessionId) {
+
+        List<Car> listOfCarforChoose = new ArrayList<>();
+        //Ajouter le nom du parking et l'adresse dans le tableau si possible
+        String bonReduction = "Aucun";      //Soit afficher aucun bon à l'offrir ou le numéro du bon
+
+        List<ChosenvehicleOdt> chosenvehicleOdts =new ArrayList<>();
+
+        ModelAndView modelAndView = new ModelAndView("emergency-modification/updateSession-or-commercialGesture");
+        modelAndView.addObject("sessionId", sessionId);
+        modelAndView.addObject("bonreduction", bonReduction);
+        modelAndView.addObject("chosenvehicle", chosenvehicleOdts);
+        modelAndView.addObject("commercialGesture", new CommercialGestureOdt());
+
+        //TODO liste de véhicule à proposer avec critère (le parking le plus proche) et afficher <marque modèle, comfort, emplacement de chaque véhicule>, et tenir compte de l'heure de départ souhaité et le confort proche du véhicule ancien
+        //TODO Générer un bon de réduction à afficher puis à envoyer le bon par mail puis annuler reservation. Voir jessica comment faire pour générer le bon
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/cancel/{sessionId}", method = RequestMethod.GET)
+    public ModelAndView cancelSession(@PathVariable int sessionId) {
+
+        sessionService.removeSessionById(sessionId);
+        //TODO vérifier si les réservations sont dans la table session
+        return getImpactedAllSessions();
+    }
+
+    @RequestMapping(value = "/updateSession", method = RequestMethod.POST)
+    public ModelAndView updateImpactedSession(@ModelAttribute("chosenvehicle") final ChosenvehicleOdt chosenvehicleOdt) {
+
+        sessionService.updateSessionById(chosenvehicleOdt.getsessionId(), chosenvehicleOdt.getcarId());
+        //TODO vérifier si les réservations sont dans la table session
+
+        return getImpactedAllSessions();
+    }
+
+    @RequestMapping(value = "/commercialGesture", method = RequestMethod.POST)
+        public ModelAndView updateImpactedSession(@ModelAttribute("commercialGesture") final CommercialGestureOdt commercialGestureOdt) {
+
+        //TODO sauvegarder le bon de reduction pour le client, creer table de bon ou mettre dans le compte client
+
+            //TODO vérifier si les réservations sont dans la table session
+
+            return getImpactedAllSessions();
+        }
 
     @RequestMapping(value = "/reouvrir/{id}", method = RequestMethod.GET)
     public ModelAndView edditingReouvrirLigneRetard(@PathVariable Integer id) {
