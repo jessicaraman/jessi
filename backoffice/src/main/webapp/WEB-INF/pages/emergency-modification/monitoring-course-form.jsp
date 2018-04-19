@@ -26,6 +26,9 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modification de session</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="<c:url value="/modifurgent/impactedSession"/>">sessions impactées</a>
+
+                    <%--A virer cet écran--%>
+                    <a class="dropdown-item" href="<c:url value="/pricing"/>">Visualiser Table tarifs</a>
                     <a class="dropdown-item"/>Liste retards</a>
                 </div>
             </li>
