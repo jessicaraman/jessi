@@ -33,6 +33,16 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
+    public void removeSessionById(int id) {
+        sessionDAO.removeSessionById(id);
+    }
+
+    @Override
+    public void updateSessionById(int sessionId, int carId) {
+        sessionDAO.updateSessionById(sessionId, carId);
+    }
+
+    @Override
     public Car getSessionCar(int sessionId) {
         return sessionDAO.getSessionCar(sessionId);
     }
