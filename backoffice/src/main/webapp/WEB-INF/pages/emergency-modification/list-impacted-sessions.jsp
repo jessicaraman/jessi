@@ -21,8 +21,8 @@
                         <td>${session.registration_number}</td>
                         <td>${session.mark}</td>
                         <td>${session.name_model}</td>
-                        <td><button class="btn btn-warning" style="margin: 0px;" title="Modifier"><a href="<c:url value="updatesession/${car.registration_number}" />" ><i class="fa fa-pencil" aria-hidden="true"></i></a></button></td>
-                        <td><button style="margin:0px" class="btn btn-danger" title="Annuler "><a href="<c:url value="cancel/${car.registration_number}/${car.id}" />" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></button></td>
+                        <td><button class="btn btn-warning" style="margin: 0px;" title="Modifier"><a href="<c:url value="edditingImpactedSession/${session.id}" />" ><i class="fa fa-pencil" aria-hidden="true"></i></a></button></td>
+                        <td><button style="margin:0px" class="btn btn-danger" title="Annuler "><a href="<c:url value="cancel/${session.id}" />" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></button></td>
                     </tr>
                 </c:forEach>
             </table>
