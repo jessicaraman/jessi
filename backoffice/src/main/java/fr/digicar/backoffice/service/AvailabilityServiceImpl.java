@@ -16,8 +16,8 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     private AvailabilityDAO availabilityDAO;
 
     @Override
-    public Availability getAvailabilityById(int id_availability){
-        return availabilityDAO.getAvailabilityById(id_availability);
+    public Availability getAvailabilityById(int idAvailability){
+        return availabilityDAO.getAvailabilityById(idAvailability);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     }
 
     @Override
-    public List<Availability> availabilityByCreteria(String date, String start_time, String end_time){
-        return availabilityDAO.availabilityByCriteria(date, start_time, end_time);
+    public List<Availability> availabilityByCriteria(String date, String startTime, String endTime){
+        return availabilityDAO.availabilityByCriteria(date, startTime, endTime);
     }
 }

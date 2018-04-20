@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,43 +20,40 @@ public class AvailabilityDAOImpl implements AvailabilityDAO {
         return sessionFactory.getCurrentSession();
     }
 
-
     public Availability getAvailabilityById(int availabilityId) {
 
         return (Availability) getCurrentSession().get(Availability.class, availabilityId);
     }
 
     public List<Availability> getAllAvailability() {
-        return getCurrentSession().createQuery("FROM Availability where status = true").list();
+        return getCurrentSession().createQuery("FROM Availability WHERE status = true").list();
     }
 
+    public List<Availability> availabilityByCriteria(String date, String startTime, String endTime) {
 
-    public List<Availability> availabilityByCriteria(String date, String start_time, String end_time){
-
-        String findByCriteriaQueryString = buildFindByCriteriaQuery(date, start_time, end_time);
+        String findByCriteriaQueryString = buildFindByCriteriaQuery(date, startTime, endTime);
 
         List<Availability> resultList = new ArrayList<Availability>();
-        try{
+        try {
             resultList = getCurrentSession().createQuery(findByCriteriaQueryString).list();
-        }
-        catch(JDBCException e) {
+        } catch (JDBCException e) {
             //Error during hibernate query
         }
 
         return resultList;
     }
 
-    private String buildFindByCriteriaQuery(String date, String start_time, String end_time){
-        String query = new String("FROM Availability where status = true");
+    private String buildFindByCriteriaQuery(String date, String startTime, String endTime) {
+        String query = "FROM Availability WHERE status = true";
         String querypParam = "";
-        if (null != date ){
-            querypParam += " and date = '"+date+"'";
+        if (null != date) {
+            querypParam += " and date = '" + date + "'";
         }
-        if (null != start_time){
-            querypParam += " and start_time <= '"+start_time+"'";
+        if (null != startTime) {
+            querypParam += " and startTime <= '" + startTime + "'";
         }
-        if (null != end_time){
-            querypParam += " and end_time >= '"+end_time+"'";
+        if (null != endTime) {
+            querypParam += " and startTime >= '" + endTime + "'";
         }
 
         query += querypParam;

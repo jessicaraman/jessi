@@ -4,10 +4,9 @@ import fr.digicar.backoffice.service.AvailabilityService;
 import fr.digicar.backoffice.service.CarService;
 import fr.digicar.backoffice.service.OccupationService;
 import fr.digicar.model.Availability;
-import fr.digicar.model.Occupation;
 import fr.digicar.model.ParkingSpot;
 import fr.digicar.model.Car;
-import fr.digicar.odt.FilterReservationOdt;
+import fr.digicar.odt.FilterBookingOdt;
 import fr.digicar.backoffice.service.ParkingSpotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,53 +39,51 @@ public class AvailabilityController {
     public ModelAndView getViewFoCarResevation() {
 
 
-        ModelAndView modelAndView = null;
-        List<ParkingSpot> listOfParkingSpot = null;
+        ModelAndView modelAndView = new ModelAndView("reservation");
+        List<ParkingSpot> listOfParkingSpot = new ArrayList<>();
 
         try {
-            modelAndView = new ModelAndView("reservation");
             listOfParkingSpot = parkingSpotService.getParkingSpots();
-            modelAndView.addObject("listOfTown", listOfParkingSpot);
-            modelAndView.addObject("filters", new FilterReservationOdt());
-        }catch (Exception e){
-            log.error("Localize message: "+e.getLocalizedMessage());
-            log.error("Simple Message: "+e.getMessage());
+        } catch (Exception e) {
+            log.error("Could not get the list of parking spot. ", e);
         }
+
+        modelAndView.addObject("listOfTown", listOfParkingSpot);
+        modelAndView.addObject("filters", new FilterBookingOdt());
+
         return modelAndView;
     }
 
     @RequestMapping(value = "/findAvailableByCreteria", method = RequestMethod.POST)
-    public ModelAndView getViewFoAvailableCar(@ModelAttribute("filters") final FilterReservationOdt filters) {
+    public ModelAndView getViewFoAvailableCar(@ModelAttribute("filters") final FilterBookingOdt filters) {
 
         ModelAndView modelAndView = new ModelAndView("reservation");
 
-
         String date = filters.getWishedDate();
-        log.info("Date input: "+date);
-        String start_time = filters.getStart_time();
-        log.info("start_time input: "+start_time);
-        String end_time = filters.getEnd_time();
-        log.info("end_time input: "+end_time);
-        String postal_code = filters.getPostal_code();
-        log.info("postal_code input: "+postal_code);
+        log.info("Date input: " + date);
+        String startTime = filters.getStartTime();
+        log.info("startTime input: " + startTime);
+        String endTime = filters.getEndTime();
+        log.info("endTime input: " + endTime);
+        String zipCode = filters.getZipCode();
+        log.info("zipCode input: " + zipCode);
 
-        List<Availability> listOfAvailability = availabilityService.availabilityByCreteria(date,start_time,end_time);
+        List<Availability> listOfAvailability = availabilityService.availabilityByCriteria(date, startTime, endTime);
 
-        List<Car> listOfAvailableCar = new ArrayList<Car>();
+        List<Car> listOfAvailableCar = new ArrayList<>();
 
         Car car;
-        for(Availability availability: listOfAvailability){
-            car = carService.getCarById(availability.getId_occupation());
+        for (Availability availability : listOfAvailability) {
+            car = carService.getCarById(availability.getIdOccupation());
             listOfAvailableCar.add(car);
         }
 
         String message;
-        if((listOfAvailability.size() == 0) || (listOfAvailableCar.size() == 0)){
+        if ((listOfAvailability.size() == 0) || (listOfAvailableCar.size() == 0)) {
             message = "Aucun véhicule disponible pour cette date";
             modelAndView.addObject("message", message);
             modelAndView.addObject("cars", listOfAvailableCar);
-        }
-        else{
+        } else {
             modelAndView.addObject("cars", listOfAvailableCar);
         }
 

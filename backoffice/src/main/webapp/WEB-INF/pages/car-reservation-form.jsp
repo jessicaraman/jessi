@@ -6,39 +6,41 @@
 
 <div class="container">
     <h2 class="modal-title text-center" id="exampleModalLabel">Réserver un véhicule</h2>
-    <%--@elvariable id="filters" type="fr.digicar.odt.FilterReservationOdt</iframe>"--%>
+    <%--@elvariable id="filters" type="fr.digicar.odt.FilterBookingOdt"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/reservation/findAvailableByCreteria"
                modelAttribute="filters">
 
         <div class="row">
             <div class="col-md-3">
-                <form:label  path="wishedDate">Date</form:label>
+                <form:label path="wishedDate">Date</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:input type="date" path="wishedDate" cssClass="form-control"/>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <form:label path="start_time" > Heure de début</form:label>
+                <form:label path="startTime"> Heure de début</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <input type="time" path="start_time" cssClass="form-control"/>
+                    <input type="time" path="startTime" cssClass="form-control"/>
                 </div>
             </div>
 
             <div class="col-md-3">
-                <form:label path="end_time" >Heure de début</form:label>
+                <form:label path="endTime">Heure de début</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <input type="time" path="end_time" cssClass="form-control"/>
+                    <input type="time" path="endTime" cssClass="form-control"/>
                 </div>
             </div>
 
         </div>
         <div class="row">
             <div class="col-md-3">
-                <form:label path="postal_code">Transmission</form:label>
+                <form:label path="zipCode">Transmission</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <form:select path="postal_code" cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border">
+                    <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border"
+                                 path="zipCode">
                         <form:option value="" disabled="true" selected="true">Choisir le departement</form:option>
+                        <%--@elvariable id="listOfTown" type="java.util.List"--%>
                         <c:forEach items="${listOfTown}" var="town">
                             <form:option value="${town.location}">${town.location}</form:option>
                         </c:forEach>
