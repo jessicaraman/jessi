@@ -6,10 +6,17 @@ import java.util.Date;
 import java.util.List;
 
 public interface InvoiceDAO {
+
     void addInvoice(Invoice inv);
+
     void updateInvoice(Invoice inv);
+
     Invoice getInvoice(int invoiceId);
+
     Invoice getInvoiceByUserAndDate(int userId, Date date);
+
     List<Invoice> getInvoices();
+
     List<Invoice> InvoiceByDate(Date d);
+
 }

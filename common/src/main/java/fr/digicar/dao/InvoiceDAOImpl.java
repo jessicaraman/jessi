@@ -11,12 +11,14 @@ import java.util.List;
 
 @Repository
 public class InvoiceDAOImpl implements InvoiceDAO {
-    @Autowired
 
+    @Autowired
     private SessionFactory sessionFactory;
+
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
+
     public void addInvoice(Invoice inv) {
         getCurrentSession().save(inv);
     }
@@ -34,14 +36,10 @@ public class InvoiceDAOImpl implements InvoiceDAO {
     }
 
     public List<Invoice> getInvoices() {
-        String sql ="FROM Invoice";
-        System.out.println(sql);
-        return getCurrentSession().createQuery(sql).list();
+        return getCurrentSession().createQuery("FROM Invoice").list();
     }
 
     public List<Invoice> InvoiceByDate(Date d) {
-        String sql ="FROM Invoice where date='"+d+"'";
-        System.out.println(sql);
-        return getCurrentSession().createQuery(sql).list();
+        return getCurrentSession().createQuery("FROM Invoice where date='" + d + "'").list();
     }
 }

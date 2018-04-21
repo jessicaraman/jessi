@@ -17,6 +17,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Autowired
     private SessionDAO sessionDAO;
+
     @Override
     public Session getSession(int id) {
         return sessionDAO.getSession(id);
@@ -31,4 +32,5 @@ public class SessionServiceImpl implements SessionService {
     public Car getSessionCar(int sessionId) {
         return sessionDAO.getSessionCar(sessionId);
     }
+
 }

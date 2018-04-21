@@ -4,6 +4,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import fr.digicar.backoffice.service.*;
 import fr.digicar.model.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,19 +18,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class InvoicingController {
 
     @Autowired
     SubscriptionService sub;
+
     @Autowired
     UserService u;
+
     @Autowired
     TarifService tarifService;
+
     @Autowired
     InvoiceService invoiceService;
+
     @Autowired
     CarService carService;
+
     @Autowired
     SessionService sessionService;
 
@@ -50,10 +57,8 @@ public class InvoicingController {
         return modelAndView;
     }
 
-
     private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
-        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-        return sDate;
+        return new java.sql.Date(uDate.getTime());
     }
 
     @RequestMapping(value = "/algo")
@@ -77,11 +82,11 @@ public class InvoicingController {
             String filename = convertUtilToSql(today) + "-" + currentUser.getLastName() + "-" + currentUser.getFirstName();
             String filepath = System.getProperty("user.home") + "/Desktop/" + filename + ".pdf";
             File file = new File(filepath);
-            if (file.exists() == false) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
-            System.out.println(file.exists());
-            System.out.println(file.getPath());
+            log.debug("File exists: " + (file.exists() ? "true" : "false"));
+            log.debug(file.getPath());
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
@@ -118,11 +123,14 @@ public class InvoicingController {
             System.out.print(sessionsOfTheMonth.size());
 
             for (Session ses : sessionsOfTheMonth) {
-                String dateOfsession = "Début " + formatDate(ses.getDeparture_date()) + " " + ses.getDeparture_date().getHours() + "h" + ses.getDeparture_date().getMinutes()
-                        + " / Fin "
-                        + formatDate(ses.getArrival_date()) + " " + ses.getArrival_date().getHours() + "h" + ses.getArrival_date().getMinutes();
-                String duration = dureeSessionToString((Timestamp) ses.getDeparture_date(), (Timestamp) ses.getArrival_date());
-                Car c = carService.getCarById(ses.getId_car());
+                String dateOfsession = "Début " + formatDate(ses.getDepartureDate())
+                        + " " + ses.getDepartureDate().getHours()
+                        + "h" + ses.getDepartureDate().getMinutes()
+                        + " / Fin " + formatDate(ses.getArrivalDate())
+                        + " " + ses.getArrivalDate().getHours()
+                        + "h" + ses.getArrivalDate().getMinutes();
+                String duration = dureeSessionToString(ses.getDepartureDate(), ses.getArrivalDate());
+                Car c = carService.getCarById(ses.getCar());
                 String car = c.getBrandName() + " " + c.getModelName();
                 String kms = "Km parcourus : " + ses.getKms();
                 chapter.add(new Paragraph(dateOfsession));
@@ -151,13 +159,13 @@ public class InvoicingController {
         int minutes = (seconds % 3600) / 60;
         seconds = (seconds % 3600) % 60;
 
-        System.out.println("timestamp1: " + timestamp1);
-        System.out.println("timestamp2: " + timestamp2);
+        log.debug("timestamp1: " + timestamp1);
+        log.debug("timestamp2: " + timestamp2);
 
-        System.out.println("Difference: ");
-        System.out.println(" Hours: " + hours);
-        System.out.println(" Minutes: " + minutes);
-        System.out.println(" Seconds: " + seconds);
+        log.debug("Difference: ");
+        log.debug(" Hours: " + hours);
+        log.debug(" Minutes: " + minutes);
+        log.debug(" Seconds: " + seconds);
         return hours + (minutes / 60);
     }
 
@@ -165,18 +173,15 @@ public class InvoicingController {
         long milliseconds = timestamp2.getTime() - timestamp1.getTime();
         int seconds = (int) milliseconds / 1000;
 
-        // calculate hours minutes and seconds
+        // Calculate hours minutes and seconds
         int hours = seconds / 3600;
         int minutes = (seconds % 3600) / 60;
         seconds = (seconds % 3600) % 60;
 
-        System.out.println("timestamp1: " + timestamp1);
-        System.out.println("timestamp2: " + timestamp2);
+        log.debug("timestamp1: " + timestamp1);
+        log.debug("timestamp2: " + timestamp2);
 
-        System.out.println("Difference: ");
-        System.out.println(" Hours: " + hours);
-        System.out.println(" Minutes: " + minutes);
-        System.out.println(" Seconds: " + seconds);
+        log.debug("Difference : " + hours + ":" + minutes + ":" + seconds);
 
         return hours + "h " + minutes + " minutes";
     }

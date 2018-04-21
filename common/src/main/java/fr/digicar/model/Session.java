@@ -1,6 +1,7 @@
 package fr.digicar.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -8,66 +9,39 @@ import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "session")
 public class Session {
-public Session(){}
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-
     @Column(name = "departure_date")
-    Timestamp departure_date;
+    Timestamp departureDate;
 
     @Column(name = "arrival_date")
-    Timestamp arrival_date;
+    Timestamp arrivalDate;
 
     @Column(name = "id_car")
-    Integer id_car;
+    Integer car;
 
     @Column(name = "id_user")
-    Integer id_user;
+    Integer user;
 
     @Column(name = "id_delay")
-    Integer id_delay;
+    Integer delay;
+
     @Column(name = "kms")
     Integer kms;
 
-    public Integer getKms() {
-        return kms;
+    public Session(Date departureDate, Date arrivalDate, Integer car, Integer user, Integer delay) {
+        this.departureDate = (Timestamp) departureDate;
+        this.arrivalDate = (Timestamp) arrivalDate;
+        this.car = car;
+        this.user = user;
+        this.delay = delay;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public Date getDeparture_date() {
-        return departure_date;
-    }
-
-    public Date getArrival_date() {
-        return arrival_date;
-    }
-
-    public Integer getId_car() {
-        return id_car;
-    }
-
-    public Integer getId_user() {
-        return id_user;
-    }
-
-    public Integer getId_delay() {
-        return id_delay;
-    }
-
-    public Session(Date departure_date, Date arrival_date, Integer id_car, Integer id_user, Integer id_delay) {
-
-        this.departure_date = (Timestamp) departure_date;
-        this.arrival_date = (Timestamp) arrival_date;
-        this.id_car = id_car;
-        this.id_user = id_user;
-        this.id_delay = id_delay;
-    }
 }

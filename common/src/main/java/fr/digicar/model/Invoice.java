@@ -1,6 +1,5 @@
 package fr.digicar.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,70 +7,35 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Date;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "invoice")
 public class Invoice {
+
     @Id
     @Column(name = "id_invoice")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
-
-    public Invoice(Integer id_user, Date date, double amount, String url) {
-        this.id_user = id_user;
-        this.date = date;
-        this.amount = amount;
-        this.url = url;
-    }
+    private Integer id;
 
     @Column(name = "id_user")
-    Integer id_user;
+    private Integer user;
 
     @Column(name = "date")
-    Date date;
+    private Date date;
 
     @Column(name = "amount")
-    double amount;
+    private double amount;
+
     @Column(name = "url")
-    String url;
+    private String url;
 
-    public Integer getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public void setDate(Date date) {
+    public Invoice(Integer idUser, Date date, double amount, String url) {
+        this.user = idUser;
         this.date = date;
-    }
-
-
-
-    public Date getDate() {
-        return date;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setUrl(String url) {
+        this.amount = amount;
         this.url = url;
     }
 
-    public String getUrl() {
-        return url;
-    }
 }

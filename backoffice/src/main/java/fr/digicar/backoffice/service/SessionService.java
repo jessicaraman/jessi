@@ -7,7 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 public interface SessionService {
+
     Session getSession(int id);
+
     List<Session> getUserSessions(int userID, Date d);
+
     Car getSessionCar(int sessionId);
+
 }
