@@ -22,8 +22,6 @@ public class CarTypeDAOImpl implements CarTypeDAO {
         getCurrentSession().save(carType);
     }
 
-
-
     @SuppressWarnings("unchecked")
     public List<CarType> getAllCarType() {
         return getCurrentSession().createQuery("FROM CarType").list();

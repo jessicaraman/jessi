@@ -4,13 +4,12 @@ import lombok.*;
 
 import javax.persistence.*;
 
-/*
+/**
  * Created by barry on 31/12/2017.
  */
-
-@AllArgsConstructor
 @Data
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "car")
 public class Car {
@@ -21,57 +20,50 @@ public class Car {
     private Integer id;
 
     @Column(name = "registration_number")
-    private String registration_number;
+    private String registrationNumber;
 
     @Column(name = "mark")
-    private String mark;
+    private String brandName;
 
     @Column(name = "name_model")
-    private String name_model;
+    private String modelName;
 
-    @Column(name="transmission_id")
+    @Column(name = "transmission_id")
     private Integer transmission;
 
     @Column(name = "nb_places")
-    private Integer nb_places;
+    private Integer seatNumber;
 
     @Column(name = "nb_doors")
-    private Integer nb_doors;
+    private Integer doorNumber;
 
-    @Column(name="type_id")
+    @Column(name = "type_id")
     private Integer type;
 
     @Column(name = "kilometers")
     private Integer kilometers;
 
     @Column(name = "release_date")
-    private String release_date;
+    private String releaseDate;
 
     @Column(name = "comfort")
     private Integer comfort;
 
-    @Column(name="fuel_type_id")
-    private Integer fuel_type;
+    @Column(name = "fuel_type_id")
+    private Integer fuelType;
 
-    public Car(int id, String registration_number, String mark, String name_model, int transmission, int nb_places, int nb_doors, int type, int kilometers, String release_date, int comfort, int fuel_type) {
-        this.registration_number = registration_number;
-        this.mark = mark;
-        this.name_model = name_model;
+    public Car(String registrationNumber, String brandName, String modelName, int transmission, int seatNumber, int doorNumber, int type, int kilometers, String releaseDate, int comfort, int fuelType) {
+        this.registrationNumber = registrationNumber;
+        this.brandName = brandName;
+        this.modelName = modelName;
         this.transmission = transmission;
-        this.nb_places = nb_places;
-        this.nb_doors = nb_doors;
+        this.seatNumber = seatNumber;
+        this.doorNumber = doorNumber;
         this.type = type;
         this.kilometers = kilometers;
-        this.release_date = release_date;
+        this.releaseDate = releaseDate;
         this.comfort = comfort;
-        this.fuel_type = fuel_type;
+        this.fuelType = fuelType;
     }
 
-    public String getMark() {
-        return mark;
-    }
-
-    public String getName_model() {
-        return name_model;
-    }
 }

@@ -1,9 +1,5 @@
 package fr.digicar.backoffice.service;
 
-/**
- * Created by barry on 31/12/2017.
- */
-
 import fr.digicar.dao.CarDAO;
 import fr.digicar.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +46,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Transactional
-    public List<Car> CarByCriteria(String mark, String name_model, String type, String transmission, String fuel_type, String mileageMin, String mileageMax) {
-        return carDAO.CarByCriteria( mark, name_model, type, transmission, fuel_type, mileageMin, mileageMax);
+    public List<Car> CarByCriteria(String mark, String modelName, String type, String transmission, String fuelType, String mileageMin, String mileageMax) {
+        return carDAO.carByCriteria(mark, modelName, type, transmission, fuelType, mileageMin, mileageMax);
     }
 
 

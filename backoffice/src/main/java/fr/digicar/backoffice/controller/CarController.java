@@ -1,20 +1,22 @@
 package fr.digicar.backoffice.controller;
 
-import fr.digicar.backoffice.service.*;
+import fr.digicar.backoffice.service.CarService;
+import fr.digicar.backoffice.service.CarTypeService;
+import fr.digicar.backoffice.service.FuelTypeService;
+import fr.digicar.backoffice.service.TransmissionModeService;
 import fr.digicar.model.Car;
-import fr.digicar.model.CarType;
-import fr.digicar.model.FuelType;
-import fr.digicar.model.TransmissionMode;
 import fr.digicar.odt.FilterOdt;
 import fr.digicar.odt.FilterRegistrationIdOdt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,23 +78,22 @@ public class CarController {
 
         Boolean checked = false;
         String actual;
-        String expected = car.getRegistration_number();
-        for (int i=0; i<cars.size(); i++){
-            actual = cars.get(i).getRegistration_number();
-            if(actual.equals(expected)){
-                checked= true;
+        String expected = car.getRegistrationNumber();
+        for (Car car1 : cars) {
+            actual = car1.getRegistrationNumber();
+            if (actual.equals(expected)) {
+                checked = true;
                 break;
             }
         }
-        if (checked){
+        if (checked) {
 
             alertMessage = "Cette immatriculation est connue dans le référentiel ! ";
             modelAndView.addObject("alertMessage", alertMessage);
 
-        }
-        else{
+        } else {
             carService.addCar(car);
-            confirmationMessage = "Le véhicule "+car.getRegistration_number()+" a bien été ajouté";
+            confirmationMessage = "Le véhicule " + car.getRegistrationNumber() + " a bien été ajouté";
             modelAndView.addObject("confirmationMessage", confirmationMessage);
 
         }
@@ -115,7 +116,7 @@ public class CarController {
         ModelAndView modelAndView = new ModelAndView("car/home-car-referential");
         String message;
 
-        message = "Le véhicule "+registration_number+" a bien été supprimé";
+        message = "Le véhicule " + registration_number + " a bien été supprimé";
         modelAndView.addObject("message", message);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
@@ -124,6 +125,7 @@ public class CarController {
 
         return modelAndView;
     }
+
     @RequestMapping(value = "/updateCar/{carId}", method = RequestMethod.GET)
     public ModelAndView getViewForUpdateCar(@PathVariable int carId) {
         Car car = carService.getCarById(carId);
@@ -143,7 +145,7 @@ public class CarController {
         String confirmationMessage;
 
         carService.updateCar(car);
-        confirmationMessage = "Le véhicule "+car.getRegistration_number()+" a bien été mis à jour";
+        confirmationMessage = "Le véhicule " + car.getRegistrationNumber() + " a bien été mis à jour";
         modelAndView.addObject("confirmationMessage", confirmationMessage);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
         modelAndView.addObject("filters", new FilterOdt());
@@ -160,7 +162,7 @@ public class CarController {
 
     @RequestMapping(value = "/registrationId", method = RequestMethod.POST)
     public ModelAndView findCarByCriteriaNominalCase(@ModelAttribute("filteregistration") final FilterRegistrationIdOdt filterRegistrationIdOdt) {
-        String registration = filterRegistrationIdOdt.getregistrationNumber();
+        String registration = filterRegistrationIdOdt.getRegistrationNumber();
         String message;
 
         Car cardfiltered = carService.getCarByRegistration(registration);
@@ -170,11 +172,10 @@ public class CarController {
         modelAndView.addObject("filters", new FilterOdt());
         modelAndView.addObject("listOfCarType", carTypeService.getAllCarType());
 
-        if (null == cardfiltered){
+        if (null == cardfiltered) {
             message = "Veuillez Renseigner un matricule correcte ou utiliser la recherche générale";
             modelAndView.addObject("message", message);
-        }
-        else {
+        } else {
             List<Car> carFilter = new ArrayList<>();
             carFilter.add(cardfiltered);
             modelAndView.addObject("cars", carFilter);
@@ -182,9 +183,9 @@ public class CarController {
         return modelAndView;
 
     }
+
     @RequestMapping(value = "/allcars", method = RequestMethod.POST)
-    public ModelAndView findCarByCriteria(@ModelAttribute("filters") final FilterOdt filterOdt)
-    {
+    public ModelAndView findCarByCriteria(@ModelAttribute("filters") final FilterOdt filterOdt) {
         String carBrand = filterOdt.getCarBrand();
         String modelName = filterOdt.getModelName();
         String typeCar = filterOdt.getTypeCar();
@@ -209,18 +210,16 @@ public class CarController {
         modelAndView.addObject("filters", new FilterOdt());
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
 
-        if(allCarList.isEmpty()){
+        if (allCarList.isEmpty()) {
             message = "Aucun véhicule trouvé pour cette rechercher";
             modelAndView.addObject("message", message);
             modelAndView.addObject("cars", cars);
-        }
-        else{
+        } else {
             modelAndView.addObject("cars", allCarList);
         }
 
         return modelAndView;
     }
-
 
 
 }
