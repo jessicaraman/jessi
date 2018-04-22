@@ -1,9 +1,6 @@
 package fr.digicar.dao;
 
-import fr.digicar.model.Car;
-import fr.digicar.model.SessionEnCours;
 import fr.digicar.model.Subscription;
-import fr.digicar.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

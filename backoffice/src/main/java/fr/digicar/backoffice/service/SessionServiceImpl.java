@@ -1,7 +1,6 @@
 package fr.digicar.backoffice.service;
 
 import fr.digicar.dao.SessionDAO;
-import fr.digicar.dao.SessionEnCoursDAO;
 import fr.digicar.model.Car;
 import fr.digicar.model.Session;
 import org.springframework.beans.factory.annotation.Autowired;

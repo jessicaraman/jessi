@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>CarSharingClub - BackOffice</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
+        <link href="<c:url value="/resources/font-awesome/css/font-awesome.min.css" />" rel="stylesheet"/>
         <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet"/>
         <link href="<c:url value="/resources/css/mdb.min.css" />" rel="stylesheet"/>
         <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
@@ -86,6 +86,7 @@
                             <td>${place.tagAppel}</td>
                             <td>${place.idSession}</td>
                             <td>
+                                <%--@elvariable id="ligneRetard" type="fr.digicar.model.CalculatedDelay"--%>
                                 <form:form method="GET" modelAttribute="ligneRetard" action="/modifurgent/cloturer/${place.id}">
                                     <button type="submit" class="btn btn-danger m-0">
                                         Clôturer
@@ -138,6 +139,7 @@
                             <td>${place.tagAppel}</td>
                             <td>${place.idSession}</td>
                             <td>
+                                <%--@elvariable id="ligneRetard" type="fr.digicar.model.CalculatedDelay"--%>
                                 <form:form method="GET" modelAttribute="ligneRetard" action="/modifurgent/reouvrir/${place.id}">
                                     <button type="submit" class="btn btn-danger m-0">Relancer
                                     </button>

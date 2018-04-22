@@ -26,7 +26,7 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
     private SessionFactory sessionFactory;
 
     @Autowired
-    private SessionEnCoursDAO sessionEnCoursDAO;
+    private CurrentSessionDAO currentSessionDAO;
 
     @Autowired
     private ParkingSpotDAO parkingSpotDAO;
@@ -87,7 +87,7 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
     @Override
     public void addCalculatedDelaysAutomatically() throws IOException, JSONException {
         // deleteAllCalculatedDelays();
-        List<SessionEnCours> lstSession = sessionEnCoursDAO.getSessionsEnCours();
+        List<CurrentSession> lstSession = currentSessionDAO.getCurrentSessions();
         float latitudeAct;
         float longitudeAct;
         float latitudeArrive;
@@ -95,11 +95,11 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
         String phone, lastName, firstName, model, marque, immat;
         Time arriveCalcule;
 
-        for (SessionEnCours s : lstSession) {
+        for (CurrentSession s : lstSession) {
             CalculatedDelay calculatedDelay = new CalculatedDelay();
-            ParkingSpot parkingSpot = parkingSpotDAO.getParkingSpot(s.getIdPlaceArrivee());
-            Car car = carDAO.getCarById(s.getIdCar());
-            User user = userDAO.getUser(s.getIdUser());
+            ParkingSpot parkingSpot = parkingSpotDAO.getParkingSpot(s.getArrivalParkingSpot());
+            Car car = carDAO.getCarById(s.getCar());
+            User user = userDAO.getUser(s.getUser());
             Tarif tarif = tarifDAO.getTarifsByLibelle("penalite de retard").get(0);
             phone = user.getPhoneNumber();
             lastName = user.getLastName();
@@ -114,19 +114,19 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
             Date d = new Date();
             List<Object> l = calculDuration(latitudeAct + "," + longitudeAct, latitudeArrive + "," + longitudeArrive, d);
             arriveCalcule = (Time) l.get(1);
-            calculatedDelay.setExpectedReturnTime(new Time(s.getHeureArriveePrevu().getTime()));
+            calculatedDelay.setExpectedReturnTime(new Time(s.getExpectedArrivalTime().getTime()));
             calculatedDelay.setFirstName(firstName);
             calculatedDelay.setLastName(lastName);
             calculatedDelay.setCalculatedReturnTime(arriveCalcule);
-            calculatedDelay.setIdSession(s.getIdSession());
+            calculatedDelay.setIdSession(s.getId());
             calculatedDelay.setRegistrationNumber(immat);
             calculatedDelay.setBrand(marque);
             calculatedDelay.setModel(model);
             calculatedDelay.setPhoneNumber(phone);
             calculatedDelay.setTagAppel(s.isTag());
-            int differenceHeur = (((Time) l.get(1)).getHours() - s.getHeureArriveePrevu().getHours()) * 60;
-            int differenceMin = (((Time) l.get(1)).getMinutes() - s.getHeureArriveePrevu().getMinutes());
-            calculatedDelay.setPenality((differenceHeur + differenceMin) * (tarif.getPrix_heure() / 60));
+            int hourDiff = (((Time) l.get(1)).getHours() - s.getExpectedArrivalTime().getHours()) * 60;
+            int minuteDiff = (((Time) l.get(1)).getMinutes() - s.getExpectedArrivalTime().getMinutes());
+            calculatedDelay.setPenality((hourDiff + minuteDiff) * (tarif.getPrix_heure() / 60));
             getCurrentSession().save(calculatedDelay);
         }
     }
