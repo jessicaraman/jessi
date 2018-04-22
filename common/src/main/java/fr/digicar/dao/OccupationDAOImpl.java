@@ -1,8 +1,6 @@
 package fr.digicar.dao;
 
-import fr.digicar.model.Car;
 import fr.digicar.model.Occupation;
-import org.hibernate.JDBCException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +20,8 @@ public class OccupationDAOImpl implements OccupationDAO {
     }
 
 
-    public Occupation getOccupationById(int id_occupation) {
-
-        return (Occupation) getCurrentSession().get(Occupation.class, id_occupation);
+    public Occupation getOccupationById(int idOccupation) {
+        return (Occupation) getCurrentSession().get(Occupation.class, idOccupation);
     }
 
     public List<Occupation> getAllOccupations() {
