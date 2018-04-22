@@ -23,10 +23,10 @@ import java.util.List;
 public class InvoicingController {
 
     @Autowired
-    SubscriptionService sub;
+    SubscriptionService subscriptionService;
 
     @Autowired
-    UserService u;
+    UserService userService;
 
     @Autowired
     TarifService tarifService;
@@ -42,8 +42,8 @@ public class InvoicingController {
 
     @RequestMapping(value = "/invoices")
     public ModelAndView mainPageInvoices() {
-        List<Subscription> t = sub.getSubscriptionByUserID();
-        List<User> users = u.searchUsers();
+        List<Subscription> t = subscriptionService.getSubscriptionByUserId();
+        List<User> users = userService.searchUsers();
         List<Tarif> tarifs = tarifService.getTarifs();
         List<Invoice> invoices = invoiceService.InvoiceByDate(convertUtilToSql(new Date()));
         String desktop = System.getProperty("user.home") + "/Desktop/";
@@ -65,16 +65,16 @@ public class InvoicingController {
     private ModelAndView testPDF() throws DocumentException, IOException {
         ModelAndView modelAndView = new ModelAndView("loader");
         Date today = new Date();
-        List<Subscription> t = sub.getSubscriptionByUserID();
-        List<User> users = u.searchUsers();
-        List<Tarif> tarifs = tarifService.getTarifs();
+        List<Subscription> t = subscriptionService.getSubscriptionByUserId();
+        List<User> users = userService.searchUsers();
+        List<Tarif> pricing = tarifService.getTarifs();
         User currentUser = new User();
         Tarif tarif = new Tarif();
         for (Subscription inv : t) {
             for (User user : users) {
-                if (inv.getId_user() == user.getId()) {
-                    currentUser = u.getUser(user.getId());
-                    tarif = tarifService.getTarif(inv.getId_pricing());
+                if (inv.getUser() == user.getId()) {
+                    currentUser = userService.getUser(user.getId());
+                    tarif = tarifService.getTarif(inv.getPricing());
                 }
             }
             List<Session> sessions = sessionService.getUserSessions(currentUser.getId(), today);
@@ -102,7 +102,7 @@ public class InvoicingController {
             String zipNcity = currentUser.getCity() + " " + currentUser.getZipCode();
             String separator = "__________________________";
             //informations sur le Tarif
-            String libelle_t = "Tarif " + tarif.getLibelle() + " (depuis le " + formatDate(inv.getStart_date()) + ")";
+            String libelle_t = "Tarif " + tarif.getLibelle() + " (depuis le " + formatDate(inv.getStartDate()) + ")";
             String prices = tarif.getPrix_heure() + " €/heure  " + tarif.getPrix_km() + " €/km  " + tarif.getFrais_mensuels() + " €/mois  ";
             chapter.add(new Paragraph(title));
             chapter.add(new Paragraph(clin));
@@ -180,7 +180,6 @@ public class InvoicingController {
 
         log.debug("timestamp1: " + timestamp1);
         log.debug("timestamp2: " + timestamp2);
-
         log.debug("Difference : " + hours + ":" + minutes + ":" + seconds);
 
         return hours + "h " + minutes + " minutes";
