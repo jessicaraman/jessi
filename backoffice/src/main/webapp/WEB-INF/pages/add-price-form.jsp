@@ -56,12 +56,12 @@
         <div class="container">
             <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus mr-1"></i>
-                Ajouter un tarif
+                Ajouter un pricing
             </button>
             <a href="<c:url value="/pricing/search"/>">
                 <button type="button" class="btn btn-primary mt-2">
                     <i class="fa fa-search mr-1"></i>
-                    Rechercher un tarif
+                    Rechercher un pricing
                 </button>
             </a>
 
@@ -71,42 +71,45 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="width:650px;">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ajouter un tarif</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajouter un pricing</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <%--@elvariable id="tarif" type="fr.digicar.model.Tarif"--%>
-                            <form:form method="POST" action="/pricing/addPricing" modelAttribute="tarif">
+                            <%--@elvariable id="pricing" type="fr.digicar.model.Pricing"--%>
+                            <form:form method="POST" action="/pricing/addPricing" modelAttribute="pricing">
 
                             <div class="md-form">
                                 <i class="fa fa-tag prefix grey-text"></i>
-                                <form:input type="text" path="libelle" class="form-control" required="required"/>
-                                <form:label path="libelle">Libellé</form:label>
+                                <form:input type="text" path="label" class="form-control" required="required"/>
+                                <form:label path="label">Libellé</form:label>
                             </div>
 
                             <div class="md-form">
                                 <i class="fa fa-eur prefix grey-text"></i>
-                                <form:input type="number" step="0.01" path="prix_heure" class="form-control"
+                                <form:input type="number" step="0.01" path="hourlyPrice" class="form-control"
                                             required="required"/>
-                                <form:label data-error="Montant invalide" path="prix_heure">Prix par heure</form:label>
+                                <form:label data-error="Montant invalide" path="hourlyPrice">Prix par heure</form:label>
                             </div>
 
-                            <div class="md-form">
-                                <i class="fa fa-eur prefix grey-text"></i>
-                                <form:input type="number" step="0.01" path="prix_km" class="form-control" required="required"/>
-                                <form:label data-error="Montant invalide" path="prix_heure">Prix par km</form:label>
-                            </div>
+                                <div class="md-form">
+                                    <i class="fa fa-eur prefix grey-text"></i>
+                                    <form:input type="number" step="0.01" path="kmPrice" class="form-control"
+                                                required="required"/>
+                                    <form:label data-error="Montant invalide" path="kmPrice">Prix par km</form:label>
+                                </div>
 
-                            <div class="md-form">
-                                <i class="fa fa-eur prefix grey-text"></i>
-                                <form:input type="number" step="1" path="frais_mensuels" class="form-control"
-                                            required="required"/>
-                                <form:label data-error="Montant invalide" path="frais_mensuels">Frais mensuels</form:label>
-                            </div>
+                                <div class="md-form">
+                                    <i class="fa fa-eur prefix grey-text"></i>
+                                    <form:input type="number" step="1" path="monthlyFees" class="form-control"
+                                                required="required"/>
+                                    <form:label data-error="Montant invalide" path="monthlyFees">
+                                        Frais mensuels
+                                    </form:label>
+                                </div>
 
-                            <p style="color:rgb(117, 117, 117);">Catégories de véhicule :</p>
+                                <p style="color:rgb(117, 117, 117);">Catégories de véhicule :</p>
                             <div class="btn-group mr-4" data-toggle="buttons">
                                 <label class="btn btn-default">
                                     <input value="1" type="checkbox" checked autocomplete="off"/>
@@ -148,7 +151,7 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-plus mr-1"></i>
-                                Ajouter tarif
+                                Ajouter pricing
                             </button>
                             </form:form>
                         </div>
@@ -157,7 +160,7 @@
             </div>
 
 
-            <h3>Liste des tarifs</h3>
+            <h3>Liste des pricings</h3>
 
             <%--@elvariable id="listOfPricings" type="java.util.List"--%>
             <c:if test="${!empty listOfPricings}">
@@ -172,17 +175,17 @@
                         <th width="100">Actions</th>
                         <th width="100"></th>
                     </tr>
-                    <c:forEach items="${listOfPricings}" var="tarif">
-                        <%--@elvariable id="tarif" type="fr.digicar.model.Tarif"--%>
-                        <c:if test="${!empty id} && ${tarif.id}==${id}">
+                    <c:forEach items="${listOfPricings}" var="pricing">
+                        <%--@elvariable id="pricing" type="fr.digicar.model.Pricing"--%>
+                        <c:if test="${!empty id} && ${pricing.id}==${id}">
                             <c:set value="table-success" var="cssClass"></c:set>
                         </c:if>
                         <tr class="${cssClass}">
-                            <td>${tarif.id}</td>
-                            <td>${tarif.libelle}</td>
-                            <td>${tarif.prix_heure}</td>
-                            <td>${tarif.prix_km}</td>
-                            <td>${tarif.frais_mensuels}</td>
+                            <td>${pricing.id}</td>
+                            <td>${pricing.label}</td>
+                            <td>${pricing.hourlyPrice}</td>
+                            <td>${pricing.kmPrice}</td>
+                            <td>${pricing.monthlyFees}</td>
                             <td></td>
                             <td>
                                 <button class="btn btn-warning m-0">

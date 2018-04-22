@@ -44,13 +44,13 @@ public class InvoicingController {
     public ModelAndView mainPageInvoices() {
         List<Subscription> t = subscriptionService.getSubscriptionByUserId();
         List<User> users = userService.searchUsers();
-        List<Tarif> tarifs = tarifService.getTarifs();
+        List<Pricing> pricings = tarifService.getTarifs();
         List<Invoice> invoices = invoiceService.InvoiceByDate(convertUtilToSql(new Date()));
         String desktop = System.getProperty("user.home") + "/Desktop/";
         ModelAndView modelAndView = new ModelAndView("usersinvoices");
         modelAndView.addObject("subscriptions", t);
         modelAndView.addObject("users", users);
-        modelAndView.addObject("tarifs", tarifs);
+        modelAndView.addObject("tarifs", pricings);
         modelAndView.addObject("invoices", invoices);
         modelAndView.addObject("desktop", desktop);
 
@@ -67,9 +67,9 @@ public class InvoicingController {
         Date today = new Date();
         List<Subscription> t = subscriptionService.getSubscriptionByUserId();
         List<User> users = userService.searchUsers();
-        List<Tarif> pricing = tarifService.getTarifs();
+        List<Pricing> pricing = tarifService.getTarifs();
         User currentUser = new User();
-        Tarif tarif = new Tarif();
+        Pricing tarif = new Pricing();
         for (Subscription inv : t) {
             for (User user : users) {
                 if (inv.getUser() == user.getId()) {
@@ -101,9 +101,14 @@ public class InvoicingController {
             String emailNNumber = currentUser.getPhoneNumber() + " - " + currentUser.getEmail();
             String zipNcity = currentUser.getCity() + " " + currentUser.getZipCode();
             String separator = "__________________________";
-            //informations sur le Tarif
-            String libelle_t = "Tarif " + tarif.getLibelle() + " (depuis le " + formatDate(inv.getStartDate()) + ")";
-            String prices = tarif.getPrix_heure() + " €/heure  " + tarif.getPrix_km() + " €/km  " + tarif.getFrais_mensuels() + " €/mois  ";
+            //informations sur le Pricing
+            String libelle_t = "Pricing " + tarif.getLabel() + " (depuis le " + formatDate(inv.getStartDate()) + ")";
+            String prices = tarif.getHourlyPrice()
+                    + " €/heure  "
+                    + tarif.getKmPrice()
+                    + " €/km  "
+                    + tarif.getMonthlyFees()
+                    + " €/mois  ";
             chapter.add(new Paragraph(title));
             chapter.add(new Paragraph(clin));
             chapter.add(new Paragraph(name));

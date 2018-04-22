@@ -38,7 +38,7 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
     private CarDAO carDAO;
 
     @Autowired
-    private TarifDAO tarifDAO;
+    private PricingDAO pricingDAO;
 
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
@@ -100,7 +100,7 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
             ParkingSpot parkingSpot = parkingSpotDAO.getParkingSpot(s.getArrivalParkingSpot());
             Car car = carDAO.getCarById(s.getCar());
             User user = userDAO.getUser(s.getUser());
-            Tarif tarif = tarifDAO.getTarifsByLibelle("penalite de retard").get(0);
+            Pricing pricing = pricingDAO.getTarifsByLibelle("penalite de retard").get(0);
             phone = user.getPhoneNumber();
             lastName = user.getLastName();
             firstName = user.getFirstName();
@@ -126,7 +126,7 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
             calculatedDelay.setTagAppel(s.isTag());
             int hourDiff = (((Time) l.get(1)).getHours() - s.getExpectedArrivalTime().getHours()) * 60;
             int minuteDiff = (((Time) l.get(1)).getMinutes() - s.getExpectedArrivalTime().getMinutes());
-            calculatedDelay.setPenality((hourDiff + minuteDiff) * (tarif.getPrix_heure() / 60));
+            calculatedDelay.setPenality((hourDiff + minuteDiff) * (pricing.getHourlyPrice() / 60));
             getCurrentSession().save(calculatedDelay);
         }
     }
