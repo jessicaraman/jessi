@@ -1,8 +1,8 @@
 package fr.digicar.backoffice.service;
 
-import java.util.List;
-
 import fr.digicar.model.ParkingSpot;
+
+import java.util.List;
 
 public interface ParkingSpotService {
 
@@ -15,6 +15,7 @@ public interface ParkingSpotService {
     void deleteParkingSpot(int id);
 
     List<ParkingSpot> getParkingSpots();
+
     List<ParkingSpot> getParkingSpotByObj(ParkingSpot p);
 
 }
