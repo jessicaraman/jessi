@@ -7,22 +7,20 @@ import fr.digicar.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
-
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
 @Repository
-public class RetardCalculeDAOImpl implements RetardCalculeDAO {
+public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -46,42 +44,49 @@ public class RetardCalculeDAOImpl implements RetardCalculeDAO {
         return sessionFactory.getCurrentSession();
     }
 
-    public void addRetardCalcule(RetardCalcule retardCalcule) {
-        getCurrentSession().save(retardCalcule);
+    @Override
+    public void addCalculatedDelay(CalculatedDelay calculatedDelay) {
+        getCurrentSession().save(calculatedDelay);
     }
 
-    public void updateRetardCalcule(RetardCalcule retardCalcule) {
-        RetardCalcule retardCalculeUpdate = getRetardCalcule(retardCalcule.getId());
-        retardCalculeUpdate.setTagAppel(retardCalcule.getTagAppel());
-        getCurrentSession().update(retardCalculeUpdate);
-
+    @Override
+    public void updateCalculatedDelay(CalculatedDelay calculatedDelay) {
+        CalculatedDelay updatedCalculatedDelay = getCalculatedDelayById(calculatedDelay.getId());
+        updatedCalculatedDelay.setTagAppel(calculatedDelay.isTagAppel());
+        getCurrentSession().update(updatedCalculatedDelay);
     }
 
-    public RetardCalcule getRetardCalcule(int id) {
-        return (RetardCalcule) getCurrentSession().get(RetardCalcule.class, id);
+    @Override
+    public CalculatedDelay getCalculatedDelayById(int id) {
+        return (CalculatedDelay) getCurrentSession().get(CalculatedDelay.class, id);
     }
 
-    public List<RetardCalcule> getRetardCalculeByObj(RetardCalcule p) {
+    @Override
+    public List<CalculatedDelay> getCalculatedDelaysByObj(CalculatedDelay p) {
         return new ArrayList<>();
     }
 
-    public void deleteRetardCalcule(int id) {
-        RetardCalcule retardCalcule = getRetardCalcule(id);
-        if (retardCalcule != null)
-            getCurrentSession().delete(retardCalcule);
+    @Override
+    public void deleteCalculatedDelay(int id) {
+        CalculatedDelay calculatedDelay = getCalculatedDelayById(id);
+        if (calculatedDelay != null)
+            getCurrentSession().delete(calculatedDelay);
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public List<RetardCalcule> getRetardsCalcule() {
-        return getCurrentSession().createQuery("FROM RetardCalcule").list();
+    public List<CalculatedDelay> getCalculatedDelays() {
+        return getCurrentSession().createQuery("FROM CalculatedDelay").list();
     }
 
-    public void deleteAllRetardsCalcule() {
-        getCurrentSession().createQuery("DELETE FROM RetardCalcule").executeUpdate();
+    @Override
+    public void deleteAllCalculatedDelays() {
+        getCurrentSession().createQuery("DELETE FROM CalculatedDelay").executeUpdate();
     }
 
-    public void addRetardCalculeAutomatically() throws IOException, JSONException {
-        // deleteAllRetardsCalcule();
+    @Override
+    public void addCalculatedDelaysAutomatically() throws IOException, JSONException {
+        // deleteAllCalculatedDelays();
         List<SessionEnCours> lstSession = sessionEnCoursDAO.getSessionsEnCours();
         float latitudeAct;
         float longitudeAct;
@@ -91,7 +96,7 @@ public class RetardCalculeDAOImpl implements RetardCalculeDAO {
         Time arriveCalcule;
 
         for (SessionEnCours s : lstSession) {
-            RetardCalcule retardCalcule = new RetardCalcule();
+            CalculatedDelay calculatedDelay = new CalculatedDelay();
             ParkingSpot parkingSpot = parkingSpotDAO.getParkingSpot(s.getIdPlaceArrivee());
             Car car = carDAO.getCarById(s.getIdCar());
             User user = userDAO.getUser(s.getIdUser());
@@ -106,32 +111,30 @@ public class RetardCalculeDAOImpl implements RetardCalculeDAO {
             longitudeArrive = parkingSpot.getLongitude();
             longitudeAct = s.getLongitudeCurrent();
             latitudeAct = s.getLatitudeCurrent();
-            java.util.Date d = new java.util.Date();
+            Date d = new Date();
             List<Object> l = calculDuration(latitudeAct + "," + longitudeAct, latitudeArrive + "," + longitudeArrive, d);
             arriveCalcule = (Time) l.get(1);
-            retardCalcule.setHeureRetourPrevu(new Time(s.getHeureArriveePrevu().getTime()));
-            retardCalcule.setFirstName(firstName);
-            retardCalcule.setLastName(lastName);
-            retardCalcule.setHeureRetourCalcule(arriveCalcule);
-            retardCalcule.setIdSession(s.getIdSession());
-            retardCalcule.setImmatriculation(immat);
-            retardCalcule.setMark(marque);
-            retardCalcule.setModel(model);
-            retardCalcule.setPhoneNumber(phone);
-            retardCalcule.setTagAppel(s.isTag());
+            calculatedDelay.setExpectedReturnTime(new Time(s.getHeureArriveePrevu().getTime()));
+            calculatedDelay.setFirstName(firstName);
+            calculatedDelay.setLastName(lastName);
+            calculatedDelay.setCalculatedReturnTime(arriveCalcule);
+            calculatedDelay.setIdSession(s.getIdSession());
+            calculatedDelay.setRegistrationNumber(immat);
+            calculatedDelay.setBrand(marque);
+            calculatedDelay.setModel(model);
+            calculatedDelay.setPhoneNumber(phone);
+            calculatedDelay.setTagAppel(s.isTag());
             int differenceHeur = (((Time) l.get(1)).getHours() - s.getHeureArriveePrevu().getHours()) * 60;
             int differenceMin = (((Time) l.get(1)).getMinutes() - s.getHeureArriveePrevu().getMinutes());
-            retardCalcule.setPenality((differenceHeur + differenceMin) * (tarif.getPrix_heure() / 60));
-            getCurrentSession().save(retardCalcule);
-
+            calculatedDelay.setPenality((differenceHeur + differenceMin) * (tarif.getPrix_heure() / 60));
+            getCurrentSession().save(calculatedDelay);
         }
     }
 
     private Time ajouterSeconde(int min, java.util.Date date) {
         int temp = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
         int total = temp + min;
-        Time time = new Time(total * 1000 - 3600000);
-        return time;
+        return new Time(total * 1000 - 3600000);
     }
 
     private List<Object> calculDuration(String origin, String destination, java.util.Date currentTime) throws IOException, JSONException {
@@ -145,7 +148,12 @@ public class RetardCalculeDAOImpl implements RetardCalculeDAO {
         try {
             Response response = client.newCall(request).execute();
             JSONObject obj = new JSONObject(response.body().string());
-            int time = (Integer) obj.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0).getJSONObject("duration").get("value");
+            int time = (Integer) obj.getJSONArray("rows")
+                    .getJSONObject(0)
+                    .getJSONArray("elements")
+                    .getJSONObject(0)
+                    .getJSONObject("duration")
+                    .get("value");
             l.add(time / 60);
             l.add(ajouterSeconde(time, currentTime));
             return l;
