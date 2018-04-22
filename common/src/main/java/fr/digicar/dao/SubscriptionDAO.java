@@ -18,11 +18,12 @@ public interface SubscriptionDAO {
      *
      * @return the list of corresponding subscriptions.
      */
-    List<Subscription> getSubscriptionByUserID();
+    List<Subscription> getSubscriptionByUserId();
 
     void deleteSubscription(int subscriptionId);
 
     List<Subscription> getSubscriptions();
 
-    List<Subscription> SubscriptionsByDate(Date date);
+    List<Subscription> subscriptionsByDate(Date date);
+
 }

@@ -92,35 +92,35 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
         float longitudeAct;
         float latitudeArrive;
         float longitudeArrive;
-        String phone, lastName, firstName, model, marque, immat;
-        Time arriveCalcule;
+        String phone, lastName, firstName, model, brand, registrationNumber;
+        Time calculatedArrivalTime;
 
         for (CurrentSession s : lstSession) {
             CalculatedDelay calculatedDelay = new CalculatedDelay();
             ParkingSpot parkingSpot = parkingSpotDAO.getParkingSpot(s.getArrivalParkingSpot());
             Car car = carDAO.getCarById(s.getCar());
             User user = userDAO.getUser(s.getUser());
-            Pricing pricing = pricingDAO.getTarifsByLibelle("penalite de retard").get(0);
+            Pricing pricing = pricingDAO.getPricingsByLabel("penalite de retard").get(0);
             phone = user.getPhoneNumber();
             lastName = user.getLastName();
             firstName = user.getFirstName();
             model = car.getModelName();
-            marque = car.getBrandName();
-            immat = car.getRegistrationNumber();
+            brand = car.getBrandName();
+            registrationNumber = car.getRegistrationNumber();
             latitudeArrive = parkingSpot.getLatitude();
             longitudeArrive = parkingSpot.getLongitude();
             longitudeAct = s.getLongitudeCurrent();
             latitudeAct = s.getLatitudeCurrent();
             Date d = new Date();
-            List<Object> l = calculDuration(latitudeAct + "," + longitudeAct, latitudeArrive + "," + longitudeArrive, d);
-            arriveCalcule = (Time) l.get(1);
+            List<Object> l = calculateDuration(latitudeAct + "," + longitudeAct, latitudeArrive + "," + longitudeArrive, d);
+            calculatedArrivalTime = (Time) l.get(1);
             calculatedDelay.setExpectedReturnTime(new Time(s.getExpectedArrivalTime().getTime()));
             calculatedDelay.setFirstName(firstName);
             calculatedDelay.setLastName(lastName);
-            calculatedDelay.setCalculatedReturnTime(arriveCalcule);
+            calculatedDelay.setCalculatedReturnTime(calculatedArrivalTime);
             calculatedDelay.setIdSession(s.getId());
-            calculatedDelay.setRegistrationNumber(immat);
-            calculatedDelay.setBrand(marque);
+            calculatedDelay.setRegistrationNumber(registrationNumber);
+            calculatedDelay.setBrand(brand);
             calculatedDelay.setModel(model);
             calculatedDelay.setPhoneNumber(phone);
             calculatedDelay.setTagAppel(s.isTag());
@@ -131,13 +131,13 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
         }
     }
 
-    private Time ajouterSeconde(int min, java.util.Date date) {
+    private Time addSecond(int min, java.util.Date date) {
         int temp = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
         int total = temp + min;
         return new Time(total * 1000 - 3600000);
     }
 
-    private List<Object> calculDuration(String origin, String destination, java.util.Date currentTime) throws IOException, JSONException {
+    private List<Object> calculateDuration(String origin, String destination, java.util.Date currentTime) throws IOException, JSONException {
         List<Object> l = new ArrayList<>();
         final String API_KEY = "AIzaSyBlCPYWn72s0pPLrZxVYBzwQcRlk2cwfAs";
         OkHttpClient client = new OkHttpClient();
@@ -155,7 +155,7 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
                     .getJSONObject("duration")
                     .get("value");
             l.add(time / 60);
-            l.add(ajouterSeconde(time, currentTime));
+            l.add(addSecond(time, currentTime));
             return l;
         } catch (IOException e) {
             log.error("Error when during trip duration calculation.", e);

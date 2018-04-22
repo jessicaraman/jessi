@@ -1,7 +1,6 @@
 package fr.digicar.dao;
 
 import fr.digicar.model.Subscription;
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 
-@Slf4j
 @Repository
 public class SubscriptionDAOImpl implements SubscriptionDAO {
 
@@ -41,21 +39,24 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Subscription> getSubscriptionByUserID() {
+    public List<Subscription> getSubscriptionByUserId() {
         int day = new Date().getDate();
-        String sql = "FROM Subscription WHERE endDate IS NULL and startDate LIKE '%" + day + "' GROUP BY user";
-        log.debug(sql);
-        return getCurrentSession().createQuery(sql).list();
+        return getCurrentSession()
+                .createQuery("FROM Subscription WHERE endDate IS NULL and startDate LIKE :day GROUP BY user")
+                .setParameter("day", '%' + day)
+                .list();
     }
 
+    @Override
     public void deleteSubscription(int subscriptionId) { }
 
+    @Override
     public List<Subscription> getSubscriptions() {
         return null;
     }
 
-
-    public List<Subscription> SubscriptionsByDate(Date date) {
+    @Override
+    public List<Subscription> subscriptionsByDate(Date date) {
         return null;
     }
 

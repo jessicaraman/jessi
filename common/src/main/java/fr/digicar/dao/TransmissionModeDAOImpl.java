@@ -18,10 +18,12 @@ public class TransmissionModeDAOImpl implements TransmissionModeDAO {
         return sessionFactory.getCurrentSession();
     }
 
+    @Override
     public void addTransmissionMode(TransmissionMode transmissionMode) {
         getCurrentSession().save(transmissionMode);
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<TransmissionMode> getAllTransmissionMode() {
         return getCurrentSession().createQuery("FROM TransmissionMode").list();

@@ -19,13 +19,15 @@ public class OccupationDAOImpl implements OccupationDAO {
         return sessionFactory.getCurrentSession();
     }
 
-
+    @Override
     public Occupation getOccupationById(int idOccupation) {
         return (Occupation) getCurrentSession().get(Occupation.class, idOccupation);
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
     public List<Occupation> getAllOccupations() {
-        return getCurrentSession().createQuery("FROM occupation").list();
+        return getCurrentSession().createQuery("FROM Occupation").list();
     }
 
   /*  private String buildFindByCriteriaQuery(String mark, String name_model, String type, String transmission, String fuel_type, String mileageMin, String mileageMax){

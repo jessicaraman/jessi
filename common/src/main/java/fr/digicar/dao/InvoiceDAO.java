@@ -17,6 +17,6 @@ public interface InvoiceDAO {
 
     List<Invoice> getInvoices();
 
-    List<Invoice> InvoiceByDate(Date d);
+    List<Invoice> invoiceByDate(Date date);
 
 }

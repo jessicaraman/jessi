@@ -17,32 +17,32 @@ public class TarifServiceImpl implements TarifService {
 
     @Override
     public void addTarif(Pricing pricing) {
-        pricingDAO.addTarif(pricing);
+        pricingDAO.addPricing(pricing);
     }
 
     @Override
     public void updateTarif(Pricing pricing) {
-        pricingDAO.updateTarif(pricing);
+        pricingDAO.updatePricing(pricing);
     }
 
     @Override
     public Pricing getTarif(int id) {
-        return pricingDAO.getTarif(id);
+        return pricingDAO.getPricing(id);
     }
 
     @Override
     public void deleteTarif(int id) {
-        pricingDAO.deleteTarif(id);
+        pricingDAO.deletePricing(id);
     }
 
     @Override
     public List<Pricing> getTarifs() {
-        return pricingDAO.getTarifs();
+        return pricingDAO.getPricings();
     }
 
     @Override
     public List<Pricing> searchTarifs(String label, float minKmPrice, float maxKmPrice, float minHourlyPrice, float maxHoulyPrice, int minMonthlyFees, int maxMonthlyFees) {
-        return pricingDAO.searchTarifs(label, minKmPrice, maxKmPrice, minHourlyPrice, maxHoulyPrice, minMonthlyFees, maxMonthlyFees);
+        return pricingDAO.searchPricings(label, minKmPrice, maxKmPrice, minHourlyPrice, maxHoulyPrice, minMonthlyFees, maxMonthlyFees);
     }
 
 }

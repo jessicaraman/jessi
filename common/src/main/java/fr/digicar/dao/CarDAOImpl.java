@@ -22,10 +22,12 @@ public class CarDAOImpl implements CarDAO {
         return sessionFactory.getCurrentSession();
     }
 
+    @Override
     public void addCar(Car car) {
         getCurrentSession().save(car);
     }
 
+    @Override
     public void updateCar(Car car) {
         try {
             getCurrentSession().update(car);
@@ -34,17 +36,19 @@ public class CarDAOImpl implements CarDAO {
         }
     }
 
+    @Override
     public Car getCarById(int carId) {
         return (Car) getCurrentSession().get(Car.class, carId);
     }
 
     //pas branchée encore
+    @Override
     public Car getCarByRegistration(String registration) {
         List<Car> list;
 
         Car car = new Car();
         try {
-            list = getCurrentSession().createQuery("FROM Car WHERE registration_number = '" + registration + "'").list();
+            list = getCurrentSession().createQuery("FROM Car WHERE registrationNumber = '" + registration + "'").list();
             car = null != list && !list.isEmpty() ? list.get(0) : null;
         } catch (JDBCException e) {
             log.error("Error when getting Car by registration number.", e);
@@ -52,6 +56,7 @@ public class CarDAOImpl implements CarDAO {
         return car;
     }
 
+    @Override
     public void deleteCar(int carId) {
         try {
             Car car = (Car) getCurrentSession().load(Car.class, carId);
@@ -63,17 +68,17 @@ public class CarDAOImpl implements CarDAO {
 
     }
 
-
+    @Override
     @SuppressWarnings("unchecked")
     public List<Car> getAllCar() {
         return getCurrentSession().createQuery("FROM Car").list();
     }
 
-
+    @Override
     public List<Car> carByCriteria(String brandName, String modelName, String type, String transmission, String fuelType, String mileageMin, String mileageMax) {
         String findByCriteriaQueryString = buildFindByCriteriaQuery(brandName, modelName, type, transmission, fuelType, mileageMin, mileageMax);
 
-        List<Car> resultList = new ArrayList<Car>();
+        List<Car> resultList = new ArrayList<>();
         try {
             resultList = getCurrentSession().createQuery(findByCriteriaQueryString).list();
         } catch (JDBCException e) {
@@ -87,46 +92,27 @@ public class CarDAOImpl implements CarDAO {
         String query = "FROM Car WHERE";
         String querypParam = "";
         if (null != mark && !mark.isEmpty()) {
-            querypParam += " mark = '" + mark + "'";
+            querypParam += " brandName = '" + mark + "'";
         }
         if (null != modelName && !modelName.isEmpty()) {
-            querypParam += " and modelName = '" + modelName + "'";
+            querypParam += " AND modelName = '" + modelName + "'";
         }
         if (null != type && !type.isEmpty()) {
-            querypParam += " and type = '" + type + "'";
+            querypParam += " AND type = '" + type + "'";
         }
         if (null != transmission && !transmission.isEmpty()) {
-            querypParam += " and transmission = '" + transmission + "'";
+            querypParam += " AND transmission = '" + transmission + "'";
         }
         if (null != fuelType && !fuelType.isEmpty()) {
-            querypParam += " and fuelType = '" + fuelType + "'";
+            querypParam += " AND fuelType = '" + fuelType + "'";
         }
 
         if (null != mileageMin && !mileageMin.isEmpty() && null != mileageMax && !mileageMax.isEmpty()) {
-            querypParam += " and kilometers between " + mileageMin + " and " + mileageMax;
+            querypParam += " AND kilometers BETWEEN " + mileageMin + " AND " + mileageMax;
         }
         querypParam += " ORDER BY mark ASC ";
         query += querypParam;
         return query;
     }
-/*
-    private void fillFindByCriteriaQuery(Query query, String mark, String name_model, String type, String transmission, String fuel_type){
 
-        if (null != mark && !mark.isEmpty()){
-            query.setParameter("mark", mark);
-        }
-        if (null != name_model && !name_model.isEmpty()){
-            query.setParameter("name_model", name_model);
-        }
-        if (null != type && !type.isEmpty()){
-            query.setParameter("type", type);
-        }
-        if (null != transmission && !transmission.isEmpty()){
-            query.setParameter("transmission", transmission);
-        }
-        if (null != fuel_type && !fuel_type.isEmpty()){
-            query.setParameter("fuel_type", fuel_type);
-        }
-    }
-*/
 }

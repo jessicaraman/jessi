@@ -32,7 +32,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public List<Subscription> getSubscriptionByUserId() {
-        return subscriptionDAO.getSubscriptionByUserID();
+        return subscriptionDAO.getSubscriptionByUserId();
     }
 
     @Override

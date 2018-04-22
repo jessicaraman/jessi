@@ -33,7 +33,7 @@ public class PricingServiceImplTest {
         expectedResult.setMonthlyFees(2);
 
         when(tarifServiceImpl.getTarif(expectedResult.getId())).thenReturn(expectedResult);
-        pricingDAO.addTarif(expectedResult);
+        pricingDAO.addPricing(expectedResult);
 
         //
         //WHEN

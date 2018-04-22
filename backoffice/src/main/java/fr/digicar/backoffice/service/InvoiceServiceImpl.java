@@ -43,6 +43,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public List<Invoice> InvoiceByDate(Date d) {
-        return dao.InvoiceByDate(d);
+        return dao.invoiceByDate(d);
     }
 }

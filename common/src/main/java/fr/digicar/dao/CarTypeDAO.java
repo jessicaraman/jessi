@@ -7,6 +7,7 @@ import java.util.List;
 public interface CarTypeDAO {
 
     void addCarType(CarType carType);
+
     List<CarType> getAllCarType();
 
 }

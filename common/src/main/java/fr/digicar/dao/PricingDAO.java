@@ -6,18 +6,18 @@ import java.util.List;
 
 public interface PricingDAO {
 
-    void addTarif(Pricing pricing);
+    void addPricing(Pricing pricing);
 
-    void updateTarif(Pricing pricing);
+    void updatePricing(Pricing pricing);
 
-    Pricing getTarif(int id);
+    Pricing getPricing(int id);
 
-    void deleteTarif(int id);
+    void deletePricing(int id);
 
-    List<Pricing> getTarifs();
+    List<Pricing> getPricings();
 
-    List<Pricing> getTarifsByLibelle(String label);
+    List<Pricing> getPricingsByLabel(String label);
 
-    List<Pricing> searchTarifs(String label, float minKmPrice, float maxKmPrice, float minHourlyPrice, float maxHourlyPrice, int minMonthlyFees, int maxMonthlyFees);
+    List<Pricing> searchPricings(String label, float minKmPrice, float maxKmPrice, float minHourlyPrice, float maxHourlyPrice, int minMonthlyFees, int maxMonthlyFees);
 
 }
