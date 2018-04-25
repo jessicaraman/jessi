@@ -67,7 +67,7 @@ public class MonitorSessionController {
         //Delay identified
         List<RetardCalcule> retardscalcule = retardCalculeService.getRetardsCalcule();
 
-        //impacted sessions
+        //impacted bookings
         List<Booking> bookingsimpacted = new ArrayList<>();
 
         List<Booking> allBookings = bookingService.getAllBookings();
