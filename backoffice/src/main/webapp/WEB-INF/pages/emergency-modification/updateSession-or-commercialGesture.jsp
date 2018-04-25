@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-1">
                     <div class="input-group md-form form-sm form-2 pl-0">
-                        <form:input name="sessionIdForCommercialFGesture" path="sessionIdForCommercialFGesture" type="hidden" value= "${sessionId}"/>
+                        <form:input name="sessionIdForCommercialFGesture" path="sessionIdForCommercialFGesture" type="hidden" value= "${bookingId}"/>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -58,7 +58,7 @@
     </div>
 
     <div class="row"></div>
-<%--@elvariable id="sessionId" type="java.lang.String"--%>
+<%--@elvariable id="bookingId" type="java.lang.String"--%>
 <%--@elvariable id="chosenvehicle" type="fr.digicar.odt.ChosenvehicleOdt</iframe>"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/updateSession" modelAttribute="chosenvehicle">
         <div class="row">
@@ -75,7 +75,7 @@
             </div>
             <div class="col-md-1">
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <form:input name="sessionId" path="sessionId" type="hidden" value= "${sessionId}"/>
+                    <form:input name="bookingId" path="bookingId" type="hidden" value= "${bookingId}"/>
                 </div>
             </div>
             <div class="col-md-3">
