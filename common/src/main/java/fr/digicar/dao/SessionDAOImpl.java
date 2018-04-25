@@ -24,36 +24,6 @@ public class SessionDAOImpl implements SessionDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void removeSessionById(int id){
-
-        try
-        {
-            Session session = getSession(id);
-            getCurrentSession().delete(session);
-
-        }
-        catch(Exception e){
-            //Error during hibernate query
-        }
-
-
-    }
-
-    public void updateSessionById(int sessionId, int carId){
-
-            try
-            {
-                Session session = getSession(sessionId);
-                //session.setCar_registration_id("");
-                //session.setId_car();
-                getCurrentSession().update(session);
-
-            }
-            catch(Exception e){
-                //Error during hibernate query
-            }
-    }
-
     private org.hibernate.Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
@@ -72,49 +42,6 @@ public class SessionDAOImpl implements SessionDAO {
         String sql ="FROM Session where id_user="+userID+" and departure_date between '"+sqlizedstart+"' and '"+sqlizedend+"'";
         System.out.print(sql);
         return getCurrentSession().createQuery(sql).list();
-    }
-    public List<Session> getImpactedSessions(String registration, Long arrival_time) {
-
-
-        List<Session> resultList = new ArrayList<Session>();
-        String sql ="FROM Session where car_registration_id="+registration;
-
-        List<Session> sessionfiltered = new ArrayList<Session>();
-
-        try{
-            resultList = getCurrentSession().createQuery(sql).list();
-
-            Long departureTime;
-            for (int i=0; i<resultList.size(); i++){
-                departureTime = resultList.get(i).getDeparture_date().getTime();
-
-                if (arrival_time >= departureTime) {
-
-                    sessionfiltered.add(resultList.get(i));
-                }
-
-            }
-        }
-        catch(Exception e) {
-            //Error during hibernate query
-        }
-
-        return resultList;
-    }
-
-    public List<Session> getAllSessions() {
-
-        List<Session> resultList = new ArrayList<Session>();
-        String sql ="FROM Session";
-
-        try{
-            resultList = getCurrentSession().createQuery(sql).list();
-        }
-        catch(Exception e) {
-            //Error during hibernate query
-        }
-
-        return resultList;
     }
 
     public Car getSessionCar(int sessionId) {

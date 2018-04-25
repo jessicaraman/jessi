@@ -1,12 +1,9 @@
 package fr.digicar.backoffice.emergency_modification.controller;
 
+import fr.digicar.backoffice.emergency_modification.service.BookingService;
 import fr.digicar.backoffice.emergency_modification.service.RetardCalculeService;
 import fr.digicar.backoffice.emergency_modification.service.SessionEnCoursService;
-import fr.digicar.backoffice.service.SessionService;
-import fr.digicar.model.Car;
-import fr.digicar.model.RetardCalcule;
-import fr.digicar.model.Session;
-import fr.digicar.model.SessionEnCours;
+import fr.digicar.model.*;
 import fr.digicar.odt.ChosenvehicleOdt;
 import fr.digicar.odt.CommercialGestureOdt;
 import fr.digicar.odt.FilterRegistrationIdOdt;
@@ -29,7 +26,7 @@ import java.util.List;
 public class MonitorSessionController {
 
     @Autowired
-    private SessionService sessionService;
+    private BookingService bookingService;
 
     @Autowired
     private RetardCalculeService retardCalculeService;
@@ -65,35 +62,35 @@ public class MonitorSessionController {
     }
 
     @RequestMapping(value = "/impactedSession", method = RequestMethod.GET)
-    public ModelAndView getImpactedAllSessions() {
+    public ModelAndView getImpactedAllBookings() {
 
         //Delay identified
         List<RetardCalcule> retardscalcule = retardCalculeService.getRetardsCalcule();
 
         //impacted sessions
-        List<Session> sessionimpacted = new ArrayList<>();
+        List<Booking> bookingsimpacted = new ArrayList<>();
 
-        List<Session> allSession = sessionService.getAllSessions();
+        List<Booking> allBookings = bookingService.getAllBookings();
         String registration;
         String impact;
         for (int i=0; i<retardscalcule.size(); i++){
             registration = retardscalcule.get(i).getImmatriculation();
             Long t1 = retardscalcule.get(i).getHeureRetourCalcule().getTime();
 
-            for (int j=0; j<allSession.size(); j++) {
+            for (int j=0; j<allBookings.size(); j++) {
 
-                impact = allSession.get(j).getCar_registration_id();
-                Long t2 = allSession.get(j).getDeparture_date().getTime();
+                impact = allBookings.get(j).getCar_registration_id();
+                Long t2 = allBookings.get(j).getDeparture_date().getTime();
 
                 if(registration.equals(impact)){
                     if (t1 >= t2) {
-                        sessionimpacted.add(allSession.get(j));
+                        bookingsimpacted.add(allBookings.get(j));
                     }
                 }
             }
         }
         ModelAndView modelAndView = new ModelAndView("emergency-modification/impacted-sessions");
-        modelAndView.addObject("sessionimpacted",  sessionimpacted);
+        modelAndView.addObject("bookingImpacted",  bookingsimpacted);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
 
         return modelAndView;
@@ -113,17 +110,18 @@ public class MonitorSessionController {
         return findSession(filterRegistrationIdOdt);
     }
 
-    @RequestMapping(value = "/edditingImpactedSession/{sessionId}", method = RequestMethod.GET)
-    public ModelAndView getViewForEdditingImpactedSession(@PathVariable int sessionId) {
+    @RequestMapping(value = "/edditingImpactedSession/{bookingId}", method = RequestMethod.GET)
+    public ModelAndView getViewForEdditingImpactedSession(@PathVariable int bookingId) {
 
         List<Car> listOfCarforChoose = new ArrayList<>();
+        //TODO Algo de recherche de vehicule disponible selon pour client 2
         //Ajouter le nom du parking et l'adresse dans le tableau si possible
         String bonReduction = "Aucun";      //Soit afficher aucun bon à l'offrir ou le numéro du bon
 
         List<ChosenvehicleOdt> chosenvehicleOdts =new ArrayList<>();
 
         ModelAndView modelAndView = new ModelAndView("emergency-modification/updateSession-or-commercialGesture");
-        modelAndView.addObject("sessionId", sessionId);
+        modelAndView.addObject("bookingId", bookingId);
         modelAndView.addObject("bonreduction", bonReduction);
         modelAndView.addObject("chosenvehicle", chosenvehicleOdts);
         modelAndView.addObject("commercialGesture", new CommercialGestureOdt());
@@ -134,21 +132,21 @@ public class MonitorSessionController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/cancel/{sessionId}", method = RequestMethod.GET)
-    public ModelAndView cancelSession(@PathVariable int sessionId) {
+    @RequestMapping(value = "/cancel/{bookingId}", method = RequestMethod.GET)
+    public ModelAndView cancelBooking(@PathVariable int bookingId) {
 
-        sessionService.removeSessionById(sessionId);
+        bookingService.removeBookingById(bookingId);
         //TODO vérifier si les réservations sont dans la table session
-        return getImpactedAllSessions();
+        return getImpactedAllBookings();
     }
 
     @RequestMapping(value = "/updateSession", method = RequestMethod.POST)
     public ModelAndView updateImpactedSession(@ModelAttribute("chosenvehicle") final ChosenvehicleOdt chosenvehicleOdt) {
 
-        sessionService.updateSessionById(chosenvehicleOdt.getsessionId(), chosenvehicleOdt.getcarId());
+        bookingService.updateBookingById(chosenvehicleOdt.getbookingId(), chosenvehicleOdt.getcarId());
         //TODO vérifier si les réservations sont dans la table session
 
-        return getImpactedAllSessions();
+        return getImpactedAllBookings();
     }
 
     @RequestMapping(value = "/commercialGesture", method = RequestMethod.POST)
@@ -158,7 +156,7 @@ public class MonitorSessionController {
 
             //TODO vérifier si les réservations sont dans la table session
 
-            return getImpactedAllSessions();
+            return getImpactedAllBookings();
         }
 
     @RequestMapping(value = "/reouvrir/{id}", method = RequestMethod.GET)
@@ -216,17 +214,17 @@ public class MonitorSessionController {
             }
         }
 
-        List<Session> sessionimpacted = sessionService.getImpactedSessions(registration, arrival_time);
+        List<Booking> bookingsimpacted = bookingService.getImpactedBookings(registration, arrival_time);
 
         ModelAndView modelAndView = new ModelAndView("emergency-modification/impacted-sessions");
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
 
-        if (sessionimpacted.isEmpty() || sessionimpacted == null){
+        if (bookingsimpacted.isEmpty() || bookingsimpacted == null){
             message = "Veuillez Renseigner un matricule correcte";
             modelAndView.addObject("message", message);
         }
         else {
-            modelAndView.addObject("sessionimpacted", sessionimpacted);
+            modelAndView.addObject("bookingImpacted", bookingsimpacted);
         }
         return modelAndView;
     }

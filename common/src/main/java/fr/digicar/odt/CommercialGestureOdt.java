@@ -2,7 +2,7 @@ package fr.digicar.odt;
 
 public class CommercialGestureOdt {
         private String bonreduction;
-        private int sessionId;
+        private int bookingId;
 
 
     /**
@@ -29,14 +29,14 @@ public class CommercialGestureOdt {
          * Getter for parameter sessionId.
          * @return the sessionId
          */
-        public int getsessionId() {
-            return sessionId;
+        public int getbookingId() {
+            return bookingId;
         }
         /**
-         * Setter for parameter sessionId.
-         * @param sessionId the sessionId to set
+         * Setter for parameter bookingId.
+         * @param bookingId the bookingId to set
          */
-        public void setsessionId(int sessionId) {
-            this.sessionId = sessionId;
+        public void setbookingId(int bookingId) {
+            this.bookingId = bookingId;
         }
 }

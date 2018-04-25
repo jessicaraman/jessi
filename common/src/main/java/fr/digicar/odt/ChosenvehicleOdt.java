@@ -4,18 +4,18 @@ public class ChosenvehicleOdt {
 
     private int carId;
 
-    private int sessionId;
+    private int bookingId;
 
     /**
      * Getter for parameter sessionId.
-     * @return the sessionId
+     * @return the bookingId
      */
     public int getcarId() {
         return carId;
     }
     /**
      * Setter for parameter sessionId.
-     * @param carId the sessionId to set
+     * @param carId the carId to set
      */
     public void setcarId(int carId) {
         this.carId = carId;
@@ -23,17 +23,17 @@ public class ChosenvehicleOdt {
 
     /**
      * Getter for parameter sessionId.
-     * @return the sessionId
+     * @return the bookingId
      */
-    public int getsessionId() {
-        return sessionId;
+    public int getbookingId() {
+        return bookingId;
     }
     /**
-     * Setter for parameter sessionId.
-     * @param sessionId the sessionId to set
+     * Setter for parameter bookingId.
+     * @param bookingId the bookingId to set
      */
-    public void setsessionId(int sessionId) {
-        this.sessionId = sessionId;
+    public void setbookingId(int bookingId) {
+        this.bookingId = bookingId;
     }
 
 }
