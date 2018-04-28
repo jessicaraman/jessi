@@ -3,12 +3,12 @@ package fr.digicar.backoffice.controller;
 import fr.digicar.backoffice.service.DelayService;
 import fr.digicar.backoffice.utils.DelayDistribution;
 import fr.digicar.backoffice.utils.SearchPeriod;
+import lombok.val;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -16,11 +16,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -87,6 +90,27 @@ public class DelayControllerTest {
                 .andExpect(model().attribute("delayDistribution", new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))
                 .andExpect(model().attribute("delayDistributionLabels", new String[]{"1-3", "4-6", "7-8", "9-10"}))
                 .andExpect(model().attribute("searchPeriod", searchPeriod));
+    }
+
+    @Test
+    public void filterByDateReturnsCorrectModelAndViewOnParseException() throws Exception {
+        String matcher = null;
+
+        when(delayService.getDelayNumber(any(Date.class), any(Date.class))).thenReturn(1000);
+        when(delayService.getDelayDistribution(any(Date.class), any(Date.class))).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
+
+        mockMvc.perform(post("/delays")
+                .param("startDateString", "")
+                .param("endDateString", "")
+        )
+                .andExpect(status().isOk())
+                .andExpect(view().name("delay-analysis"))
+                .andExpect(forwardedUrl("/WEB-INF/pages/delay-analysis.jsp"))
+                .andExpect(model().attribute("delayNumber", 1000))
+                .andExpect(model().attribute("delayDistribution", new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))
+                .andExpect(model().attribute("delayDistributionLabels", new String[]{"1-3", "4-6", "7-8", "9-10"}))
+                .andExpect(model().attribute("searchPeriod.startDateString", matcher))
+                .andExpect(model().attribute("searchPeriod.endDateString", matcher));
     }
 
     @Test
