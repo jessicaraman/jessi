@@ -2,17 +2,23 @@ package fr.digicar.backoffice.controller;
 
 import fr.digicar.backoffice.service.DelayService;
 import fr.digicar.backoffice.utils.DelayDistribution;
+import fr.digicar.backoffice.utils.SearchPeriod;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+@Slf4j
 @Controller
 @RequestMapping("/delays")
 public class DelayController {
@@ -29,7 +35,28 @@ public class DelayController {
         DelayDistribution delayDistribution = delayService.getDelayDistribution(getPreviousYearDate(today), today);
         modelAndView.addObject("delayDistribution", delayDistribution.getValues());
         modelAndView.addObject("delayDistributionLabels", delayDistribution.getLabels());
+        modelAndView.addObject("searchPeriod", new SearchPeriod());
         return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String filterByDate(@ModelAttribute SearchPeriod searchPeriod, ModelMap model) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            searchPeriod.setStartDate(format.parse(searchPeriod.getStartDateString()));
+            searchPeriod.setEndDate(format.parse(searchPeriod.getEndDateString()));
+        } catch (ParseException e) {
+            log.error("Error when parsing dates to filter delays.", e);
+            searchPeriod.setStartDate(getPreviousYearDate(new Date()));
+            searchPeriod.setEndDate(new Date());
+        }
+        model.addAttribute("resultDate", getResultDateString(searchPeriod.getStartDate(), searchPeriod.getEndDate()));
+        model.addAttribute("delayNumber", delayService.getDelayNumber(searchPeriod.getStartDate(), searchPeriod.getEndDate()));
+        DelayDistribution delayDistribution = delayService.getDelayDistribution(searchPeriod.getStartDate(), searchPeriod.getEndDate());
+        model.addAttribute("delayDistribution", delayDistribution.getValues());
+        model.addAttribute("delayDistributionLabels", delayDistribution.getLabels());
+        model.addAttribute("searchPeriod", searchPeriod);
+        return "delay-analysis";
     }
 
     private Date getPreviousYearDate(Date date) {

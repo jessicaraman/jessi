@@ -48,10 +48,11 @@
             &nbsp;
         </div>
 
-        <section class="container mt-5 mb-4">
+        <section class="container mt-3 mb-4">
             <div class="row mb-4">
                 <div class="card col">
-                    <div class="card-body container pt-0 pb-0">
+                    <div class="card-body container pt-4 pb-0">
+                        <%--@elvariable id="searchPeriod" type="fr.digicar.backoffice.utils.SearchPeriod"--%>
                         <form:form method="POST" modelAttribute="searchPeriod"
                                    action="${pageContext.request.contextPath}/delays">
                             <div class="row">
@@ -62,18 +63,22 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="md-form">
-                                        <input type="text" onfocus="(this.type='date')" id="dateStart"
-                                               class="form-control"/>
-                                        <label for="dateStart">Date de début</label>
+                                        <form:input type="text" onfocus="(this.type='date')" id="dateStart"
+                                                    path="startDateString" cssClass="form-control"/>
+                                        <form:label for="dateStart" path="startDateString">Date de début</form:label>
                                     </div>
                                 </div>
-                                <div class="col-1"></div>
                                 <div class="col-4">
                                     <div class="md-form">
-                                        <input type="text" onfocus="(this.type='date')" id="dateEnd"
-                                               class="form-control">
-                                        <label for="dateEnd">Date de fin</label>
+                                        <form:input type="text" onfocus="(this.type='date')" id="dateEnd"
+                                                    path="endDateString" cssClass="form-control"/>
+                                        <form:label for="dateEnd" path="endDateString">Date de fin</form:label>
                                     </div>
+                                </div>
+                                <div class="col-1">
+                                    <button type="submit" class="btn btn-sm btn-primary mt-3">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
                             </div>
                         </form:form>
