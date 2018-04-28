@@ -20,10 +20,12 @@ public class UserDAOImpl implements UserDAO {
         return sessionFactory.getCurrentSession();
     }
 
+    @Override
     public void addUser(User user) {
         getCurrentSession().save(user);
     }
 
+    @Override
     public void updateUser(User user) {
         User userToUpdate = getUser(user.getId());
         userToUpdate.setGender(user.getGender());
@@ -33,44 +35,53 @@ public class UserDAOImpl implements UserDAO {
         getCurrentSession().update(userToUpdate);
     }
 
+    @Override
     public User getUser(int id) {
         return (User) getCurrentSession().get(User.class, id);
     }
 
+    @Override
     public void deleteUser(int id) {
         User user = getUser(id);
         if (user != null)
             getCurrentSession().delete(user);
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
     public List<User> getUsers() {
         try {
-            return getCurrentSession().createQuery("from User").list();
+            return getCurrentSession().createQuery("FROM User").list();
         } catch (ClassCastException e) {
-            return new ArrayList<User>();
+            return new ArrayList<>();
         }
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
     public List<User> filterUsers(String searchQuery) {
         try {
             return getCurrentSession().createQuery(searchQuery).list();
         } catch (ClassCastException e) {
-            return new ArrayList<User>();
+            return new ArrayList<>();
         }
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
     public boolean checkEmailExistence(String email) {
-        Query query = getCurrentSession().createQuery("from User where email = :email");
+        Query query = getCurrentSession().createQuery("FROM User WHERE email = :email");
         query.setString("email", email);
         List<User> result;
         try {
             result = (List<User>) query.list();
         } catch (ClassCastException e) {
-            result = new ArrayList<User>();
+            result = new ArrayList<>();
         }
         return !(result.size() > 0);
     }
 
+    @Override
     public boolean checkUserCredentials(User user) {
         String email = user.getEmail();
         String password = user.getPassword();

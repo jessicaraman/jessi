@@ -1,7 +1,6 @@
 package fr.digicar.backoffice.service;
 
 import fr.digicar.dao.SessionDAO;
-import fr.digicar.dao.SessionEnCoursDAO;
 import fr.digicar.model.Car;
 import fr.digicar.model.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Autowired
     private SessionDAO sessionDAO;
+
     @Override
     public List<Session> getImpactedSessions(String registration, Long arrival_time){return sessionDAO.getImpactedSessions(registration, arrival_time);}
     @Override
@@ -46,4 +46,5 @@ public class SessionServiceImpl implements SessionService {
     public Car getSessionCar(int sessionId) {
         return sessionDAO.getSessionCar(sessionId);
     }
+
 }

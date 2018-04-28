@@ -7,7 +7,6 @@ import javax.persistence.*;
 /**
  * Created by barry on 15/01/2018.
  */
-
 @Data
 @Entity
 @Table(name = "transmission_mode")
@@ -18,7 +17,10 @@ public class TransmissionMode {
     @Column(name = "id")
     private Integer id;
 
-    /* tramsmission mode name */
+    /**
+     * Tramsmission mode name
+     */
     @Column(name = "name")
     private String name;
+
 }

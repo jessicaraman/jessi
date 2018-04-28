@@ -15,7 +15,7 @@ public interface ParkingSpotDAO {
     void deleteParkingSpot(int id);
 
     List<ParkingSpot> getParkingSpots();
-    List<ParkingSpot> getParkingSpotByObj(ParkingSpot p);
 
+    List<ParkingSpot> getParkingSpotByObj(ParkingSpot p);
 
 }

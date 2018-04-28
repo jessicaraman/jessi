@@ -1,16 +1,17 @@
 package fr.digicar.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-/*
+/**
  * Created by barry on 31/12/2017.
  */
-
-@AllArgsConstructor
 @Data
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "occupation")
 public class Occupation {
@@ -21,38 +22,14 @@ public class Occupation {
     private Integer id;
 
     @Column(name = "car_id")
-    private Integer car_id;
+    private Integer car;
 
     @Column(name = "parking_spots_id")
-    private Integer parking_spots_id;
+    private Integer parkingSpot;
 
-
-    public Occupation(int id, int car_id, int parking_spots_id) {
-        this.car_id = car_id;
-        this.parking_spots_id = parking_spots_id;
+    public Occupation(int car, int parkingSpot) {
+        this.car = car;
+        this.parkingSpot = parkingSpot;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getCar_id() {
-        return car_id;
-    }
-
-    public void setCar_id(Integer car_id) {
-        this.car_id = car_id;
-    }
-
-    public Integer getParking_spots_id() {
-        return parking_spots_id;
-    }
-
-    public void setParking_spots_id(Integer parking_spots_id) {
-        this.parking_spots_id = parking_spots_id;
-    }
 }

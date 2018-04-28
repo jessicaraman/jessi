@@ -58,20 +58,24 @@ public class SessionDAOImpl implements SessionDAO {
         return sessionFactory.getCurrentSession();
     }
 
+    @Override
     public Session getSession(int id) {
         return (Session) getCurrentSession().get(Session.class, id);
     }
 
-    public List<Session> getUserSessions(int userID, Date d) {
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Session> getUserSessions(int userId, Date today) {
         Calendar c = Calendar.getInstance();
-        c.setTime(d);
+        c.setTime(today);
         c.add(Calendar.MONTH, -1);
-        Date minus1= c.getTime();
-        String sqlizedstart = convertToDatetim(minus1);
-        String sqlizedend=convertToDatetim(d);
-        String sql ="FROM Session where id_user="+userID+" and departure_date between '"+sqlizedstart+"' and '"+sqlizedend+"'";
-        System.out.print(sql);
-        return getCurrentSession().createQuery(sql).list();
+        Date oneMonthAgo = c.getTime();
+        String hql = "FROM Session WHERE user = :userId and departure_date BETWEEN :dateStart AND :dateEnd";
+        return getCurrentSession().createQuery(hql)
+                .setParameter("userId", userId)
+                .setDate("dateStart", oneMonthAgo)
+                .setDate("dateEnd", today)
+                .list();
     }
     public List<Session> getImpactedSessions(String registration, Long arrival_time) {
 
@@ -117,29 +121,13 @@ public class SessionDAOImpl implements SessionDAO {
         return resultList;
     }
 
+    @Override
     public Car getSessionCar(int sessionId) {
-        Session s=this.getSession(sessionId);
+        Session s = this.getSession(sessionId);
         Criteria cr = getCurrentSession().createCriteria(Car.class);
-
-        Criterion id = Restrictions.gt("id", s.getId_car());
-        cr.add( id );
-
-       return (Car) cr.list().get(0);
+        Criterion id = Restrictions.gt("id", s.getCar());
+        cr.add(id);
+        return (Car) cr.list().get(0);
     }
-
-    private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
-        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-        return sDate;
-    }
-    private static String convertToDatetime(Date d){
-    java.text.SimpleDateFormat sdf =
-            new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm");
-
-    return sdf.format(d);}
-    private static String convertToDatetim(Date d){
-    java.text.SimpleDateFormat sdf =
-            new java.text.SimpleDateFormat("yyyy-MM-dd");
-
-    return sdf.format(d);}
 
 }

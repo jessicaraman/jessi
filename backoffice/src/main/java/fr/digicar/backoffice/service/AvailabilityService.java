@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface AvailabilityService {
 
-    Availability getAvailabilityById(int id_availability);
+    Availability getAvailabilityById(int idAvailability);
+    
     List<Availability> getAllAvailability();
-    List<Availability> availabilityByCreteria(String date, String start_time, String end_time);
-
+    
+    List<Availability> availabilityByCriteria(String date, String startTime, String endTime);
+    
 }

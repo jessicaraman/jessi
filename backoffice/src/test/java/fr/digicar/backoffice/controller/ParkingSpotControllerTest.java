@@ -1,13 +1,13 @@
 package fr.digicar.backoffice.controller;
 
-import fr.digicar.backoffice.controller.ParkingSpotController;
 import fr.digicar.backoffice.service.ParkingSpotService;
 import fr.digicar.model.ParkingSpot;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -20,19 +20,19 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ParkingSpotControllerTest {
 
     @Mock
-    ParkingSpotService parkingSpotService;
+    private ParkingSpotService parkingSpotService;
 
     @InjectMocks
-    ParkingSpotController parkingSpotController;
+    private ParkingSpotController parkingSpotController;
 
     private MockMvc mockMvc;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/pages/");
         viewResolver.setSuffix(".jsp");

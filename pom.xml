@@ -1,10 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.digicar</groupId>
     <artifactId>digicar</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.1.3-SNAPSHOT</version>
     <modules>
         <module>webportal</module>
         <module>backoffice</module>
@@ -12,9 +11,9 @@
     </modules>
 
     <scm>
-        <url>http://192.168.3.2:8081/alpha.barry/digicar</url>
-        <connection>scm:git:http://192.168.3.2:8081/alpha.barry/digicar.git</connection>
-        <tag>v1.0.0</tag>
+        <url>http://192.168.3.2/alpha.barry/digicar</url>
+        <connection>scm:git:http://192.168.3.2/alpha.barry/digicar.git</connection>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
@@ -107,18 +106,18 @@
             <scope>runtime</scope>
             <version>1.1.1</version>
         </dependency>
+        <!-- Squareup -->
         <dependency>
-			<groupId>com.squareup.okhttp</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>2.7.5</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.squareup.okio/okio -->
-		<dependency>
-			<groupId>com.squareup.okio</groupId>
-			<artifactId>okio</artifactId>
-			<version>1.14.0</version>
-		</dependency>
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>2.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okio</groupId>
+            <artifactId>okio</artifactId>
+            <version>1.14.0</version>
+        </dependency>
+        <!-- Json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
@@ -176,48 +175,46 @@
         <profile>
             <id>release</id>
             <build>
-
                 <plugins>
-                   <plugin>
-                       <groupId>org.sonatype.plugins</groupId>
-                      <artifactId>nexus-staging-maven-plugin</artifactId>
-                      <version>1.5.1</version>
-                      <executions>
-                          <execution>
-                              <id>default-deploy</id>
-                              <phase>deploy</phase>
-                              <goals>
-                                  <goal>deploy</goal>
-                              </goals>
-                          </execution>
-                      </executions>
-                      <configuration>
-                          <serverId>nexus</serverId>
-                          <nexusUrl>http://192.168.3.3:8081/nexus/</nexusUrl>
-                          <skipStaging>true</skipStaging>
-                      </configuration>
-                  </plugin>
-              </plugins>
-           </build>
-       </profile>
-   </profiles>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.5.1</version>
+                        <executions>
+                            <execution>
+                                <id>default-deploy</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <serverId>nexus</serverId>
+                            <nexusUrl>http://192.168.3.3:8081/nexus/</nexusUrl>
+                            <skipStaging>true</skipStaging>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
-   <build>
-       <plugins>
-           <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-release-plugin</artifactId>
-               <version>2.5.3</version>
-               <dependencies>
-                   <!--https://mvnrepository.com/artifact/org.apache.maven.scm/maven-scm-provider-gitexe -->
-                <dependency>
-                    <groupId>org.apache.maven.scm</groupId>
-                    <artifactId>maven-scm-provider-gitexe</artifactId>
-                    <version>1.9.5</version>
-                </dependency>
-            </dependencies>
-        </plugin>
-    </plugins>
-</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-gitexe</artifactId>
+                        <version>1.9.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

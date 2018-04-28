@@ -9,9 +9,7 @@ import javax.persistence.*;
  */
 @Data
 @Entity
-
 @Table(name = "fuel_type")
-
 public class FuelType {
 
     @Id
@@ -19,7 +17,10 @@ public class FuelType {
     @Column(name = "id")
     private Integer id;
 
-    /* fuel type name */
+    /**
+     * Fuel type name
+     */
     @Column(name = "name")
     private String name;
+
 }

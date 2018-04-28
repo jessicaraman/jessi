@@ -18,12 +18,12 @@ public class CarTypeDAOImpl implements CarTypeDAO {
         return sessionFactory.getCurrentSession();
     }
 
+    @Override
     public void addCarType(CarType carType) {
         getCurrentSession().save(carType);
     }
 
-
-
+    @Override
     @SuppressWarnings("unchecked")
     public List<CarType> getAllCarType() {
         return getCurrentSession().createQuery("FROM CarType").list();

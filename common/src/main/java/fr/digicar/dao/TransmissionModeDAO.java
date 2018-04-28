@@ -7,6 +7,7 @@ import java.util.List;
 public interface TransmissionModeDAO {
 
     void addTransmissionMode(TransmissionMode transmissionMode);
+
     List<TransmissionMode> getAllTransmissionMode();
 
 }
