@@ -22,7 +22,7 @@ public class PricingController {
     @RequestMapping(value = "/pricing", method = RequestMethod.GET)
     public ModelAndView addPricingPage() {
         ModelAndView modelAndView = new ModelAndView("add-price-form");
-        modelAndView.addObject("tarif", new Pricing());
+        modelAndView.addObject("pricing", new Pricing());
         List listOfPricings = tarifService.getTarifs();
         modelAndView.addObject("listOfPricings", listOfPricings);
         return modelAndView;
@@ -33,7 +33,7 @@ public class PricingController {
     public ModelAndView addingPricing(@ModelAttribute Pricing pricing) {
         tarifService.addTarif(pricing);
         ModelAndView modelAndView = new ModelAndView("add-price-form");
-        modelAndView.addObject("tarif", new Pricing());
+        modelAndView.addObject("pricing", new Pricing());
         List listOfPricings = tarifService.getTarifs();
         modelAndView.addObject("listOfPricings", listOfPricings);
         return modelAndView;
