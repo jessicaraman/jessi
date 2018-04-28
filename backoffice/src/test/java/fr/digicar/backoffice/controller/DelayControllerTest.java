@@ -2,11 +2,14 @@ package fr.digicar.backoffice.controller;
 
 import fr.digicar.backoffice.service.DelayService;
 import fr.digicar.backoffice.utils.DelayDistribution;
+import fr.digicar.backoffice.utils.SearchPeriod;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -20,8 +23,10 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DelayControllerTest {
 
     @Mock
@@ -37,7 +42,6 @@ public class DelayControllerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/pages/");
         viewResolver.setSuffix(".jsp");
@@ -55,7 +59,8 @@ public class DelayControllerTest {
                 .andExpect(forwardedUrl("/WEB-INF/pages/delay-analysis.jsp"))
                 .andExpect(model().attribute("delayNumber", 1000))
                 .andExpect(model().attribute("delayDistribution", new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))
-                .andExpect(model().attribute("delayDistributionLabels", new String[]{"1-3", "4-6", "7-8", "9-10"}));
+                .andExpect(model().attribute("delayDistributionLabels", new String[]{"1-3", "4-6", "7-8", "9-10"}))
+                .andExpect(model().attribute("searchPeriod", new SearchPeriod()));
     }
 
     @Test
