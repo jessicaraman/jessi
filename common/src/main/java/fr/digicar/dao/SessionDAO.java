@@ -12,7 +12,7 @@ public interface SessionDAO {
 
     List<Session> getUserSessions(int userID, Date d);
 
-    List<Session> getImpactedSessions(String registration, Long arrival_time);
+    List<Session> getImpactedSessions(String registration, Long arrivalTime);
 
     List<Session> getAllSessions();
 
