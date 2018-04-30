@@ -56,7 +56,7 @@ public class BookingDAOImpl implements BookingDAO{
 
 
         List<Booking> resultList = new ArrayList<Booking>();
-        String sql ="FROM Booking where car_registration_id="+registration;
+        String sql ="FROM Booking where car_registration_id='"+registration+"'";
 
         List<Booking> bookingfiltered = new ArrayList<Booking>();
 

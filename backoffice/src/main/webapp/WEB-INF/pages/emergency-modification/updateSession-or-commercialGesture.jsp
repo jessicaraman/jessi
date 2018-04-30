@@ -38,7 +38,7 @@
     <%--@elvariable id="bonreduction" type="java.lang.String"--%>
         <%--@elvariable id="commercialGesture" type="fr.digicar.odt.commercialGestureOdt</iframe>"--%>
         <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/commercialGesture" modelAttribute="commercialGesture">
-            <div class="row">
+            <div class="row" style="margin-left: 75px">
                 <div class="col-md-3">
                     <div class="input-group md-form form-sm form-2 pl-0">
                         <form:input name="bonreduction" path="bonreduction" type="text" value= "${bonreduction}" disabled="true" readonly="readonly"/>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-1">
                     <div class="input-group md-form form-sm form-2 pl-0">
-                        <form:input name="sessionIdForCommercialFGesture" path="sessionIdForCommercialFGesture" type="hidden" value= "${bookingId}"/>
+                        <form:input name="bookingIdForCommercialFGesture" path="bookingIdForCommercialFGesture" type="hidden" value= "${bookingId}"/>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -57,28 +57,31 @@
         </form:form>
     </div>
 
-    <div class="row"></div>
-<%--@elvariable id="bookingId" type="java.lang.String"--%>
+    <div class="row" style="margin-left: 200px">Ou</div>
 <%--@elvariable id="chosenvehicle" type="fr.digicar.odt.ChosenvehicleOdt</iframe>"--%>
+<%--@elvariable id="bookingId" type="java.lang.String"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/updateSession" modelAttribute="chosenvehicle">
-        <div class="row">
-            <div class="col-md-4">
-                <form:label path="carId" >Transmission</form:label>
+        <div class="row" style="margin-left: 75px">
+
+            <div class="col-md-3">
+                <form:label path="carId" >Liste des véhicules disponibles à proximité</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="carId">
-                        <form:option value="" disabled="true" selected="true">Choisir un véhicule</form:option>
+
+                        <%--@elvariable id="listOfCarforChoose" type="java.util.List"--%>
                         <c:forEach items="${listOfCarforChoose}" var="car" >
-                            <form:option value="${car.id}" >${car.mark} ${car.name_model} ${car.comfort} </form:option>
+                            <form:option value="${car.id}" > ${car.brandName} ${car.modelName} ${car.comfort} </form:option>
                         </c:forEach>
                     </form:select>
                 </div>
             </div>
+
             <div class="col-md-1">
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:input name="bookingId" path="bookingId" type="hidden" value= "${bookingId}"/>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm my-0" title="Mettre à jour la session"><i class="fa fa-refresh" aria-hidden="true"></i></button>
             </div>
         </div>

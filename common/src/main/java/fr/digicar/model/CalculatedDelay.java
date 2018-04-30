@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -33,6 +34,9 @@ public class CalculatedDelay {
 
     @Column(name = "heure_retour_calcule")
     private Time calculatedReturnTime;
+
+    @Column(name = "date_retour_calcule")
+    Timestamp calculatedReturnDateTime;
 
     @Column(name = "penality")
     private float penality;

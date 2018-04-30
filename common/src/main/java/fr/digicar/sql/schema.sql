@@ -77,6 +77,7 @@ CREATE TABLE retard_calcule
   model                VARCHAR(40) NULL,
   heure_retour_prevu   DATETIME    NULL,
   heure_retour_calcule DATETIME    NULL,
+  date_retour_calcule  DATETIME    NULL,
   penality             DOUBLE      NULL,
   first_name           VARCHAR(40) NULL,
   last_name            VARCHAR(40) NULL,

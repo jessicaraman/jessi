@@ -4,6 +4,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import fr.digicar.model.*;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,10 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Slf4j
 @Repository
@@ -39,6 +44,8 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
 
     @Autowired
     private PricingDAO pricingDAO;
+
+    private static String actualTime;
 
     private Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
@@ -127,6 +134,8 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
             int hourDiff = (((Time) l.get(1)).getHours() - s.getExpectedArrivalTime().getHours()) * 60;
             int minuteDiff = (((Time) l.get(1)).getMinutes() - s.getExpectedArrivalTime().getMinutes());
             calculatedDelay.setPenality((hourDiff + minuteDiff) * (pricing.getHourlyPrice() / 60));
+            //to have a datetime format
+            calculatedDelay.setCalculatedReturnDateTime(Timestamp.valueOf(actualTime));
             getCurrentSession().save(calculatedDelay);
         }
     }
@@ -156,6 +165,13 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
                     .get("value");
             l.add(time / 60);
             l.add(addSecond(time, currentTime));
+
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                actualTime = sdfDate.format(currentTime);
+            }catch (Exception e){}
+
+
             return l;
         } catch (IOException e) {
             log.error("Error when during trip duration calculation.", e);
