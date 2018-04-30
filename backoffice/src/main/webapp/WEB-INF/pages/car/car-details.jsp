@@ -13,7 +13,6 @@
         <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"/>
     </head>
     <body>
-
         <div class="header">
             <nav class="navbar navbar-expand-lg navbar-dark indigo">
                 <a class="navbar-brand" href="<c:url value="/"/>">CSC Inside</a>
@@ -26,7 +25,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Véhicules</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">Véhicules</a>
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="<c:url value="/car/"/>">Liste véhicule</a>
                                 <a class="dropdown-item" href="">Ajouter</a>
@@ -50,20 +50,21 @@
         <div>
 
         </div>
+        <%--@elvariable id="addedCar" type="fr.digicar.model.Car"--%>
         <c:if test="${!empty addedCar}">
             <table class="table">
                 <tbody>
                 <tr>
                     <td>Immatriculation</td>
-                    <td>${addedCar.registration_number}</td>
+                    <td>${addedCar.registrationNumber}</td>
                 </tr>
                 <tr>
                     <td>Marque</td>
-                    <td>${addedCar.mark}</td>
+                    <td>${addedCar.brandName}</td>
                 </tr>
                 <tr>
                     <td>Nom du modèle</td>
-                    <td>${addedCar.name_model}</td>
+                    <td>${addedCar.modelName}</td>
                 </tr>
                 <tr>
                     <td>Mode de transmission</td>
@@ -71,23 +72,23 @@
                 </tr>
                 <tr>
                     <td>Nombre de places</td>
-                    <td>${addedCar.nb_places}</td>
+                    <td>${addedCar.seatNumber}</td>
                 </tr>
                 <tr>
                     <td>Nombre de portes</td>
-                    <td>${addedCar.nb_doors}</td>
+                    <td>${addedCar.doorNumber}</td>
                 </tr>
                 <tr>
                     <td>Type de véhiclue</td>
                     <td>${addedCar.type}</td>
                 </tr>
-                <tr>
-                    <td>Emplacement</td>
-                    <td>${addedCar.location}</td>
-                </tr>
+                <%--<tr>--%>
+                    <%--<td>Emplacement</td>--%>
+                    <%--<td>${addedCar.location}</td>--%>
+                <%--</tr>--%>
                 <tr>
                     <td>Date de mise en circulation</td>
-                    <td>${addedCar.release_date}</td>
+                    <td>${addedCar.releaseDate}</td>
                 </tr>
                 <tr>
                     <td>Confort</td>
@@ -99,15 +100,15 @@
                 </tr>
                 <tr>
                     <td>Type de carburant</td>
-                    <td>${addedCar.fuel_type}</td>
+                    <td>${addedCar.fuelType}</td>
                 </tr>
                 </tbody>
             </table>
         </c:if>
 
-    <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
-    <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
-    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-    <script type="text/javascript" src="<c:url value="/resources/js/mdb.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/mdb.min.js" />"></script>
     </body>
 </html>

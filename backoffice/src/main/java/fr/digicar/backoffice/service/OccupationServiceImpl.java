@@ -16,13 +16,13 @@ public class OccupationServiceImpl implements OccupationService{
     private OccupationDAO occupationDAO;
 
     @Override
-    public Occupation getOccupationById(int id_occupation){
-
-        return occupationDAO.getOccupationById(id_occupation);
+    public Occupation getOccupationById(int idOccupation){
+        return occupationDAO.getOccupationById(idOccupation);
     }
 
     @Override
     public List<Occupation> getAllOccupations(){
         return occupationDAO.getAllOccupations();
     }
+
 }

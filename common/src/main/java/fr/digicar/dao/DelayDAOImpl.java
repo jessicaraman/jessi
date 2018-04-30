@@ -22,28 +22,32 @@ public class DelayDAOImpl implements DelayDAO {
         return sessionFactory.getCurrentSession();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<Delay> findAll() {
         return getCurrentSession().createQuery("FROM Delay").list();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<Delay> filterByDate(Date dateStart, Date dateEnd) {
         Query query = getCurrentSession().createQuery("FROM Delay d WHERE d.date BETWEEN :dateStart AND :dateEnd");
-        query.setParameter("dateStart", dateStart);
-        query.setParameter("dateEnd", dateEnd);
+        query.setDate("dateStart", dateStart);
+        query.setDate("dateEnd", dateEnd);
         return query.list();
 
     }
 
+    @Override
     public int count() {
         return ((Number) getCurrentSession().createCriteria(Delay.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
     }
 
+    @Override
     public int countByDate(Date dateStart, Date dateEnd) {
         Query query = getCurrentSession().createQuery("SELECT count(*) FROM Delay d WHERE d.date BETWEEN :dateStart AND :dateEnd");
-        query.setParameter("dateStart", dateStart);
-        query.setParameter("dateEnd", dateEnd);
+        query.setDate("dateStart", dateStart);
+        query.setDate("dateEnd", dateEnd);
         return ((Long) query.uniqueResult()).intValue();
     }
 

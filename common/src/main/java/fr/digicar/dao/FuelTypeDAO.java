@@ -7,6 +7,7 @@ import java.util.List;
 public interface FuelTypeDAO {
 
     void addFuelType(FuelType fuelType);
+
     List<FuelType> getAllFuelType();
 
 }

@@ -2,18 +2,18 @@ package fr.digicar.backoffice.service;
 
 import fr.digicar.dao.OccupationDAO;
 import fr.digicar.model.Occupation;
-import fr.digicar.backoffice.service.OccupationServiceImpl;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RunWith(MockitoJUnitRunner.class)
 public class OccupationServiceImplTest {
 
     @Mock
@@ -22,19 +22,13 @@ public class OccupationServiceImplTest {
     @InjectMocks
     private OccupationServiceImpl occupationService;
 
-    @Before
-    public void setUp() throws Exception{
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
-    public void listAllOccupationsShouldReturnAllOccupations(){
-
+    public void listAllOccupationsShouldReturnAllOccupations() {
         List<Occupation> occupations = new ArrayList<>();
-        occupations.add(new Occupation(1,1,1));
-        occupations.add(new Occupation(2,4,5));
-        occupations.add(new Occupation(3,3,9));
-        occupations.add(new Occupation(4,2,7));
+        occupations.add(new Occupation(1, 1));
+        occupations.add(new Occupation(4, 5));
+        occupations.add(new Occupation(3, 9));
+        occupations.add(new Occupation(2, 7));
         Mockito.when(occupationDAO.getAllOccupations()).thenReturn(occupations);
 
         List<Occupation> occupationListTest = occupationService.getAllOccupations();

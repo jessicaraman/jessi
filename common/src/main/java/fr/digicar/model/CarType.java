@@ -7,7 +7,6 @@ import javax.persistence.*;
 /**
  * Created by barry on 15/01/2018.
  */
-
 @Data
 @Entity
 @Table(name = "car_type")
@@ -18,7 +17,10 @@ public class CarType {
     @Column(name = "id")
     private Integer id;
 
-    /* car type name */
+    /**
+     * Car type name
+     */
     @Column(name = "name")
     private String name;
+
 }

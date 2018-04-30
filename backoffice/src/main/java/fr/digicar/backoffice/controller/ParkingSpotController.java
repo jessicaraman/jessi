@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,7 +26,6 @@ public class ParkingSpotController {
         modelAndView.addObject("parking", new ParkingSpot());
         return modelAndView;
     }
-
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView addSearchParkingSpotPage() {
@@ -79,7 +77,6 @@ public class ParkingSpotController {
         return modelAndView;
     }
 
-
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editParkingSpotPage(@PathVariable Integer id) {
         ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
@@ -96,7 +93,7 @@ public class ParkingSpotController {
         modelAndView.addObject("parking", new ParkingSpot());
         parkingSpotService.updateParkingSpot(parkingSpot);
 
-        String message = parkingSpot.getNbSpot() + " a ete modifee.";
+        String message = parkingSpot.getNbSpot() + " a été modifiée.";
 
         List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpots();
         modelAndView.addObject("parkingSpot", parkingSpots);
@@ -109,7 +106,7 @@ public class ParkingSpotController {
         ModelAndView modelAndView = new ModelAndView("menu-parking-spot-form");
         modelAndView.addObject("parking", new ParkingSpot());
         parkingSpotService.deleteParkingSpot(id);
-        String message = "une place supprime.";
+        String message = "une place supprimée.";
         List<ParkingSpot> parkingSpots = parkingSpotService.getParkingSpots();
         modelAndView.addObject("parkingSpot", parkingSpots);
         modelAndView.addObject("message", message);

@@ -18,10 +18,12 @@ public class FuelTypeDAOImpl implements FuelTypeDAO {
         return sessionFactory.getCurrentSession();
     }
 
+    @Override
     public void addFuelType(FuelType fuelType) {
         getCurrentSession().save(fuelType);
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<FuelType> getAllFuelType() {
         return getCurrentSession().createQuery("FROM FuelType").list();
