@@ -39,7 +39,6 @@ public class Session {
     @Column(name = "kms")
     Integer kms;
 
-<<<<<<< HEAD
     public String getCar_registration_id() {
         return car_registration_id;
     }
@@ -56,19 +55,19 @@ public class Session {
     }
 
     public Date getDeparture_date() {
-        return departure_date;
+        return departureDate;
     }
 
     public Date getArrival_date() {
-        return arrival_date;
-=======
+        return arrivalDate;
+    }
+
     public Session(Date departureDate, Date arrivalDate, Integer car, Integer user, Integer delay) {
         this.departureDate = (Timestamp) departureDate;
         this.arrivalDate = (Timestamp) arrivalDate;
         this.car = car;
         this.user = user;
         this.delay = delay;
->>>>>>> 11628992d524629963af242df0e4345fffd6d47d
     }
 
 }

@@ -1,6 +1,6 @@
-package fr.digicar.backoffice.emergency_modification.controller;
+package fr.digicar.backoffice.controller;
 
-import fr.digicar.backoffice.emergency_modification.service.BookingService;
+import fr.digicar.backoffice.service.BookingService;
 import fr.digicar.backoffice.service.CalculatedDelayService;
 import fr.digicar.backoffice.service.CurrentSessionService;
 import fr.digicar.model.Booking;
@@ -91,7 +91,7 @@ public class MonitorSessionController {
             }
         }
         ModelAndView modelAndView = new ModelAndView("emergency-modification/impacted-sessions");
-        modelAndView.addObject("bookingImpacted", bookingsimpacted);
+        modelAndView.addObject("bookingimpacted", bookingsimpacted);
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
 
         return modelAndView;

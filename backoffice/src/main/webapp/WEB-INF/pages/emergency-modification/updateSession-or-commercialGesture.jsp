@@ -47,11 +47,7 @@
                 </div>
                 <div class="col-md-1">
                     <div class="input-group md-form form-sm form-2 pl-0">
-<<<<<<< HEAD
                         <form:input name="sessionIdForCommercialFGesture" path="sessionIdForCommercialFGesture" type="hidden" value= "${bookingId}"/>
-=======
-                        <form:input name="sessionIdForCommercialFGesture" path="sessionIdForCommercialFGesture" type="hidden" value= "${sessionId}"/>
->>>>>>> 11628992d524629963af242df0e4345fffd6d47d
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -62,11 +58,7 @@
     </div>
 
     <div class="row"></div>
-<<<<<<< HEAD
 <%--@elvariable id="bookingId" type="java.lang.String"--%>
-=======
-<%--@elvariable id="sessionId" type="java.lang.String"--%>
->>>>>>> 11628992d524629963af242df0e4345fffd6d47d
 <%--@elvariable id="chosenvehicle" type="fr.digicar.odt.ChosenvehicleOdt</iframe>"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/updateSession" modelAttribute="chosenvehicle">
         <div class="row">
@@ -83,11 +75,7 @@
             </div>
             <div class="col-md-1">
                 <div class="input-group md-form form-sm form-2 pl-0">
-<<<<<<< HEAD
                     <form:input name="bookingId" path="bookingId" type="hidden" value= "${bookingId}"/>
-=======
-                    <form:input name="sessionId" path="sessionId" type="hidden" value= "${sessionId}"/>
->>>>>>> 11628992d524629963af242df0e4345fffd6d47d
                 </div>
             </div>
             <div class="col-md-3">

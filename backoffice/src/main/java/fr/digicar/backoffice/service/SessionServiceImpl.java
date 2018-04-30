@@ -18,13 +18,6 @@ public class SessionServiceImpl implements SessionService {
     @Autowired
     private SessionDAO sessionDAO;
 
-<<<<<<< HEAD
-=======
-    @Override
-    public List<Session> getImpactedSessions(String registration, Long arrival_time){return sessionDAO.getImpactedSessions(registration, arrival_time);}
-    @Override
-    public List<Session> getAllSessions(){return sessionDAO.getAllSessions();}
->>>>>>> 11628992d524629963af242df0e4345fffd6d47d
     @Override
     public Session getSession(int id) {
         return sessionDAO.getSession(id);

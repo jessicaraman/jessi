@@ -29,7 +29,7 @@
 
                     <%--A virer cet écran--%>
                     <a class="dropdown-item" href="<c:url value="/pricing"/>">Visualiser Table tarifs</a>
-                    <a class="dropdown-item"/>Liste retards</a>
+                    <a class="dropdown-item">Liste retards</a>
                 </div>
             </li>
 
@@ -73,11 +73,11 @@
 
                 <tr class="${cssClass}">
                     <td>${place.id}</td>
-                    <td>${place.immatriculation}</td>
-                    <td>${place.mark}</td>
+                    <td>${place.registrationNumber}</td>
+                    <td>${place.brand}</td>
                     <td>${place.model}</td>
-                    <td>${place.heureRetourPrevu}</td>
-                    <td>${place.heureRetourCalcule}</td>
+                    <td>${place.expectedReturnTime}</td>
+                    <td>${place.calculatedReturnTime}</td>
                     <td>${place.penality}</td>
                     <td>${place.firstName}</td>
                     <td>${place.lastName}</td>
@@ -90,7 +90,7 @@
                         </button>
                         </form:form>
                     </td>
-                    <td><button class="btn btn-warning" style="margin: 0px;" title="Voir conflits"><a href="<c:url value="/modifurgent/impactedSession/${place.immatriculation}" />" ><i class="fa fa-eye" aria-hidden="true"></i></a></button></td>
+                    <td><button class="btn btn-warning" style="margin: 0px;" title="Voir conflits"><a href="<c:url value="/modifurgent/impactedSession/${place.registrationNumber}" />" ><i class="fa fa-eye" aria-hidden="true"></i></a></button></td>
                 </tr>
             </c:forEach>
         </table>
@@ -123,11 +123,11 @@
 
                 <tr class="${cssClass}">
                     <td>${place.id}</td>
-                    <td>${place.immatriculation}</td>
-                    <td>${place.mark}</td>
+                    <td>${place.registrationNumber}</td>
+                    <td>${place.brand}</td>
                     <td>${place.model}</td>
-                    <td>${place.heureRetourPrevu}</td>
-                    <td>${place.heureRetourCalcule}</td>
+                    <td>${place.expectedReturnTime}</td>
+                    <td>${place.calculatedReturnTime}</td>
                     <td>${place.penality}</td>
                     <td>${place.firstName}</td>
                     <td>${place.lastName}</td>
@@ -140,7 +140,7 @@
                             </button>
                         </form:form>
                     </td>
-                    <td><button class="btn btn-warning" style="margin: 0px;" title="Voir conflits"><a href="<c:url value="/modifurgent/impactedSession/${place.immatriculation}" />" ><i class="fa fa-eye" aria-hidden="true"></i></a></button></td>
+                    <td><button class="btn btn-warning" style="margin: 0px;" title="Voir conflits"><a href="<c:url value="/modifurgent/impactedSession/${place.registrationNumber}" />" ><i class="fa fa-eye" aria-hidden="true"></i></a></button></td>
 
 
                 </tr>
@@ -177,11 +177,11 @@
 
                 <tr class="${cssClass}">
                     <td>${place.id}</td>
-                    <td>${place.immatriculation}</td>
-                    <td>${place.mark}</td>
+                    <td>${place.registrationNumber}</td>
+                    <td>${place.brand}</td>
                     <td>${place.model}</td>
-                    <td>${place.heureRetourPrevu}</td>
-                    <td>${place.heureRetourCalcule}</td>
+                    <td>${place.expectedReturnTime}</td>
+                    <td>${place.calculatedReturnTime}</td>
                     <td>${place.penality}</td>
                     <td>${place.firstName}</td>
                     <td>${place.lastName}</td>

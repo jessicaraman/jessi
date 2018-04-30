@@ -4,22 +4,15 @@ import fr.digicar.model.Car;
 import fr.digicar.model.Session;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Criteria;
-<<<<<<< HEAD
 import org.hibernate.JDBCException;
-=======
-import org.hibernate.Query;
->>>>>>> 11628992d524629963af242df0e4345fffd6d47d
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
 import java.sql.Time;
 import java.sql.Timestamp;
-=======
->>>>>>> 11628992d524629963af242df0e4345fffd6d47d
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

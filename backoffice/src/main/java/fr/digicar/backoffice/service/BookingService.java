@@ -1,4 +1,4 @@
-package fr.digicar.backoffice.emergency_modification.service;
+package fr.digicar.backoffice.service;
 
 import fr.digicar.model.Booking;
 

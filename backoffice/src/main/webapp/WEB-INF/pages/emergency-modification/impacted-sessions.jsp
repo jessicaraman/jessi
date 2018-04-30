@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="input-group md-form form-sm form-2 pl-0">
-                            <form:input title="AA-OO1-AA" maxlength="9" onKeypress="if( (event.keyCode != 45) && (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if( (event.which != 45) && (event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
+                            <form:input title="AA-OO1-AA" maxlength="9" onKeypress="if( (event.keyCode !== 45) && (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;if( (event.which !== 45) && (event.which < 48 || event.which > 57) && (event.which < 65 || event.which > 90) && (event.which < 97 || event.which > 122)) return false;"
                                         cssStyle="text-transform:uppercase" name="registrationNumber" path="registrationNumber" minlength="" required="required" cssClass="form-control validate my-0 py-1 grey-border" type="text"/>
                             <form:label path="registrationNumber" data-error="Immatriculation invalide">Immatriculation</form:label>
                         </div>
