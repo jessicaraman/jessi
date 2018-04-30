@@ -28,10 +28,6 @@ public class Booking {
     private int idPlaceDepart;
     @Column(name = "id_place_arrivee")
     private int idPlaceArrivee;
-    @Column(name = "heure_depart_prevu")
-    private Timestamp heureDepartPrevu;
-    @Column(name = "heure_arrivee_prevu")
-    private Timestamp heureArriveePrevu;
 
     public Booking(){}
 
@@ -99,19 +95,4 @@ public class Booking {
         this.idPlaceArrivee = idPlaceArrivee;
     }
 
-    public Timestamp getHeureDepartPrevu() {
-        return heureDepartPrevu;
-    }
-
-    public void setHeureDepartPrevu(Timestamp heureDepartPrevu) {
-        this.heureDepartPrevu = heureDepartPrevu;
-    }
-
-    public Timestamp getHeureArriveePrevu() {
-        return heureArriveePrevu;
-    }
-
-    public void setHeureArriveePrevu(Timestamp heureArriveePrevu) {
-        this.heureArriveePrevu = heureArriveePrevu;
-    }
 }
