@@ -30,18 +30,18 @@ public class MonitorSessionController {
     private BookingService bookingService;
 
     @Autowired
-    private CalculatedDelayService retardCalculeService;
+    private CalculatedDelayService calculatedDelayService;
 
     @Autowired
-    private CurrentSessionService sessionEnCoursService;
+    private CurrentSessionService currentSessionService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView AddMonitorCoursePage() throws IOException {
         ModelAndView modelAndView = new ModelAndView("emergency-modification/monitoring-course-form");
         modelAndView.addObject("ligneRetard", new CalculatedDelay());
-        retardCalculeService.deleteAllCalculatedDelays();
-        retardCalculeService.addCalculatedDelayAutomatically();
-        List<CalculatedDelay> retardscalcule = retardCalculeService.getCalculatedDelays(); //liste des personnes à appele
+        calculatedDelayService.deleteAllCalculatedDelays();
+        calculatedDelayService.addCalculatedDelayAutomatically();
+        List<CalculatedDelay> retardscalcule = calculatedDelayService.getCalculatedDelays(); //liste des personnes à appele
         return affichageMultiTable(retardscalcule, modelAndView);
     }
 
@@ -54,11 +54,11 @@ public class MonitorSessionController {
         CurrentSession sessionEnCours = new CurrentSession();
         retardCalcule.setTagAppel(true);
         retardCalcule.setId(id);
-        sessionEnCours.setId(retardCalculeService.getCalculatedDelayById(id).getIdSession());
+        sessionEnCours.setId(calculatedDelayService.getCalculatedDelayById(id).getIdSession());
         sessionEnCours.setTag(true);
-        retardCalculeService.updateCalculatedDelay(retardCalcule);
-        sessionEnCoursService.updateCurrentSession(sessionEnCours);
-        List<CalculatedDelay> retardscalcule = retardCalculeService.getCalculatedDelays(); //liste des personnes à appele
+        calculatedDelayService.updateCalculatedDelay(retardCalcule);
+        currentSessionService.updateCurrentSession(sessionEnCours);
+        List<CalculatedDelay> retardscalcule = calculatedDelayService.getCalculatedDelays(); //liste des personnes à appele
         return affichageMultiTable(retardscalcule, modelAndView);
     }
 
@@ -66,7 +66,7 @@ public class MonitorSessionController {
     public ModelAndView getImpactedAllBookings() {
 
         //Delay identified
-        List<CalculatedDelay> retardscalcule = retardCalculeService.getCalculatedDelays();
+        List<CalculatedDelay> retardscalcule = calculatedDelayService.getCalculatedDelays();
 
         //impacted bookings
         List<Booking> bookingsimpacted = new ArrayList<>();
@@ -166,15 +166,15 @@ public class MonitorSessionController {
 
         ModelAndView modelAndView = new ModelAndView("monitoring-course-form");
         modelAndView.addObject("ligneRetard", new CalculatedDelay());
-        CalculatedDelay retardCalcule = new CalculatedDelay();
+        CalculatedDelay calculatedDelay = new CalculatedDelay();
         CurrentSession sessionEnCours = new CurrentSession();
-        retardCalcule.setTagAppel(false);
-        retardCalcule.setId(id);
-        sessionEnCours.setId(retardCalculeService.getCalculatedDelayById(id).getIdSession());
+        calculatedDelay.setTagAppel(false);
+        calculatedDelay.setId(id);
+        sessionEnCours.setId(calculatedDelayService.getCalculatedDelayById(id).getIdSession());
         sessionEnCours.setTag(true);
-        retardCalculeService.updateCalculatedDelay(retardCalcule);
-        sessionEnCoursService.updateCurrentSession(sessionEnCours);
-        List<CalculatedDelay> retardscalcule = retardCalculeService.getCalculatedDelays(); //liste des personnes à appele
+        calculatedDelayService.updateCalculatedDelay(calculatedDelay);
+        currentSessionService.updateCurrentSession(sessionEnCours);
+        List<CalculatedDelay> retardscalcule = calculatedDelayService.getCalculatedDelays(); //liste des personnes à appele
         return affichageMultiTable(retardscalcule, modelAndView);
     }
 
@@ -201,7 +201,7 @@ public class MonitorSessionController {
         String registration = filterRegistrationIdOdt.getRegistrationNumber();
         String message;
 
-        List<CalculatedDelay> retardscalcule = retardCalculeService.getCalculatedDelays();
+        List<CalculatedDelay> retardscalcule = calculatedDelayService.getCalculatedDelays();
         Long arrival_time = null;
 
         for (CalculatedDelay aRetardscalcule : retardscalcule) {
