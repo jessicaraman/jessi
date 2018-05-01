@@ -232,3 +232,21 @@ CREATE TABLE commercial_gesture
 )
   ENGINE = InnoDB;
 
+create table booking
+(
+  id                  int auto_increment primary key,
+  car_registration_id VARCHAR(40)   NOT NULL,
+  departure_date      datetime      not null,
+  arrival_date        datetime      not null,
+  id_car              int           not null,
+  id_user             int           not null,
+  id_place_depart     int           not null,
+  id_place_arrivee    int           not null
+)
+  engine = InnoDB;
+
+ALTER TABLE booking ADD CONSTRAINT booking_car_id_fk
+FOREIGN KEY (id_car) REFERENCES car (id);
+
+ALTER TABLE booking ADD CONSTRAINT booking_users_id_fk
+FOREIGN KEY (id_user) REFERENCES users (id);
