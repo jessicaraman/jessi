@@ -113,4 +113,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
+    @Column(name = "numberOfCommercialGesture")
+    private Integer numberOfCommercialGesture;
+
 }

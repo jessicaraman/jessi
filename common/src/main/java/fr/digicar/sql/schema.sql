@@ -84,6 +84,7 @@ CREATE TABLE retard_calcule
   phone_number         VARCHAR(15) NULL,
   tag_appel            TINYINT(1)  NULL,
   id_session           INT         NOT NULL
+  date_retour_calcule           DATETIME NULL
 )
   ENGINE = InnoDB;
 
@@ -155,6 +156,7 @@ CREATE TABLE users
   city           VARCHAR(100) NOT NULL,
   signup_date    DATE         NOT NULL,
   status         VARCHAR(10)  NOT NULL
+  numberOfCommercialGesture   int(123) DEFAULT 0,
 )
   ENGINE = InnoDB
   CHARSET = utf8;
@@ -216,4 +218,17 @@ CREATE TABLE history_delays
 )
   ENGINE = InnoDB;
 
+
+CREATE TABLE commercial_gesture
+(
+  id                INT AUTO_INCREMENT PRIMARY KEY,
+  id_user           INT        DEFAULT NULL,
+  code              VARCHAR(500)  NOT NULL
+  valeur            VARCHAR(500)  NOT NULL
+  date_fin_validite DATE  NOT NULL
+
+  CONSTRAINT commercial_gesture_id_user_fk
+  FOREIGN KEY (id_user) REFERENCES USER (id)
+)
+  ENGINE = InnoDB;
 

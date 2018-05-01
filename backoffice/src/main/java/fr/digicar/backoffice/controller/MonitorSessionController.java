@@ -1,12 +1,10 @@
 package fr.digicar.backoffice.controller;
 
-import fr.digicar.backoffice.service.BookingService;
-import fr.digicar.backoffice.service.CalculatedDelayService;
-import fr.digicar.backoffice.service.CurrentSessionService;
-import fr.digicar.backoffice.service.UserService;
+import fr.digicar.backoffice.service.*;
 import fr.digicar.model.*;
 import fr.digicar.odt.ChosenvehicleOdt;
 import fr.digicar.odt.CommercialGestureOdt;
+import fr.digicar.odt.DisplayUserPreferencesOdt;
 import fr.digicar.odt.FilterRegistrationIdOdt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +25,9 @@ public class MonitorSessionController {
     @Autowired
     private BookingService bookingService;
     @Autowired
-        private UserService userService;
+    private UserService userService;
+    @Autowired
+    private CommercialGestureService commercialGestureService;
 
     @Autowired
     private CalculatedDelayService calculatedDelayService;
@@ -137,18 +137,28 @@ public class MonitorSessionController {
         car.setType(4);
         listOfCarforChoose.add(car);
 
-        //TODO Algo de recherche de vehicule disponible selon pour client 2
-        //Ajouter le nom du parking et l'adresse dans le tableau si possible
-        //TODO Générer un bon de réduction à afficher puis à envoyer le bon par mail puis annuler reservation. Voir jessica comment faire pour générer le bon
-        String bonReduction = "CSC_token_01";      //Soit afficher aucun bon à l'offrir ou le numéro du bon
+        List<CommercialGesture> commercialGestureList =commercialGestureService.getFirstCommercialGestureFree();
 
         ModelAndView modelAndView = new ModelAndView("emergency-modification/updateSession-or-commercialGesture");
+        if(commercialGestureList.isEmpty()){
+            modelAndView.addObject("bonreduction", "");
+
+            String message = "Pas de reduction disponible Mettre à jour, veuillez rajouter des tokens";
+            modelAndView.addObject("message", message);
+        }
+        else {
+            String message = "";
+            modelAndView.addObject("message", message);
+            modelAndView.addObject("bonreduction", commercialGestureList.get(0));
+        }
+
         modelAndView.addObject("bookingId", bookingId);
-        modelAndView.addObject("bonreduction", bonReduction);
         modelAndView.addObject("listOfCarforChoose", listOfCarforChoose);
         modelAndView.addObject("chosenvehicle", new ChosenvehicleOdt());
         modelAndView.addObject("commercialGesture", new CommercialGestureOdt());
 
+        //TODO Algo de recherche de vehicule disponible selon pour client 2
+        //Ajouter le nom du parking et l'adresse dans le tableau si possible
         //TODO liste de véhicule à proposer avec critère (le parking le plus proche) et afficher <marque modèle, comfort, emplacement de chaque véhicule>, et tenir compte de l'heure de départ souhaité et le confort proche du véhicule ancien
 
         return modelAndView;
@@ -165,7 +175,6 @@ public class MonitorSessionController {
     public ModelAndView updateImpactedSession(@ModelAttribute("chosenvehicle") final ChosenvehicleOdt chosenvehicleOdt) {
 
         bookingService.updateBookingById(chosenvehicleOdt.getBookingId(), chosenvehicleOdt.getCarId());
-        //TODO vérifier si les réservations sont dans la table session
 
         return getImpactedAllBookings();
     }
@@ -173,11 +182,40 @@ public class MonitorSessionController {
     @RequestMapping(value = "/commercialGesture", method = RequestMethod.POST)
     public ModelAndView updateImpactedSession(@ModelAttribute("commercialGesture") final CommercialGestureOdt commercialGestureOdt) {
 
-        //TODO sauvegarder le bon de reduction pour le client, creer table de bon ou mettre dans le compte client
-
+        //TODO sauvegarder le bon de reduction pour le client dans la table commercialGesture (validité 2 semaines et incrementer le tables users, actualiser la resa 2 avec lheure de retour du client 1
         //TODO vérifier si les réservations sont dans la table session
 
         return getImpactedAllBookings();
+    }
+
+    @RequestMapping(value = "/commercialGestureView", method = RequestMethod.GET)
+    public ModelAndView getCommercialGestureView() {
+
+        List<CommercialGesture> commercialGestureList =commercialGestureService.getAllCommeercialGesture();
+        ModelAndView modelAndView = new ModelAndView("emergency-modification/commerciale_gesture");
+        modelAndView.addObject("commercialGestureList", commercialGestureList);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/usersPreferencesView", method = RequestMethod.GET)
+    public ModelAndView getComercialGestureView() {
+
+        List<User> users = userService.searchUsers();
+        List<DisplayUserPreferencesOdt> userPreferencesOdtList = new ArrayList<>();
+        for (User aUser : users) {
+
+            DisplayUserPreferencesOdt displayUserPreferencesOdt = new DisplayUserPreferencesOdt();
+            displayUserPreferencesOdt.setIdUser(aUser.getId());
+            displayUserPreferencesOdt.setNumberOfDiscount(aUser.getNumberOfCommercialGesture());
+
+            userPreferencesOdtList.add(displayUserPreferencesOdt);
+        }
+
+        ModelAndView modelAndView = new ModelAndView("emergency-modification/View_user_preferences");
+        modelAndView.addObject("users", userPreferencesOdtList);
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "/reouvrir/{id}", method = RequestMethod.GET)
