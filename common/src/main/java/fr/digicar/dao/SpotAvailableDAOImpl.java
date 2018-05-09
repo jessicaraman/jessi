@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @Repository
-public class SpotAvailableDAOImpl {
+public class SpotAvailableDAOImpl implements SpotAvailableDAO{
 
     @Autowired
     private SessionFactory sessionFactory;
