@@ -21,7 +21,7 @@ public class CarAvailabilityDAOImpl implements CarAvailabilityDAO{
         return sessionFactory.getCurrentSession();
     }
 
-
+    @Override
     public CarAvailability getCarAvailabilityByCriteria(String available) {
 
         List<CarAvailability> list;
@@ -36,7 +36,7 @@ public class CarAvailabilityDAOImpl implements CarAvailabilityDAO{
         return carAvailability;
     }
 
-
+    @Override
     public List<CarAvailability> getAllCarAvailabilities() {
         return getCurrentSession().createQuery("FROM car_availability").list();
     }
