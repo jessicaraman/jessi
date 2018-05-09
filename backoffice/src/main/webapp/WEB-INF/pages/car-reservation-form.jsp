@@ -35,12 +35,12 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <form:label path="zipCode">Transmission</form:label>
+                <%--<form:label path="zipCode">Ville</form:label>--%>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border"
                                  path="zipCode">
-                        <form:option value="" disabled="true" selected="true">Choisir le departement</form:option>
-                        <%--@elvariable id="listOfTown" type="java.util.List"--%>
+                        <form:option value="" disabled="true" selected="true">Choisir la ville</form:option>
+                        <%--@elvariable id="listOfTown" type="java.util.List<fr.digicar.model.ParkingSpot>"--%>
                         <c:forEach items="${listOfTown}" var="town">
                             <form:option value="${town.location}">${town.location}</form:option>
                         </c:forEach>

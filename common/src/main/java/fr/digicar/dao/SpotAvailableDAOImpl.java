@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @Repository
-public class SpotAvailableDAOImpl {
+public class SpotAvailableDAOImpl implements SpotAvailableDAO{
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -36,8 +36,8 @@ public class SpotAvailableDAOImpl {
 
         SpotAvailable spotAvailable = new SpotAvailable();
         try {
-            list = getCurrentSession().createQuery("FROM places_available WHERE available = 'yes" + spotAvailable + "'").list();
-            spotAvailable = null != list && !list.isEmpty() ? list.get(0) : null;
+            list = getCurrentSession().createQuery("FROM places_available WHERE available = 'yes' and id = " + id_parking_spots).list();
+            spotAvailable = (!list.isEmpty() && list != null)  ? list.get(0) : null;
         } catch (JDBCException e) {
             log.error("Error.", e);
         }
@@ -46,7 +46,7 @@ public class SpotAvailableDAOImpl {
 
 
     public List<SpotAvailable> getAllSpotsAvailable() {
-        return getCurrentSession().createQuery("FROM places_available").list();
+        return getCurrentSession().createQuery("FROM places_available WHERE available = 'yes'").list();
     }
 
 }

@@ -21,24 +21,26 @@ public class CarAvailabilityDAOImpl implements CarAvailabilityDAO{
         return sessionFactory.getCurrentSession();
     }
 
-
+    @Override
     public CarAvailability getCarAvailabilityByCriteria(String available) {
 
         List<CarAvailability> list;
 
         CarAvailability carAvailability = new CarAvailability();
         try {
-            list = getCurrentSession().createQuery("FROM car_availability WHERE available = 'yes" + carAvailability + "'").list();
-            carAvailability = null != list && !list.isEmpty() ? list.get(0) : null;
+            list = getCurrentSession().createQuery("FROM car_availability WHERE available = '"+available+"'").list();
+
+            carAvailability = (!list.isEmpty() && list != null) ? list.get(0) : null;
+
         } catch (JDBCException e) {
             log.error("Error.", e);
         }
         return carAvailability;
     }
 
-
+    @Override
     public List<CarAvailability> getAllCarAvailabilities() {
-        return getCurrentSession().createQuery("FROM car_availability").list();
+        return getCurrentSession().createQuery("FROM car_availability WHERE available = 'yes'").list();
     }
 
 

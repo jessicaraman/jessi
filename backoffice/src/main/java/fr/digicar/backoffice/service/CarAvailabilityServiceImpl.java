@@ -9,17 +9,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Transactional
 public class CarAvailabilityServiceImpl implements CarAvailabilityService{
 
     @Autowired
     private CarAvailabilityDAO carAvailabilityDAO;
 
     @Transactional
+    @Override
     public CarAvailability getCarAvailabilityByCriteria(String available) {
         return carAvailabilityDAO.getCarAvailabilityByCriteria(available);
     }
 
     @Transactional
+    @Override
     public List<CarAvailability> getAllCarAvailabilities() {
         return carAvailabilityDAO.getAllCarAvailabilities();
     }

@@ -3,11 +3,13 @@ package fr.digicar.backoffice.service;
 import fr.digicar.dao.SpotAvailableDAO;
 import fr.digicar.model.SpotAvailable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public class SpotAvailableServiceImpl {
+@Service
+public class SpotAvailableServiceImpl implements SpotAvailableService{
 
     @Autowired
     private SpotAvailableDAO spotAvailableDAO;
