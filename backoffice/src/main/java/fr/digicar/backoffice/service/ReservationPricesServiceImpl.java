@@ -3,9 +3,11 @@ package fr.digicar.backoffice.service;
 import fr.digicar.dao.ReservationPricesDAO;
 import fr.digicar.model.ReservationPrices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ReservationPricesServiceImpl implements ReservationPricesService{
 
     @Autowired
