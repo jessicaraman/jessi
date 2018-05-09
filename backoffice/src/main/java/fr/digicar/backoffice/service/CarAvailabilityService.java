@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CarAvailabilityService {
 
-    CarAvailability getCarAvailabilityById(String available);
+    CarAvailability getCarAvailabilityByCriteria(String available);
 
     List<CarAvailability> getAllCarAvailabilities();
 }

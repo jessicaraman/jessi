@@ -2,12 +2,15 @@ package fr.digicar.backoffice.controller;
 
 
 import fr.digicar.backoffice.service.CarAvailabilityService;
+import fr.digicar.backoffice.service.ParkingSpotService;
 import fr.digicar.model.CarAvailability;
+import fr.digicar.model.ParkingSpot;
 import fr.digicar.odt.FilterBookingOdt;
 import fr.digicar.odt.FilterOdt;
 import fr.digicar.odt.FilterRegistrationIdOdt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +20,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
+@Controller
+@RequestMapping("/reservation")
 public class CarAvailabilityController {
 
     @Autowired
     private CarAvailabilityService carAvailabilityService;
+
+    @Autowired
+    private ParkingSpotService parkingSpotService;
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public ModelAndView getViewFoCarResevation() {
+
+
+        ModelAndView modelAndView = new ModelAndView("reservation");
+        List<ParkingSpot> listOfParkingSpot = new ArrayList<>();
+
+        try {
+            listOfParkingSpot = parkingSpotService.getParkingSpots();
+        } catch (Exception e) {
+            log.error("Could not get the list of parking spot. ", e);
+        }
+
+        modelAndView.addObject("listOfTown", listOfParkingSpot);
+        modelAndView.addObject("filters", new FilterBookingOdt());
+
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/allcaravailabilities", method = RequestMethod.POST)
     public ModelAndView findCarAvailabilityByCriteria(@ModelAttribute("filters") final FilterBookingOdt filters) {
