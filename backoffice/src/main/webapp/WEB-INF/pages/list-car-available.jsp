@@ -15,7 +15,6 @@
                     <th width="120">Marque</th>
                     <th width="120">Nom du modèle</th>
                     <th width="120">Type de véhicule</th>
-                    <th width="120">Type de carburant</th>
                     <th width="120">Transmission</th>
                     <th width="120">Nombre de portes</th>
                 </tr>
@@ -26,7 +25,6 @@
                         <td>${car.brandName}</td>
                         <td>${car.modelName}</td>
                         <td>${car.type}</td>
-                        <td>${car.fuelType}</td>
                         <td>${car.transmission}</td>
                         <td>${car.doorNumber}</td>
                         <td>

@@ -21,7 +21,7 @@ import java.util.*;
 @Slf4j
 @Controller
 @RequestMapping("/reservation")
-public class CarAvailabilityController {
+public class BookingController {
 
     @Autowired
     private CarAvailabilityService carAvailabilityService;
