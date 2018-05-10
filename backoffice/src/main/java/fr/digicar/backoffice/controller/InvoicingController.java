@@ -42,7 +42,7 @@ public class InvoicingController {
 
     @RequestMapping(value = "/invoices")
     public ModelAndView mainPageInvoices() {
-        List<Subscription> t = subscriptionService.getSubscriptionByUserId();
+       List<Subscription> t = subscriptionService.getSubscriptionByUserId();
         List<User> users = userService.searchUsers();
         List<Pricing> pricings = tarifService.getTarifs();
         List<Invoice> invoices = invoiceService.InvoiceByDate(convertUtilToSql(new Date()));
