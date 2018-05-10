@@ -182,7 +182,15 @@ public class MonitorSessionController {
     @RequestMapping(value = "/commercialGesture", method = RequestMethod.POST)
     public ModelAndView updateImpactedSession(@ModelAttribute("commercialGesture") final CommercialGestureOdt commercialGestureOdt) {
 
-        //TODO sauvegarder le bon de reduction pour le client dans la table commercialGesture (validité 2 semaines et incrementer le tables users, actualiser la resa 2 avec lheure de retour du client 1
+        Booking booking = bookingService.getBooking(commercialGestureOdt.getBookingIdForCommercialFGesture());
+        int id_user= booking.getId_user();
+        //validité 2 semaines
+        commercialGestureService.updateCommercialGestureForUser(id_user, commercialGestureOdt.getBonreduction());
+
+        //actualiser la résa 2 avec lheure de retour du client 1
+        bookingService.updateHourBooking(commercialGestureOdt.getBookingIdForCommercialFGesture(), booking.getDeparture_date());
+        //incrementer le tables users,
+        userService.updateGestureAccountUser(id_user);
         //TODO vérifier si les réservations sont dans la table session
 
         return getImpactedAllBookings();

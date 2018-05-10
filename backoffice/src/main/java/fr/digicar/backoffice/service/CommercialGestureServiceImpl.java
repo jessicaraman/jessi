@@ -22,4 +22,8 @@ public class CommercialGestureServiceImpl implements CommercialGestureService{
     public List<CommercialGesture> getFirstCommercialGestureFree(){
         return commercialeGestureDAO.getFirstCommercialGestureFree();
     }
+
+    @Override
+    public void  updateCommercialGestureForUser(int id_user, String code) { commercialeGestureDAO.updateCommercialGestureForUser(id_user, code);
+    }
 }

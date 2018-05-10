@@ -1,11 +1,14 @@
 package fr.digicar.dao;
 
 import fr.digicar.model.Booking;
+import fr.digicar.model.Car;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -20,6 +23,9 @@ public class BookingDAOImpl implements BookingDAO{
 
     public Booking getBooking(int id) {
         return (Booking) getCurrentSession().get(Booking.class, id);
+    }
+    public Car getCar(int id) {
+        return (Car) getCurrentSession().get(Car.class, id);
     }
 
     public void removeSessionById(int id){
@@ -37,13 +43,12 @@ public class BookingDAOImpl implements BookingDAO{
 
     }
 
-    public void updateSessionById(int bookingId, int carId){
+    public void updateHourBooking(int bookingId, Timestamp date){
 
         try
         {
             Booking booking = getBooking(bookingId);
-            //session.setCar_registration_id("");
-            //session.setId_car();
+            booking.setDeparture_date(date);
             getCurrentSession().update(booking);
 
         }
@@ -51,6 +56,23 @@ public class BookingDAOImpl implements BookingDAO{
             //Error during hibernate query
         }
     }
+
+    public void updateBookingById(int bookingId, int carId){
+
+            try
+            {
+                Car car =getCar(carId);
+                Booking booking = getBooking(bookingId);
+
+                booking.setCar_registration_id(car.getRegistrationNumber());
+                booking.setId_car(carId);
+                getCurrentSession().update(booking);
+
+            }
+            catch(Exception e){
+                //Error during hibernate query
+            }
+        }
 
     public List<Booking> getImpactedSessions(String registration, Long arrival_time) {
 
@@ -67,7 +89,7 @@ public class BookingDAOImpl implements BookingDAO{
             for (int i=0; i<resultList.size(); i++){
                 departureTime = resultList.get(i).getDeparture_date().getTime();
 
-                if (arrival_time >= departureTime) {
+                if (arrival_time > departureTime) {
 
                     bookingfiltered.add(resultList.get(i));
                 }

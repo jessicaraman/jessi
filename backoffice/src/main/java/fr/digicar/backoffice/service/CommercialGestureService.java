@@ -7,4 +7,6 @@ import java.util.List;
 public interface CommercialGestureService {
     List<CommercialGesture> getAllCommeercialGesture();
     List<CommercialGesture> getFirstCommercialGestureFree();
+    void updateCommercialGestureForUser(int user, String code);
+
 }

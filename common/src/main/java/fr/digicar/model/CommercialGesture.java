@@ -3,6 +3,8 @@ package fr.digicar.model;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @Entity
@@ -20,5 +22,8 @@ public class CommercialGesture {
     @Column(name = "valeur")
     private Float valeur;
     @Column(name = "date_fin_validite")
-    private Integer date_fin_validite;
+    private Timestamp date_fin_validite;
+
+    public CommercialGesture() {
+    }
 }
