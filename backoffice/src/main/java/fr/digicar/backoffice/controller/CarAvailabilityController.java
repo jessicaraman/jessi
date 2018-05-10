@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -35,15 +34,17 @@ public class CarAvailabilityController {
 
 
         ModelAndView modelAndView = new ModelAndView("reservation");
-        List<ParkingSpot> listOfParkingSpot = new ArrayList<>();
+        List listOfParkingSpot = new ArrayList<>();
+        Set setOfTown = null;
 
         try {
             listOfParkingSpot = parkingSpotService.getParkingSpots();
+            setOfTown =  new HashSet(listOfParkingSpot);
         } catch (Exception e) {
             log.error("Could not get the list of parking spot. ", e);
         }
 
-        modelAndView.addObject("listOfTown", listOfParkingSpot);
+        modelAndView.addObject("setOfTown", setOfTown);
         modelAndView.addObject("filters", new FilterBookingOdt());
 
         return modelAndView;
