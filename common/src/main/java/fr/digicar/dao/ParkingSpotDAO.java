@@ -18,4 +18,5 @@ public interface ParkingSpotDAO {
 
     List<ParkingSpot> getParkingSpotByObj(ParkingSpot p);
 
+    List getParkingSpotIdFrom(String location);
 }

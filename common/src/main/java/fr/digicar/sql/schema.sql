@@ -203,6 +203,7 @@ CREATE TABLE availability (
   start_time    TIME,
   end_time      TIME,
   status        INT(1),
+  pricing       INT,
 
   PRIMARY KEY (id, id_occupation, date, start_time, end_time),
   FOREIGN KEY (id_occupation) REFERENCES occupation (id)
@@ -218,6 +219,26 @@ CREATE TABLE history_delays
   session_end_date DATE NOT NULL
 )
   ENGINE = InnoDB;
+
+CREATE TABLE reservation
+(
+  id_reservation  INT(6) AUTO_INCREMENT,
+  id_occupation   INT(6),
+  id_user         INT(6),
+  start_time      TIME,
+  end_time        TIME,
+  pricing         INT,
+  return_place    INT(6),
+
+  PRIMARY KEY (id_reservation),
+  FOREIGN KEY (id_occupation) REFERENCES occupation (id),
+  FOREIGN KEY (id_user) REFERENCES users (id),
+  FOREIGN KEY (return_place) REFERENCES occupation (id)
+
+)
+  ENGINE = InnoDB;
+
+
 
 
 CREATE TABLE commercial_gesture
