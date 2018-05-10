@@ -11,7 +11,6 @@
         <div class="table">
             <table class="table table-hover">
                 <tr>
-                    <th width="80">Immatriculation</th>
                     <th width="120">Marque</th>
                     <th width="120">Nom du modèle</th>
                     <th width="120">Type de véhicule</th>
@@ -21,7 +20,6 @@
                 <%--@elvariable id="car" type="fr.digicar.model.Car"--%>
                 <c:forEach items="${cars}" var="car">
                     <tr>
-                        <td>${car.registrationNumber}</td>
                         <td>${car.brandName}</td>
                         <td>${car.modelName}</td>
                         <td>${car.type}</td>

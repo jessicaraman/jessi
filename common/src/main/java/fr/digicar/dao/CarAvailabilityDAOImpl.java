@@ -39,6 +39,15 @@ public class CarAvailabilityDAOImpl implements CarAvailabilityDAO{
     }
 
     @Override
+    public List<CarAvailability> getCarAvailabilityBy(String location, int idCarType) {
+        String sql = "FROM CarAvailability join Car WHERE available = 'yes' " +
+                     "and id_car = id and  type_id = "+idCarType+
+                     " id_parking_spots in (select nbParking from ParkingSpot where location ='"+location+"')";
+
+        return getCurrentSession().createQuery(sql).list();
+    }
+
+    @Override
     public List<CarAvailability> getAllCarAvailabilities() {
         return getCurrentSession().createQuery("FROM CarAvailability WHERE available = 'yes'").list();
     }

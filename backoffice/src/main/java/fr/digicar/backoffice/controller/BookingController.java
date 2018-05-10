@@ -2,12 +2,11 @@ package fr.digicar.backoffice.controller;
 
 
 import fr.digicar.backoffice.service.CarAvailabilityService;
+import fr.digicar.backoffice.service.CarTypeService;
 import fr.digicar.backoffice.service.ParkingSpotService;
+import fr.digicar.model.Car;
 import fr.digicar.model.CarAvailability;
-import fr.digicar.model.ParkingSpot;
 import fr.digicar.odt.FilterBookingOdt;
-import fr.digicar.odt.FilterOdt;
-import fr.digicar.odt.FilterRegistrationIdOdt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +26,9 @@ public class BookingController {
     private CarAvailabilityService carAvailabilityService;
 
     @Autowired
+    private CarTypeService carTypeService;
+
+    @Autowired
     private ParkingSpotService parkingSpotService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -34,32 +36,26 @@ public class BookingController {
 
 
         ModelAndView modelAndView = new ModelAndView("reservation");
-        List listOfParkingSpot = new ArrayList<>();
-        Set setOfTown = null;
+        Set setOfTown = new TreeSet();
+        List listOfCarType = new ArrayList();
 
         try {
-            listOfParkingSpot = parkingSpotService.getParkingSpots();
-            setOfTown =  new HashSet(listOfParkingSpot);
+            setOfTown =  parkingSpotService.getListOfLocation();
+            listOfCarType = carTypeService.getAllCarType();
         } catch (Exception e) {
             log.error("Could not get the list of parking spot. ", e);
         }
 
         modelAndView.addObject("setOfTown", setOfTown);
+        modelAndView.addObject("listOfCarType", listOfCarType);
         modelAndView.addObject("filters", new FilterBookingOdt());
+       //modelAndView.addObject("cars", new FilterBookingOdt());
 
         return modelAndView;
     }
 //allcaravailabilities
-    @RequestMapping(value = "/findAvailableByCreteria", method = RequestMethod.POST)
+    @RequestMapping(value = "/carAvailable", method = RequestMethod.POST)
     public ModelAndView findCarAvailabilityByCriteria(@ModelAttribute("filters") final FilterBookingOdt filters) {
-
-
-        List<CarAvailability> allCarAvailabilityList = carAvailabilityService.getAllCarAvailabilities();
-
-        String message;
-        List<CarAvailability> carAvailabilities = new ArrayList<>();
-
-        ModelAndView modelAndView = new ModelAndView("reservation");
 
         String date = filters.getWishedDate();
         log.info("Date input: " + date);
@@ -67,16 +63,40 @@ public class BookingController {
         log.info("startTime input: " + startTime);
         String endTime = filters.getEndTime();
         log.info("endTime input: " + endTime);
-        String zipCode = filters.getZipCode();
-        log.info("zipCode input: " + zipCode);
+        String city = filters.getCity();
+        log.info("city input: " + city);
+        int idCarType  = Integer.parseInt(filters.getCarType());
+        log.info("idCarType input: " + idCarType);
 
-        if (allCarAvailabilityList.isEmpty()) {
+        List<Car> carsAvailable = new ArrayList<>();
+
+        Set setOfTown = new TreeSet();
+        List listOfCarType = new ArrayList();
+
+        try {
+            carsAvailable = carAvailabilityService.getCarAvailabilityBy(city, idCarType);
+            setOfTown =  parkingSpotService.getListOfLocation();
+            listOfCarType = carTypeService.getAllCarType();
+        } catch (Exception e) {
+            log.error("Could not get the list of parking spot. ", e);
+        }
+
+        String message;
+
+        ModelAndView modelAndView = new ModelAndView("reservation");
+
+        if (carsAvailable.isEmpty()) {
             message = "Aucun véhicule trouvé pour cette recherche";
             modelAndView.addObject("message", message);
-            modelAndView.addObject("carAvailabilities", carAvailabilities);
+            modelAndView.addObject("cars", carsAvailable);
+
         } else {
-            modelAndView.addObject("carAvailabilities", allCarAvailabilityList);
+            modelAndView.addObject("cars", carsAvailable);
         }
+
+        modelAndView.addObject("setOfTown", setOfTown);
+        modelAndView.addObject("listOfCarType", listOfCarType);
+        modelAndView.addObject("filters", new FilterBookingOdt());
 
         return modelAndView;
     }
