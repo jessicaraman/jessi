@@ -155,11 +155,12 @@ CREATE TABLE users
   zip_code       VARCHAR(10)  NOT NULL,
   city           VARCHAR(100) NOT NULL,
   signup_date    DATE         NOT NULL,
-  status         VARCHAR(10)  NOT NULL
-  numberOfCommercialGesture   int(123) DEFAULT 0,
+  status         VARCHAR(10)  NOT NULL,
+  commercial_gesture_number   int(123) NULL
 )
   ENGINE = InnoDB
   CHARSET = utf8;
+
 
 ALTER TABLE session_en_cours
   ADD CONSTRAINT session_en_cours_users_id_fk
@@ -223,9 +224,9 @@ CREATE TABLE commercial_gesture
 (
   id                INT AUTO_INCREMENT PRIMARY KEY,
   id_user           INT        DEFAULT NULL,
-  code              VARCHAR(500)  NOT NULL
-  valeur            VARCHAR(500)  NOT NULL
-  date_fin_validite DATE  NOT NULL
+  code              VARCHAR(500)  NOT NULL,
+  valeur            VARCHAR(500)  NOT NULL,
+  date_fin_validite datetime  NOT NULL,
 
   CONSTRAINT commercial_gesture_id_user_fk
   FOREIGN KEY (id_user) REFERENCES USER (id)
