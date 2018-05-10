@@ -11,6 +11,7 @@ public interface UserDAO {
     void updateUser(User team);
 
     User getUser(int id);
+    void updateGestureAccountUser(int id);
 
     void deleteUser(int id);
 

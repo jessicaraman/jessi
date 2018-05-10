@@ -11,5 +11,6 @@ public interface UserService {
 
     List<User> searchUsers(SearchCriteria searchCriteria);
     User getUser(int id);
+    void updateGestureAccountUser(int id);
 
 }
