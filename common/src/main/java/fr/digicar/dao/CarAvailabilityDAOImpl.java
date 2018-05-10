@@ -26,7 +26,7 @@ public class CarAvailabilityDAOImpl implements CarAvailabilityDAO{
 
         List<CarAvailability> list;
 
-        CarAvailability carAvailability = new CarAvailability();
+        CarAvailability carAvailability = null;
         try {
             list = getCurrentSession().createQuery("FROM car_availability WHERE available = '"+available+"'").list();
 

@@ -40,8 +40,8 @@
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border"
                                  path="zipCode">
                         <form:option value="" disabled="true" selected="true">Choisir la ville</form:option>
-                        <%--@elvariable id="listOfTown" type="java.util.List<fr.digicar.model.ParkingSpot>"--%>
-                        <c:forEach items="${listOfTown}" var="town">
+                        <%--@elvariable id="setOfTown" type="java.util.Set<fr.digicar.model.ParkingSpot>"--%>
+                        <c:forEach items="${setOfTown}" var="town">
                             <form:option value="${town.location}">${town.location}</form:option>
                         </c:forEach>
                     </form:select>
