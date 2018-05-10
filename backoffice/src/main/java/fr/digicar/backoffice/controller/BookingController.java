@@ -1,12 +1,12 @@
 package fr.digicar.backoffice.controller;
 
 
-import fr.digicar.backoffice.service.CarAvailabilityService;
-import fr.digicar.backoffice.service.CarTypeService;
-import fr.digicar.backoffice.service.ParkingSpotService;
+import fr.digicar.backoffice.service.*;
 import fr.digicar.model.Car;
 import fr.digicar.model.CarAvailability;
+import fr.digicar.model.ParkingSpot;
 import fr.digicar.odt.FilterBookingOdt;
+import fr.digicar.odt.ReservationOdt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,13 @@ public class BookingController {
     private CarTypeService carTypeService;
 
     @Autowired
+    private CarService carService;
+
+    @Autowired
     private ParkingSpotService parkingSpotService;
+
+    @Autowired
+    private ParkingService parkingService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView getViewFoCarResevation() {
@@ -49,7 +55,7 @@ public class BookingController {
         modelAndView.addObject("setOfTown", setOfTown);
         modelAndView.addObject("listOfCarType", listOfCarType);
         modelAndView.addObject("filters", new FilterBookingOdt());
-       //modelAndView.addObject("cars", new FilterBookingOdt());
+       modelAndView.addObject("cars", new ArrayList<>());
 
         return modelAndView;
     }
@@ -68,13 +74,30 @@ public class BookingController {
         int idCarType  = Integer.parseInt(filters.getCarType());
         log.info("idCarType input: " + idCarType);
 
-        List<Car> carsAvailable = new ArrayList<>();
-
+        List<CarAvailability> carsAvailable = new ArrayList<>();
+        List<ReservationOdt> potentialBooking = new ArrayList<>();
         Set setOfTown = new TreeSet();
         List listOfCarType = new ArrayList();
 
         try {
             carsAvailable = carAvailabilityService.getCarAvailabilityBy(city, idCarType);
+            log.info("Size of carsAvailable : "+ carsAvailable.size());
+            for(  CarAvailability carAvailability : carsAvailable){
+                Car car = carService.getCarById(carAvailability.getId_car());
+                ParkingSpot parkingSpot = parkingSpotService.getParkingSpot(carAvailability.getId_parking_spots());
+
+                String mark = car.getBrandName();
+                log.info("mark: "+mark);
+                String model = car.getModelName();
+                log.info("model: "+ model);
+                int doorsNumber = car.getDoorNumber();
+                log.info("doorsNumber: "+doorsNumber);
+                String parkingAddress = (parkingService.getParkingById(Integer.parseInt(parkingSpot.getNbParking()))).getRoad_name();
+
+                potentialBooking.add(new ReservationOdt(mark, model, doorsNumber, parkingAddress ));
+
+            }
+
             setOfTown =  parkingSpotService.getListOfLocation();
             listOfCarType = carTypeService.getAllCarType();
         } catch (Exception e) {
@@ -88,10 +111,10 @@ public class BookingController {
         if (carsAvailable.isEmpty()) {
             message = "Aucun véhicule trouvé pour cette recherche";
             modelAndView.addObject("message", message);
-            modelAndView.addObject("cars", carsAvailable);
+            modelAndView.addObject("cars", potentialBooking);
 
         } else {
-            modelAndView.addObject("cars", carsAvailable);
+            modelAndView.addObject("cars", potentialBooking);
         }
 
         modelAndView.addObject("setOfTown", setOfTown);
