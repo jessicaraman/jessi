@@ -86,78 +86,245 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="card col-5 container" style="margin: auto;">
-                    <div class="card-body row">
-                        <div class="col-3 text-center" style="border-right: 1px solid darkgrey;">
-                            <h1 class="display-2"><i class="fa fa-clock-o" aria-hidden="true"></i></h1>
-                        </div>
-                        <div class="col-9">
-                            <%--@elvariable id="delayNumber" type="int"--%>
-                            <h4 class="card-title"><strong>${delayNumber}</strong></h4>
-                            <h5>RETARDS ENREGISTRÉS</h5>
-                            <%--@elvariable id="resultDate" type="String"--%>
-                            <p class="card-text">${resultDate}</p>
-                        </div>
-                    </div>
+            <div class="row mb-5">
+                <div class="col">
+                    <form:form action="${pageContext.request.contextPath}/delays" method="PUT">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-filter"></i>&nbsp;
+                            ÉLIMINER LES RETARDS ATYPIQUES
+                        </button>
+                    </form:form>
                 </div>
             </div>
 
-            <div class="row mt-5">
-                <canvas id="quartiles" class="col" style="max-width: 600px; margin: auto;"></canvas>
-            </div>
+            <%--@elvariable id="filtered" type="boolean"--%>
+            <c:choose>
+                <c:when test="${filtered}">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>Données standards</h4>
+                        </div>
+                        <div class="col-6">
+                            <h4>Données filtrées</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card col-5 container">
+                            <div class="card-body row">
+                                <div class="col-3 text-center" style="border-right: 1px solid darkgrey;">
+                                    <h1 class="display-2">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </h1>
+                                </div>
+                                <div class="col-9">
+                                    <h4 class="card-title">
+                                        <%--@elvariable id="standardDelayNumber" type="int"--%>
+                                        <strong>${standardDelayNumber}</strong>
+                                    </h4>
+                                    <h5>RETARDS ENREGISTRÉS</h5>
+                                    <%--@elvariable id="standardResultDate" type="String"--%>
+                                    <p class="card-text">${standardResultDate}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="card col-5 container">
+                            <div class="card-body row">
+                                <div class="col-3 text-center" style="border-right: 1px solid darkgrey;">
+                                    <h1 class="display-2">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </h1>
+                                </div>
+                                <div class="col-9">
+                                    <h4 class="card-title">
+                                        <%--@elvariable id="cleanDelayNumber" type="int"--%>
+                                        <strong>${cleanDelayNumber}</strong>
+                                    </h4>
+                                    <h5>RETARDS ENREGISTRÉS</h5>
+                                    <p class="card-text">Février - Mars 2018</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <canvas id="standardQuartiles" class="col-6" style="margin: auto;"></canvas>
+                        <canvas id="cleanQuartiles" class="col-6" style="margin: auto;"></canvas>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="row">
+                        <div class="card col-5 container" style="margin: auto;">
+                            <div class="card-body row">
+                                <div class="col-3 text-center" style="border-right: 1px solid darkgrey;">
+                                    <h1 class="display-2"><i class="fa fa-clock-o" aria-hidden="true"></i></h1>
+                                </div>
+                                <div class="col-9">
+                                    <%--@elvariable id="delayNumber" type="int"--%>
+                                    <h4 class="card-title"><strong>${delayNumber}</strong></h4>
+                                    <h5>RETARDS ENREGISTRÉS</h5>
+                                    <%--@elvariable id="resultDate" type="String"--%>
+                                    <p class="card-text">${resultDate}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <canvas id="quartiles" class="col" style="max-width: 600px; margin: auto;"></canvas>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
         </section>
 
         <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/mdb.min.js" />"></script>
-        <script type="text/javascript">
-            var ctx = document.getElementById("quartiles").getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    <%--@elvariable id="delayDistributionLabels" type="java.util.List"--%>
-                    labels: [
-                        '${delayDistributionLabels[0]}',
-                        '${delayDistributionLabels[1]}',
-                        '${delayDistributionLabels[2]}',
-                        '${delayDistributionLabels[3]}'
-                    ],
-                    datasets: [{
-                        label: 'Répartition des retards',
-                        <%--@elvariable id="delayDistribution" type="java.util.List"--%>
-                        data: [
-                            ${delayDistribution[0]},
-                            ${delayDistribution[1]},
-                            ${delayDistribution[2]},
-                            ${delayDistribution[3]}
-                        ],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
+        <c:choose>
+            <c:when test="${filtered}">
+                <script type="text/javascript">
+                    var ctx1 = document.getElementById("standardQuartiles").getContext('2d');
+                    new Chart(ctx1, {
+                        type: 'bar',
+                        data: {
+                            <%--@elvariable id="standardDelayDistributionLabels" type="java.util.List"--%>
+                            labels: [
+                                '${standardDelayDistributionLabels[0]}',
+                                '${standardDelayDistributionLabels[1]}',
+                                '${standardDelayDistributionLabels[2]}',
+                                '${standardDelayDistributionLabels[3]}'
+                            ],
+                            datasets: [{
+                                label: 'Répartition des retards',
+                                data: [
+                                    <%--@elvariable id="standardDelayDistribution" type="java.util.List"--%>
+                                    ${standardDelayDistribution[0]},
+                                    ${standardDelayDistribution[1]},
+                                    ${standardDelayDistribution[2]},
+                                    ${standardDelayDistribution[3]}
+                                ],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
                             }
-                        }]
-                    }
-                }
-            });
-        </script>
+                        }
+                    });
+                    var ctx2 = document.getElementById("cleanQuartiles").getContext('2d');
+                    new Chart(ctx2, {
+                        type: 'bar',
+                        data: {
+                            labels: [
+                                <%--@elvariable id="cleanDelayDistributionLabels" type="java.util.List"--%>
+                                '${cleanDelayDistributionLabels[0]}',
+                                '${cleanDelayDistributionLabels[1]}',
+                                '${cleanDelayDistributionLabels[2]}',
+                                '${cleanDelayDistributionLabels[3]}'
+                            ],
+                            datasets: [{
+                                label: 'Répartition des retards',
+                                data: [
+                                    <%--@elvariable id="cleanDelayDistribution" type="java.util.List"--%>
+                                    ${cleanDelayDistribution[0]},
+                                    ${cleanDelayDistribution[1]},
+                                    ${cleanDelayDistribution[2]},
+                                    ${cleanDelayDistribution[3]}
+                                ],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+            </c:when>
+            <c:otherwise>
+                <script type="text/javascript">
+                    var ctx = document.getElementById("quartiles").getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            <%--@elvariable id="delayDistributionLabels" type="java.util.List"--%>
+                            labels: [
+                                '${delayDistributionLabels[0]}',
+                                '${delayDistributionLabels[1]}',
+                                '${delayDistributionLabels[2]}',
+                                '${delayDistributionLabels[3]}'
+                            ],
+                            datasets: [{
+                                label: 'Répartition des retards',
+                                <%--@elvariable id="delayDistribution" type="java.util.List"--%>
+                                data: [
+                                    ${delayDistribution[0]},
+                                    ${delayDistribution[1]},
+                                    ${delayDistribution[2]},
+                                    ${delayDistribution[3]}
+                                ],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+            </c:otherwise>
+        </c:choose>
     </body>
 </html>
