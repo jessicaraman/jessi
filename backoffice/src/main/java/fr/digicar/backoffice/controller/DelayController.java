@@ -36,6 +36,7 @@ public class DelayController {
         modelAndView.addObject("delayDistribution", delayDistribution.getValues());
         modelAndView.addObject("delayDistributionLabels", delayDistribution.getLabels());
         modelAndView.addObject("searchPeriod", new SearchPeriod());
+        modelAndView.addObject("filtered", false);
         return modelAndView;
     }
 
