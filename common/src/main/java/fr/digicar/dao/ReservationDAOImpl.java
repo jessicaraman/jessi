@@ -87,6 +87,6 @@ public class ReservationDAOImpl implements ReservationDAO{
 
     @Override
     public List<Reservation> getAllReservations() {
-        return getCurrentSession().createQuery("FROM reservation").list();
+        return getCurrentSession().createQuery("FROM Reservation").list();
     }
 }

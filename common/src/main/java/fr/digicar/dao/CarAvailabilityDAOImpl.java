@@ -28,7 +28,7 @@ public class CarAvailabilityDAOImpl implements CarAvailabilityDAO{
 
         CarAvailability carAvailability = null;
         try {
-            list = getCurrentSession().createQuery("FROM car_availability WHERE available = '"+available+"'").list();
+            list = getCurrentSession().createQuery("FROM CarAvailability WHERE available = '"+available+"'").list();
 
             carAvailability = (!list.isEmpty() && list != null) ? list.get(0) : null;
 
@@ -40,7 +40,7 @@ public class CarAvailabilityDAOImpl implements CarAvailabilityDAO{
 
     @Override
     public List<CarAvailability> getAllCarAvailabilities() {
-        return getCurrentSession().createQuery("FROM car_availability WHERE available = 'yes'").list();
+        return getCurrentSession().createQuery("FROM CarAvailability WHERE available = 'yes'").list();
     }
 
 

@@ -49,8 +49,8 @@ public class CarAvailabilityController {
 
         return modelAndView;
     }
-
-    @RequestMapping(value = "/allcaravailabilities", method = RequestMethod.POST)
+//allcaravailabilities
+    @RequestMapping(value = "/findAvailableByCreteria", method = RequestMethod.POST)
     public ModelAndView findCarAvailabilityByCriteria(@ModelAttribute("filters") final FilterBookingOdt filters) {
 
 

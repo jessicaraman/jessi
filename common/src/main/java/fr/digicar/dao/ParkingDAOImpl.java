@@ -27,7 +27,7 @@ public class ParkingDAOImpl implements ParkingDAO{
 
         Parking parking = new Parking();
         try {
-            list = getCurrentSession().createQuery("FROM parking WHERE id = '" + id + "'").list();
+            list = getCurrentSession().createQuery("FROM Parking WHERE id = '" + id + "'").list();
             parking = null != list && !list.isEmpty() ? list.get(0) : null;
         } catch (JDBCException e) {
             log.error("Error, could not find any parking.", e);
@@ -37,6 +37,6 @@ public class ParkingDAOImpl implements ParkingDAO{
 
     @Override
     public List<Parking> getAllParkings() {
-        return getCurrentSession().createQuery("FROM parking").list();
+        return getCurrentSession().createQuery("FROM Parking").list();
     }
 }

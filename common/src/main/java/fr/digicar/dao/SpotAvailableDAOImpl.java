@@ -36,7 +36,7 @@ public class SpotAvailableDAOImpl implements SpotAvailableDAO{
 
         SpotAvailable spotAvailable = new SpotAvailable();
         try {
-            list = getCurrentSession().createQuery("FROM places_available WHERE available = 'yes' and id = " + id_parking_spots).list();
+            list = getCurrentSession().createQuery("FROM SpotAvailable WHERE available = 'yes' and id = " + id_parking_spots).list();
             spotAvailable = (!list.isEmpty() && list != null)  ? list.get(0) : null;
         } catch (JDBCException e) {
             log.error("Error.", e);
@@ -46,7 +46,7 @@ public class SpotAvailableDAOImpl implements SpotAvailableDAO{
 
 
     public List<SpotAvailable> getAllSpotsAvailable() {
-        return getCurrentSession().createQuery("FROM places_available WHERE available = 'yes'").list();
+        return getCurrentSession().createQuery("FROM SpotAvailable WHERE available = 'yes'").list();
     }
 
 }

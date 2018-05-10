@@ -28,7 +28,7 @@ public class ReservationPricesDAOImpl implements ReservationPricesDAO{
 
         ReservationPrices reservationPrices = new ReservationPrices();
         try {
-            list = getCurrentSession().createQuery("FROM pricing WHERE id = '" + id + "'").list();
+            list = getCurrentSession().createQuery("FROM Pricing WHERE id = '" + id + "'").list();
             reservationPrices = null != list && !list.isEmpty() ? list.get(0) : null;
         } catch (JDBCException e) {
             log.error("Error, could not find any available spot.", e);
@@ -38,5 +38,5 @@ public class ReservationPricesDAOImpl implements ReservationPricesDAO{
 
     @Override
     public List<ReservationPrices> getAllReservationPrices() {
-        return getCurrentSession().createQuery("FROM pricing").list();    }
+        return getCurrentSession().createQuery("FROM Pricing").list();    }
 }
