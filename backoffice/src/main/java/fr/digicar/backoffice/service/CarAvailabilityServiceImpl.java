@@ -39,12 +39,10 @@ public class CarAvailabilityServiceImpl implements CarAvailabilityService{
     }
 
     @Override
-    public List<Car> getCarAvailabilityBy(String location, int idCarType){
+    public List<CarAvailability> getCarAvailabilityBy(String location, int idCarType){
         List<CarAvailability> listOfCarAvailable = carAvailabilityDAO.getAllCarAvailabilities();
 
         List<CarAvailability> carsAvailableWithCriteria = new ArrayList();
-
-        List<Car> cars = new ArrayList();
 
         for (CarAvailability carAvailable : listOfCarAvailable){
             if (carDAO.getCarById(carAvailable.getId_car()).getType() != idCarType
@@ -53,11 +51,8 @@ public class CarAvailabilityServiceImpl implements CarAvailabilityService{
             }
         }
 
-        for( CarAvailability carAvailableWithCriteria : carsAvailableWithCriteria){
-            cars.add(carDAO.getCarById(carAvailableWithCriteria.getId_car()));
-        }
 
-        return  cars;
+        return  carsAvailableWithCriteria;
     }
 
 }

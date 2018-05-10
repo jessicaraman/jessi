@@ -13,18 +13,16 @@
                 <tr>
                     <th width="120">Marque</th>
                     <th width="120">Nom du modèle</th>
-                    <th width="120">Type de véhicule</th>
-                    <th width="120">Transmission</th>
                     <th width="120">Nombre de portes</th>
+                    <th width="120">Adresse du Parking</th>
                 </tr>
-                <%--@elvariable id="car" type="fr.digicar.model.Car"--%>
+                    <%--@elvariable id="car" type="fr.digicar.odt.ReservationOdt"--%>
                 <c:forEach items="${cars}" var="car">
                     <tr>
-                        <td>${car.brandName}</td>
-                        <td>${car.modelName}</td>
-                        <td>${car.type}</td>
-                        <td>${car.transmission}</td>
-                        <td>${car.doorNumber}</td>
+                        <td>${car.mark}</td>
+                        <td>${car.model}</td>
+                        <td>${car.nbDoors}</td>
+                        <td>${car.addressParking}</td>
                         <td>
                             <button class="btn btn-primary m-0" title="Réserver">
                                 <a href="<c:url value="" />">
