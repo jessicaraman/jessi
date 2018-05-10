@@ -75,8 +75,8 @@ CREATE TABLE retard_calcule
   immatriculation      VARCHAR(40) NOT NULL,
   mark                 VARCHAR(40) NULL,
   model                VARCHAR(40) NULL,
-  heure_retour_prevu   DATETIME    NULL,
-  heure_retour_calcule DATETIME    NULL,
+  heure_retour_prevu   TIME    NULL,
+  heure_retour_calcule TIME    NULL,
   date_retour_calcule  DATETIME    NULL,
   penality             DOUBLE      NULL,
   first_name           VARCHAR(40) NULL,
@@ -84,7 +84,6 @@ CREATE TABLE retard_calcule
   phone_number         VARCHAR(15) NULL,
   tag_appel            TINYINT(1)  NULL,
   id_session           INT         NOT NULL
-  date_retour_calcule           DATETIME NULL
 )
   ENGINE = InnoDB;
 

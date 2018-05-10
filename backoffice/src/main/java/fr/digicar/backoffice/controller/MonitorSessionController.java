@@ -207,7 +207,7 @@ public class MonitorSessionController {
     }
 
     @RequestMapping(value = "/usersPreferencesView", method = RequestMethod.GET)
-    public ModelAndView getComercialGestureView() {
+    public ModelAndView getusersPreferencesView() {
 
         List<User> users = userService.searchUsers();
         List<DisplayUserPreferencesOdt> userPreferencesOdtList = new ArrayList<>();
