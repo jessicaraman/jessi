@@ -42,4 +42,76 @@ public class ParkingSpot {
     @Column(name = "largeur")
     private Integer width;
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNbSpot(Integer nbSpot) {
+        this.nbSpot = nbSpot;
+    }
+
+    public void setNbParking(String nbParking) {
+        this.nbParking = nbParking;
+    }
+
+    public void setPlug(boolean plug) {
+        this.plug = plug;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public Integer getId() {
+
+        return id;
+    }
+
+    public Integer getNbSpot() {
+        return nbSpot;
+    }
+
+    public String getNbParking() {
+        return nbParking;
+    }
+
+    public boolean isPlug() {
+        return plug;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
 }

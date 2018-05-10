@@ -32,4 +32,28 @@ public class Occupation {
         this.parkingSpot = parkingSpot;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setCar(Integer car) {
+        this.car = car;
+    }
+
+    public void setParkingSpot(Integer parkingSpot) {
+        this.parkingSpot = parkingSpot;
+    }
+
+    public Integer getId() {
+
+        return id;
+    }
+
+    public Integer getCar() {
+        return car;
+    }
+
+    public Integer getParkingSpot() {
+        return parkingSpot;
+    }
 }

@@ -54,4 +54,52 @@ public class Availability {
         this.status = status;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setIdOccupation(Integer idOccupation) {
+        this.idOccupation = idOccupation;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Integer getId() {
+
+        return id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public Integer getIdOccupation() {
+        return idOccupation;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
 }

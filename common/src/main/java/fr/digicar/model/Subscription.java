@@ -31,4 +31,44 @@ public class Subscription {
     @Column(name = "end_date")
     Date endDate;
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setUser(Integer user) {
+        this.user = user;
+    }
+
+    public void setPricing(Integer pricing) {
+        this.pricing = pricing;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Integer getId() {
+
+        return id;
+    }
+
+    public Integer getUser() {
+        return user;
+    }
+
+    public Integer getPricing() {
+        return pricing;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
 }
