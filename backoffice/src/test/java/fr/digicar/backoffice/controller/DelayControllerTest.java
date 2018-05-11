@@ -125,6 +125,28 @@ public class DelayControllerTest {
     }
 
     @Test
+    public void excludeAtypicalDelaysReturnsCorrectModelAndView() throws Exception {
+
+        when(delayService.getDelayNumber(any(Date.class), any(Date.class), eq(false))).thenReturn(1000);
+        when(delayService.getDelayDistribution(any(Date.class), any(Date.class), eq(false))).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
+
+        when(delayService.getDelayNumber(any(Date.class), any(Date.class), eq(true))).thenReturn(800);
+        when(delayService.getDelayDistribution(any(Date.class), any(Date.class), eq(true))).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8}, new String[]{"1-2", "3-4", "5-6", "7-8"}));
+
+        mockMvc.perform(get("/delays/filtered"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("delay-analysis"))
+                .andExpect(forwardedUrl("/WEB-INF/pages/delay-analysis.jsp"))
+                .andExpect(model().attribute("delayNumber", 1000))
+                .andExpect(model().attribute("delayDistribution", new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}))
+                .andExpect(model().attribute("delayDistributionLabels", new String[]{"1-3", "4-6", "7-8", "9-10"}))
+                .andExpect(model().attribute("cleanDelayNumber", 800))
+                .andExpect(model().attribute("cleanDelayDistribution", new int[]{1, 2, 3, 4, 5, 6, 7, 8}))
+                .andExpect(model().attribute("cleanDelayDistributionLabels", new String[]{"1-2", "3-4", "5-6", "7-8"}))
+                .andExpect(model().attribute("searchPeriod", new SearchPeriod()));
+    }
+
+    @Test
     public void getPreviousYearDateReturnLastYearsDate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = DelayController.class.getDeclaredMethod("getPreviousYearDate", Date.class);
         method.setAccessible(true);
