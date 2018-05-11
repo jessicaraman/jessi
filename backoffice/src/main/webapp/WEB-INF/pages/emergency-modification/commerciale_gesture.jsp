@@ -52,7 +52,7 @@
                     <th width="110">code</th>
                     <th width="110">valeur en €</th>
                     <th width="110">date_fin_validite</th>
-                    <th width="110">Non Attribué</th>
+                    <th width="110">Attribué</th>
                 </tr>
                     <%--@elvariable id="user" type="java.util.List"--%>
                 <c:forEach items="${commercialGestureList}" var="OneComercialeGesture">
@@ -63,6 +63,9 @@
                         <td>${OneComercialeGesture.valeur}</td>
                         <td>${OneComercialeGesture.date_fin_validite}</td>
                         <c:if test="${OneComercialeGesture.id_user eq 0}">
+                            <td>Pas encore</td>
+                        </c:if>
+                        <c:if test="${OneComercialeGesture.id_user ne 0}">
                             <td>Oui</td>
                         </c:if>
                     </tr>

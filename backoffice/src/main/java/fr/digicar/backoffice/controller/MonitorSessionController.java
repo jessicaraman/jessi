@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,14 +117,14 @@ public class MonitorSessionController {
         return findSession(filterRegistrationIdOdt);
     }
 
-    @RequestMapping(value = "impactedSession/edditingImpactedSession/{bookingId}", method = RequestMethod.GET)
-    public ModelAndView getViewForEdditingImpactedSession(@PathVariable int bookingId) {
+    @RequestMapping(value = "impactedSession/edditingImpactedSession/{bookingId}/{sessionInLateId}", method = RequestMethod.GET)
+    public ModelAndView getViewForEdditingImpactedSession(@PathVariable int bookingId, @PathVariable int sessionInLateId) {
 
         List<Car> listOfCarforChoose = new ArrayList<>();
 
         //Exemple de car à afficher
         Car car = new Car();
-        car.setId(22234);
+        car.setId(490);
         car.setComfort(5);
         car.setTransmission(13);
         car.setFuelType(1);
@@ -132,9 +133,10 @@ public class MonitorSessionController {
         car.setModelName("MAZDA3");
         car.setDoorNumber(5);
         car.setSeatNumber(5);
-        car.setRegistrationNumber("IA123AA");
+        car.setRegistrationNumber("TZ-314-BA");
         car.setReleaseDate("2018-01-22");
         car.setType(4);
+
         listOfCarforChoose.add(car);
 
         List<CommercialGesture> commercialGestureList =commercialGestureService.getFirstCommercialGestureFree();
@@ -149,10 +151,11 @@ public class MonitorSessionController {
         else {
             String message = "";
             modelAndView.addObject("message", message);
-            modelAndView.addObject("bonreduction", commercialGestureList.get(0));
+            modelAndView.addObject("bon", commercialGestureList.get(0).getCode());
         }
 
         modelAndView.addObject("bookingId", bookingId);
+        modelAndView.addObject("sessionInLateId", sessionInLateId);
         modelAndView.addObject("listOfCarforChoose", listOfCarforChoose);
         modelAndView.addObject("chosenvehicle", new ChosenvehicleOdt());
         modelAndView.addObject("commercialGesture", new CommercialGestureOdt());
@@ -171,27 +174,29 @@ public class MonitorSessionController {
         return getImpactedAllBookings();
     }
 
-    @RequestMapping(value = "/updateSession", method = RequestMethod.POST)
-    public ModelAndView updateImpactedSession(@ModelAttribute("chosenvehicle") final ChosenvehicleOdt chosenvehicleOdt) {
+    @RequestMapping(value = "/updateSession/{sessionInLateId}", method = RequestMethod.POST)
+    public ModelAndView updateImpactedSession(@PathVariable int sessionInLateId, @ModelAttribute("chosenvehicle") final ChosenvehicleOdt chosenvehicleOdt) {
+
+        //TODO traitement en masse à faire si temps
 
         bookingService.updateBookingById(chosenvehicleOdt.getBookingId(), chosenvehicleOdt.getCarId());
 
         return getImpactedAllBookings();
     }
 
-    @RequestMapping(value = "/commercialGesture", method = RequestMethod.POST)
-    public ModelAndView updateImpactedSession(@ModelAttribute("commercialGesture") final CommercialGestureOdt commercialGestureOdt) {
+    @RequestMapping(value = "/commercialGesture/{sessionInLateId}", method = RequestMethod.POST)
+    public ModelAndView updateImpactedSession(@PathVariable int sessionInLateId, @ModelAttribute("commercialGesture") final CommercialGestureOdt commercialGestureOdt) {
 
         Booking booking = bookingService.getBooking(commercialGestureOdt.getBookingIdForCommercialFGesture());
         int id_user= booking.getId_user();
-        //validité 2 semaines
-        commercialGestureService.updateCommercialGestureForUser(id_user, commercialGestureOdt.getBonreduction());
 
-        //actualiser la résa 2 avec lheure de retour du client 1
-        bookingService.updateHourBooking(commercialGestureOdt.getBookingIdForCommercialFGesture(), booking.getDeparture_date());
+        commercialGestureService.updateCommercialGestureForUser(id_user, commercialGestureOdt.getBonCode());
+
+        Timestamp returnDateTimeForDelaySession = calculatedDelayService.getCalculatedDelayById(sessionInLateId).getCalculatedReturnDateTime();
+        bookingService.updateHourBooking(commercialGestureOdt.getBookingIdForCommercialFGesture(), returnDateTimeForDelaySession);
+
         //incrementer le tables users,
         userService.updateGestureAccountUser(id_user);
-        //TODO vérifier si les réservations sont dans la table session
 
         return getImpactedAllBookings();
     }
@@ -268,12 +273,14 @@ public class MonitorSessionController {
 
         List<CalculatedDelay> retardscalcule = calculatedDelayService.getCalculatedDelays();
         Long arrival_time = null;
+        int sessionId =0;
 
         for (CalculatedDelay aRetardscalcule : retardscalcule) {
 
             if (aRetardscalcule.getRegistrationNumber().equals(registration)) {
 
-                arrival_time = aRetardscalcule.getCalculatedReturnTime().getTime();
+                arrival_time = aRetardscalcule.getCalculatedReturnDateTime().getTime();
+                sessionId = aRetardscalcule.getId();
                 break;
             }
         }
@@ -284,11 +291,13 @@ public class MonitorSessionController {
         ModelAndView modelAndView = new ModelAndView("emergency-modification/impacted-sessions");
         modelAndView.addObject("filteregistration", new FilterRegistrationIdOdt());
 
+
         if (bookingsimpacted.isEmpty()) {
             message = "Veuillez Renseigner un matricule correcte";
             modelAndView.addObject("message", message);
         } else {
             modelAndView.addObject("bookingImpacted", bookingsimpacted);
+            modelAndView.addObject("sessionInLateId", sessionId);
             modelAndView.addObject("AllUser", users);
         }
         return modelAndView;

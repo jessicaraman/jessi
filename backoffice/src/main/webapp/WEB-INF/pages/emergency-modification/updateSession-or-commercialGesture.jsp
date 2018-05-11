@@ -33,6 +33,7 @@
     </nav>
 </div>
 <div class="container">
+    <%--@elvariable id="sessionInLateId" type="java.lang.String"--%>
 
     <%--@elvariable id="message" type="java.lang.String"--%>
     <c:if test="${not empty message}">
@@ -41,15 +42,15 @@
         </div>
     </c:if>
         <div class="row"></div>
-        <%--@elvariable id="bonreduction" type="java.lang.String"--%>
-        <%--@elvariable id="commercialGesture" type="fr.digicar.odt.commercialGestureOdt</iframe>"--%>
+        <%--@elvariable id="bon" type="java.lang.String"--%>
+        <%--@elvariable id="commercialGesture" type="fr.digicar.odt.CommercialGestureOdt</iframe>"--%>
         <c:if test="${ empty message}">
-            <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/commercialGesture" modelAttribute="commercialGesture">
+            <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/commercialGesture/${sessionInLateId}" modelAttribute="commercialGesture">
                 <div class="row" style="margin-left: 75px">
                     <div class="col-md-3">
                         <div class="input-group md-form form-sm form-2 pl-0">
-                            <form:input name="bonreduction" path="bonreduction" type="text" value= "${bonreduction}" disabled="true" readonly="readonly"/>
-                            <form:label path="bonreduction">Bon de réduction</form:label>
+                            <form:input name="bonCode" path="bonCode" type="text" value= "${bon}"/>
+                            <form:label path="bonCode" >Bon de réduction</form:label>
                         </div>
                     </div>
                     <div class="col-md-1">
@@ -68,7 +69,7 @@
     <div class="row" style="margin-left: 200px">Ou</div>
 <%--@elvariable id="chosenvehicle" type="fr.digicar.odt.ChosenvehicleOdt</iframe>"--%>
 <%--@elvariable id="bookingId" type="java.lang.String"--%>
-    <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/updateSession" modelAttribute="chosenvehicle">
+    <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/updateSession/${sessionInLateId}" modelAttribute="chosenvehicle">
         <div class="row" style="margin-left: 75px">
 
             <div class="col-md-3">
@@ -95,7 +96,6 @@
         </div>
 
     </form:form>
-</div>
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>

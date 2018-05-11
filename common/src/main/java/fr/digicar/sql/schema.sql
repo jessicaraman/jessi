@@ -222,13 +222,10 @@ CREATE TABLE history_delays
 CREATE TABLE commercial_gesture
 (
   id                INT AUTO_INCREMENT PRIMARY KEY,
-  id_user           INT        DEFAULT NULL,
+  id_user           INT        DEFAULT 0,
   code              VARCHAR(500)  NOT NULL,
   valeur            VARCHAR(500)  NOT NULL,
-  date_fin_validite datetime  NOT NULL,
-
-  CONSTRAINT commercial_gesture_id_user_fk
-  FOREIGN KEY (id_user) REFERENCES USER (id)
+  date_fin_validite datetime  NOT NULL
 )
   ENGINE = InnoDB;
 
