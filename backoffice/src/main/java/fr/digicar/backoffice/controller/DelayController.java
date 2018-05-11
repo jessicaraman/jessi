@@ -43,15 +43,7 @@ public class DelayController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String filterByDate(@ModelAttribute SearchPeriod searchPeriod, ModelMap model) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            searchPeriod.setStartDate(format.parse(searchPeriod.getStartDateString()));
-            searchPeriod.setEndDate(format.parse(searchPeriod.getEndDateString()));
-        } catch (ParseException e) {
-            log.error("Error when parsing dates to filter delays.", e);
-            searchPeriod.setStartDate(getPreviousYearDate(new Date()));
-            searchPeriod.setEndDate(new Date());
-        }
+        searchPeriod = formatPeriod(searchPeriod);
         model.addAttribute("resultDate", getResultDateString(searchPeriod.getStartDate(), searchPeriod.getEndDate()));
         model.addAttribute("delayNumber", delayService.getDelayNumber(searchPeriod.getStartDate(), searchPeriod.getEndDate(), false));
         DelayDistribution delayDistribution = delayService.getDelayDistribution(searchPeriod.getStartDate(), searchPeriod.getEndDate(), false);
@@ -87,15 +79,7 @@ public class DelayController {
 
     @RequestMapping(value = "/filtered", method = RequestMethod.POST)
     public String filterCleanValuesByDate(@ModelAttribute SearchPeriod searchPeriod, ModelMap model) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            searchPeriod.setStartDate(format.parse(searchPeriod.getStartDateString()));
-            searchPeriod.setEndDate(format.parse(searchPeriod.getEndDateString()));
-        } catch (ParseException e) {
-            log.error("Error when parsing dates to filter delays.", e);
-            searchPeriod.setStartDate(getPreviousYearDate(new Date()));
-            searchPeriod.setEndDate(new Date());
-        }
+        searchPeriod = formatPeriod(searchPeriod);
 
         DelayDistribution cleanDelayDistribution = delayService.getDelayDistribution(searchPeriod.getStartDate(), searchPeriod.getEndDate(), true);
         model.addAttribute("cleanResultDate", getResultDateString(searchPeriod.getStartDate(), searchPeriod.getEndDate()));
@@ -115,6 +99,18 @@ public class DelayController {
         return "delay-analysis";
     }
 
+    private SearchPeriod formatPeriod(SearchPeriod searchPeriod) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            searchPeriod.setStartDate(format.parse(searchPeriod.getStartDateString()));
+            searchPeriod.setEndDate(format.parse(searchPeriod.getEndDateString()));
+        } catch (ParseException e) {
+            log.error("Error when parsing dates to filter delays.", e);
+            searchPeriod.setStartDate(getPreviousYearDate(new Date()));
+            searchPeriod.setEndDate(new Date());
+        }
+        return searchPeriod;
+    }
 
     private Date getPreviousYearDate(Date date) {
         Calendar previousYearDate = Calendar.getInstance();
