@@ -46,6 +46,8 @@ public class InvoicingController {
 
     @Autowired
     DelayService delayService;
+    @Autowired
+    TokenService tokenService;
 
     @RequestMapping(value = "/invoices")
     public ModelAndView mainPageInvoices() {
@@ -66,6 +68,12 @@ public class InvoicingController {
 
     private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
         return new java.sql.Date(uDate.getTime());
+    }
+
+    @RequestMapping(value = "/test")
+    private ModelAndView test() {
+        tokenService.getTokenByUserId(20);
+        return new ModelAndView("usersinvoices");
     }
 
     @RequestMapping(value = "/algo")
@@ -127,7 +135,7 @@ public class InvoicingController {
                     + tarif.getMonthlyFees()
                     + " €/mois  ";
             Font font1 = new Font(Font.FontFamily.HELVETICA  , 25, Font.BOLD);
-            Font bfBold12 = new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD, new BaseColor(0, 0, 0));
+            Font bfBold12 = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, new BaseColor(0, 0, 0));
             Paragraph titre=new Paragraph(title,font1);
             titre.setAlignment(Element.ALIGN_CENTER);
 
