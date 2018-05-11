@@ -111,9 +111,10 @@ public class DelayServiceImpl implements DelayService {
 
     private int[] getCleanValues(int[] values) {
         List<Integer> cleanValuesList = new ArrayList<>();
+        double min = getMean(values) - (1.96 * getStandardDeviation(values));
         double max = getMean(values) + (1.96 * getStandardDeviation(values));
         for (int value : values) {
-            if (value >= 1 && value <= max) {
+            if (value >= min && value <= max) {
                 cleanValuesList.add(value);
             }
         }
