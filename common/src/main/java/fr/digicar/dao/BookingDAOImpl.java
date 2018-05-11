@@ -70,7 +70,8 @@ public class BookingDAOImpl implements BookingDAO{
                 getCurrentSession().createSQLQuery(sqlQuery).executeUpdate();
 
                 getCurrentSession().beginTransaction().commit();
-                //voir si c'est bien ajouté dans booking
+
+                //Mettre à jour la table car_availability
 
             }
             catch(Exception e){

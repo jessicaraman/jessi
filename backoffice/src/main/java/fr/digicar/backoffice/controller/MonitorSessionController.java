@@ -236,6 +236,16 @@ public class MonitorSessionController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/bookingList", method = RequestMethod.GET)
+    public ModelAndView getbookingView() {
+
+        List<Booking> bookingList =bookingService.getAllBookings();
+        ModelAndView modelAndView = new ModelAndView("emergency-modification/list-booking");
+        modelAndView.addObject("listBooking", bookingList);
+
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/usersPreferencesView", method = RequestMethod.GET)
     public ModelAndView getusersPreferencesView() {
 

@@ -30,6 +30,7 @@
                         <a class="dropdown-item" href="<c:url value="/modifurgent/"/>">Liste retards</a>
                         <a class="dropdown-item" href="<c:url value="/modifurgent/usersPreferencesView"/>">préférences utilisateurs</a>
                         <a class="dropdown-item" href="<c:url value="/modifurgent/commercialGestureView"/>">Gestes commerciaux</a>
+                        <a class="dropdown-item" href="<c:url value="/modifurgent/bookingList"/>">Liste des réservations</a>
                     </div>
                 </li>
 

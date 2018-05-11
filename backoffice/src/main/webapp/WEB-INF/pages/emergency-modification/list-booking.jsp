@@ -39,31 +39,38 @@
     </nav>
 </div>
 
-<div class="container">
-    <h3 class="text-center">Liste des utilisateurs</h3>
 
-    <%--@elvariable id="users" type="java.util.List"--%>
-    <c:if test="${!empty users}">
+<div class="container">
+    <h3 class="text-center">Liste des réservations</h3>
+
+    <%--@elvariable id="listBooking" type="java.util.List"--%>
+    <c:if test="${!empty listBooking}">
         <div class="table">
             <table class="table table-hover">
                 <tr>
-
-                    <th width="80">Identifiant utilisateur</th>
-                    <th width="120">Total reduction</th>
+                    <th width="110">Immatriculation</th>
+                    <th width="110">Date de départ</th>
+                    <th width="110">Date d'arrivée</th>
+                    <th width="110">identifiant utilisateur</th>
+                    <th width="110">Place départ</th>
+                    <th width="110">place arrivée</th>
                 </tr>
                     <%--@elvariable id="user" type="java.util.List"--%>
-                <c:forEach items="${users}" var="user">
+                <c:forEach items="${listBooking}" var="aBooking">
 
                     <tr>
-                        <td>${user.idUser}</td>
-                        <td>${user.numberOfDiscount}</td>
+                        <td>${aBooking.car_registration_id}</td>
+                        <td>${aBooking.departure_date}</td>
+                        <td>${aBooking.arrival_date}</td>
+                        <td>${aBooking.id_user}</td>
+                        <td>${aBooking.idPlaceDepart}</td>
+                        <td>${aBooking.idPlaceArrivee}</td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
     </c:if>
 </div>
-
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>
