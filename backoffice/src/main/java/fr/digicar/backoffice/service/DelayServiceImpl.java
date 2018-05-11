@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -82,17 +83,40 @@ public class DelayServiceImpl implements DelayService {
         return values;
     }
 
-    private double getStandardDeviation(int[] values) {
+    private double getMean(int[] values) {
         double sum = 0.0;
-        double standardDeviation = 0.0;
-        for (double num : values) {
-            sum += num;
+        for (double a : values)
+            sum += a;
+        return sum / values.length;
+    }
+
+    private double getVariance(int[] values) {
+        double mean = getMean(values);
+        double temp = 0;
+        for (double a : values)
+            temp += (a - mean) * (a - mean);
+        return temp / (values.length - 1);
+    }
+
+    private double getStandardDeviation(int[] values) {
+        return Math.sqrt(getVariance(values));
+    }
+
+    private int[] getCleanValues(int[] values) {
+        List<Integer> cleanValuesList = new ArrayList<>();
+        double min = getMean(values) - (1.96 * getStandardDeviation(values));
+        double max = getMean(values) + (1.96 * getStandardDeviation(values));
+        for (int value : values) {
+            if (value >= min && value <= max) {
+                cleanValuesList.add(value);
+            }
         }
-        double mean = sum / values.length;
-        for (double num : values) {
-            standardDeviation += Math.pow(num - mean, 2);
+        int[] cleanValues = new int[cleanValuesList.size()];
+        int i = 0;
+        for (Integer value : cleanValuesList) {
+            cleanValues[i++] = value;
         }
-        return Math.sqrt(standardDeviation / values.length - 1);
+        return cleanValues;
     }
 
 }
