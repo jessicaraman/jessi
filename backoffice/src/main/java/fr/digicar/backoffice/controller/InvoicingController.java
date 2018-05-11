@@ -85,6 +85,8 @@ public class InvoicingController {
                     tarif = tarifService.getTarif(inv.getPricing());
                 }
             }
+            float total_final=0;
+            float total_penalities=0;
             //pour chaque utilisateur récupère les sessions depuis la durée d'un mois
             List<Session> sessions = sessionService.getUserSessions(currentUser.getId(), today);
             System.out.println("sessions du mois ="+sessions.toString());
@@ -154,6 +156,7 @@ public class InvoicingController {
                 int delay_duration=delayService.getDelay(ses.getDelay()).getDuration();
                 String delay="Retard :"+delay_duration+" minutes";
                 String pennality=" Pénalité : "+pennality(delay_duration);
+                total_penalities=total_penalities+pennality(delay_duration);
                 System.out.println(pennality);
                 String indication_retard="*Vous êtes facturés à 10 euros pour chaque heure de retard soit 0,17 euros la minute";
                 total_presta= total_presta+pennality(delay_duration);
@@ -163,15 +166,23 @@ public class InvoicingController {
                 chapter.add(new Paragraph(kms));
                 chapter.add(new Paragraph(delay));
                 chapter.add(new Paragraph(pennality));
-                chapter.add(new Paragraph(indication_retard));
-                String total_string="Total = "+total_presta+" euros";
+                String total_string="Total prestation = "+total_presta+" euros dont "+pennality(delay_duration)+" euros de pénalités";
                 chapter.add(new Paragraph(total_string));
                 chapter.add(new Paragraph(separator));
+                total_final=total_final+total_presta+tarif.getMonthlyFees();
+                String total_string_final=" Total mensuels (incluant frais mensuels)= "+(total_final-total_penalities)+ "+ Pénalités "+total_penalities+" euros = "+total_final;
+                String earned_tokens="Tokens obtenus sur la période = "+calculToken(total_final,total_penalities);
+                chapter.add(new Paragraph(total_string_final));
+                chapter.add(new Paragraph(indication_retard));
+                chapter.add(new Paragraph(earned_tokens));
+                String indication_penalites="*Les frais engendrés par les pénalités ne sont pas pris en compte pour l'obtention des Tokens";
+                String indication_token="*Un token gagné par tranche de 100 euros de prestations";
+                chapter.add(new Paragraph(indication_token));
+                chapter.add(new Paragraph(indication_penalites));
             }
             document.add(chapter);
             document.close();
             //creating invoice in database
-            float total_final=0;
             Invoice invoice = new Invoice(currentUser.getId(), today, total_final, filepath.replace(System.getProperty("user.home") + "/Desktop/", ""));
             invoiceService.addInvoice(invoice);
         }
@@ -225,4 +236,16 @@ public class InvoicingController {
 
         return (float) (minutes*0.17);
     }
+    private int calculToken(float total_mensuel,float penalities) {
+        int result = 0;
+        float temp = total_mensuel-penalities;
+        while (temp >= 0) {
+            temp = temp - 100;
+            result++;
+        }
+        return result - 1;
+    }
+    private float prochainToken(int earnedTokens, float total, float pennalities){
+
+    return Float.parseFloat(null);}
 }
