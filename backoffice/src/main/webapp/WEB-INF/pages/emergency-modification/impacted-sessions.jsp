@@ -28,6 +28,8 @@
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="<c:url value="/modifurgent/impactedSession/"/>">sessions impactées</a>
                                 <a class="dropdown-item" href="<c:url value="/modifurgent/"/>">Liste retards</a>
+                                <a class="dropdown-item" href="<c:url value="/modifurgent/usersPreferencesView"/>">préférences utilisateurs</a>
+                                <a class="dropdown-item" href="<c:url value="/modifurgent/commercialGestureView"/>">Gestes commerciaux</a>
                             </div>
                         </li>
 

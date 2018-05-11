@@ -75,8 +75,8 @@ CREATE TABLE retard_calcule
   immatriculation      VARCHAR(40) NOT NULL,
   mark                 VARCHAR(40) NULL,
   model                VARCHAR(40) NULL,
-  heure_retour_prevu   DATETIME    NULL,
-  heure_retour_calcule DATETIME    NULL,
+  heure_retour_prevu   TIME    NULL,
+  heure_retour_calcule TIME    NULL,
   date_retour_calcule  DATETIME    NULL,
   penality             DOUBLE      NULL,
   first_name           VARCHAR(40) NULL,
@@ -154,10 +154,12 @@ CREATE TABLE users
   zip_code       VARCHAR(10)  NOT NULL,
   city           VARCHAR(100) NOT NULL,
   signup_date    DATE         NOT NULL,
-  status         VARCHAR(10)  NOT NULL
+  status         VARCHAR(10)  NOT NULL,
+  commercial_gesture_number   int(123) NULL
 )
   ENGINE = InnoDB
   CHARSET = utf8;
+
 
 ALTER TABLE session_en_cours
   ADD CONSTRAINT session_en_cours_users_id_fk
@@ -200,6 +202,7 @@ CREATE TABLE availability (
   start_time    TIME,
   end_time      TIME,
   status        INT(1),
+  pricing       INT,
 
   PRIMARY KEY (id, id_occupation, date, start_time, end_time),
   FOREIGN KEY (id_occupation) REFERENCES occupation (id)
@@ -216,4 +219,52 @@ CREATE TABLE history_delays
 )
   ENGINE = InnoDB;
 
+CREATE TABLE reservation
+(
+  id_reservation  INT(6) AUTO_INCREMENT,
+  id_occupation   INT(6),
+  id_user         INT(6),
+  start_time      TIME,
+  end_time        TIME,
+  pricing         INT,
+  return_place    INT(6),
 
+  PRIMARY KEY (id_reservation),
+  FOREIGN KEY (id_occupation) REFERENCES occupation (id),
+  FOREIGN KEY (id_user) REFERENCES users (id),
+  FOREIGN KEY (return_place) REFERENCES occupation (id)
+
+)
+  ENGINE = InnoDB;
+
+
+
+
+CREATE TABLE commercial_gesture
+(
+  id                INT AUTO_INCREMENT PRIMARY KEY,
+  id_user           INT        DEFAULT 0,
+  code              VARCHAR(500)  NOT NULL,
+  valeur            VARCHAR(500)  NOT NULL,
+  date_fin_validite datetime  NOT NULL
+)
+  ENGINE = InnoDB;
+
+create table booking
+(
+  id                  int auto_increment primary key,
+  car_registration_id VARCHAR(40)   NOT NULL,
+  departure_date      datetime      not null,
+  arrival_date        datetime      not null,
+  id_car              int           not null,
+  id_user             int           not null,
+  id_place_depart     int           not null,
+  id_place_arrivee    int           not null
+)
+  engine = InnoDB;
+
+ALTER TABLE booking ADD CONSTRAINT booking_car_id_fk
+FOREIGN KEY (id_car) REFERENCES car (id);
+
+ALTER TABLE booking ADD CONSTRAINT booking_users_id_fk
+FOREIGN KEY (id_user) REFERENCES users (id);
