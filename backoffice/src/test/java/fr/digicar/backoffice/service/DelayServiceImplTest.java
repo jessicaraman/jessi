@@ -105,4 +105,13 @@ public class DelayServiceImplTest {
         assertEquals(5, (double) method.invoke(delayService, (Object) values), 0);
     }
 
+    @Test
+    public void getVarianceReturnsCorrectValue() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Method method = DelayServiceImpl.class.getDeclaredMethod("getVariance", int[].class);
+        method.setAccessible(true);
+
+        int[] values = new int[]{17, 15, 23, 7, 9, 13};
+        assertEquals(33.2, (double) method.invoke(delayService, (Object) values), 0);
+    }
+
 }
