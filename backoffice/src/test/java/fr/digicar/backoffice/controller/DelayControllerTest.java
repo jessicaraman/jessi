@@ -21,10 +21,10 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import static org.exparity.hamcrest.date.DateMatchers.sameDay;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasToString;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -176,6 +176,26 @@ public class DelayControllerTest {
                 .andExpect(model().attribute("cleanDelayDistribution", new int[]{1, 2, 3, 4, 5, 6, 7, 8}))
                 .andExpect(model().attribute("cleanDelayDistributionLabels", new String[]{"1-2", "3-4", "5-6", "7-8"}))
                 .andExpect(model().attribute("searchPeriod", searchPeriod));
+    }
+
+    @Test
+    public void formatPeriodReturnsCorrectValues() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+
+        SearchPeriod searchPeriod = new SearchPeriod();
+        searchPeriod.setStartDateString("2017-01-01");
+        searchPeriod.setEndDateString("2018-01-01");
+
+        SearchPeriod expected = new SearchPeriod();
+        expected.setStartDateString("2017-01-01");
+        expected.setStartDate(new Date(1483228800000L));
+        expected.setEndDateString("2018-01-01");
+        expected.setEndDate(new Date(1514764800000L));
+
+        Method method = DelayController.class.getDeclaredMethod("formatPeriod", SearchPeriod.class);
+        method.setAccessible(true);
+
+        assertEquals(expected, method.invoke(delayController, searchPeriod));
     }
 
     @Test
