@@ -88,7 +88,7 @@
 
             <div class="row mb-5">
                 <div class="col">
-                    <form:form action="${pageContext.request.contextPath}/delays" method="PUT">
+                    <form:form method="POST" action="${pageContext.request.contextPath}/delays/filtered">
                         <button class="btn btn-primary" type="submit">
                             <i class="fa fa-filter"></i>&nbsp;
                             ÉLIMINER LES RETARDS ATYPIQUES
@@ -101,10 +101,11 @@
             <c:choose>
                 <c:when test="${filtered}">
                     <div class="row">
-                        <div class="col-6">
-                            <h4>Données standards</h4>
+                        <div class="col-5">
+                            <h4>Données brutes</h4>
                         </div>
-                        <div class="col-6">
+                        <div class="col-1"></div>
+                        <div class="col-5">
                             <h4>Données filtrées</h4>
                         </div>
                     </div>
@@ -118,12 +119,12 @@
                                 </div>
                                 <div class="col-9">
                                     <h4 class="card-title">
-                                        <%--@elvariable id="standardDelayNumber" type="int"--%>
-                                        <strong>${standardDelayNumber}</strong>
+                                        <%--@elvariable id="delayNumber" type="int"--%>
+                                        <strong>${delayNumber}</strong>
                                     </h4>
                                     <h5>RETARDS ENREGISTRÉS</h5>
-                                    <%--@elvariable id="standardResultDate" type="String"--%>
-                                    <p class="card-text">${standardResultDate}</p>
+                                    <%--@elvariable id="resultDate" type="String"--%>
+                                    <p class="card-text">${resultDate}</p>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +142,8 @@
                                         <strong>${cleanDelayNumber}</strong>
                                     </h4>
                                     <h5>RETARDS ENREGISTRÉS</h5>
-                                    <p class="card-text">Février - Mars 2018</p>
+                                    <%--@elvariable id="cleanResultDate" type="java.lang.String"--%>
+                                    <p class="card-text">${cleanResultDate}</p>
                                 </div>
                             </div>
                         </div>
@@ -188,21 +190,21 @@
                     new Chart(ctx1, {
                         type: 'bar',
                         data: {
-                            <%--@elvariable id="standardDelayDistributionLabels" type="java.util.List"--%>
+                            <%--@elvariable id="delayDistributionLabels" type="java.util.List"--%>
                             labels: [
-                                '${standardDelayDistributionLabels[0]}',
-                                '${standardDelayDistributionLabels[1]}',
-                                '${standardDelayDistributionLabels[2]}',
-                                '${standardDelayDistributionLabels[3]}'
+                                '${delayDistributionLabels[0]}',
+                                '${delayDistributionLabels[1]}',
+                                '${delayDistributionLabels[2]}',
+                                '${delayDistributionLabels[3]}'
                             ],
                             datasets: [{
                                 label: 'Répartition des retards',
                                 data: [
-                                    <%--@elvariable id="standardDelayDistribution" type="java.util.List"--%>
-                                    ${standardDelayDistribution[0]},
-                                    ${standardDelayDistribution[1]},
-                                    ${standardDelayDistribution[2]},
-                                    ${standardDelayDistribution[3]}
+                                    <%--@elvariable id="delayDistribution" type="java.util.List"--%>
+                                    ${delayDistribution[0]},
+                                    ${delayDistribution[1]},
+                                    ${delayDistribution[2]},
+                                    ${delayDistribution[3]}
                                 ],
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
