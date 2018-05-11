@@ -57,10 +57,11 @@ public class DelayController {
         model.addAttribute("delayDistribution", delayDistribution.getValues());
         model.addAttribute("delayDistributionLabels", delayDistribution.getLabels());
         model.addAttribute("searchPeriod", searchPeriod);
+        model.addAttribute("filtered", false);
         return "delay-analysis";
     }
 
-    @RequestMapping(value = "/filtered", method = RequestMethod.POST)
+    @RequestMapping(value = "/filtered", method = RequestMethod.GET)
     public String excludeAtypicalDelays(ModelMap model) {
         Date today = new Date();
 

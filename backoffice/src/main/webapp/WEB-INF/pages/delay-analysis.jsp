@@ -88,12 +88,10 @@
 
             <div class="row mb-5">
                 <div class="col">
-                    <form:form method="POST" action="${pageContext.request.contextPath}/delays/filtered">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fa fa-filter"></i>&nbsp;
-                            ÉLIMINER LES RETARDS ATYPIQUES
-                        </button>
-                    </form:form>
+                    <a class="btn btn-primary" role="button" href="<c:url value="/delays/filtered"/>">
+                        <i class="fa fa-filter"></i>&nbsp;
+                        ÉLIMINER LES RETARDS ATYPIQUES
+                    </a>
                 </div>
             </div>
 
