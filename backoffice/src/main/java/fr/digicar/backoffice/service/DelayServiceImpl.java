@@ -82,4 +82,17 @@ public class DelayServiceImpl implements DelayService {
         return values;
     }
 
+    private double getStandardDeviation(int[] values) {
+        double sum = 0.0;
+        double standardDeviation = 0.0;
+        for (double num : values) {
+            sum += num;
+        }
+        double mean = sum / values.length;
+        for (double num : values) {
+            standardDeviation += Math.pow(num - mean, 2);
+        }
+        return Math.sqrt(standardDeviation / values.length - 1);
+    }
+
 }

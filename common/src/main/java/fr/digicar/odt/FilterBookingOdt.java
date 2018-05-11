@@ -16,4 +16,6 @@ public class FilterBookingOdt {
 
     String city;
 
+    String zipCode;
+
 }

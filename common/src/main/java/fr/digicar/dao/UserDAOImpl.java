@@ -41,6 +41,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public void updateGestureAccountUser(int id) {
+        User user = getUser(id);
+        user.setNumberOfCommercialGesture(user.getNumberOfCommercialGesture()+1);
+        getCurrentSession().update(user);
+    }
+
+    @Override
     public void deleteUser(int id) {
         User user = getUser(id);
         if (user != null)
