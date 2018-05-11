@@ -44,13 +44,13 @@ public class DelayServiceImpl implements DelayService {
                         if (value >= values[0] && value < firstQuartile) count++;
                         break;
                     case 1:
-                        if (value >= firstQuartile && value < secondQuartile) count++;
+                        if (value > firstQuartile && value <= secondQuartile) count++;
                         break;
                     case 2:
-                        if (value >= secondQuartile && value < thirdQuartile) count++;
+                        if (value > secondQuartile && value <= thirdQuartile) count++;
                         break;
                     case 3:
-                        if (value >= thirdQuartile && value <= values[values.length - 1]) count++;
+                        if (value > thirdQuartile && value <= values[values.length - 1]) count++;
                         break;
                 }
             }
