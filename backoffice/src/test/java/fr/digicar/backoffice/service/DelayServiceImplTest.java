@@ -114,4 +114,13 @@ public class DelayServiceImplTest {
         assertEquals(33.2, (double) method.invoke(delayService, (Object) values), 0);
     }
 
+    @Test
+    public void getStandardDeviationCorrectValue() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Method method = DelayServiceImpl.class.getDeclaredMethod("getStandardDeviation", int[].class);
+        method.setAccessible(true);
+
+        int[] values = new int[]{17, 15, 23, 7, 9, 13};
+        assertEquals(5.76, (double) method.invoke(delayService, (Object) values), 0.002);
+    }
+
 }
