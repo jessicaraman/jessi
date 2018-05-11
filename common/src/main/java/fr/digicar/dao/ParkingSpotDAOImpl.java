@@ -134,6 +134,11 @@ public class ParkingSpotDAOImpl implements ParkingSpotDAO {
     }
 
     @Override
+    public List getParkingSpotIdFrom(String location) {
+        return getCurrentSession().createQuery("FROM ParkingSpot WHERE location = '"+location+"'").list();
+    }
+
+    @Override
     public void deleteParkingSpot(int id) {
         ParkingSpot parkingSpot = getParkingSpot(id);
         if (parkingSpot != null)

@@ -1,9 +1,7 @@
+/*
 package fr.digicar.backoffice.controller;
 
-import fr.digicar.backoffice.service.AvailabilityService;
 import fr.digicar.backoffice.service.CarService;
-import fr.digicar.backoffice.service.OccupationService;
-import fr.digicar.model.Availability;
 import fr.digicar.model.ParkingSpot;
 import fr.digicar.model.Car;
 import fr.digicar.odt.FilterBookingOdt;
@@ -25,14 +23,14 @@ public class AvailabilityController {
     @Autowired
     private ParkingSpotService parkingSpotService;
 
-    @Autowired
-    private AvailabilityService availabilityService;
-
-    @Autowired
-    private CarService carService;
-
-    @Autowired
-    private OccupationService occupationService;
+//    @Autowired
+//    private AvailabilityService availabilityService;
+//
+//    @Autowired
+//    private CarService carService;
+//
+//    @Autowired
+//    private OccupationService occupationService;
 
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -68,24 +66,24 @@ public class AvailabilityController {
         String zipCode = filters.getZipCode();
         log.info("zipCode input: " + zipCode);
 
-        List<Availability> listOfAvailability = availabilityService.availabilityByCriteria(date, startTime, endTime);
+        //List<Availability> listOfAvailability = availabilityService.availabilityByCriteria(date, startTime, endTime);
 
         List<Car> listOfAvailableCar = new ArrayList<>();
 
         Car car;
-        for (Availability availability : listOfAvailability) {
-            car = carService.getCarById(availability.getIdOccupation());
-            listOfAvailableCar.add(car);
-        }
+//        for (Availability availability : listOfAvailability) {
+//            car = carService.getCarById(availability.getIdOccupation());
+//            listOfAvailableCar.add(car);
+//        }
 
         String message;
-        if ((listOfAvailability.size() == 0) || (listOfAvailableCar.size() == 0)) {
-            message = "Aucun véhicule disponible pour cette date";
-            modelAndView.addObject("message", message);
-            modelAndView.addObject("cars", listOfAvailableCar);
-        } else {
-            modelAndView.addObject("cars", listOfAvailableCar);
-        }
+//        if ((listOfAvailability.size() == 0) || (listOfAvailableCar.size() == 0)) {
+//            message = "Aucun véhicule disponible pour cette date";
+//            modelAndView.addObject("message", message);
+//            modelAndView.addObject("cars", listOfAvailableCar);
+//        } else {
+//            modelAndView.addObject("cars", listOfAvailableCar);
+//        }
 
 
         return modelAndView;
@@ -93,3 +91,4 @@ public class AvailabilityController {
 
 }
 
+*/
