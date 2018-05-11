@@ -31,8 +31,8 @@ public class DelayController {
         Date today = new Date();
         ModelAndView modelAndView = new ModelAndView("delay-analysis");
         modelAndView.addObject("resultDate", getResultDateString(getPreviousYearDate(today), today));
-        modelAndView.addObject("delayNumber", delayService.getDelayNumber(getPreviousYearDate(today), today));
-        DelayDistribution delayDistribution = delayService.getDelayDistribution(getPreviousYearDate(today), today);
+        modelAndView.addObject("delayNumber", delayService.getDelayNumber(getPreviousYearDate(today), today, false));
+        DelayDistribution delayDistribution = delayService.getDelayDistribution(getPreviousYearDate(today), today, false);
         modelAndView.addObject("delayDistribution", delayDistribution.getValues());
         modelAndView.addObject("delayDistributionLabels", delayDistribution.getLabels());
         modelAndView.addObject("searchPeriod", new SearchPeriod());
@@ -52,8 +52,8 @@ public class DelayController {
             searchPeriod.setEndDate(new Date());
         }
         model.addAttribute("resultDate", getResultDateString(searchPeriod.getStartDate(), searchPeriod.getEndDate()));
-        model.addAttribute("delayNumber", delayService.getDelayNumber(searchPeriod.getStartDate(), searchPeriod.getEndDate()));
-        DelayDistribution delayDistribution = delayService.getDelayDistribution(searchPeriod.getStartDate(), searchPeriod.getEndDate());
+        model.addAttribute("delayNumber", delayService.getDelayNumber(searchPeriod.getStartDate(), searchPeriod.getEndDate(), false));
+        DelayDistribution delayDistribution = delayService.getDelayDistribution(searchPeriod.getStartDate(), searchPeriod.getEndDate(), false);
         model.addAttribute("delayDistribution", delayDistribution.getValues());
         model.addAttribute("delayDistributionLabels", delayDistribution.getLabels());
         model.addAttribute("searchPeriod", searchPeriod);
@@ -64,17 +64,17 @@ public class DelayController {
     public String excludeAtypicalDelays(ModelMap model) {
         Date today = new Date();
 
-        DelayDistribution delayDistribution = delayService.getDelayDistribution(getPreviousYearDate(today), today);
-
+        DelayDistribution standardDelayDistribution = delayService.getDelayDistribution(getPreviousYearDate(today), today, false);
         model.addAttribute("resultDate", getResultDateString(getPreviousYearDate(today), today));
-        model.addAttribute("delayNumber", delayService.getDelayNumber(getPreviousYearDate(today), today));
-        model.addAttribute("delayDistribution", delayDistribution.getValues());
-        model.addAttribute("delayDistributionLabels", delayDistribution.getLabels());
+        model.addAttribute("delayNumber", delayService.getDelayNumber(getPreviousYearDate(today), today, false));
+        model.addAttribute("delayDistribution", standardDelayDistribution.getValues());
+        model.addAttribute("delayDistributionLabels", standardDelayDistribution.getLabels());
 
+        DelayDistribution cleanDelayDistribution = delayService.getDelayDistribution(getPreviousYearDate(today), today, true);
         model.addAttribute("cleanResultDate", getResultDateString(getPreviousYearDate(today), today));
-        model.addAttribute("cleanDelayNumber", delayService.getDelayNumber(getPreviousYearDate(today), today));
-        model.addAttribute("cleanDelayDistribution", delayDistribution.getValues());
-        model.addAttribute("cleanDelayDistributionLabels", delayDistribution.getLabels());
+        model.addAttribute("cleanDelayNumber", delayService.getDelayNumber(getPreviousYearDate(today), today, true));
+        model.addAttribute("cleanDelayDistribution", cleanDelayDistribution.getValues());
+        model.addAttribute("cleanDelayDistributionLabels", cleanDelayDistribution.getLabels());
 
         model.addAttribute("searchPeriod", new SearchPeriod());
         model.addAttribute("filtered", true);

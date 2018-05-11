@@ -33,7 +33,7 @@ public class DelayServiceImplTest {
     public void getDelayNumberReturnsCorrectValue() {
         when(delayDAO.countByDate(dateStart, dateEnd)).thenReturn(1000);
 
-        assertEquals(1000, delayService.getDelayNumber(dateStart, dateEnd));
+        assertEquals(1000, delayService.getDelayNumber(dateStart, dateEnd, false));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class DelayServiceImplTest {
         when(delayDAO.filterByDate(dateStart, dateEnd)).thenReturn(delays);
 
         int total = 0;
-        for (int delayNumber : delayService.getDelayDistribution(dateStart, dateEnd).getValues()) {
+        for (int delayNumber : delayService.getDelayDistribution(dateStart, dateEnd, false).getValues()) {
             total += delayNumber;
         }
         assertEquals(10, total);

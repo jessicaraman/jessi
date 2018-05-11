@@ -22,8 +22,13 @@ public class DelayServiceImpl implements DelayService {
     private DelayDAO delayDAO;
 
     @Override
-    public DelayDistribution getDelayDistribution(Date dateStart, Date dateEnd) {
-        int[] values = getDelayValues(delayDAO.filterByDate(dateStart, dateEnd));
+    public DelayDistribution getDelayDistribution(Date dateStart, Date dateEnd, boolean filtered) {
+        int[] values;
+        if (filtered) {
+            values = getCleanValues(getDelayValues(delayDAO.filterByDate(dateStart, dateEnd)));
+        } else {
+            values = getDelayValues(delayDAO.filterByDate(dateStart, dateEnd));
+        }
 
         int[] distribution = new int[4];
 
@@ -55,8 +60,10 @@ public class DelayServiceImpl implements DelayService {
     }
 
     @Override
-    public int getDelayNumber(Date dateStart, Date dateEnd) {
-        Date today = new Date();
+    public int getDelayNumber(Date dateStart, Date dateEnd, boolean filtered) {
+        if (filtered) {
+            return getCleanValues(getDelayValues(delayDAO.filterByDate(dateStart, dateEnd))).length;
+        }
         return delayDAO.countByDate(dateStart, dateEnd);
     }
 
@@ -104,10 +111,9 @@ public class DelayServiceImpl implements DelayService {
 
     private int[] getCleanValues(int[] values) {
         List<Integer> cleanValuesList = new ArrayList<>();
-        double min = getMean(values) - (1.96 * getStandardDeviation(values));
         double max = getMean(values) + (1.96 * getStandardDeviation(values));
         for (int value : values) {
-            if (value >= min && value <= max) {
+            if (value >= 1 && value <= max) {
                 cleanValuesList.add(value);
             }
         }
