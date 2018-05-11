@@ -22,6 +22,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateGestureAccountUser(int id) {
+        userDAO.updateGestureAccountUser(id);
+    }
+
+    @Override
     public List<User> searchUsers(SearchCriteria searchCriteria) {
         if (searchCriteria != null
                 && ((searchCriteria.getName() != null && searchCriteria.getName().length() > 0)

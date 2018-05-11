@@ -810,3 +810,44 @@ insert into car (id, registration_number, mark, name_model, nb_places, nb_doors,
 insert into car (id, registration_number, mark, name_model, nb_places, nb_doors, type_id, comfort, kilometers, release_date) values (748, 'YQ-205-GJ', 'Pontiac', 'Bonneville', '5', '5', '2', '4', '35000', '2014-06-21');
 insert into car (id, registration_number, mark, name_model, nb_places, nb_doors, type_id, comfort, kilometers, release_date) values (749, 'JU-163-WN', 'Plymouth', 'Colt Vista', '5', '5', '2', '4', '35000', '2016-08-17');
 insert into car (id, registration_number, mark, name_model, nb_places, nb_doors, type_id, comfort, kilometers, release_date) values (750, 'OZ-793-OP', 'Honda', 'CR-V', '5', '5', '2', '4', '35000', '2017-10-15');
+
+#---------------Geste-commerciale----------------------------------
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (1, '0', 'CSCCODE1', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (2, '0', 'CSCCODE2', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (3, '0', 'CSCCODE3', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (4, '0', 'CSCCODE4', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (5, '0', 'CSCCODE5', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (6, '0', 'CSCCODE6', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (7, '0', 'CSCCODE7', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (8, '0', 'CSCCODE8', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (9, '0', 'CSCCODE9', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (10, '0', 'CSCCODE10', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (11, '0', 'CSCCODE11', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (12, '0', 'CSCCODE12', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (13, '0', 'CSCCODE13', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (14, '0', 'CSCCODE14', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (15, '0', 'CSCCODE15', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (16, '0', 'CSCCODE16', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (17, '0', 'CSCCODE17', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (18, '0', 'CSCCODE18', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (19, '0', 'CSCCODE19', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (20, '0', 'CSCCODE20', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (21, '0', 'CSCCODE21', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (22, '0', 'CSCCODE22', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (23, '0', 'CSCCODE23', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (24, '0', 'CSCCODE24', '10', '2018-05-24 00:00:00');
+insert into commercial_gesture (id, id_user, code, valeur, date_fin_validite) values (25, '0', 'CSCCODE25', '10', '2018-05-24 00:00:00');
+
+#---------------Reservation Thierno----------------------------------
+INSERT INTO booking (id, car_registration_id, departure_date, arrival_date, id_car, id_user, id_place_depart, id_place_arrivee, heure_depart_prevu, heure_arrivee_prevu)
+VALUES
+(1, 'IG-194-IF', '2018-04-01 09:39:00', '2018-04-01 15:00:00', 731, 200, 7, 1000, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'IG-194-IF', '2018-04-01 14:55:00', '2018-04-01 22:18:00', 731, 200, 8, 826, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'ZT-166-PS', '2018-04-01 10:55:00', '2018-04-01 18:00:00', 638, 200, 9, 999, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'ZT-166-PS', '2018-04-01 10:55:00', '2018-04-01 18:00:00', 638, 200, 9, 999, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'OZ-793-OP', '2018-04-01 10:55:00', '2018-04-01 18:00:00', 750, 200, 9, 999, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'EB-184-WF', '2018-04-01 10:55:00', '2018-04-01 18:00:00', 39, 200, 9, 999, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'PO-367-WY', '2018-04-01 10:55:00', '2018-04-01 18:00:00', 40, 200, 9, 999, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'LI-621-XC', '2018-04-01 10:55:00', '2018-04-01 18:00:00', 41, 200, 9, 999, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 'PM-433-PQ', '2018-04-01 10:55:00', '2018-04-01 18:00:00', 42, 200, 9, 999, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 'XQ-794-YP', '2018-04-01 10:55:00', '2018-04-01 18:00:00', 43, 200, 9, 999, '0000-00-00 00:00:00', '0000-00-00 00:00:00');

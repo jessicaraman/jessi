@@ -18,6 +18,9 @@
                     <th width="120">Place_arrivée</th>
                     <th width="120">Numéro</th>
                 </tr>
+
+                    <%--@elvariable id="sessionInLateId" type="java.lang.String"--%>
+
                 <c:forEach items="${bookingImpacted}" var="booking">
 
                     <%--@elvariable id="AllUser" type="java.util.List"--%>
@@ -34,7 +37,7 @@
                         <td>${booking.idPlaceDepart}</td>
                         <td>${booking.idPlaceArrivee}</td>
                         <td>${userPhoneNumber}</td>
-                        <td><button class="btn btn-warning" style="margin: 0px;" title="Modifier"><a href="<c:url value="edditingImpactedSession/${booking.id}" />" ><i class="fa fa-pencil" aria-hidden="true"></i></a></button></td>
+                        <td><button class="btn btn-warning" style="margin: 0px;" title="Modifier"><a href="<c:url value="edditingImpactedSession/${booking.id}/${sessionInLateId}" />" ><i class="fa fa-pencil" aria-hidden="true"></i></a></button></td>
                         <td><button style="margin:0px" class="btn btn-danger" title="Annuler "><a href="<c:url value="cancel/${booking.id}" />" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></button></td>
 
                     </tr>
