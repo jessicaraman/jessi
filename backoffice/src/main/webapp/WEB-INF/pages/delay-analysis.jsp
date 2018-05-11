@@ -53,8 +53,9 @@
                 <div class="card col">
                     <div class="card-body container pt-4 pb-0">
                         <%--@elvariable id="searchPeriod" type="fr.digicar.backoffice.utils.SearchPeriod"--%>
+                        <%--@elvariable id="target" type="java.lang.String"--%>
                         <form:form method="POST" modelAttribute="searchPeriod"
-                                   action="${pageContext.request.contextPath}/delays">
+                                   action="${pageContext.request.contextPath}${target}">
                             <div class="row">
                                 <div class="col-3">
                                     <div class="mt-4">

@@ -37,6 +37,7 @@ public class DelayController {
         modelAndView.addObject("delayDistributionLabels", delayDistribution.getLabels());
         modelAndView.addObject("searchPeriod", new SearchPeriod());
         modelAndView.addObject("filtered", false);
+        modelAndView.addObject("target", "/delays");
         return modelAndView;
     }
 
@@ -58,6 +59,7 @@ public class DelayController {
         model.addAttribute("delayDistributionLabels", delayDistribution.getLabels());
         model.addAttribute("searchPeriod", searchPeriod);
         model.addAttribute("filtered", false);
+        model.addAttribute("target", "/delays");
         return "delay-analysis";
     }
 
@@ -79,8 +81,40 @@ public class DelayController {
 
         model.addAttribute("searchPeriod", new SearchPeriod());
         model.addAttribute("filtered", true);
+        model.addAttribute("target", "/delays/filtered");
         return "delay-analysis";
     }
+
+    @RequestMapping(value = "/filtered", method = RequestMethod.POST)
+    public String filterCleanValuesByDate(@ModelAttribute SearchPeriod searchPeriod, ModelMap model) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            searchPeriod.setStartDate(format.parse(searchPeriod.getStartDateString()));
+            searchPeriod.setEndDate(format.parse(searchPeriod.getEndDateString()));
+        } catch (ParseException e) {
+            log.error("Error when parsing dates to filter delays.", e);
+            searchPeriod.setStartDate(getPreviousYearDate(new Date()));
+            searchPeriod.setEndDate(new Date());
+        }
+
+        DelayDistribution cleanDelayDistribution = delayService.getDelayDistribution(searchPeriod.getStartDate(), searchPeriod.getEndDate(), true);
+        model.addAttribute("cleanResultDate", getResultDateString(searchPeriod.getStartDate(), searchPeriod.getEndDate()));
+        model.addAttribute("cleanDelayNumber", delayService.getDelayNumber(searchPeriod.getStartDate(), searchPeriod.getEndDate(), true));
+        model.addAttribute("cleanDelayDistribution", cleanDelayDistribution.getValues());
+        model.addAttribute("cleanDelayDistributionLabels", cleanDelayDistribution.getLabels());
+
+        DelayDistribution delayDistribution = delayService.getDelayDistribution(searchPeriod.getStartDate(), searchPeriod.getEndDate(), false);
+        model.addAttribute("resultDate", getResultDateString(searchPeriod.getStartDate(), searchPeriod.getEndDate()));
+        model.addAttribute("delayNumber", delayService.getDelayNumber(searchPeriod.getStartDate(), searchPeriod.getEndDate(), false));
+        model.addAttribute("delayDistribution", delayDistribution.getValues());
+        model.addAttribute("delayDistributionLabels", delayDistribution.getLabels());
+
+        model.addAttribute("searchPeriod", searchPeriod);
+        model.addAttribute("filtered", true);
+        model.addAttribute("target", "/delays/filtered");
+        return "delay-analysis";
+    }
+
 
     private Date getPreviousYearDate(Date date) {
         Calendar previousYearDate = Calendar.getInstance();
