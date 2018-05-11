@@ -24,6 +24,8 @@ import static org.exparity.hamcrest.date.DateMatchers.sameDay;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasToString;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -196,6 +198,30 @@ public class DelayControllerTest {
         method.setAccessible(true);
 
         assertEquals(expected, method.invoke(delayController, searchPeriod));
+    }
+
+    @Test
+    public void formatPeriodReturnsCorrectValuesOnParseException() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Date today = new Date();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(today);
+        cal.add(Calendar.YEAR, -1);
+        Date aYearAgo = cal.getTime();
+        String startDateString = "abcd";
+        String endDateString = "defg";
+
+        SearchPeriod searchPeriod = new SearchPeriod();
+        searchPeriod.setStartDateString(startDateString);
+        searchPeriod.setEndDateString(endDateString);
+
+        Method method = DelayController.class.getDeclaredMethod("formatPeriod", SearchPeriod.class);
+        method.setAccessible(true);
+
+        SearchPeriod result = (SearchPeriod) method.invoke(delayController, searchPeriod);
+        assertEquals(startDateString, result.getStartDateString());
+        assertEquals(endDateString, result.getEndDateString());
+        assertThat(result.getStartDate(), sameDay(aYearAgo));
+        assertThat(result.getEndDate(), sameDay(today));
     }
 
     @Test
