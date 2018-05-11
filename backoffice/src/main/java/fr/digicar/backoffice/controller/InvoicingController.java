@@ -1,6 +1,7 @@
 package fr.digicar.backoffice.controller;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import fr.digicar.backoffice.service.*;
 import fr.digicar.model.*;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,8 +87,6 @@ public class InvoicingController {
                     tarif = tarifService.getTarif(inv.getPricing());
                 }
             }
-            float total_final=0;
-            float total_penalities=0;
             //pour chaque utilisateur récupère les sessions depuis la durée d'un mois
             List<Session> sessions = sessionService.getUserSessions(currentUser.getId(), today);
             System.out.println("sessions du mois ="+sessions.toString());
@@ -107,6 +107,8 @@ public class InvoicingController {
             Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
             //Titre
             String title = "DIGICAR - FACTURE DU  " + formatDate(today);
+            float total_final=0;
+            float total_penalities=0;
             Chapter chapter = new Chapter(new Paragraph(), 1);
             chapter.setNumberDepth(0);
             String clin = "Numéro Client :" + currentUser.getId();
@@ -114,7 +116,8 @@ public class InvoicingController {
             String adress = currentUser.getAddressLine1() + " " + currentUser.getAddressLine2();
             String emailNNumber = currentUser.getPhoneNumber() + " - " + currentUser.getEmail();
             String zipNcity = currentUser.getCity() + " " + currentUser.getZipCode();
-            String separator = "__________________________";
+            String separator = "______________________________________________________________________________";
+            String separator2= "************************************************************************************************************";
             //informations sur le Pricing
             String libelle_t = "Pricing " + tarif.getLabel() + " (depuis le " + formatDate(inv.getStartDate()) + ")";
             String prices = tarif.getHourlyPrice()
@@ -123,7 +126,12 @@ public class InvoicingController {
                     + " €/km  "
                     + tarif.getMonthlyFees()
                     + " €/mois  ";
-            chapter.add(new Paragraph(title));
+            Font font1 = new Font(Font.FontFamily.HELVETICA  , 25, Font.BOLD);
+            Font bfBold12 = new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD, new BaseColor(0, 0, 0));
+            Paragraph titre=new Paragraph(title,font1);
+            titre.setAlignment(Element.ALIGN_CENTER);
+
+            chapter.add(titre);
             chapter.add(new Paragraph(clin));
             chapter.add(new Paragraph(name));
             chapter.add(new Paragraph(adress));
@@ -131,13 +139,22 @@ public class InvoicingController {
             chapter.add(new Paragraph(separator));
             chapter.add(new Paragraph(libelle_t));
             chapter.add(new Paragraph(prices));
-            chapter.add(new Paragraph(separator));
-            chapter.add(new Paragraph(separator));
-            chapter.add(new Paragraph("Prestations consommées"));
+            chapter.add(new Paragraph(separator2));
+            Paragraph prestas=new Paragraph("Prestations consommées");
+            prestas.setAlignment(Element.ALIGN_CENTER);
+            chapter.add(prestas);
+            chapter.add(new Paragraph(separator2));
+
 
             List<Session> sessionsOfTheMonth = sessionService.getUserSessions(currentUser.getId(), today);
             System.out.print(sessionsOfTheMonth.size());
             for (Session ses : sessionsOfTheMonth) {
+                //initialisation of table
+                /*float[] columnWidths = {45f,45f};
+                //create PDF table with the given widths
+                PdfPTable table = new PdfPTable(columnWidths);
+                // set table width a percentage of the page width
+                table.setWidthPercentage(90f);*/
                 String dateOfsession = "Début " + formatDate(ses.getDepartureDate())
                         + " " + ses.getDepartureDate().getHours()
                         + "h" + ses.getDepartureDate().getMinutes()
@@ -158,7 +175,6 @@ public class InvoicingController {
                 String pennality=" Pénalité : "+pennality(delay_duration);
                 total_penalities=total_penalities+pennality(delay_duration);
                 System.out.println(pennality);
-                String indication_retard="*Vous êtes facturés à 10 euros pour chaque heure de retard soit 0,17 euros la minute";
                 total_presta= total_presta+pennality(delay_duration);
                 chapter.add(new Paragraph(dateOfsession));
                 chapter.add(new Paragraph(duration));
@@ -168,18 +184,19 @@ public class InvoicingController {
                 chapter.add(new Paragraph(pennality));
                 String total_string="Total prestation = "+total_presta+" euros dont "+pennality(delay_duration)+" euros de pénalités";
                 chapter.add(new Paragraph(total_string));
-                chapter.add(new Paragraph(separator));
+                chapter.add(new Paragraph(separator2));
                 total_final=total_final+total_presta+tarif.getMonthlyFees();
-                String total_string_final=" Total mensuels (incluant frais mensuels)= "+(total_final-total_penalities)+ "+ Pénalités "+total_penalities+" euros = "+total_final;
-                String earned_tokens="Tokens obtenus sur la période = "+calculToken(total_final,total_penalities);
-                chapter.add(new Paragraph(total_string_final));
-                chapter.add(new Paragraph(indication_retard));
-                chapter.add(new Paragraph(earned_tokens));
-                String indication_penalites="*Les frais engendrés par les pénalités ne sont pas pris en compte pour l'obtention des Tokens";
-                String indication_token="*Un token gagné par tranche de 100 euros de prestations";
-                chapter.add(new Paragraph(indication_token));
-                chapter.add(new Paragraph(indication_penalites));
             }
+            String indication_retard="*Vous êtes facturés à 10 euros pour chaque heure de retard soit 0,17 euros la minute";
+            String total_string_final=" Total mensuels (incluant frais mensuels)= "+(total_final-total_penalities)+ "+ Pénalités "+total_penalities+" euros = "+total_final;
+            String earned_tokens="Tokens obtenus sur la période = "+calculToken(total_final,total_penalities);
+            chapter.add(new Paragraph(total_string_final));
+            chapter.add(new Paragraph(earned_tokens));
+            String indication_penalites="*Les frais engendrés par les pénalités ne sont pas pris en compte pour l'obtention des Tokens";
+            String indication_token="*Un token gagné par tranche de 100 euros de prestations";
+            chapter.add(new Paragraph(indication_retard));
+            chapter.add(new Paragraph(indication_token));
+            chapter.add(new Paragraph(indication_penalites));
             document.add(chapter);
             document.close();
             //creating invoice in database
