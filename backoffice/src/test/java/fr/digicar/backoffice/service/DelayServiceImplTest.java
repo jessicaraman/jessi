@@ -96,4 +96,13 @@ public class DelayServiceImplTest {
         assertArrayEquals(expected, (String[]) method.invoke(delayService, (Object) quartiles));
     }
 
+    @Test
+    public void getMeanReturnsCorrectValue() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Method method = DelayServiceImpl.class.getDeclaredMethod("getMean", int[].class);
+        method.setAccessible(true);
+
+        int[] values = new int[]{4, 4, 6, 6, 3, 3, 7, 7, 2, 8};
+        assertEquals(5, (double) method.invoke(delayService, (Object) values), 0);
+    }
+
 }
