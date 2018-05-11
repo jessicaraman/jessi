@@ -64,39 +64,13 @@ public class BookingController {
     @RequestMapping(value = "/carAvailable", method = RequestMethod.POST)
     public ModelAndView findCarAvailabilityByCriteria(@ModelAttribute("filters") final FilterBookingOdt filters) {
 
-        String date = filters.getWishedDate();
-        log.info("Date input: " + date);
-        String startTime = filters.getStartTime();
-        log.info("startTime input: " + startTime);
-        String endTime = filters.getEndTime();
-        log.info("endTime input: " + endTime);
-        String city = filters.getCity();
-        log.info("city input: " + city);
-        int idCarType = Integer.parseInt(filters.getCarType());
-        log.info("idCarType input: " + idCarType);
 
-        List<CarAvailability> carsAvailable = new ArrayList<>();
         List<ReservationOdt> potentialBooking = new ArrayList<>();
         Set setOfTown = new TreeSet();
         List listOfCarType = new ArrayList();
 
         try {
-            carsAvailable = carAvailabilityService.getCarAvailabilityBy(city, idCarType);
-            log.info("Size of carsAvailable : " + carsAvailable.size());
-            for (CarAvailability carAvailability : carsAvailable) {
-                Car car = carService.getCarById(carAvailability.getId_car());
-                ParkingSpot parkingSpot = parkingSpotService.getParkingSpot(carAvailability.getId_parking_spots());
-
-                String mark = car.getBrandName();
-                log.info("mark: " + mark);
-                String model = car.getModelName();
-                log.info("model: " + model);
-                int doorsNumber = car.getDoorNumber();
-                log.info("doorsNumber: " + doorsNumber);
-                String parkingAddress = (parkingService.getParkingById(Integer.parseInt(parkingSpot.getNbParking()))).getRoad_name();
-
-                potentialBooking.add(new ReservationOdt(mark, model, doorsNumber, parkingAddress));
-            }
+            potentialBooking = carAvailabilityService.getCarAvailabilityBy(filters);
 
             setOfTown = parkingSpotService.getListOfLocation();
             listOfCarType = carTypeService.getAllCarType();
@@ -108,7 +82,7 @@ public class BookingController {
 
         ModelAndView modelAndView = new ModelAndView("reservation");
 
-        if (carsAvailable.isEmpty()) {
+        if (potentialBooking.isEmpty()) {
             message = "Aucun véhicule trouvé pour cette recherche";
             modelAndView.addObject("message", message);
             modelAndView.addObject("cars", potentialBooking);
