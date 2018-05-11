@@ -60,6 +60,27 @@ public class DelayController {
         return "delay-analysis";
     }
 
+    @RequestMapping(value = "/filtered", method = RequestMethod.POST)
+    public String excludeAtypicalDelays(ModelMap model) {
+        Date today = new Date();
+
+        DelayDistribution delayDistribution = delayService.getDelayDistribution(getPreviousYearDate(today), today);
+
+        model.addAttribute("resultDate", getResultDateString(getPreviousYearDate(today), today));
+        model.addAttribute("delayNumber", delayService.getDelayNumber(getPreviousYearDate(today), today));
+        model.addAttribute("delayDistribution", delayDistribution.getValues());
+        model.addAttribute("delayDistributionLabels", delayDistribution.getLabels());
+
+        model.addAttribute("cleanResultDate", getResultDateString(getPreviousYearDate(today), today));
+        model.addAttribute("cleanDelayNumber", delayService.getDelayNumber(getPreviousYearDate(today), today));
+        model.addAttribute("cleanDelayDistribution", delayDistribution.getValues());
+        model.addAttribute("cleanDelayDistributionLabels", delayDistribution.getLabels());
+
+        model.addAttribute("searchPeriod", new SearchPeriod());
+        model.addAttribute("filtered", true);
+        return "delay-analysis";
+    }
+
     private Date getPreviousYearDate(Date date) {
         Calendar previousYearDate = Calendar.getInstance();
         previousYearDate.setTime(date);
