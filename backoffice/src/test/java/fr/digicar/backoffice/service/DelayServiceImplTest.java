@@ -123,4 +123,14 @@ public class DelayServiceImplTest {
         assertEquals(5.76, (double) method.invoke(delayService, (Object) values), 0.002);
     }
 
+    @Test
+    public void getCleanValuesReturnsConsistentValues() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Method method = DelayServiceImpl.class.getDeclaredMethod("getCleanValues", int[].class);
+        method.setAccessible(true);
+
+        int[] values = new int[]{1, 2, 3, 2, 1, 3, 4, 5, 4, 20};
+        int[] expected = new int[]{1, 2, 3, 2, 1, 3, 4, 5, 4};
+        assertArrayEquals(expected, (int[]) method.invoke(delayService, (Object) values));
+    }
+
 }
