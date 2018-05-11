@@ -22,6 +22,11 @@ public class ReservationPricesServiceImpl implements ReservationPricesService{
     }
 
     @Override
+    public ReservationPrices getReservationPriceByCriterias(int carType, int fuelType){
+        return reservationPricesDAO.getReservationPriceByCriterias(carType,fuelType);
+    }
+
+    @Override
     public List<ReservationPrices> getAllReservationPrices() {
         return reservationPricesDAO.getAllReservationPrices();
     }

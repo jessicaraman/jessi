@@ -20,4 +20,6 @@ public class ReservationOdt {
 
     String addressParking;
 
+    Double price;
+
 }

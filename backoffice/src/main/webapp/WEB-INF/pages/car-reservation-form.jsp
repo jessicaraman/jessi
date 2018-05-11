@@ -11,35 +11,31 @@
                modelAttribute="filters">
 
         <div class="row">
-            <div class="col-md-3">
-                <form:label path="wishedDate">Date</form:label>
-                <div class="input-group md-form form-sm form-2 pl-0">
-                    <form:input type="date" path="wishedDate" cssClass="form-control"/>
-                </div>
-            </div>
+
 
             <div class="col-md-3">
                 <form:label path="startTime"> Heure de début</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <input type="time" path="startTime" cssClass="form-control"/>
+                    <form:input type="datetime-local" path="startTime" cssClass="form-control"/>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <form:label path="endTime">Heure de fin</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <input type="time" path="endTime" cssClass="form-control"/>
+                    <form:input type="datetime-local" path="endTime" cssClass="form-control"/>
                 </div>
             </div>
 
         </div>
         <div class="row">
+
             <div class="col-md-3">
-                <%--<form:label path="city">Ville</form:label>--%>
+                <%--<form:label path="arrivedCity">Ville</form:label>--%>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border"
-                                 path="city">
-                        <form:option value="" disabled="true" selected="true">Choisir la ville</form:option>
+                                 path="arrivedCity">
+                        <form:option value="" disabled="true" selected="true">Ville d'arrivée</form:option>
                         <%--@elvariable id="setOfTown" type="java.util.Set<String>"--%>
                         <c:forEach items="${setOfTown}" var="town">
                             <form:option value="${town}">${town}</form:option>
@@ -49,20 +45,34 @@
             </div>
 
             <div class="col-md-3">
-                <%--<form:label path="carType">Type de véhicule</form:label>--%>
+                    <%--<form:label path="arrivedCity">Ville</form:label>--%>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <%--<input type="time" path="carType" cssClass="form-control"/>--%>
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border"
-                                 path="carType">
-                        <form:option value="" disabled="true" selected="true">Type de véhicule</form:option>
-                        <%--@elvariable id="listOfCarType" type="java.util.List<fr.digicar.model.CarType>"--%>
-                        <c:forEach items="${listOfCarType}" var="cartype">
-                            <form:option value="${cartype.id}">${cartype.name}</form:option>
+                                 path="startCity">
+                        <form:option value="" disabled="true" selected="true">Ville de départ</form:option>
+                        <%--@elvariable id="setOfTown" type="java.util.Set<String>"--%>
+                        <c:forEach items="${setOfTown}" var="town">
+                            <form:option value="${town}">${town}</form:option>
                         </c:forEach>
                     </form:select>
                 </div>
+            </div>
 
-                <div class="col-md-3">
+            <div class="col-md-3">
+                <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border"
+                             path="carType">
+                    <form:option value="" disabled="true" selected="true">Type de véhicule</form:option>
+                    <%--@elvariable id="listOfCarType" type="java.util.List<fr.digicar.model.CarType>"--%>
+                    <c:forEach items="${listOfCarType}" var="cartype">
+                        <form:option value="${cartype.id}">${cartype.name}</form:option>
+                    </c:forEach>
+                </form:select>
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="row">
                     <div class="input-group md-form form-sm form-2 pl-0">
                         <button type="submit" class="btn btn-primary" title="Lister les véhicules disponibles"><i
                                 class="fa fa-search"

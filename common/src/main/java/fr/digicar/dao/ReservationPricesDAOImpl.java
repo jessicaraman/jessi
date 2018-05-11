@@ -37,6 +37,21 @@ public class ReservationPricesDAOImpl implements ReservationPricesDAO{
     }
 
     @Override
+    public ReservationPrices getReservationPriceByCriterias(int carType, int fuelType){
+        List<ReservationPrices> list;
+
+        ReservationPrices reservationPrices = new ReservationPrices();
+        try {
+            list = getCurrentSession().createQuery("FROM ReservationPrices WHERE id_car_type = '" + carType + "' and id_fuel_type = '"+fuelType+"'").list();
+            reservationPrices = (!list.isEmpty() &&  list != null ) ? list.get(0) : null;
+        } catch (JDBCException e) {
+            log.error("Error, could not find any available spot.", e);
+        }
+        return reservationPrices;
+    }
+
+
+    @Override
     public List<ReservationPrices> getAllReservationPrices() {
         return getCurrentSession().createQuery("FROM Pricing").list();    }
 }
