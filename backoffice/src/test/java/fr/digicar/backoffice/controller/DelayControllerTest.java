@@ -24,6 +24,8 @@ import static org.exparity.hamcrest.date.DateMatchers.sameDay;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -53,8 +55,9 @@ public class DelayControllerTest {
 
     @Test
     public void delayDashboardIsOk() throws Exception {
-        when(delayService.getDelayNumber(any(Date.class), any(Date.class), false)).thenReturn(1000);
-        when(delayService.getDelayDistribution(any(Date.class), any(Date.class), false)).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
+
+        when(delayService.getDelayNumber(any(Date.class), any(Date.class), eq(false))).thenReturn(1000);
+        when(delayService.getDelayDistribution(any(Date.class), any(Date.class), eq(false))).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
 
         mockMvc.perform(get("/delays"))
                 .andExpect(status().isOk())
@@ -76,8 +79,8 @@ public class DelayControllerTest {
         searchPeriod.setEndDateString("2018-01-01");
         searchPeriod.setEndDate(new Date(1514764800000L));
 
-        when(delayService.getDelayNumber(any(Date.class), any(Date.class), false)).thenReturn(1000);
-        when(delayService.getDelayDistribution(any(Date.class), any(Date.class), false)).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
+        when(delayService.getDelayNumber(any(Date.class), any(Date.class), eq(false))).thenReturn(1000);
+        when(delayService.getDelayDistribution(any(Date.class), any(Date.class), eq(false))).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
 
         mockMvc.perform(post("/delays")
                 .param("startDateString", "2017-01-01")
@@ -102,8 +105,8 @@ public class DelayControllerTest {
         String startDateString = "abcd";
         String endDateString = "defg";
 
-        when(delayService.getDelayNumber(any(Date.class), any(Date.class), false)).thenReturn(1000);
-        when(delayService.getDelayDistribution(any(Date.class), any(Date.class), false)).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
+        when(delayService.getDelayNumber(any(Date.class), any(Date.class), eq(false))).thenReturn(1000);
+        when(delayService.getDelayDistribution(any(Date.class), any(Date.class), eq(false))).thenReturn(new DelayDistribution(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, new String[]{"1-3", "4-6", "7-8", "9-10"}));
 
         mockMvc.perform(post("/delays")
                 .param("startDateString", startDateString)
