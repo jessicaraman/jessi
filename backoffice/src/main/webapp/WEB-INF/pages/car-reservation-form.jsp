@@ -21,14 +21,14 @@
             <div class="col-md-3">
                 <form:label path="startTime"> Heure de début</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <input type="time" path="startTime" cssClass="form-control"/>
+                    <form:input type="time" path="startTime" cssClass="form-control"/>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <form:label path="endTime">Heure de fin</form:label>
                 <div class="input-group md-form form-sm form-2 pl-0">
-                    <input type="time" path="endTime" cssClass="form-control"/>
+                    <form:input type="time" path="endTime" cssClass="form-control"/>
                 </div>
             </div>
 
