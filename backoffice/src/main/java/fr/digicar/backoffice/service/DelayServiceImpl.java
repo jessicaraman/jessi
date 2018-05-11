@@ -59,6 +59,11 @@ public class DelayServiceImpl implements DelayService {
         return delayDAO.countByDate(dateStart, dateEnd);
     }
 
+    @Override
+    public Delay getDelay(int id) {
+        return delayDAO.getDelay(id);
+    }
+
     private String[] getQuartileLabels(int[] quartiles) {
         String[] labels = new String[4];
         labels[0] = String.valueOf(quartiles[0]) + "-" + String.valueOf(quartiles[1]) + " min.";

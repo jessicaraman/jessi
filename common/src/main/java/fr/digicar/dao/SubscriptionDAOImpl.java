@@ -40,10 +40,9 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List<Subscription> getSubscriptionByUserId() {
-       int day = new Date().getDay();
-       String sql="FROM Subscription WHERE endDate IS NULL and startDate LIKE '%"
-               +day+"' GROUP BY user";
-
+       int day = new Date().getDate();
+       String sql="FROM Subscription WHERE end_date IS NULL and start_date LIKE '%"+day+"' GROUP BY id_user";
+System.out.println(sql);
         return (List<Subscription>) getCurrentSession()
                 .createQuery(sql).list();
     }

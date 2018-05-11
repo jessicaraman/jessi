@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static jdk.nashorn.internal.objects.NativeMath.round;
+
 @Slf4j
 @Controller
 public class InvoicingController {
@@ -39,6 +41,9 @@ public class InvoicingController {
 
     @Autowired
     SessionService sessionService;
+
+    @Autowired
+    DelayService delayService;
 
     @RequestMapping(value = "/invoices")
     public ModelAndView mainPageInvoices() {
@@ -66,10 +71,13 @@ public class InvoicingController {
         ModelAndView modelAndView = new ModelAndView("loader");
         Date today = new Date();
         List<Subscription> t = subscriptionService.getSubscriptionByUserId();
+        System.out.println("Liste des users à facturer "+t.toString());
         List<User> users = userService.searchUsers();
         List<Pricing> pricing = tarifService.getTarifs();
         User currentUser = new User();
         Pricing tarif = new Pricing();
+
+        //récupère les infos sur la personne et le tarif pour chaque utilisateur concerné
         for (Subscription inv : t) {
             for (User user : users) {
                 if (inv.getUser() == user.getId()) {
@@ -77,8 +85,10 @@ public class InvoicingController {
                     tarif = tarifService.getTarif(inv.getPricing());
                 }
             }
+            //pour chaque utilisateur récupère les sessions depuis la durée d'un mois
             List<Session> sessions = sessionService.getUserSessions(currentUser.getId(), today);
-            double total = 0;
+            System.out.println("sessions du mois ="+sessions.toString());
+            //chemin pour écrire le fichier
             String filename = convertUtilToSql(today) + "-" + currentUser.getLastName() + "-" + currentUser.getFirstName();
             String filepath = System.getProperty("user.home") + "/Desktop/" + filename + ".pdf";
             File file = new File(filepath);
@@ -87,6 +97,8 @@ public class InvoicingController {
             }
             log.debug("File exists: " + (file.exists() ? "true" : "false"));
             log.debug(file.getPath());
+
+            /* Création du PDF */
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(file));
             document.open();
@@ -121,12 +133,8 @@ public class InvoicingController {
             chapter.add(new Paragraph(separator));
             chapter.add(new Paragraph("Prestations consommées"));
 
-            //creation Invoice
-            Invoice invoice = new Invoice(currentUser.getId(), today, total, filepath.replace(System.getProperty("user.home") + "/Desktop/", ""));
-            invoiceService.addInvoice(invoice);
             List<Session> sessionsOfTheMonth = sessionService.getUserSessions(currentUser.getId(), today);
             System.out.print(sessionsOfTheMonth.size());
-
             for (Session ses : sessionsOfTheMonth) {
                 String dateOfsession = "Début " + formatDate(ses.getDepartureDate())
                         + " " + ses.getDepartureDate().getHours()
@@ -134,18 +142,38 @@ public class InvoicingController {
                         + " / Fin " + formatDate(ses.getArrivalDate())
                         + " " + ses.getArrivalDate().getHours()
                         + "h" + ses.getArrivalDate().getMinutes();
+                float total_presta=0;
                 String duration = dureeSessionToString(ses.getDepartureDate(), ses.getArrivalDate());
                 Car c = carService.getCarById(ses.getCar());
+                int nb_kms=ses.getKms();
+                int nb_h=totalDuree(ses.getDepartureDate(), ses.getArrivalDate());
+                System.out.println("nb heures"+nb_h);
+                total_presta=total_presta+((tarif.getHourlyPrice()*nb_h)+(tarif.getKmPrice()*nb_kms));
                 String car = c.getBrandName() + " " + c.getModelName();
                 String kms = "Km parcourus : " + ses.getKms();
+                int delay_duration=delayService.getDelay(ses.getDelay()).getDuration();
+                String delay="Retard :"+delay_duration+" minutes";
+                String pennality=" Pénalité : "+pennality(delay_duration);
+                System.out.println(pennality);
+                String indication_retard="*Vous êtes facturés à 10 euros pour chaque heure de retard soit 0,17 euros la minute";
+                total_presta= total_presta+pennality(delay_duration);
                 chapter.add(new Paragraph(dateOfsession));
                 chapter.add(new Paragraph(duration));
                 chapter.add(new Paragraph(car));
                 chapter.add(new Paragraph(kms));
+                chapter.add(new Paragraph(delay));
+                chapter.add(new Paragraph(pennality));
+                chapter.add(new Paragraph(indication_retard));
+                String total_string="Total = "+total_presta+" euros";
+                chapter.add(new Paragraph(total_string));
                 chapter.add(new Paragraph(separator));
             }
             document.add(chapter);
             document.close();
+            //creating invoice in database
+            float total_final=0;
+            Invoice invoice = new Invoice(currentUser.getId(), today, total_final, filepath.replace(System.getProperty("user.home") + "/Desktop/", ""));
+            invoiceService.addInvoice(invoice);
         }
         return modelAndView;
     }
@@ -155,7 +183,7 @@ public class InvoicingController {
         return formater.format(d);
     }
 
-    public double dureeSession(Timestamp timestamp1, Timestamp timestamp2) {
+    public float dureeSession(Timestamp timestamp1, Timestamp timestamp2) {
         long milliseconds = timestamp2.getTime() - timestamp1.getTime();
         int seconds = (int) milliseconds / 1000;
 
@@ -188,5 +216,13 @@ public class InvoicingController {
         log.debug("Difference : " + hours + ":" + minutes + ":" + seconds);
 
         return hours + "h " + minutes + " minutes";
+    }
+    private int totalDuree(Timestamp timestamp1, Timestamp timestamp2){
+        long diff = timestamp2.getTime() - timestamp1.getTime();
+        return (int) (diff / (60 * 1000));
+    }
+    private float pennality(int minutes){
+
+        return (float) (minutes*0.17);
     }
 }
