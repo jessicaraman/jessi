@@ -41,7 +41,7 @@ public class DelayServiceImpl implements DelayService {
             for (int value : values) {
                 switch (i) {
                     case 0:
-                        if (value >= values[0] && value < firstQuartile) count++;
+                        if (value >= values[0] && value <= firstQuartile) count++;
                         break;
                     case 1:
                         if (value > firstQuartile && value <= secondQuartile) count++;
