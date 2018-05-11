@@ -27,4 +27,35 @@ public class CarAvailability {
     @Column(name = "available")
     private String available;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId_car() {
+        return id_car;
+    }
+
+    public void setId_car(Integer id_car) {
+        this.id_car = id_car;
+    }
+
+    public Integer getId_parking_spots() {
+        return id_parking_spots;
+    }
+
+    public void setId_parking_spots(Integer id_parking_spots) {
+        this.id_parking_spots = id_parking_spots;
+    }
+
+    public String getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(String available) {
+        this.available = available;
+    }
 }

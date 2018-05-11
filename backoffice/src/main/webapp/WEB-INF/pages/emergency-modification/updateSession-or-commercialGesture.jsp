@@ -41,6 +41,7 @@
             <div class="alert alert-warning w-100">${message}</div>
         </div>
     </c:if>
+
         <div class="row"></div>
         <%--@elvariable id="bon" type="java.lang.String"--%>
         <%--@elvariable id="commercialGesture" type="fr.digicar.odt.CommercialGestureOdt</iframe>"--%>
@@ -67,19 +68,45 @@
 </div>
 
     <div class="row" style="margin-left: 200px">Ou</div>
+
 <%--@elvariable id="chosenvehicle" type="fr.digicar.odt.ChosenvehicleOdt</iframe>"--%>
+<%--@elvariable id="allCars" type="java.util.List</iframe>"--%>
+<%--@elvariable id="parkingSpotList" type="java.util.List</iframe>"--%>
+<%--@elvariable id="availabilityList" type="java.util.List</iframe>"--%>
 <%--@elvariable id="bookingId" type="java.lang.String"--%>
     <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/updateSession/${sessionInLateId}" modelAttribute="chosenvehicle">
         <div class="row" style="margin-left: 75px">
 
-            <div class="col-md-3">
-                <form:label path="carId" >Liste des véhicules disponibles à proximité</form:label>
+            <div class="col-md-6">
+                <form:label path="carId" >Liste des véhicules disponibles avec le même confort</form:label>
+
+                    <%--@elvariable id="messageDispo" type="java.lang.String"--%>
+                    <c:if test="${not empty messageDispo}">
+                        <div class="row">
+                            <div class="alert alert-warning w-100">${messageDispo}</div>
+                        </div>
+                    </c:if>
+
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="carId">
 
-                        <%--@elvariable id="listOfCarforChoose" type="java.util.List"--%>
-                        <c:forEach items="${listOfCarforChoose}" var="car" >
-                            <form:option value="${car.id}" > ${car.brandName} ${car.modelName} ${car.comfort} </form:option>
+                        <c:forEach items="${availabilityList}" var="availability" >
+
+                            <c:forEach items="${allCars}" var="car">
+                                <c:if test="${car.id eq availability.id_car}">
+                                    <c:set var="carRegistration" value="${car.registrationNumber}" scope="request"/>
+                                    <c:set var="carbrandName" value="${car.brandName}" scope="request"/>
+                                    <c:set var="carModelName" value="${car.modelName}" scope="request"/>
+                                    <c:set var="comfort" value="${car.comfort}" scope="request"/>
+                                </c:if>
+                            </c:forEach>
+                            <c:forEach items="${parkingSpotList}" var="parking">
+                                <c:if test="${parking.id eq availability.id_parking_spots}">
+                                    <c:set var="parkingLocation" value="${parking.location}" scope="request"/>
+                                </c:if>
+                            </c:forEach>
+
+                            <form:option value="${availability.id_car}" > ${carRegistration} : ${carbrandName} ${carModelName} de comfort ${comfort} dans la ville ${parkingLocation}</form:option>
                         </c:forEach>
                     </form:select>
                 </div>
@@ -96,6 +123,57 @@
         </div>
 
     </form:form>
+
+<%--@elvariable id="availabilityListWithoutComfort" type="java.util.List</iframe>"--%>
+    <form:form method="POST" action="${pageContext.request.contextPath}/modifurgent/updateSession/${sessionInLateId}" modelAttribute="chosenvehicle">
+            <div class="row" style="margin-left: 75px">
+
+                <div class="col-md-6">
+                    <form:label path="carId" >Liste des véhicules disponibles avec un confort proche</form:label>
+
+                        <%--@elvariable id="messageDispo" type="java.lang.String"--%>
+                        <c:if test="${not empty messageDispo}">
+                            <div class="row">
+                                <div class="alert alert-warning w-100">${messageDispo}</div>
+                            </div>
+                        </c:if>
+
+                    <div class="input-group md-form form-sm form-2 pl-0">
+                        <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border" path="carId">
+
+                            <c:forEach items="${availabilityListWithoutComfort}" var="availability" >
+
+                                <c:forEach items="${allCars}" var="car">
+                                    <c:if test="${car.id eq availability.id_car}">
+                                        <c:set var="carRegistration" value="${car.registrationNumber}" scope="request"/>
+                                        <c:set var="carbrandName" value="${car.brandName}" scope="request"/>
+                                        <c:set var="carModelName" value="${car.modelName}" scope="request"/>
+                                        <c:set var="comfort" value="${car.comfort}" scope="request"/>
+                                    </c:if>
+                                </c:forEach>
+                                <c:forEach items="${parkingSpotList}" var="parking">
+                                    <c:if test="${parking.id eq availability.id_parking_spots}">
+                                        <c:set var="parkingLocation" value="${parking.location}" scope="request"/>
+                                    </c:if>
+                                </c:forEach>
+
+                                <form:option value="${availability.id_car}" > ${carRegistration} : ${carbrandName} ${carModelName} de comfort ${comfort} dans la ville ${parkingLocation}</form:option>
+                            </c:forEach>
+                        </form:select>
+                    </div>
+                </div>
+
+                <div class="col-md-1">
+                    <div class="input-group md-form form-sm form-2 pl-0">
+                        <form:input name="bookingId" path="bookingId" type="hidden" value= "${bookingId}"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-outline-blue btn-rounded btn-sm my-0" title="Mettre à jour la session"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+        </form:form>
 
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/popper.min.js" />"></script>

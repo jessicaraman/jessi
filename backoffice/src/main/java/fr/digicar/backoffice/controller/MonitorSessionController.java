@@ -25,8 +25,16 @@ public class MonitorSessionController {
 
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private ParkingSpotService parkingSpotService;
+
+    @Autowired
+    private CarService carService;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private CommercialGestureService commercialGestureService;
 
@@ -35,6 +43,9 @@ public class MonitorSessionController {
 
     @Autowired
     private CurrentSessionService currentSessionService;
+
+    @Autowired
+    private CarAvailabilityService carAvailabilityService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView AddMonitorCoursePage() throws IOException {
@@ -120,28 +131,40 @@ public class MonitorSessionController {
     @RequestMapping(value = "impactedSession/edditingImpactedSession/{bookingId}/{sessionInLateId}", method = RequestMethod.GET)
     public ModelAndView getViewForEdditingImpactedSession(@PathVariable int bookingId, @PathVariable int sessionInLateId) {
 
-        List<Car> listOfCarforChoose = new ArrayList<>();
+        Booking booking = bookingService.getBooking(bookingId);
+        int oldComfort =0;
+        int idCar =0;
+        idCar = booking.getId_car();
+        oldComfort =carService.getCarById(idCar).getComfort();
 
-        //Exemple de car à afficher
-        Car car = new Car();
-        car.setId(490);
-        car.setComfort(5);
-        car.setTransmission(13);
-        car.setFuelType(1);
-        car.setKilometers(5);
-        car.setBrandName("MAZDA");
-        car.setModelName("MAZDA3");
-        car.setDoorNumber(5);
-        car.setSeatNumber(5);
-        car.setRegistrationNumber("TZ-314-BA");
-        car.setReleaseDate("2018-01-22");
-        car.setType(4);
+        List<Car> allCars = carService.getAllCar();
+        List<ParkingSpot> parkingSpotList = parkingSpotService.getParkingSpots();
+        List<CarAvailability> availabilityList = new ArrayList<>();
+        List<CarAvailability> availabilityListWithoutComfort = new ArrayList<>();
 
-        listOfCarforChoose.add(car);
+        List<CarAvailability> carAvailabilities = carAvailabilityService.getAllCarAvailabilities();
+
+        ModelAndView modelAndView = new ModelAndView("emergency-modification/updateSession-or-commercialGesture");
+
+        int comfortNeeded=0;
+
+        if (!carAvailabilities.isEmpty())
+            for (CarAvailability carAvailability : carAvailabilities) {
+
+                comfortNeeded = carService.getCarById(carAvailability.getId_car()).getComfort();
+
+                //on lui propose un véhicule avec le même comfort à minima
+                if (comfortNeeded == oldComfort) {
+                    availabilityList.add(carAvailability);
+                    modelAndView.addObject("messageDispo", "");
+                } else
+                    availabilityListWithoutComfort.add(carAvailability);
+            }
+        else
+            modelAndView.addObject("messageDispo", "Aucun véhicule disponible");
 
         List<CommercialGesture> commercialGestureList =commercialGestureService.getFirstCommercialGestureFree();
 
-        ModelAndView modelAndView = new ModelAndView("emergency-modification/updateSession-or-commercialGesture");
         if(commercialGestureList.isEmpty()){
             modelAndView.addObject("bonreduction", "");
 
@@ -156,13 +179,15 @@ public class MonitorSessionController {
 
         modelAndView.addObject("bookingId", bookingId);
         modelAndView.addObject("sessionInLateId", sessionInLateId);
-        modelAndView.addObject("listOfCarforChoose", listOfCarforChoose);
+
+        modelAndView.addObject("allCars", allCars);
+        modelAndView.addObject("parkingSpotList", parkingSpotList);
+        modelAndView.addObject("availabilityList", availabilityList);
+        modelAndView.addObject("availabilityListWithoutComfort", availabilityListWithoutComfort);
+
+
         modelAndView.addObject("chosenvehicle", new ChosenvehicleOdt());
         modelAndView.addObject("commercialGesture", new CommercialGestureOdt());
-
-        //TODO Algo de recherche de vehicule disponible selon pour client 2
-        //Ajouter le nom du parking et l'adresse dans le tableau si possible
-        //TODO liste de véhicule à proposer avec critère (le parking le plus proche) et afficher <marque modèle, comfort, emplacement de chaque véhicule>, et tenir compte de l'heure de départ souhaité et le confort proche du véhicule ancien
 
         return modelAndView;
     }
