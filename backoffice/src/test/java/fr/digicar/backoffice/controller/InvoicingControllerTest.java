@@ -31,6 +31,9 @@ public class InvoicingControllerTest {
     @Mock
     private SessionService sessionService;
 
+    @Mock
+    private TokenService tokenService;
+
     @InjectMocks
     private InvoicingController invoicingController;
 
@@ -43,6 +46,7 @@ public class InvoicingControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(invoiceService).build();
         mockMvc = MockMvcBuilders.standaloneSetup(carService).build();
         mockMvc = MockMvcBuilders.standaloneSetup(sessionService).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(tokenService).build();
     }
 
     @Test
