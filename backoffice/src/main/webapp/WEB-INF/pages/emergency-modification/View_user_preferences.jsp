@@ -48,9 +48,9 @@
             <table class="table table-hover">
                 <tr>
 
-                    <th width="80">Identifiant utilisateur</th>
-                    <th width="100">Prénom</th>
-                    <th width="100">Total reduction</th>
+                    <th width="150">Identifiant utilisateur</th>
+                    <th width="150">Prénom Nom</th>
+                    <th width="500">Total gestes commerciales</th>
                 </tr>
                     <%--@elvariable id="user" type="java.util.List"--%>
                 <c:forEach items="${users}" var="user">
