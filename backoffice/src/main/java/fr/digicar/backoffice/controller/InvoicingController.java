@@ -208,8 +208,8 @@ public class InvoicingController {
             Token usersToken =tokenService.getTokenByUserId(currentUser.getId());
             usersToken.increment(calculToken(total_final,total_penalities));
             usersToken.resteToken(prochainToken(usersToken.getTillNext(),calculToken(total_final,total_penalities),total_final,total_penalities));
-            //if the user has earned a total of 250 tokens(2500 euros of prestations) he can switch to a gold profile
-
+            //if the user has earned a total of 500 tokens(5000 euros of prestations) he can switch to a gold profile
+            if(usersToken.getTotalEarned()>=500){usersToken.setGold(1);}
             tokenService.saveToken(usersToken);
             String solde_final="Solde actuel = "+usersToken.getSolde();
             String nextToken="~ Plus que "+usersToken.getTillNext()+" € pour obtenir votre prochain token";
