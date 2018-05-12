@@ -24,5 +24,18 @@ public class Token {
     private boolean gold;
 
     @Column(name = "tillNext")
-    private int tillNext;
+    private float tillNext;
+    @Column(name = "totalEarned")
+    private int totalEarned;
+
+    public void increment(int amount){
+        setSolde(solde+amount);
+        setTotalEarned(totalEarned+amount);
+    }
+    public void decrecrement(int amount){
+        setSolde(solde-amount);
+    }
+    public void resteToken (float amount){
+        setTillNext(tillNext+amount);
+    }
 }
