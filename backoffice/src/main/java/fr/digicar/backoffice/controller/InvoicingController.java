@@ -62,7 +62,7 @@ public class InvoicingController {
         ModelAndView modelAndView = new ModelAndView("usersinvoices");
         modelAndView.addObject("subscriptions", t);
         modelAndView.addObject("users", users);
-        modelAndView.addObject("tarifs", pricings);
+        modelAndView.addObject("pricings", pricings);
         modelAndView.addObject("invoices", invoices);
         modelAndView.addObject("desktop", desktop);
 
