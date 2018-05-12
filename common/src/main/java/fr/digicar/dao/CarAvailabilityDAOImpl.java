@@ -52,5 +52,24 @@ public class CarAvailabilityDAOImpl implements CarAvailabilityDAO{
         return getCurrentSession().createQuery("FROM CarAvailability WHERE available = 'yes'").list();
     }
 
+    @Override
+    public void updateCarAvailabilityId(int idCar, String state) {
+
+        try
+        {
+            String sqlQuery = "UPDATE CarAvailability SET available ='"+state+"'  WHERE id_car='"+idCar+"'";
+
+            getCurrentSession().createSQLQuery(sqlQuery).executeUpdate();
+
+            getCurrentSession().beginTransaction().commit();
+            //voir si c'est bien modifié dans booking
+
+        }
+        catch(Exception e){
+            //Error during hibernate query
+        }
+
+    }
+
 
 }

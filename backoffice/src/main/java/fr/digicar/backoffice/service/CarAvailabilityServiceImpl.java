@@ -3,7 +3,6 @@ package fr.digicar.backoffice.service;
 import fr.digicar.dao.*;
 import fr.digicar.model.Car;
 import fr.digicar.model.CarAvailability;
-import fr.digicar.model.ParkingSpot;
 import fr.digicar.model.ReservationPrices;
 import fr.digicar.odt.FilterBookingOdt;
 import fr.digicar.odt.ReservationOdt;
@@ -37,8 +36,6 @@ public class CarAvailabilityServiceImpl implements CarAvailabilityService{
     @Autowired
     private ParkingService parkingService;
 
-    @Autowired
-    private CarTypeDAO carTypeDAO;
 
     @Autowired
     private CarDAO carDAO;
@@ -97,7 +94,6 @@ public class CarAvailabilityServiceImpl implements CarAvailabilityService{
 
         }
 
-
         List<CarAvailability> listOfCarAvailable = carAvailabilityDAO.getAllCarAvailabilities();
         List<CarAvailability> carsAvailable = new ArrayList<>();
         List<ReservationOdt> potentialBooking = new ArrayList<>();
@@ -108,24 +104,37 @@ public class CarAvailabilityServiceImpl implements CarAvailabilityService{
             if (carDAO.getCarById(carAvailable.getId_car()).getType() != idCarType
                     || !(parkingSpotDAO.getParkingSpot(carAvailable.getId_parking_spots()).getLocation().equals(arrivedCity))) {
 
-                Car car = carService.getCarById(carAvailable.getId_car());
-                ParkingSpot parkingSpot = parkingSpotService.getParkingSpot(carAvailable.getId_parking_spots());
-                String mark = car.getBrandName();
-                log.info("mark: " + mark);
-                String model = car.getModelName();
-                log.info("model: " + model);
-                int doorsNumber = car.getDoorNumber();
-                log.info("doorsNumber: " + doorsNumber);
-                String parkingAddress = (parkingService.getParkingById(Integer.parseInt(parkingSpot.getNbParking()))).getRoad_name();
-                log.info("parkingAddress: " + parkingAddress);
-                ReservationPrices  reservationPrices = reservationPricesService.getReservationPriceByCriterias(car.getType(), car.getFuelType());
-                Double price = reservationPrices.getPricing_minute_standard() * durationInMinute ;
+                ReservationOdt  reservationOdt = new ReservationOdt();
 
-                potentialBooking.add(new ReservationOdt(mark, model, doorsNumber, parkingAddress, price));
+                Car car = carService.getCarById(carAvailable.getId_car());
+
+                reservationOdt.setIdCar(car.getId());
+                reservationOdt.setRegistrationNumber(car.getRegistrationNumber());
+                reservationOdt.setMark(car.getBrandName());
+                reservationOdt.setModel(car.getModelName());
+                reservationOdt.setNbDoors(car.getDoorNumber());
+
+                reservationOdt.setStartTime(startTime);
+                reservationOdt.setEndTime(endTime);
+
+                reservationOdt.setIdParkingSpot(carAvailable.getId_parking_spots());
+                reservationOdt.setAddressParking(parkingService.getParkingById(reservationOdt.getIdParkingSpot()).getRoad_name());
+                reservationOdt.setCity(parkingSpotService.getLocationById(reservationOdt.getIdParkingSpot()).toUpperCase());
+
+                ReservationPrices  reservationPrices = reservationPricesService.getReservationPriceByCriterias(car.getType(), car.getFuelType());
+                reservationOdt.setPrice(reservationPrices.getPricing_minute_standard() * durationInMinute);
+                reservationOdt.setIdPrice(reservationPrices.getId());
+
+                potentialBooking.add(reservationOdt);
 
             }
         }
         return  potentialBooking;
+    }
+
+    @Override
+    public void updateCarAvailabilityId(int idCar, String state) {
+        carAvailabilityDAO.updateCarAvailabilityId(idCar, state);
     }
 
 }

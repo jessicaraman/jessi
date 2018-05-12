@@ -34,8 +34,8 @@
                 <%--<form:label path="arrivedCity">Ville</form:label>--%>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border"
-                                 path="arrivedCity">
-                        <form:option value="" disabled="true" selected="true">Ville d'arrivée</form:option>
+                                 path="startCity">
+                        <form:option value="" disabled="true" selected="true">Ville de départ</form:option>
                         <%--@elvariable id="setOfTown" type="java.util.Set<String>"--%>
                         <c:forEach items="${setOfTown}" var="town">
                             <form:option value="${town}">${town}</form:option>
@@ -48,8 +48,8 @@
                     <%--<form:label path="arrivedCity">Ville</form:label>--%>
                 <div class="input-group md-form form-sm form-2 pl-0">
                     <form:select cssClass="form-control rounded validate mdb-select  my-0 py-1 grey-border"
-                                 path="startCity">
-                        <form:option value="" disabled="true" selected="true">Ville de départ</form:option>
+                                 path="arrivedCity">
+                        <form:option value="" disabled="true" selected="true">Ville d'arrivée</form:option>
                         <%--@elvariable id="setOfTown" type="java.util.Set<String>"--%>
                         <c:forEach items="${setOfTown}" var="town">
                             <form:option value="${town}">${town}</form:option>
@@ -89,11 +89,37 @@
 
 </div>
 
-<%--@elvariable id="message" type="java.lang.String"--%>
-<c:if test="${not empty message}">
-    <div class="row">
-        <div class="alert alert-success w-100">${message}</div>
-    </div>
-</c:if>
+<c:choose>
+    <%--@elvariable id="message" type="java.lang.String"--%>
+    <c:when test="${not empty message}">
+        <div class="row">
+            <div class="alert alert-success w-100">${message}</div>
+        </div>
+        <br />
+    </c:when>
+    <%--@elvariable id="submitMessage" type="java.lang.String"--%>
+    <c:when test="${not empty submitMessage}">
+        <div class="row">
+            <div class="alert alert-success w-100">${submitMessage}</div>
+                <%--@elvariable id="reservationFilter" type="fr.digicar.odt.ReservationOdt"--%>
+            <div class="alert alert-success w-100">
+                <ul>
+                    <li>Immatriculation: ${reservationFilter.registrationNumber}</li>
+                    <li>Marque: ${reservationFilter.mark}</li>
+                    <li>Modèle: ${reservationFilter.model}</li>
+                    <li>Adresse de prise en charge: ${reservationFilter.addressParking}, ${reservationFilter.city}</li>
+                    <li>Numéro de place de parking: ${reservationFilter.nbSpot}</li>
+                    <li>Prix: ${reservationFilter.price}</li>
+                    <li>Rappel horaires:
+                        <ul>
+                            <li>date de début: ${reservationFilter.startTime}</li>
+                            <li>date de fin: ${reservationFilter.endTime}</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </c:when>
+</c:choose>
 
 

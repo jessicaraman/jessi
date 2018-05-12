@@ -2,9 +2,7 @@ package fr.digicar.backoffice.controller;
 
 
 import fr.digicar.backoffice.service.*;
-import fr.digicar.model.Car;
-import fr.digicar.model.CarAvailability;
-import fr.digicar.model.ParkingSpot;
+import fr.digicar.model.*;
 import fr.digicar.odt.FilterBookingOdt;
 import fr.digicar.odt.ReservationOdt;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +33,13 @@ public class BookingController {
     private ParkingSpotService parkingSpotService;
 
     @Autowired
-    private ParkingService parkingService;
+    private ReservationService reservationService;
+
+    @Autowired
+    private SpotAvailableService spotAvailableService;
+
+
+
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView getViewFoCarResevation() {
@@ -55,12 +59,11 @@ public class BookingController {
         modelAndView.addObject("setOfTown", setOfTown);
         modelAndView.addObject("listOfCarType", listOfCarType);
         modelAndView.addObject("filters", new FilterBookingOdt());
-        modelAndView.addObject("cars", new ArrayList<>());
+        modelAndView.addObject("reservations", new ArrayList<>());
 
         return modelAndView;
     }
 
-    //allcaravailabilities
     @RequestMapping(value = "/carAvailable", method = RequestMethod.POST)
     public ModelAndView findCarAvailabilityByCriteria(@ModelAttribute("filters") final FilterBookingOdt filters) {
 
@@ -85,15 +88,66 @@ public class BookingController {
         if (potentialBooking.isEmpty()) {
             message = "Aucun véhicule trouvé pour cette recherche";
             modelAndView.addObject("message", message);
-            modelAndView.addObject("cars", potentialBooking);
+            modelAndView.addObject("reservations", potentialBooking);
 
         } else {
-            modelAndView.addObject("cars", potentialBooking);
+            modelAndView.addObject("reservations", potentialBooking);
         }
 
         modelAndView.addObject("setOfTown", setOfTown);
         modelAndView.addObject("listOfCarType", listOfCarType);
         modelAndView.addObject("filters", new FilterBookingOdt());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/submitBooking", method = RequestMethod.POST)
+    public ModelAndView submitBooking(@ModelAttribute("reservationFilter") final ReservationOdt reservationFilter) {
+
+        Set setOfTown = new TreeSet();
+        List listOfCarType = new ArrayList();
+
+        ParkingSpot parkingSpot = spotAvailableService.getSpotAvailableByIdLocation(reservationFilter.getCity());
+
+        Reservation reservation = new Reservation();
+
+        reservation.setId_car(reservationFilter.getIdCar());
+        reservation.setId_parking_spots(reservationFilter.getIdParkingSpot());
+        reservation.setStart_time(new Date(reservationFilter.getStartTime()));
+        reservation.setEnd_time(new Date(reservationFilter.getEndTime()));
+        reservation.setPlace_back(parkingSpot.getId());
+        reservation.setId_user(1);
+        reservation.setId_pricing(reservationFilter.getIdPrice());
+
+        reservationService.addReservation(reservation);
+
+        /*  lock car availability   */
+        carAvailabilityService.updateCarAvailabilityId(reservation.getId_car(), "no");
+
+        String submitMessage = null;
+
+        ModelAndView modelAndView = new ModelAndView("reservation");
+
+        try {
+
+            setOfTown = parkingSpotService.getListOfLocation();
+            listOfCarType = carTypeService.getAllCarType();
+            modelAndView.addObject("reservationFilter", reservationFilter);
+            submitMessage = "Réservation validée";
+
+        } catch (Exception e) {
+            log.error("Erreur when submitting reservation: "+e);
+        }
+
+        modelAndView.addObject("setOfTown", setOfTown);
+        modelAndView.addObject("listOfCarType", listOfCarType);
+        modelAndView.addObject("filters", new FilterBookingOdt());
+        modelAndView.addObject("reservations", new ArrayList<>());
+        modelAndView.addObject("reservationFilter", new ReservationOdt());
+        modelAndView.addObject("message", submitMessage);
+
+
+
 
         return modelAndView;
     }

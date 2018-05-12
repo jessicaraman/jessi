@@ -12,14 +12,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReservationOdt {
 
+    int idCar;
+
+    String registrationNumber;
+
     String mark;
 
     String model;
 
     int nbDoors;
 
+    String placeBack;
+
+    int idPlaceBack;
+
     String addressParking;
+
+    String city;
 
     Double price;
 
+    int idPrice;
+
+    String startTime;
+
+    String endTime;
+
+    int idParkingSpot;
+
+    int nbSpot;
 }

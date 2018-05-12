@@ -13,8 +13,7 @@ public interface CarAvailabilityService {
 
     List<ReservationOdt> getCarAvailabilityBy(final FilterBookingOdt filters);
 
-    //Utiliser pour le 2ième algo
-    // List<CarAvailability> getCarAvailabilityBy(String starDate, String endDate, String location, int idCarType);
+    void updateCarAvailabilityId(int idCar, String state);
 
     List<CarAvailability> getAllCarAvailabilities();
 }
