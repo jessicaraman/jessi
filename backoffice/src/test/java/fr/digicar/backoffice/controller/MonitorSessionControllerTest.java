@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -51,6 +51,20 @@ public class MonitorSessionControllerTest {
     @Test
     public void addMonitorCoursePageReturnsCorrectModelAndView() throws Exception {
         mockMvc.perform(get("/modifurgent"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("emergency-modification/monitoring-course-form"))
+                .andExpect(forwardedUrl("/WEB-INF/pages/emergency-modification/monitoring-course-form.jsp"))
+                .andExpect(model().attribute("ligneRetard", new CalculatedDelay()));
+    }
+
+    @Test
+    public void edditingClotureLigneRetard() throws Exception {
+        CalculatedDelay calculatedDelay = new CalculatedDelay();
+        calculatedDelay.setId(1);
+
+        when(calculatedDelayService.getCalculatedDelayById(anyInt())).thenReturn(calculatedDelay);
+
+        mockMvc.perform(get("/modifurgent/cloturer/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("emergency-modification/monitoring-course-form"))
                 .andExpect(forwardedUrl("/WEB-INF/pages/emergency-modification/monitoring-course-form.jsp"))
