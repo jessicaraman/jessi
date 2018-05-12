@@ -8,7 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -31,10 +31,10 @@ public class Reservation {
     private Integer id_parking_spots;
 
     @Column(name = "start_time")
-    private Date start_time;
+    private Timestamp start_time;
 
     @Column(name = "end_time")
-    private Date end_time;
+    private Timestamp end_time;
 
     @Column(name = "place_back")
     private Integer place_back;

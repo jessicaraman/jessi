@@ -18,18 +18,18 @@
                     <th width="120">Adresse du Parking</th>
                     <th width="120">Prix</th>
                 </tr>
-                    <%--@elvariable id="reservation" type="fr.digicar.odt.ReservationOdt"--%>
-                <c:forEach items="${reservations}" var="reservation">
+                    <%--@elvariable id="reservationOdt" type="fr.digicar.odt.ReservationOdt"--%>
+                <c:forEach items="${reservations}" var="reservationOdt">
                     <tr>
-                        <td>${reservation.registrationNumber}</td>
-                        <td>${reservation.mark}</td>
-                        <td>${reservation.model}</td>
-                        <td>${reservation.nbDoors}</td>
-                        <td>${reservation.addressParking}</td>
-                        <td>${reservation.price} €</td>
+                        <td>${reservationOdt.registrationNumber}</td>
+                        <td>${reservationOdt.mark}</td>
+                        <td>${reservationOdt.model}</td>
+                        <td>${reservationOdt.nbDoors}</td>
+                        <td>${reservationOdt.addressParking}</td>
+                        <td>${reservationOdt.price} €</td>
                         <td>
-                            <%--@elvariable id="reservationFilter" type="fr.digicar.odt.ReservationOdt"--%>
-                            <form:form method="POST" modelAttribute="reservationFilter" action="/reservation/submitBooking">
+                            <%--@elvariable id="reservationOdt" type="fr.digicar.odt.ReservationOdt"--%>
+                            <form:form method="GET" modelAttribute="reservationOdt" action="/reservation/submitBooking/${reservationOdt}">
                                 <button type="submit" class="btn btn-primary">
                                     Réserver
                                 </button>
