@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 @Slf4j
@@ -113,8 +114,8 @@ public class BookingController {
 
         reservation.setId_car(reservationFilter.getIdCar());
         reservation.setId_parking_spots(reservationFilter.getIdParkingSpot());
-        reservation.setStart_time(new Date(reservationFilter.getStartTime()));
-        reservation.setEnd_time(new Date(reservationFilter.getEndTime()));
+        reservation.setStart_time((Timestamp) new Date(reservationFilter.getStartTime()));
+        reservation.setEnd_time((Timestamp)new Date(reservationFilter.getEndTime()));
         reservation.setPlace_back(parkingSpot.getId());
         reservation.setId_user(1);
         reservation.setId_pricing(reservationFilter.getIdPrice());
