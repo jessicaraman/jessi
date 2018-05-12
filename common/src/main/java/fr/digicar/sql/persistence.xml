@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/digicar</property>
+        <property name="connection.url">jdbc:mysql://fw-i2-digicar:8083/digicar</property>
         <property name="connection.username">dev</property>
         <property name="connection.password">digicar</property>
         <property name="show_sql">true</property>
@@ -19,5 +19,6 @@
         <mapping class="fr.digicar.model.User"/>
         <mapping class="fr.digicar.model.Subscription"/>
         <mapping class="fr.digicar.model.Invoice"/>
+        <mapping class="fr.digicar.model.Token"/>
     </session-factory>
 </hibernate-configuration>

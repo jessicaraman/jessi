@@ -27,4 +27,28 @@ public class Delay {
     @Column(name = "session_end_date")
     private Date date;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getId() {
+
+        return id;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public Date getDate() {
+        return date;
+    }
 }

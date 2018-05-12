@@ -66,4 +66,100 @@ public class Car {
         this.fuelType = fuelType;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public void setTransmission(Integer transmission) {
+        this.transmission = transmission;
+    }
+
+    public void setSeatNumber(Integer seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public void setDoorNumber(Integer doorNumber) {
+        this.doorNumber = doorNumber;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public void setKilometers(Integer kilometers) {
+        this.kilometers = kilometers;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setComfort(Integer comfort) {
+        this.comfort = comfort;
+    }
+
+    public void setFuelType(Integer fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public Integer getId() {
+
+        return id;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public Integer getTransmission() {
+        return transmission;
+    }
+
+    public Integer getSeatNumber() {
+        return seatNumber;
+    }
+
+    public Integer getDoorNumber() {
+        return doorNumber;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public Integer getKilometers() {
+        return kilometers;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public Integer getComfort() {
+        return comfort;
+    }
+
+    public Integer getFuelType() {
+        return fuelType;
+    }
 }

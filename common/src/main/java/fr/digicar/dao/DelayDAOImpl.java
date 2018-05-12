@@ -51,4 +51,8 @@ public class DelayDAOImpl implements DelayDAO {
         return ((Long) query.uniqueResult()).intValue();
     }
 
+    @Override
+    public Delay getDelay(int delay_id) { return (Delay) getCurrentSession().get(Delay.class, delay_id);
+    }
+
 }

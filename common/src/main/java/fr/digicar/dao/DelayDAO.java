@@ -15,4 +15,6 @@ public interface DelayDAO {
 
     int countByDate(Date dateStart, Date dateEnd);
 
+    Delay getDelay(int delay_id);
+
 }

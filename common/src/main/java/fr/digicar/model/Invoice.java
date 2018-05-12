@@ -38,4 +38,44 @@ public class Invoice {
         this.url = url;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setUser(Integer user) {
+        this.user = user;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Integer getId() {
+
+        return id;
+    }
+
+    public Integer getUser() {
+        return user;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }

@@ -70,4 +70,52 @@ public class Session {
         this.delay = delay;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDepartureDate(Timestamp departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public void setArrivalDate(Timestamp arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public void setCar(Integer car) {
+        this.car = car;
+    }
+
+    public void setUser(Integer user) {
+        this.user = user;
+    }
+
+    public void setDelay(Integer delay) {
+        this.delay = delay;
+    }
+
+    public void setKms(Integer kms) {
+        this.kms = kms;
+    }
+
+    public Timestamp getDepartureDate() {
+
+        return departureDate;
+    }
+
+    public Timestamp getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public Integer getCar() {
+        return car;
+    }
+
+    public Integer getUser() {
+        return user;
+    }
+
+    public Integer getDelay() {
+        return delay;
+    }
 }

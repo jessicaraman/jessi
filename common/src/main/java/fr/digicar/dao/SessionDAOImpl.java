@@ -62,11 +62,12 @@ public class SessionDAOImpl implements SessionDAO {
         c.setTime(today);
         c.add(Calendar.MONTH, -1);
         Date oneMonthAgo = c.getTime();
-        String hql = "FROM Session WHERE user = :userId and departure_date BETWEEN :dateStart AND :dateEnd";
+        System.out.println("ajourdhui ="+convertTosqlDate(today)+" one month ago"+convertTosqlDate(oneMonthAgo));
+        String hql = "FROM Session WHERE id_user = :userId and departure_date BETWEEN :dateStart AND :dateEnd";
         return getCurrentSession().createQuery(hql)
                 .setParameter("userId", userId)
-                .setDate("dateStart", oneMonthAgo)
-                .setDate("dateEnd", today)
+                .setParameter("dateStart", convertTosqlDate(oneMonthAgo))
+                .setParameter("dateEnd", convertTosqlDate(today))
                 .list();
     }
 
@@ -116,6 +117,11 @@ public class SessionDAOImpl implements SessionDAO {
         Criterion id = Restrictions.gt("id", s.getCar());
         cr.add(id);
         return (Car) cr.list().get(0);
+    }
+    public String convertTosqlDate(Date d) {
+       return new java.sql.Date(d.getTime()).toString();
+
+
     }
 
 }
