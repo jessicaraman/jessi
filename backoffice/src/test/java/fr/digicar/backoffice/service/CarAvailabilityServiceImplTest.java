@@ -57,5 +57,41 @@ public class CarAvailabilityServiceImplTest {
         //
         Assert.assertEquals(carAvailabilities, carAvailabilityListTest);
     }
+
+    /**
+     * Unit test for getCarAvailabilityByCriteria method
+     * from CarAvailabilityServiceImpl class
+     */
+    @Test
+    public void getCarAvailabilityByCriteriaShouldReturnCarAvailabilityByCriteria() {
+        //
+        //GIVEN
+        //
+        List<CarAvailability> carAvailabilities = new ArrayList<>();
+
+        CarAvailability exceptedCarAvailability1 = new CarAvailability(4, 4, 2, "no");
+        CarAvailability exceptedCarAvailability2 = new CarAvailability(5, 5, 4, "yes");
+
+        carAvailabilities.add(new CarAvailability(1, 3, 7, "yes"));
+        carAvailabilities.add(new CarAvailability(2, 8, 1, "yes"));
+        carAvailabilities.add(new CarAvailability(3, 2, 3, "yes"));
+        carAvailabilities.add(exceptedCarAvailability1);
+        carAvailabilities.add(exceptedCarAvailability2);
+
+        Mockito.when(carAvailabilityDAO.getCarAvailabilityByCriteria("no")).thenReturn(exceptedCarAvailability1);
+        Mockito.when(carAvailabilityDAO.getCarAvailabilityByCriteria("yes")).thenReturn(exceptedCarAvailability2);
+        //
+        //WHEN
+        //
+        CarAvailability carAvailabilityTest1 = carAvailabilityService.getCarAvailabilityByCriteria("yes");
+        CarAvailability carAvailabilityTest2 = carAvailabilityService.getCarAvailabilityByCriteria("no");
+        //
+        //THEN
+        //
+        Assert.assertNotSame(exceptedCarAvailability1, carAvailabilityTest1);
+        Assert.assertNotSame(exceptedCarAvailability2, carAvailabilityTest2);
+    }
+
+
 }
 

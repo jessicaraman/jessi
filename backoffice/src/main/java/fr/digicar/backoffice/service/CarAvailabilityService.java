@@ -1,6 +1,5 @@
 package fr.digicar.backoffice.service;
 
-import fr.digicar.model.Car;
 import fr.digicar.model.CarAvailability;
 import fr.digicar.odt.FilterBookingOdt;
 import fr.digicar.odt.ReservationOdt;
