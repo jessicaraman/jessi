@@ -26,4 +26,9 @@ public class TokenDAOImpl implements TokenDAO {
         String hql ="From Token where id_user in("+id+")";
         return (Token) getCurrentSession().createQuery(hql).list().get(0);
     }
+
+    @Override
+    public void saveToken(Token t) {
+        sessionFactory.getCurrentSession().update(t);
+    }
 }

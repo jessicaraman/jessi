@@ -5,6 +5,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import fr.digicar.backoffice.service.*;
 import fr.digicar.model.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -70,12 +73,6 @@ public class InvoicingController {
         return new java.sql.Date(uDate.getTime());
     }
 
-    @RequestMapping(value = "/test")
-    private ModelAndView test() {
-        tokenService.getTokenByUserId(20);
-        return new ModelAndView("usersinvoices");
-    }
-
     @RequestMapping(value = "/algo")
     private ModelAndView testPDF() throws DocumentException, IOException {
         ModelAndView modelAndView = new ModelAndView("loader");
@@ -119,12 +116,13 @@ public class InvoicingController {
             float total_penalities=0;
             Chapter chapter = new Chapter(new Paragraph(), 1);
             chapter.setNumberDepth(0);
-            String clin = "Numéro Client :" + currentUser.getId();
+            String clin = "Numéro Client = " + currentUser.getId();
             String name = currentUser.getLastName() + " " + currentUser.getFirstName();
             String adress = currentUser.getAddressLine1() + " " + currentUser.getAddressLine2();
             String emailNNumber = currentUser.getPhoneNumber() + " - " + currentUser.getEmail();
             String zipNcity = currentUser.getCity() + " " + currentUser.getZipCode();
             String separator = "______________________________________________________________________________";
+            String separator3 = "      ";
             String separator2= "************************************************************************************************************";
             //informations sur le Pricing
             String libelle_t = "Pricing " + tarif.getLabel() + " (depuis le " + formatDate(inv.getStartDate()) + ")";
@@ -135,20 +133,28 @@ public class InvoicingController {
                     + tarif.getMonthlyFees()
                     + " €/mois  ";
             Font font1 = new Font(Font.FontFamily.HELVETICA  , 25, Font.BOLD);
-            Font bfBold12 = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, new BaseColor(0, 0, 0));
+            //Font red = new Font(Font.FontFamily.HELVETICA  , 30, Font.BOLD,BaseColor.RED);
+            Font bfBold12 = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.BOLD, new BaseColor(0, 0, 0));
             Paragraph titre=new Paragraph(title,font1);
+            Paragraph sep=new Paragraph(separator3);
+            titre.setAlignment(Element.ALIGN_CENTER);
+            Paragraph tar=new Paragraph("Votre tarif",bfBold12);
+          tar.setAlignment(Element.ALIGN_CENTER);
             titre.setAlignment(Element.ALIGN_CENTER);
 
             chapter.add(titre);
+            chapter.add(new Paragraph(separator));
             chapter.add(new Paragraph(clin));
             chapter.add(new Paragraph(name));
             chapter.add(new Paragraph(adress));
             chapter.add(new Paragraph(zipNcity));
             chapter.add(new Paragraph(separator));
+            chapter.add(tar);
+            chapter.add(new Paragraph(separator));
             chapter.add(new Paragraph(libelle_t));
             chapter.add(new Paragraph(prices));
             chapter.add(new Paragraph(separator2));
-            Paragraph prestas=new Paragraph("Prestations consommées");
+            Paragraph prestas=new Paragraph("Prestations consommées",bfBold12);
             prestas.setAlignment(Element.ALIGN_CENTER);
             chapter.add(prestas);
             chapter.add(new Paragraph(separator2));
@@ -175,15 +181,15 @@ public class InvoicingController {
                 int nb_kms=ses.getKms();
                 int nb_h=totalDuree(ses.getDepartureDate(), ses.getArrivalDate());
                 System.out.println("nb heures"+nb_h);
-                total_presta=total_presta+((tarif.getHourlyPrice()*nb_h)+(tarif.getKmPrice()*nb_kms));
+                total_presta=round(total_presta+((tarif.getHourlyPrice()*nb_h)+(tarif.getKmPrice()*nb_kms)),2);
                 String car = c.getBrandName() + " " + c.getModelName();
-                String kms = "Km parcourus : " + ses.getKms();
+                String kms = "Km parcourus = " + ses.getKms();
                 int delay_duration=delayService.getDelay(ses.getDelay()).getDuration();
-                String delay="Retard :"+delay_duration+" minutes";
-                String pennality=" Pénalité : "+pennality(delay_duration);
-                total_penalities=total_penalities+pennality(delay_duration);
+                String delay="Retard = "+delay_duration+" minutes";
+                String pennality=" Pénalité = "+pennality(delay_duration);
+                total_penalities=round(total_penalities+pennality(delay_duration),2);
                 System.out.println(pennality);
-                total_presta= total_presta+pennality(delay_duration);
+                total_presta= round(total_presta+pennality(delay_duration),2);
                 chapter.add(new Paragraph(dateOfsession));
                 chapter.add(new Paragraph(duration));
                 chapter.add(new Paragraph(car));
@@ -193,13 +199,24 @@ public class InvoicingController {
                 String total_string="Total prestation = "+total_presta+" euros dont "+pennality(delay_duration)+" euros de pénalités";
                 chapter.add(new Paragraph(total_string));
                 chapter.add(new Paragraph(separator2));
-                total_final=total_final+total_presta+tarif.getMonthlyFees();
+                total_final=round(total_final+total_presta+tarif.getMonthlyFees(),2);
             }
+            chapter.add(new Paragraph(separator));
             String indication_retard="*Vous êtes facturés à 10 euros pour chaque heure de retard soit 0,17 euros la minute";
             String total_string_final=" Total mensuels (incluant frais mensuels)= "+(total_final-total_penalities)+ "+ Pénalités "+total_penalities+" euros = "+total_final;
             String earned_tokens="Tokens obtenus sur la période = "+calculToken(total_final,total_penalities);
+            Token usersToken =tokenService.getTokenByUserId(currentUser.getId());
+            usersToken.increment(calculToken(total_final,total_penalities));
+            usersToken.resteToken(prochainToken(usersToken.getTillNext(),calculToken(total_final,total_penalities),total_final,total_penalities));
+            //if the user has earned a total of 250 tokens(2500 euros of prestations) he can switch to a gold profile
+
+            tokenService.saveToken(usersToken);
+            String solde_final="Solde actuel = "+usersToken.getSolde();
+            String nextToken="~ Plus que "+usersToken.getTillNext()+" € pour obtenir votre prochain token";
             chapter.add(new Paragraph(total_string_final));
             chapter.add(new Paragraph(earned_tokens));
+            chapter.add(new Paragraph(solde_final));
+            chapter.add(new Paragraph(nextToken));
             String indication_penalites="*Les frais engendrés par les pénalités ne sont pas pris en compte pour l'obtention des Tokens";
             String indication_token="*Un token gagné par tranche de 100 euros de prestations";
             chapter.add(new Paragraph(indication_retard));
@@ -270,7 +287,13 @@ public class InvoicingController {
         }
         return result - 1;
     }
-    private float prochainToken(int earnedTokens, float total, float pennalities){
+    private float prochainToken(float tillNext,int earnedTokens, float total, float pennalities){
+        return round(tillNext+total-pennalities-(100*earnedTokens),2);
 
-    return Float.parseFloat(null);}
+}
+    public static float round(float d, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(Float.toString(d));
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
+    }
 }

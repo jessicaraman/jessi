@@ -22,6 +22,10 @@ public class TokenServiceImpl implements TokenService {
         return tokenDAO.getTokenByUserID(id);
     }
 
+    @Override
+    public void saveToken(Token t) {
+        tokenDAO.saveToken(t);
+    }
 
 
 }

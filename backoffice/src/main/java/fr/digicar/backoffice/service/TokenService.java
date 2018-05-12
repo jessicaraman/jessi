@@ -8,5 +8,6 @@ import java.util.List;
 public interface TokenService {
 
      Token getTokenByUserId(int id);
+     void saveToken(Token t);
 
 }

@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface TokenDAO {
      Token getTokenByUserID (int id);
+     void saveToken(Token t);
 
 }
