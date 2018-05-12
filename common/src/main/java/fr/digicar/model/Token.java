@@ -21,7 +21,7 @@ public class Token {
     private int solde;
 
     @Column(name = "gold")
-    private boolean gold;
+    private int gold;
 
     @Column(name = "tillNext")
     private float tillNext;
