@@ -69,18 +69,21 @@
                     <%--@elvariable id="users" type="java.util.List"--%>
                     <%--@elvariable id="user" type="fr.digicar.model.User"--%>
                 <c:forEach items="${users}" var="user">
-                <c:forEach items="${invoices}" var="inv">
                     <%--@elvariable id="inv" type="fr.digicar.model.Invoice"--%>
+                <c:forEach items="${invoices}" var="inv">
                     <%--@elvariable id="subscriptions" type="java.util.List"--%>
-                    <%--@elvariable id="sub" type="fr.digicar.model.Subscription"--%>
-                    <c:if test="${user.id==inv.user}">
+                <c:forEach items="${subscriptions}" var="sub">
+                    <%--@elvariable id="pricings" type="fr.digicar.model.Pricing"--%>
+                    <c:forEach items="${pricings}" var="pricing">
+
+                    <c:if test="${user.id==inv.user&&sub.user==inv.user&&sub.pricing==pricing.id}">
                         <tr>
                             <td>
                                 <img src="<c:url value="/resources/img/gold.png" />">
                             </td>
                             <td>${user.lastName}</td>
                             <td>${user.firstName}</td>
-                            <td>Zoom</td>
+                            <td>${pricing.label}</td>
                             <td>${user.email}</td>
                             <td>${user.phoneNumber}
                             <td>
@@ -92,7 +95,8 @@
                         </tr>
                     </c:if>
 
-
+                </c:forEach>
+                </c:forEach>
                 </c:forEach>
                 </c:forEach>
             </table>
