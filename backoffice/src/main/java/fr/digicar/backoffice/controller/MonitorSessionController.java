@@ -255,6 +255,8 @@ public class MonitorSessionController {
 
             DisplayUserPreferencesOdt displayUserPreferencesOdt = new DisplayUserPreferencesOdt();
             displayUserPreferencesOdt.setIdUser(aUser.getId());
+            displayUserPreferencesOdt.setFirstName(aUser.getFirstName());
+            displayUserPreferencesOdt.setLastName(aUser.getLastName());
             displayUserPreferencesOdt.setNumberOfDiscount(aUser.getNumberOfCommercialGesture());
 
             userPreferencesOdtList.add(displayUserPreferencesOdt);

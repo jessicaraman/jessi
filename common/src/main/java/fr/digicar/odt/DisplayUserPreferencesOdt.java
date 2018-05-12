@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class DisplayUserPreferencesOdt {
     int idUser;
+    String firstName;
+    String lastName;
     int numberOfDiscount;
 
     public int getIdUser() {
@@ -13,6 +15,22 @@ public class DisplayUserPreferencesOdt {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getNumberOfDiscount() {
