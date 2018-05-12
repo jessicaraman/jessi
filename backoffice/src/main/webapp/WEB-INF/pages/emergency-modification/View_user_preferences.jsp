@@ -49,13 +49,15 @@
                 <tr>
 
                     <th width="80">Identifiant utilisateur</th>
-                    <th width="120">Total reduction</th>
+                    <th width="100">Prénom</th>
+                    <th width="100">Total reduction</th>
                 </tr>
                     <%--@elvariable id="user" type="java.util.List"--%>
                 <c:forEach items="${users}" var="user">
 
                     <tr>
                         <td>${user.idUser}</td>
+                        <td>${user.firstName} ${user.lastName}</td>
                         <td>${user.numberOfDiscount}</td>
                     </tr>
                 </c:forEach>
