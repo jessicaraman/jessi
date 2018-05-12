@@ -47,9 +47,11 @@ public class BookingDAOImpl implements BookingDAO{
 
         try
         {
-            Booking booking = getBooking(bookingId);
-            booking.setDeparture_date(date);
-            getCurrentSession().update(booking);
+            String sqlQuery = "UPDATE booking SET departure_date='"+date+"'" +" WHERE id='"+bookingId+"'";
+
+            getCurrentSession().createSQLQuery(sqlQuery).executeUpdate();
+
+            getCurrentSession().beginTransaction().commit();
 
         }
         catch(Exception e){
@@ -62,11 +64,13 @@ public class BookingDAOImpl implements BookingDAO{
             try
             {
                 Car car =getCar(carId);
-                Booking booking = getBooking(bookingId);
 
-                booking.setCar_registration_id(car.getRegistrationNumber());
-                booking.setId_car(carId);
-                getCurrentSession().update(booking);
+                String sqlQuery = "UPDATE booking SET id_car='"+carId+"', " + "car_registration_id='"+car.getRegistrationNumber()+"'" +" WHERE id='"+bookingId+"'";
+
+                getCurrentSession().createSQLQuery(sqlQuery).executeUpdate();
+
+                getCurrentSession().beginTransaction().commit();
+                //voir si c'est bien ajouté dans booking
 
             }
             catch(Exception e){

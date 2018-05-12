@@ -3,6 +3,7 @@ package fr.digicar.dao;
 import fr.digicar.model.CommercialGesture;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -34,7 +35,7 @@ public class CommercialeGestureDAOImpl implements CommercialeGestureDAO{
         List<CommercialGesture> resultList = new ArrayList<>();
 
         try {
-            resultList = getCurrentSession().createQuery("FROM CommercialGesture WHERE id_user = null").list();
+            resultList = getCurrentSession().createQuery("FROM CommercialGesture WHERE id_user = 0").list();
         } catch (Exception e) {
         }
         return resultList;
@@ -43,31 +44,17 @@ public class CommercialeGestureDAOImpl implements CommercialeGestureDAO{
     @Override
     public void updateCommercialGestureForUser(int id_user, String code){
 
-        String weeks2="";
-        Date today = new Date();
 
         try {
 
-            List<CommercialGesture> resultList;
-            resultList = getCurrentSession().createQuery("FROM CommercialGesture WHERE code = '"+code+"'").list();
+            String sqlQuery = "UPDATE commercial_gesture SET id_user='"+id_user+"'" +" WHERE code='"+code+"'";
 
-            CommercialGesture commercialGesture = new CommercialGesture();
-            commercialGesture.setId(resultList.get(0).getId());
-            commercialGesture.setId_user(id_user);
-            commercialGesture.setCode(resultList.get(0).getCode());
-            commercialGesture.setValeur(resultList.get(0).getValeur());
+            getCurrentSession().createSQLQuery(sqlQuery).executeUpdate();
 
-            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            try {
-                weeks2 = sdfDate.format(today.getTime() + (1000 * 60 * 60 * 24*14));
-
-                commercialGesture.setDate_fin_validite(Timestamp.valueOf(weeks2));
-                getCurrentSession().update(commercialGesture);
-            }catch (Exception e){}
-
-
+            getCurrentSession().beginTransaction().commit();
         } catch (Exception e) {
-            //log.error("Error when updating Car.", e);
+            e.printStackTrace();
+
         }
     }
 

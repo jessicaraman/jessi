@@ -1,4 +1,3 @@
-/*
 package fr.digicar.backoffice.controller;
 
 import fr.digicar.backoffice.service.UserService;
@@ -43,9 +42,9 @@ public class UserControllerTest {
     @Test
     public void showUsers() throws Exception {
         List<User> usersFromService = new ArrayList<>();
-        User user1 = new User(0, "M.", "Test", "Test", "test1@email.com", "password", null, "1st Test Street", null, "00000", "Test City", "0000000001", new Date(631152000000L), null, new Date(), UserStatus.ACTIVE);
-        User user2 = new User(1, "Mme", "Test", "Test", "test2@email.com", "password", null, "2nd Test Street", null, "00000", "Test City", "0000000002", new Date(662688000000L), null, new Date(), UserStatus.INACTIVE);
-        User user3 = new User(2, "Mme", "Test", "Test", "test3@email.com", "password", null, "3rd Test Street", null, "00000", "Test City", "0000000003", new Date(694224000000L), null, new Date(), UserStatus.BANNED);
+        User user1 = new User(0, "M.", "Test", "Test", "test1@email.com", "password", null, "1st Test Street", null, "00000", "Test City", "0000000001", new Date(631152000000L), null, new Date(), UserStatus.ACTIVE, 0);
+        User user2 = new User(1, "Mme", "Test", "Test", "test2@email.com", "password", null, "2nd Test Street", null, "00000", "Test City", "0000000002", new Date(662688000000L), null, new Date(), UserStatus.INACTIVE, 0);
+        User user3 = new User(2, "Mme", "Test", "Test", "test3@email.com", "password", null, "3rd Test Street", null, "00000", "Test City", "0000000003", new Date(694224000000L), null, new Date(), UserStatus.BANNED, 0);
         usersFromService.add(user1);
         usersFromService.add(user2);
         usersFromService.add(user3);
@@ -57,4 +56,4 @@ public class UserControllerTest {
                 .andExpect(forwardedUrl("/WEB-INF/pages/search-users.jsp"))
                 .andExpect(model().attribute("users", usersFromService));
     }
-}*/
+}

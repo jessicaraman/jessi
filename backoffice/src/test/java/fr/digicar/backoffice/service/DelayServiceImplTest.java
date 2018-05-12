@@ -33,7 +33,7 @@ public class DelayServiceImplTest {
     public void getDelayNumberReturnsCorrectValue() {
         when(delayDAO.countByDate(dateStart, dateEnd)).thenReturn(1000);
 
-        assertEquals(1000, delayService.getDelayNumber(dateStart, dateEnd));
+        assertEquals(1000, delayService.getDelayNumber(dateStart, dateEnd, false));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class DelayServiceImplTest {
         when(delayDAO.filterByDate(dateStart, dateEnd)).thenReturn(delays);
 
         int total = 0;
-        for (int delayNumber : delayService.getDelayDistribution(dateStart, dateEnd).getValues()) {
+        for (int delayNumber : delayService.getDelayDistribution(dateStart, dateEnd, false).getValues()) {
             total += delayNumber;
         }
         assertEquals(10, total);
@@ -94,6 +94,43 @@ public class DelayServiceImplTest {
         String[] expected = new String[]{"1-3 min.", "4-6 min.", "7-8 min.", "9-10 min."};
 
         assertArrayEquals(expected, (String[]) method.invoke(delayService, (Object) quartiles));
+    }
+
+    @Test
+    public void getMeanReturnsCorrectValue() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Method method = DelayServiceImpl.class.getDeclaredMethod("getMean", int[].class);
+        method.setAccessible(true);
+
+        int[] values = new int[]{4, 4, 6, 6, 3, 3, 7, 7, 2, 8};
+        assertEquals(5, (double) method.invoke(delayService, (Object) values), 0);
+    }
+
+    @Test
+    public void getVarianceReturnsCorrectValue() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Method method = DelayServiceImpl.class.getDeclaredMethod("getVariance", int[].class);
+        method.setAccessible(true);
+
+        int[] values = new int[]{17, 15, 23, 7, 9, 13};
+        assertEquals(33.2, (double) method.invoke(delayService, (Object) values), 0);
+    }
+
+    @Test
+    public void getStandardDeviationCorrectValue() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Method method = DelayServiceImpl.class.getDeclaredMethod("getStandardDeviation", int[].class);
+        method.setAccessible(true);
+
+        int[] values = new int[]{17, 15, 23, 7, 9, 13};
+        assertEquals(5.76, (double) method.invoke(delayService, (Object) values), 0.002);
+    }
+
+    @Test
+    public void getCleanValuesReturnsConsistentValues() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        Method method = DelayServiceImpl.class.getDeclaredMethod("getCleanValues", int[].class);
+        method.setAccessible(true);
+
+        int[] values = new int[]{1, 2, 3, 2, 1, 3, 4, 5, 4, 20};
+        int[] expected = new int[]{1, 2, 3, 2, 1, 3, 4, 5, 4};
+        assertArrayEquals(expected, (int[]) method.invoke(delayService, (Object) values));
     }
 
 }

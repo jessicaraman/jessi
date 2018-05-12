@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -21,8 +22,13 @@ public class DelayServiceImpl implements DelayService {
     private DelayDAO delayDAO;
 
     @Override
-    public DelayDistribution getDelayDistribution(Date dateStart, Date dateEnd) {
-        int[] values = getDelayValues(delayDAO.filterByDate(dateStart, dateEnd));
+    public DelayDistribution getDelayDistribution(Date dateStart, Date dateEnd, boolean filtered) {
+        int[] values;
+        if (filtered) {
+            values = getCleanValues(getDelayValues(delayDAO.filterByDate(dateStart, dateEnd)));
+        } else {
+            values = getDelayValues(delayDAO.filterByDate(dateStart, dateEnd));
+        }
 
         int[] distribution = new int[4];
 
@@ -38,13 +44,13 @@ public class DelayServiceImpl implements DelayService {
                         if (value >= values[0] && value < firstQuartile) count++;
                         break;
                     case 1:
-                        if (value >= firstQuartile && value < secondQuartile) count++;
+                        if (value >= firstQuartile && value <= secondQuartile) count++;
                         break;
                     case 2:
-                        if (value >= secondQuartile && value < thirdQuartile) count++;
+                        if (value > secondQuartile && value <= thirdQuartile) count++;
                         break;
                     case 3:
-                        if (value >= thirdQuartile && value <= values[values.length - 1]) count++;
+                        if (value > thirdQuartile && value <= values[values.length - 1]) count++;
                         break;
                 }
             }
@@ -54,8 +60,10 @@ public class DelayServiceImpl implements DelayService {
     }
 
     @Override
-    public int getDelayNumber(Date dateStart, Date dateEnd) {
-        Date today = new Date();
+    public int getDelayNumber(Date dateStart, Date dateEnd, boolean filtered) {
+        if (filtered) {
+            return getCleanValues(getDelayValues(delayDAO.filterByDate(dateStart, dateEnd))).length;
+        }
         return delayDAO.countByDate(dateStart, dateEnd);
     }
 
@@ -85,6 +93,42 @@ public class DelayServiceImpl implements DelayService {
         }
         Arrays.sort(values);
         return values;
+    }
+
+    private double getMean(int[] values) {
+        double sum = 0.0;
+        for (double a : values)
+            sum += a;
+        return sum / values.length;
+    }
+
+    private double getVariance(int[] values) {
+        double mean = getMean(values);
+        double temp = 0;
+        for (double a : values)
+            temp += (a - mean) * (a - mean);
+        return temp / (values.length - 1);
+    }
+
+    private double getStandardDeviation(int[] values) {
+        return Math.sqrt(getVariance(values));
+    }
+
+    private int[] getCleanValues(int[] values) {
+        List<Integer> cleanValuesList = new ArrayList<>();
+        double min = getMean(values) - (1.96 * getStandardDeviation(values));
+        double max = getMean(values) + (1.96 * getStandardDeviation(values));
+        for (int value : values) {
+            if (value >= min && value <= max) {
+                cleanValuesList.add(value);
+            }
+        }
+        int[] cleanValues = new int[cleanValuesList.size()];
+        int i = 0;
+        for (Integer value : cleanValuesList) {
+            cleanValues[i++] = value;
+        }
+        return cleanValues;
     }
 
 }
