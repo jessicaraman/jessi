@@ -30,7 +30,7 @@ public class Pricing {
     @Column(name = "frais_mensuels")
     private int monthlyFees;
 
-    @Column(name = "vehicle_category")
+    @Column(name = "vehicule_category")
     private int vehicleCategory;
 
 
