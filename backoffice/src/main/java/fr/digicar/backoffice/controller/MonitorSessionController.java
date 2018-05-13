@@ -271,7 +271,7 @@ public class MonitorSessionController {
     @RequestMapping(value = "/reouvrir/{id}", method = RequestMethod.GET)
     public ModelAndView edditingReouvrirLigneRetard(@PathVariable Integer id) {
 
-        ModelAndView modelAndView = new ModelAndView("monitoring-course-form");
+        ModelAndView modelAndView = new ModelAndView("emergency-modification/monitoring-course-form");
         modelAndView.addObject("ligneRetard", new CalculatedDelay());
         CalculatedDelay calculatedDelay = new CalculatedDelay();
         CurrentSession sessionEnCours = new CurrentSession();
