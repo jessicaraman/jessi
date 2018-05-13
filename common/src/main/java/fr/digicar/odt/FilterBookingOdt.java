@@ -8,13 +8,13 @@ public class FilterBookingOdt {
 
     String carType;
 
-    String wishedDate;
+    String startCity;
 
     String startTime;
 
     String endTime;
 
-    String city;
+    String arrivedCity;
 
     String zipCode;
 

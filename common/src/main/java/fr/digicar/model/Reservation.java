@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -19,6 +16,7 @@ public class Reservation {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "id_user")
@@ -31,10 +29,10 @@ public class Reservation {
     private Integer id_parking_spots;
 
     @Column(name = "start_time")
-    private Date start_time;
+    private Timestamp start_time;
 
     @Column(name = "end_time")
-    private Date end_time;
+    private Timestamp end_time;
 
     @Column(name = "place_back")
     private Integer place_back;

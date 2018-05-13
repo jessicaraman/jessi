@@ -6,31 +6,31 @@
 <div class="container">
     <h3 class="text-center">Liste des véhicules disponibles</h3>
 
-    <%--@elvariable id="cars" type="java.util.List"--%>
-    <c:if test="${!empty cars}">
+    <%--@elvariable id="reservations" type="java.util.List"--%>
+    <c:if test="${!empty reservations}">
         <div class="table">
             <table class="table table-hover">
                 <tr>
+                    <th width="120">Immatriculation</th>
                     <th width="120">Marque</th>
                     <th width="120">Nom du modèle</th>
-                    <th width="120">Type de véhicule</th>
-                    <th width="120">Transmission</th>
                     <th width="120">Nombre de portes</th>
+                    <th width="120">Adresse du Parking</th>
+                    <th width="120">Prix</th>
                 </tr>
-                <%--@elvariable id="car" type="fr.digicar.model.Car"--%>
-                <c:forEach items="${cars}" var="car">
+                    <%--@elvariable id="reservationOdt" type="fr.digicar.odt.ReservationOdt"--%>
+                <c:forEach items="${reservations}" var="reservationOdt" varStatus="status">
                     <tr>
-                        <td>${car.brandName}</td>
-                        <td>${car.modelName}</td>
-                        <td>${car.type}</td>
-                        <td>${car.transmission}</td>
-                        <td>${car.doorNumber}</td>
+                        <td>${reservationOdt.registrationNumber}</td>
+                        <td>${reservationOdt.mark}</td>
+                        <td>${reservationOdt.model}</td>
+                        <td>${reservationOdt.nbDoors}</td>
+                        <td>${reservationOdt.addressParking}</td>
+                        <td>${reservationOdt.price} €</td>
                         <td>
-                            <button class="btn btn-primary m-0" title="Réserver">
-                                <a href="<c:url value="" />">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                </a>
-                            </button>
+                            <a type="submit" class="btn btn-primary" href="<c:url value="/reservation/submitBooking/${status.index}"/>">
+                                Réserver
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -38,3 +38,35 @@
         </div>
     </c:if>
 </div>
+
+<%--@elvariable id="message" type="java.lang.String"--%>
+<%--<c:if test="${not empty message}">--%>
+    <%--<div class="row">--%>
+        <%--<div class="alert alert-success w-100">${message}</div>--%>
+            <%--&lt;%&ndash;@elvariable id="reservationFilter" type="fr.digicar.odt.ReservationOdt"&ndash;%&gt;--%>
+        <%--<div class="alert alert-success w-100">--%>
+            <%--<ul>--%>
+                <%--<li>Immatriculation: ${reservationFilter.registrationNumber}</li>--%>
+                <%--<li>Marque: ${reservationFilter.mark}</li>--%>
+                <%--<li>Modèle: ${reservationFilter.model}</li>--%>
+                <%--<li>Adresse de prise en charge: ${reservationFilter.addressParking}, ${reservationFilter.city}</li>--%>
+                <%--<li>Numéro de place de parking: ${reservationFilter.nbSpot}</li>--%>
+                <%--<li>Prix: ${reservationFilter.price}</li>--%>
+                <%--<li>Rappel horaires:--%>
+                    <%--<ul>--%>
+                        <%--<li>date de début: ${reservationFilter.startTime}</li>--%>
+                        <%--<li>date de fin: ${reservationFilter.endTime}</li>--%>
+                    <%--</ul>--%>
+                <%--</li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</c:if>--%>
+<%--<c:if test="${empty message}">--%>
+    <%--<div class="row">--%>
+        <%--<div class="alert alert-success w-100">Aucun véhicule trouvé pour cette recherche</div>--%>
+            <%--&lt;%&ndash;@elvariable id="reservationFilter" type="fr.digicar.odt.ReservationOdt"&ndash;%&gt;--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</c:if>--%>
+

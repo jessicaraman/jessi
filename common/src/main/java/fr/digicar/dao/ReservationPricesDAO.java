@@ -8,6 +8,8 @@ public interface ReservationPricesDAO {
 
     ReservationPrices getReservationPriceById(int id);
 
+    ReservationPrices getReservationPriceByCriterias(int carType, int fuelType);
+
     List<ReservationPrices> getAllReservationPrices();
 
 }
