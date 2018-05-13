@@ -135,8 +135,14 @@ public class BookingController {
             setOfTown = parkingSpotService.getListOfLocation();
             listOfCarType = carTypeService.getAllCarType();
             modelAndView.addObject("reservationFilter", reservationFilter);
-            submitMessage = "Réservation validée";
+            submitMessage = "Réservation validée: ";
+            String recap = "Immatriculation : "+reservationFilter.getRegistrationNumber()+
+                            "; Marque : "+reservationFilter.getMark()+
+                            "; Modèle : "+reservationFilter.getModel()+
+                            "; Locatisation : Place "+parkingSpotService.getParkingSpot(reservationFilter.getIdParkingSpot()).getNbSpot()+ ", "+reservationFilter.getAddressParking()+ " "+ reservationFilter.getCity()+
+                            "; Tarif : "+reservationFilter.getPrice()+ " €";
 
+            submitMessage = submitMessage + recap;
         } catch (Exception e) {
             log.error("Erreur when submitting reservation: "+e);
         }
