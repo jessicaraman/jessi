@@ -19,7 +19,7 @@
                     <th width="120">Prix</th>
                 </tr>
                     <%--@elvariable id="reservationOdt" type="fr.digicar.odt.ReservationOdt"--%>
-                <c:forEach items="${reservations}" var="reservationOdt">
+                <c:forEach items="${reservations}" var="reservationOdt" varStatus="status">
                     <tr>
                         <td>${reservationOdt.registrationNumber}</td>
                         <td>${reservationOdt.mark}</td>
@@ -28,12 +28,9 @@
                         <td>${reservationOdt.addressParking}</td>
                         <td>${reservationOdt.price} €</td>
                         <td>
-                            <%--@elvariable id="reservationOdt" type="fr.digicar.odt.ReservationOdt"--%>
-                            <form:form method="GET" modelAttribute="reservationOdt" action="/reservation/submitBooking/${reservationOdt}">
-                                <button type="submit" class="btn btn-primary">
-                                    Réserver
-                                </button>
-                            </form:form>
+                            <a type="submit" class="btn btn-primary" href="<c:url value="/reservation/submitBooking/${status.index}"/>">
+                                Réserver
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
