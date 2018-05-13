@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -34,16 +36,20 @@ public class ReservationServiceImplTest {
      * from ReservationServiceImpl class
      */
     @Test
-    public void listAllReservationsShouldReturnAllReservations() {
+    public void listAllReservationsShouldReturnAllReservations() throws ParseException{
         //
         //GIVEN
         //
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         List<Reservation> reservations = new ArrayList<>();
-        reservations.add(new Reservation(1, 1, 2, 300, new Timestamp(new Date("2017-07-06 19:03:28").getTime()), new Timestamp(new Date("2017-07-06 20:03:28").getTime()), 51, 5));
-        reservations.add(new Reservation(2, 10, 12, 2, new Timestamp(new Date("2017-07-06 17:03:28").getTime()), new Timestamp(new Date("2017-07-06 19:03:28").getTime()), 21, 15));
-        reservations.add(new Reservation(3, 1, 23, 189, new Timestamp(new Date("2017-07-06 12:03:28").getTime()), new Timestamp(new Date("2017-07-06 17:03:28").getTime()), 33, 12));
-        reservations.add(new Reservation(4, 12, 27, 253, new Timestamp(new Date("2017-07-06 08:03:28").getTime()), new Timestamp(new Date("2017-07-06 15:03:28").getTime()), 12, 17));
-        reservations.add(new Reservation(5, 31, 52, 56, new Timestamp(new Date("2017-07-06 09:03:28").getTime()), new Timestamp(new Date("2017-07-06 11:03:28").getTime()), 11, 1));
+        reservations.add(new Reservation(1, 1, 2, 300, new Timestamp(format.parse("2017-07-06 19:03:28").getTime()), new Timestamp(format.parse("2017-07-06 20:03:28").getTime()), 51, 5));
+
+
+        reservations.add(new Reservation(2, 10, 12, 2, new Timestamp(format.parse("2017-07-06 17:03:28").getTime()), new Timestamp(format.parse("2017-07-06 19:03:28").getTime()), 21, 15));
+        reservations.add(new Reservation(3, 1, 23, 189, new Timestamp(format.parse("2017-07-06 12:03:28").getTime()), new Timestamp(format.parse("2017-07-06 17:03:28").getTime()), 33, 12));
+        reservations.add(new Reservation(4, 12, 27, 253, new Timestamp(format.parse("2017-07-06 08:03:28").getTime()), new Timestamp(format.parse("2017-07-06 15:03:28").getTime()), 12, 17));
+        reservations.add(new Reservation(5, 31, 52, 56, new Timestamp(format.parse("2017-07-06 09:03:28").getTime()), new Timestamp(format.parse("2017-07-06 11:03:28").getTime()), 11, 1));
 
         Mockito.when(reservationDAO.getAllReservations()).thenReturn(reservations);
         //
@@ -56,72 +62,75 @@ public class ReservationServiceImplTest {
         Assert.assertEquals(reservations, reservationsListTest);
     }
 
-//    /**
-//     * Unit test for getReservationById method
-//     * from ReservationServiceImpl class
-//     */
-//    @Test
-//    public void getReservationByIdShouldReturnReservation() {
-//        //
-//        //GIVEN
-//        //
-//        List<Reservation> reservations = new ArrayList<>();
-//
-//        Reservation reservation1 = new Reservation(3, 1, 23, 189, new Date("2017-07-06 19:03:28"), new Date("2017-07-06 20:03:28"), 33, 12);
-//        Reservation reservation2 = new Reservation(4, 12, 27, 253, new Date("2017-07-06 11:03:28"), new Date("2017-07-06 15:03:28"), 12, 17);
-//
-//        reservations.add(new Reservation(1, 1, 2, 300, new Date("2017-07-06 08:03:28"), new Date("2017-07-06 10:03:28"), 51, 5));
-//        reservations.add(new Reservation(2, 10, 12, 2, new Date("2017-07-06 09:03:28"), new Date("2017-07-06 16:03:28"), 21, 15));
-//        reservations.add(reservation1);
-//        reservations.add(reservation2);
-//        reservations.add(new Reservation(5, 31, 52, 56, new Date("2017-07-06 12:03:28"), new Date("2017-07-06 19:03:28"), 11, 1));
-//
-//        Mockito.when(reservationDAO.getReservationById(3)).thenReturn(reservation1);
-//        Mockito.when(reservationDAO.getReservationById(4)).thenReturn(reservation2);
-//        //
-//        //WHEN
-//        //
-//        Reservation reservationTest1 = reservationService.getReservationById(3);
-//        Reservation reservationTest2 = reservationService.getReservationById(4);
-//        //
-//        //THEN
-//        //
-//        Assert.assertEquals(reservation1, reservationTest1);
-//        Assert.assertEquals(reservation2, reservationTest2);
-//    }
-//
-//    /**
-//     * Unit test for getReservationByCriteria method
-//     * from ReservationServiceImpl class
-//     */
-//    @Test
-//    public void getReservationByCriteriaShouldReturnListOfReservation() {
-//        //
-//        //GIVEN
-//        //
-//        List<Reservation> reservations = new ArrayList<>();
-//
-//        Reservation reservation1 = new Reservation(3, 1, 23, 189, new Date("2017-07-06 19:03:28"), new Date("2017-07-06 20:03:28"), 33, 12);
-//        Reservation reservation2 = new Reservation(4, 12, 27, 253, new Date("2017-07-06 11:03:28"), new Date("2017-07-06 15:03:28"), 12, 17);
-//
-//        reservations.add(new Reservation(1, 1, 2, 300, new Date("2017-07-06 08:03:28"), new Date("2017-07-06 10:03:28"), 51, 5));
-//        reservations.add(new Reservation(2, 10, 12, 2, new Date("2017-07-06 09:03:28"), new Date("2017-07-06 16:03:28"), 21, 15));
-//        reservations.add(reservation1);
-//        reservations.add(reservation2);
-//        reservations.add(new Reservation(5, 31, 52, 56, new Date("2017-07-06 12:03:28"), new Date("2017-07-06 19:03:28"), 11, 1));
-//
-//        List<Reservation> exceptedListOfReservation = Arrays.asList(reservation1);
-//
-//        Mockito.when(reservationDAO.getReservationByCriteria(new Date("2017-07-06 11:03:28"), new Date("2017-07-06 15:03:28"), 12)).thenReturn(exceptedListOfReservation);
-//        //
-//        //WHEN
-//        //
-//        List<Reservation> reservationListTest = reservationService.getReservationByCriteria(new Date("2017-07-06 11:03:28"), new Date("2017-07-06 15:03:28"), 12);
-//        //
-//        //THEN
-//        //
-//        Assert.assertEquals(exceptedListOfReservation, reservationListTest);
-//    }
+    /**
+     * Unit test for getReservationById method
+     * from ReservationServiceImpl class
+     */
+    @Test
+    public void getReservationByIdShouldReturnReservation() throws ParseException {
+        //
+        //GIVEN
+        //
+        List<Reservation> reservations = new ArrayList<>();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Reservation reservation1 = new Reservation(3, 1, 23, 189,  new Timestamp(format.parse("2017-07-06 19:03:28").getTime()),  new Timestamp(format.parse("2017-07-06 20:03:28").getTime()), 33, 12);
+        Reservation reservation2 = new Reservation(4, 12, 27, 253, new Timestamp(format.parse("2017-07-06 11:03:28").getTime()), new Timestamp(format.parse("2017-07-06 15:03:28").getTime()), 12, 17);
+
+        reservations.add(new Reservation(1, 1, 2, 300, new Timestamp(format.parse("2017-07-06 08:03:28").getTime()), new Timestamp(format.parse("2017-07-06 10:03:28").getTime()), 51, 5));
+        reservations.add(new Reservation(2, 10, 12, 2, new Timestamp(format.parse("2017-07-06 09:03:28").getTime()),new Timestamp(format.parse("2017-07-06 16:03:28").getTime()), 21, 15));
+        reservations.add(reservation1);
+        reservations.add(reservation2);
+        reservations.add(new Reservation(5, 31, 52, 56, new Timestamp(format.parse("2017-07-06 12:03:28").getTime()), new Timestamp(format.parse("2017-07-06 19:03:28").getTime()), 11, 1));
+
+        Mockito.when(reservationDAO.getReservationById(3)).thenReturn(reservation1);
+        Mockito.when(reservationDAO.getReservationById(4)).thenReturn(reservation2);
+        //
+        //WHEN
+        //
+        Reservation reservationTest1 = reservationService.getReservationById(3);
+        Reservation reservationTest2 = reservationService.getReservationById(4);
+        //
+        //THEN
+        //
+        Assert.assertEquals(reservation1, reservationTest1);
+        Assert.assertEquals(reservation2, reservationTest2);
+    }
+
+    /**
+     * Unit test for getReservationByCriteria method
+     * from ReservationServiceImpl class
+     */
+    @Test
+    public void getReservationByCriteriaShouldReturnListOfReservation() throws ParseException {
+        //
+        //GIVEN
+        //
+        List<Reservation> reservations = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Reservation reservation1 = new Reservation(3, 1, 23, 189, new Timestamp(format.parse("2017-07-06 19:03:28").getTime()), new Timestamp(format.parse("2017-07-06 20:03:28").getTime()), 33, 12);
+        Reservation reservation2 = new Reservation(4, 12, 27, 253, new Timestamp(format.parse("2017-07-06 11:03:28").getTime()), new Timestamp(format.parse("2017-07-06 15:03:28").getTime()), 12, 17);
+
+        reservations.add(new Reservation(1, 1, 2, 300, new Timestamp(format.parse("2017-07-06 08:03:28").getTime()),new Timestamp(format.parse("2017-07-06 10:03:28").getTime()), 51, 5));
+        reservations.add(new Reservation(2, 10, 12, 2, new Timestamp(format.parse("2017-07-06 09:03:28").getTime()),new Timestamp(format.parse("2017-07-06 16:03:28").getTime()), 21, 15));
+        reservations.add(reservation1);
+        reservations.add(reservation2);
+        reservations.add(new Reservation(5, 31, 52, 56, new Timestamp(format.parse("2017-07-06 12:03:28").getTime()), new Timestamp(format.parse("2017-07-06 19:03:28").getTime()), 11, 1));
+
+        List<Reservation> exceptedListOfReservation = Arrays.asList(reservation1);
+
+        Mockito.when(reservationDAO.getReservationByCriteria(new Timestamp(format.parse("2017-07-06 11:03:28").getTime()), new Timestamp(format.parse("2017-07-06 15:03:28").getTime()), 12)).thenReturn(exceptedListOfReservation);
+        //
+        //WHEN
+        //
+        List<Reservation> reservationListTest = reservationService.getReservationByCriteria(new Timestamp(format.parse("2017-07-06 11:03:28").getTime()), new Timestamp(format.parse("2017-07-06 15:03:28").getTime()), 12);
+        //
+        //THEN
+        //
+        Assert.assertEquals(exceptedListOfReservation, reservationListTest);
+    }
 
 
 }
