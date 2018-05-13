@@ -8,12 +8,12 @@ import fr.digicar.odt.ReservationOdt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Slf4j
@@ -39,7 +39,7 @@ public class BookingController {
     @Autowired
     private SpotAvailableService spotAvailableService;
 
-
+    private List<ReservationOdt> potentialBooking = new ArrayList<>();
 
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -68,8 +68,6 @@ public class BookingController {
     @RequestMapping(value = "/carAvailable", method = RequestMethod.POST)
     public ModelAndView findCarAvailabilityByCriteria(@ModelAttribute("filters") final FilterBookingOdt filters) {
 
-
-        List<ReservationOdt> potentialBooking = new ArrayList<>();
         Set setOfTown = new TreeSet();
         List listOfCarType = new ArrayList();
 
@@ -102,8 +100,10 @@ public class BookingController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/submitBooking", method = RequestMethod.POST)
-    public ModelAndView submitBooking(@ModelAttribute("reservationFilter") final ReservationOdt reservationFilter) {
+    @RequestMapping(value = "/submitBooking/{index}", method = RequestMethod.GET)
+    public ModelAndView submitBooking(@PathVariable("index") int index) throws ParseException {
+
+        ReservationOdt reservationFilter = potentialBooking.get(index);
 
         Set setOfTown = new TreeSet();
         List listOfCarType = new ArrayList();
@@ -114,8 +114,9 @@ public class BookingController {
 
         reservation.setId_car(reservationFilter.getIdCar());
         reservation.setId_parking_spots(reservationFilter.getIdParkingSpot());
-        reservation.setStart_time((Timestamp) new Date(reservationFilter.getStartTime()));
-        reservation.setEnd_time((Timestamp)new Date(reservationFilter.getEndTime()));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        reservation.setStart_time(new Timestamp(format.parse(reservationFilter.getStartTime()).getTime()));
+        reservation.setEnd_time(new Timestamp(format.parse(reservationFilter.getEndTime()).getTime()));
         reservation.setPlace_back(parkingSpot.getId());
         reservation.setId_user(1);
         reservation.setId_pricing(reservationFilter.getIdPrice());
@@ -146,9 +147,6 @@ public class BookingController {
         modelAndView.addObject("reservations", new ArrayList<>());
         modelAndView.addObject("reservationFilter", new ReservationOdt());
         modelAndView.addObject("message", submitMessage);
-
-
-
 
         return modelAndView;
     }
