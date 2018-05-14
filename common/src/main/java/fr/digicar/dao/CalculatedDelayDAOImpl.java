@@ -140,13 +140,13 @@ public class CalculatedDelayDAOImpl implements CalculatedDelayDAO {
         }
     }
 
-    private Time addSecond(int min, java.util.Date date) {
+    public Time addSecond(int min, java.util.Date date) {
         int temp = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
         int total = temp + min;
         return new Time(total * 1000 - 3600000);
     }
 
-    private List<Object> calculateDuration(String origin, String destination, java.util.Date currentTime) throws IOException, JSONException {
+    public List<Object> calculateDuration(String origin, String destination, java.util.Date currentTime) throws IOException, JSONException {
         List<Object> l = new ArrayList<>();
         final String API_KEY = "AIzaSyBlCPYWn72s0pPLrZxVYBzwQcRlk2cwfAs";
         OkHttpClient client = new OkHttpClient();
