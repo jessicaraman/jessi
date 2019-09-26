@@ -1,6 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%--
+  Created by IntelliJ IDEA.
+  User: Jess
+  Date: 26/09/2019
+  Time: 23:54
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html class="full-height">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -61,10 +66,10 @@
 <br>
 <br>
 <center>
-    <a class="btn btn-purple zoom" href="<c:url value="/lieu"/>"><i class="fas fa-map-marker-alt fa-3x"></i> Information lieu</a>
-    <a class="btn btn-deep-purple zoom"><i class="fas fa-prescription-bottle-alt fa-3x"></i> Info médicament(s)</a>
-    <a class="btn btn-indigo zoom"><i class="fas fa-baby fa-3x"></i> Populations particulières</a>
-    <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil" target="_blank" class="btn btn-light-blue zoom"><i class="fas fa-exclamation fa-3x"></i> Signaler une erreur</a>
+    <a class="btn btn-purple zoom"><i class="fas fa-hospital fa-3x"></i> Etablissement de santé</a>
+    <a class="btn btn-deep-purple zoom" href="graphes.html"><i class="fas fa-home fa-3x"></i></i> Domicile</a>
+    <a class="btn btn-indigo zoom"><i class="fas fa-city fa-3x"></i> Ville</a>
 </center>
+</body>
 </body>
 </html>

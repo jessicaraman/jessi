@@ -12,4 +12,9 @@ public class LinkController {
         return new ModelAndView("home");
     }
 
+    @RequestMapping(value = "/lieu")
+    public ModelAndView lieu() {
+        return new ModelAndView("lieu");
+    }
+
 }

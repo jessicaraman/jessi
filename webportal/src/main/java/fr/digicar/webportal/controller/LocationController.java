@@ -5,10 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class HomeController {
-
-    @RequestMapping(value = "/nvbvbnv")
+public class LocationController {
+    @RequestMapping(value = "/lieu")
     public ModelAndView mainPage() {
-        return new ModelAndView("home");
+        return new ModelAndView("lieu");
     }
 }
