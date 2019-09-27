@@ -61,7 +61,7 @@
 <br>
 <br>
 <center>
-    <a class="btn btn-purple zoom" href="<c:url value="/lieu"/>"><i class="fas fa-map-marker-alt fa-3x"></i> Information lieu</a>
+    <a class="btn btn-purple zoom" href="<c:url value="/lieu"/>"><i class="fas fa-map-marker-alt fa-3x"></i> EM concernant un lieu</a>
     <a class="btn btn-deep-purple zoom"><i class="fas fa-prescription-bottle-alt fa-3x"></i> Info médicament(s)</a>
     <a class="btn btn-indigo zoom"><i class="fas fa-baby fa-3x"></i> Populations particulières</a>
     <a href="https://signalement.social-sante.gouv.fr/psig_ihm_utilisateurs/index.html#/accueil" target="_blank" class="btn btn-light-blue zoom"><i class="fas fa-exclamation fa-3x"></i> Signaler une erreur</a>

@@ -1,12 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: Jess
-  Date: 26/09/2019
-  Time: 23:54
+  Date: 27/09/2019
+  Time: 00:41
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
+<!DOCTYPE html>
 <html class="full-height">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -38,12 +41,17 @@
         .zoom:hover {
             transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
+        .blue-border{
+            border: 5px solid rgba(51,181,229,0.54);
+            border-radius: 18px;
+            margin:3px;
+        }
     </style>
 </head>
 
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark indigo" >
+    <nav class=" no-paddingnavbar navbar-expand-lg navbar-dark indigo" >
         <a class="navbar-brand" href="">
             <img class="no-padding" id="logo" src ="https://media.discordapp.net/attachments/626528980320780308/626820356778491904/Jessi_logo_sans_fond.png" height="50"> Portail d'information sur les erreurs médicamenteuses
         </a>
@@ -61,16 +69,75 @@
             </ul>
         </div>
     </nav>
+    <br>
 </header>
-<br>
-<br>
-<br>
-<br>
-<center>
-    <a class="btn btn-purple zoom"><i class="fas fa-hospital fa-3x"></i> Etablissement de santé</a>
-    <a class="btn btn-deep-purple zoom" href="<c:url value="/charts"/>"><i class="fas fa-home fa-3x"></i></i> Domicile</a>
-    <a class="btn btn-indigo zoom"><i class="fas fa-city fa-3x"></i> Ville</a>
-</center>
-</body>
+<div class="row">
+    <div class="col blue-border">
+        <canvas id="pieChart2"></canvas>
+        <center><h3>Erreurs fréquentes</h3></center>
+    </div>
+    <!-- <div class="col"><canvas class="pieChart"></canvas></div> -->
+    <!-- <div class="col"><canvas class="pieChart"></canvas></div> -->
+    <div class="col blue-border">
+        <canvas id="pieChart"></canvas>
+        <center><h3>Erreurs graves</h3></center>
+    </div>
+    <div class="col blue-border">
+        <canvas id="pieChart3"></canvas>
+        <center><h3>Causes des erreurs</h3></center>
+    </div>
+</div>
+<script>
+    //pie
+    var ctxP = document.getElementById("pieChart").getContext('2d');
+    var myPieChart = new Chart(ctxP, {
+        type: 'pie',
+        data: {
+            labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+            datasets: [{
+                data: [150, 85, 200, 50, 100],
+                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+                hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    var ctxP = document.getElementById("pieChart2").getContext('2d');
+    var myPieChart = new Chart(ctxP, {
+        type: 'pie',
+        data: {
+            labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+            datasets: [{
+                data: [50, 50, 90, 40, 140],
+                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+                hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+    var ctxP = document.getElementById("pieChart3").getContext('2d');
+    var myPieChart = new Chart(ctxP, {
+        type: 'pie',
+        data: {
+            labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+            datasets: [{
+                data: [300, 50, 100, 40, 120],
+                backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+                hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
 </body>
 </html>
+
+
+

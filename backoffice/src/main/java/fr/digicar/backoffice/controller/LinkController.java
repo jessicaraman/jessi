@@ -17,4 +17,9 @@ public class LinkController {
         return new ModelAndView("lieu");
     }
 
+    @RequestMapping(value = "/charts")
+    public ModelAndView charts() {
+        return new ModelAndView("charts");
+    }
+
 }
